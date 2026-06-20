@@ -152,9 +152,10 @@ function waitForImages() {
 function sizeArtboard() {
   const width = stage.clientWidth;
   const height = stage.clientHeight;
-  const usePad = width > 820 && width <= 960;
-  const useCover = width <= 820;
-  const useWideMobile = width > 520 && width <= 820;
+  const useDesktop = width >= 1200;
+  const useLaptop = width >= 1024;
+  const useCover = width < 1024;
+  const useTablet = width >= 600 && width < 1024;
   const backgroundScale = Math.max(width / 1920, height / 1080);
   const artboardWidth = 1920 * backgroundScale;
   const artboardHeight = 1080 * backgroundScale;
@@ -178,7 +179,7 @@ function sizeArtboard() {
     const mobileProgress = Math.max(0, Math.min(1, (width - 360) / 160));
     const mobileLogoRatio = 0.78 + 0.16 * mobileProgress;
     logoScale = Math.min((width * mobileLogoRatio) / 974, (height * 0.58) / 719);
-    if (useWideMobile) {
+    if (useTablet) {
       logoScale *= 0.8;
     }
     logoLeft = (width - 949 * logoScale) / 2;
@@ -195,13 +196,27 @@ function sizeArtboard() {
     // At 1920x1080 (logoScale=1), it perfectly matches original logoTop (141).
     logoTop = buttonTop - 679.8 * logoScale - marginTop;
   }
-  if (usePad) {
-    logoScale *= 1.25;
+  if (useLaptop) {
+    logoScale *= 1.12;
     logoLeft = (width - 974 * logoScale) / 2;
-    logoTop = Math.max(
-      24,
-      height * 0.62 - (719 * logoScale) / 2 - marginTop,
-    );
+    logoTop = useDesktop
+      ? (height - 719 * logoScale) / 2 - marginTop
+      : Math.max(
+          24,
+          height * 0.62 - (719 * logoScale) / 2 - marginTop,
+        );
+  }
+  const maxLogoRatio = width < 600 ? 0.8 : 0.5;
+  const maxLogoScale = (width * maxLogoRatio) / 974;
+  if (logoScale > maxLogoScale) {
+    logoScale = maxLogoScale;
+    logoLeft = (width - 974 * logoScale) / 2;
+    logoTop = useDesktop
+      ? (height - 719 * logoScale) / 2 - marginTop
+      : Math.max(
+          24,
+          height * 0.62 - (719 * logoScale) / 2 - marginTop,
+        );
   }
   Object.assign(logoMotion.style, {
     left: `${logoLeft}px`,
@@ -365,7 +380,7 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
 
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.getElementById("site-navigation");
-const mobileNavQuery = window.matchMedia("(max-width: 820px)");
+const mobileNavQuery = window.matchMedia("(max-width: 1023.95px)");
 
 function setMobileNavOpen(isOpen) {
   navToggle.setAttribute("aria-expanded", String(isOpen));

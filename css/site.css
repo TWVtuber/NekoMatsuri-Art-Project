@@ -218,7 +218,7 @@ body.pv-is-open {
   from { opacity: 0; transform: translateY(18px) scale(0.975); }
   to { opacity: 1; transform: none; }
 }
-@media (max-width: 820px) {
+@media (max-width: 1023.95px) {
   .pv-modal {
     padding: 72px 16px 54px;
   }
@@ -2327,7 +2327,7 @@ body.organizer-open .site-nav [data-organizer-link] {
   border-bottom-color: var(--pink-strong);
 }
 
-@media (max-width: 820px) {
+@media (max-width: 1023.95px) {
   html,
   body {
     width: 100%;
@@ -2699,18 +2699,28 @@ body.organizer-open .site-nav [data-organizer-link] {
   .site-footer .footer-links {
     font-size: 14px;
   }
-}
-
-@media (max-width: 960px) {
-  .home-stage.is-playing .submit-button {
-    top: 76%;
-    min-width: 560px;
-    padding: 36px 88px;
-    font-size: 44px;
+  .faq-launcher {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 30px 25px 25px;
+    text-align: center;
+  }
+  .faq-launcher__button {
+    justify-content: space-between;
+    min-width: 0;
+  }
+  .faq-heading {
+    margin-bottom: 42px;
+  }
+  .faq-card {
+    padding: 24px 20px;
+  }
+  .faq-card p {
+    margin-left: 0;
   }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 1023.95px) {
   .home-stage.is-playing .submit-button {
     top: auto;
     bottom: 60px;
@@ -2720,14 +2730,19 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
 }
 
-@media (min-width: 520px) and (max-width: 820px) {
+@media (min-width: 600px) and (max-width: 1023.95px) {
   .home-stage.is-playing .submit-button {
     top: auto;
     bottom: 60px;
+    width: 320px;
+    min-width: 0;
+    min-height: 82px;
+    padding: 20px 54px;
+    font-size: 24px;
   }
 }
 
-@media (min-width: 821px) and (max-width: 960px) {
+@media (min-width: 1024px) {
   .home-stage.is-playing .submit-button {
     top: 84%;
     bottom: auto;
@@ -2737,7 +2752,21 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
 }
 
-@media (max-width: 520px) {
+@media (min-width: 1200px) {
+  .home-stage .submit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 60px;
+    min-width: 0;
+    min-height: 0;
+    padding: 0 28px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 599.95px) {
   .home-stage,
   .sketch-page,
   .site-header,
@@ -2761,7 +2790,7 @@ body.organizer-open .site-nav [data-organizer-link] {
     font-size: 18px;
   }
   .page-content {
-    padding-inline: 13px;
+    padding-inline: 20px;
   }
   .section-mascot {
     width: 82px;
