@@ -11,25 +11,25 @@ document.addEventListener(
   { capture: true },
 );
 
-document.addEventListener(
-  "keydown",
-  (event) => {
-    const key = event.key.toLowerCase();
-    const opensDeveloperTools =
-      event.key === "F12" ||
-      ((event.ctrlKey || event.metaKey) &&
-        event.shiftKey &&
-        blockedDeveloperShortcuts.has(key));
-    const opensPageSource =
-      (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
+// document.addEventListener(
+//   "keydown",
+//   (event) => {
+//     const key = event.key.toLowerCase();
+//     const opensDeveloperTools =
+//       event.key === "F12" ||
+//       ((event.ctrlKey || event.metaKey) &&
+//         event.shiftKey &&
+//         blockedDeveloperShortcuts.has(key));
+//     const opensPageSource =
+//       (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
 
-    if (opensDeveloperTools || opensPageSource) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  },
-  { capture: true },
-);
+//     if (opensDeveloperTools || opensPageSource) {
+//       event.preventDefault();
+//       event.stopImmediatePropagation();
+//     }
+//   },
+//   { capture: true },
+// );
 
 document.addEventListener(
   "dragstart",
@@ -89,9 +89,7 @@ function sizeArtboard() {
   const width = stage.clientWidth;
   const height = stage.clientHeight;
   const useCover = window.matchMedia("(max-width: 820px)").matches;
-  const backgroundScale = useCover
-    ? Math.max(width / 1920, height / 1080)
-    : Math.min(width / 1920, height / 1080);
+  const backgroundScale = Math.max(width / 1920, height / 1080);
   const artboardWidth = 1920 * backgroundScale;
   const artboardHeight = 1080 * backgroundScale;
   artboard.style.width = `${artboardWidth}px`;
@@ -103,11 +101,16 @@ function sizeArtboard() {
   if (useCover) {
     logoScale = Math.min((width * 0.94) / 974, (height * 0.58) / 719);
     logoLeft = (width - 949 * logoScale) / 2;
-    logoTop = Math.max(20, height * 0.7 - 823 * logoScale + 2);
+    logoTop = Math.max(20, height * 0.70 - 679.8 * logoScale);
   } else {
-    logoScale = backgroundScale;
-    logoLeft = (width - artboardWidth) / 2 + 485.5 * logoScale;
-    logoTop = (height - artboardHeight) / 2 + 141 * logoScale;
+    logoScale = Math.min(width / 1920, height / 1080);
+    // Restore the exact 1920x1080 horizontal visual center
+    logoLeft = (width - 974 * logoScale) / 2 + 12.5 * logoScale;
+    
+    // Anchor the logo's bottom to the submit button (which is at top: 76%)
+    // This perfectly matches the 1920x1080 position (logoTop: 141) and dynamically 
+    // pushes the logo down on narrower screens to avoid the right character's face.
+    logoTop = height * 0.76 - 679.8 * logoScale;
   }
   Object.assign(logoMotion.style, {
     left: `${logoLeft}px`,
@@ -390,7 +393,6 @@ organizerLinks.forEach((link) =>
 organizerBackButtons.forEach((button) =>
   button.addEventListener("click", () => history.back()),
 );
-
 
 document
   .querySelectorAll(
