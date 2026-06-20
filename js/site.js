@@ -113,6 +113,45 @@ new IntersectionObserver(
   { threshold: 0.015 },
 ).observe(activity);
 
+const navToggle = document.querySelector(".nav-toggle");
+const siteNav = document.getElementById("site-navigation");
+const mobileNavQuery = window.matchMedia("(max-width: 820px)");
+
+function setMobileNavOpen(isOpen) {
+  navToggle.setAttribute("aria-expanded", String(isOpen));
+  navToggle.setAttribute("aria-label", isOpen ? "關閉導覽列" : "開啟導覽列");
+  siteNav.classList.toggle("is-open", isOpen);
+}
+
+navToggle.addEventListener("click", () => {
+  setMobileNavOpen(navToggle.getAttribute("aria-expanded") !== "true");
+});
+
+siteNav.addEventListener("click", (event) => {
+  if (event.target.closest("a") && mobileNavQuery.matches) {
+    setMobileNavOpen(false);
+  }
+});
+
+document.addEventListener("click", (event) => {
+  if (
+    mobileNavQuery.matches &&
+    siteNav.classList.contains("is-open") &&
+    !event.target.closest(".site-header__inner")
+  ) {
+    setMobileNavOpen(false);
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && siteNav.classList.contains("is-open")) {
+    setMobileNavOpen(false);
+    navToggle.focus();
+  }
+});
+
+mobileNavQuery.addEventListener("change", () => setMobileNavOpen(false));
+
 const sectionNavLinks = [
   ...document.querySelectorAll(
     '.site-nav a[href^="#"]:not([data-faq-link]):not([data-organizer-link])',

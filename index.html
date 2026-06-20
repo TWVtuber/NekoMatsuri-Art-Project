@@ -17,7 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=16" />
+    <link rel="stylesheet" href="css/site.css?v=27" />
   </head>
   <body>
     <section class="home-stage" aria-label="貓祭不繪讓你俄史計劃入口">
@@ -34,7 +34,7 @@
           src="imgs/main/LOGO.png"
           alt="貓祭不繪讓你俄史計劃"
         />
-        <!--<img class="home-white-bg" src="imgs/main/LOGO_whiteBG.png" alt="" />-->
+        <img class="home-white-bg" src="imgs/main/LOGO_whiteBG.png" alt="" />
         <img class="home-vfx" src="imgs/main/LOGO_vfx.png" alt="" />
       </div>
       <a class="submit-button" href="#activity">進入活動網站</a>
@@ -46,7 +46,18 @@
           <a class="site-brand" href="#activity" aria-label="活動資訊首頁">
             <img src="imgs/main/LOGO.png" alt="Neko Matsuri" />
           </a>
-          <nav class="site-nav" aria-label="活動導覽">
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="site-navigation"
+            aria-label="開啟導覽列"
+          >
+            <span class="nav-toggle__line"></span>
+            <span class="nav-toggle__line"></span>
+            <span class="nav-toggle__line"></span>
+          </button>
+          <nav class="site-nav" id="site-navigation" aria-label="活動導覽">
             <a href="#about">活動介紹</a>
             <a href="#rules">活動主題</a>
             <a href="#rewards">獎勵辦法</a>
@@ -390,11 +401,21 @@
                 >
               </figcaption>
             </figure>
-            <figure class="award-note role-award-note award-note--yellow">
+            <figure class="award-note role-award-note award-note--pink">
               <span class="note-tape" aria-hidden="true"></span
               ><img src="imgs/trophies/貓祭獎.png" alt="貓祭獎獎盃" />
               <figcaption>
                 <strong>貓祭獎</strong><span>NT$ 1,500</span
+                ><small class="award-judge"
+                  ><img src="imgs/judges/NekoMatsuri.webp" alt="" />貓祭</small
+                >
+              </figcaption>
+            </figure>
+            <figure class="award-note role-award-note award-note--yellow">
+              <span class="note-tape" aria-hidden="true"></span
+              ><img src="imgs/trophies/祭煜獎.png" alt="祭煜獎獎盃" />
+              <figcaption>
+                <strong>祭煜獎</strong><span>NT$ 1,500</span
                 ><small class="award-judge"
                   ><img
                     src="imgs/judges/大雄&amp;New Project.webp"
@@ -405,9 +426,9 @@
             </figure>
             <figure class="award-note role-award-note award-note--green">
               <span class="note-tape" aria-hidden="true"></span
-              ><img src="imgs/trophies/祭煜獎.png" alt="祭煜獎獎盃" />
+              ><img src="imgs/trophies/沈月獎.png" alt="沈月獎獎盃" />
               <figcaption>
-                <strong>祭煜獎</strong><span>NT$ 1,500</span
+                <strong>沈月獎</strong><span>NT$ 1,500</span
                 ><small class="award-judge"
                   ><img src="imgs/judges/Tsuki.webp" alt="" />沈月</small
                 >
@@ -415,31 +436,21 @@
             </figure>
             <figure class="award-note role-award-note award-note--blue">
               <span class="note-tape" aria-hidden="true"></span
-              ><img src="imgs/trophies/沈月獎.png" alt="沈月獎獎盃" />
+              ><img src="imgs/trophies/沈澈獎.png" alt="沈澈獎獎盃" />
               <figcaption>
-                <strong>沈月獎</strong><span>NT$ 1,500</span
+                <strong>沈澈獎</strong><span>NT$ 1,500</span
                 ><small class="award-judge"
-                  ><img src="imgs/judges/Ivan.webp" alt="" />沈澈</small
+                  ><img src="imgs/judges/David.webp" alt="" />沈澈</small
                 >
               </figcaption>
             </figure>
             <figure class="award-note role-award-note award-note--green">
               <span class="note-tape" aria-hidden="true"></span
-              ><img src="imgs/trophies/沈澈獎.png" alt="沈澈獎獎盃" />
-              <figcaption>
-                <strong>沈澈獎</strong><span>NT$ 1,500</span
-                ><small class="award-judge"
-                  ><img src="imgs/judges/David.webp" alt="" />沈樂</small
-                >
-              </figcaption>
-            </figure>
-            <figure class="award-note role-award-note award-note--pink">
-              <span class="note-tape" aria-hidden="true"></span
               ><img src="imgs/trophies/沈樂獎.png" alt="沈樂獎獎盃" />
               <figcaption>
                 <strong>沈樂獎</strong><span>NT$ 1,500</span
                 ><small class="award-judge"
-                  ><img src="imgs/judges/抖內贊助.png" alt="" />祭煜</small
+                  ><img src="imgs/judges/Ivan.webp" alt="" />沈樂</small
                 >
               </figcaption>
             </figure>
@@ -827,6 +838,6 @@
       </footer>
     </div>
 
-    <script src="js/site.js?v=10"></script>
+    <script src="js/site.js?v=11"></script>
   </body>
 </html>
