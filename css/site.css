@@ -1154,6 +1154,70 @@ p {
     0.9% 12%
   );
   filter: drop-shadow(-6px 8px 0 rgba(0, 0, 0, 0.13));
+  isolation: isolate;
+  max-width: 1080px;
+  margin: 0 auto 82px;
+  padding: clamp(48px, 5vw, 66px) clamp(48px, 5.5vw, 72px);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: rotate(-0.35deg);
+}
+.common-awards-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: 2;
+  background-color: #F6F7E8;
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 0 62px,
+      rgba(205, 91, 105, 0.22) 62px 64px,
+      transparent 64px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 31px,
+      rgba(86, 132, 159, 0.12) 31px 33px
+    ),
+    radial-gradient(
+      circle at 18% 24%,
+      rgba(142, 112, 71, 0.08) 0 1px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 78% 68%,
+      rgba(142, 112, 71, 0.07) 0 1px,
+      transparent 1.5px
+    );
+  background-size:
+    auto,
+    auto,
+    23px 25px,
+    29px 31px;
+  clip-path: var(--common-awards-sheet-edge);
+}
+.common-awards-sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(91, 145, 174, 0.15);
+  clip-path: var(--common-awards-sheet-edge);
+  transform: translate(-8px, 9px);
+}
+.common-awards-sheet__edge {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--ink);
+  clip-path: var(--common-awards-sheet-edge);
+  pointer-events: none;
+}
+.common-awards-sheet > :not(.common-awards-sheet__edge) {
+  position: relative;
+  z-index: 3;
 }
 .judge-note__scope {
   display: table;
