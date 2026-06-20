@@ -2243,3 +2243,10 @@ body.organizer-open .site-nav [data-organizer-link] {
   min-width: 140px;
   text-align: center;
 }
+/* Discourage long-press menus, selection, and dragging on site artwork. */
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
