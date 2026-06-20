@@ -1523,13 +1523,15 @@ p {
   display: inline-block;
   min-width: 72px;
   color: var(--pink-strong);
+  white-space: nowrap;
 }
 .reward-prize-list span {
   font-weight: 700;
+  white-space: nowrap;
 }
 .reward-prize-list small {
   display: block;
-  margin: 4px 0 0 72px;
+  margin: 4px 0 0;
   color: #5d5852;
   font-size: 18px;
   line-height: 1.55;
@@ -1706,12 +1708,16 @@ p {
   margin: 0 auto;
 }
 .judge-grid figure {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: 100%;
   min-width: 0;
   margin: 0;
   text-align: center;
 }
 .judge-portrait {
-  width: min(100%, 158px);
+  width: 100%;
+  max-width: 158px;
   aspect-ratio: 1;
   margin: 0 auto 14px;
   padding: 6px;
@@ -1734,6 +1740,10 @@ p {
   object-position: top;
 }
 .judge-grid figcaption {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  row-gap: 8px;
   font:
     700 18px/1.35 "jf-openhuninn",
     sans-serif;
@@ -1753,7 +1763,7 @@ p {
 }
 .judge-grid figcaption strong {
   display: table;
-  margin: 8px auto 0;
+  margin: 0;
   padding: 4px 9px;
   border: 1px solid var(--ink);
   font-size: 18px;
@@ -2898,11 +2908,8 @@ body.organizer-open .site-nav [data-organizer-link] {
     display: block;
     min-width: 0;
   }
-  .reward-prize-list small {
-    margin-left: 0;
-  }
   .common-awards-sheet {
-    padding: 44px 24px 34px;
+    padding: 44px clamp(14px, 5vw, 24px) 34px;
     transform: none;
   }
   .common-awards-sheet::before {
@@ -2929,14 +2936,15 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .judge-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
+    gap: clamp(6px, 2vw, 10px);
   }
   .judge-grid figcaption {
-    font-size: 18px;
+    overflow-wrap: anywhere;
+    font-size: clamp(15px, 4.5vw, 18px);
   }
   .judge-grid figcaption strong {
     padding-inline: 5px;
-    font-size: 18px;
+    font-size: clamp(16px, 4.5vw, 18px);
   }
   .award-note-grid {
     grid-template-columns: 1fr;
@@ -3004,6 +3012,38 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .footer-identity p {
     font-size: min(12px, 3.1cqi);
+  }
+}
+
+@media (max-width: 480px) {
+  .judge-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .judge-grid figure {
+    grid-template-columns: clamp(76px, 24vw, 96px) minmax(0, 1fr);
+    grid-template-rows: auto;
+    align-items: center;
+    column-gap: 18px;
+    text-align: left;
+  }
+  .judge-portrait {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+  .judge-grid figcaption {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto;
+    align-items: center;
+    justify-items: start;
+    width: 100%;
+    column-gap: 12px;
+    row-gap: 0;
+    text-align: left;
+  }
+  .judge-grid figcaption strong {
+    justify-self: end;
   }
 }
 
