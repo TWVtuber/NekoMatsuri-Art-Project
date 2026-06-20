@@ -379,7 +379,7 @@ img {
   position: relative;
   border: 2px solid var(--ink);
   background: white;
-  box-shadow: -6px 7px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
 }
 .hero-copy {
   display: flow-root;
@@ -529,7 +529,7 @@ p {
   padding: 12px 12px 58px;
   border: 2px solid var(--ink);
   background: #fff;
-  box-shadow: -6px 7px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
   transform: rotate(1.8deg);
 }
 .hero-photo--secondary {
@@ -627,7 +627,7 @@ p {
   background: var(--pink);
   text-align: center;
   transform: rotate(-2deg);
-  box-shadow: -6px 7px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
 }
 .countdown-pin {
   position: absolute;
@@ -732,7 +732,7 @@ p {
   background-position:
     0 0,
     0 12px;
-  box-shadow: -8px 9px 0 rgba(91, 145, 174, 0.15);
+  box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
   transform: rotate(0.7deg);
 }
 .note-card--rules::before {
@@ -757,7 +757,7 @@ p {
     linear-gradient(rgba(180, 145, 79, 0.12) 1px, transparent 1px),
     linear-gradient(90deg, rgba(180, 145, 79, 0.12) 1px, transparent 1px);
   background-size: 27px 27px;
-  box-shadow: -8px 9px 0 rgba(91, 145, 174, 0.15);
+  box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
   transform: rotate(-0.7deg);
 }
 .note-card h2 {
@@ -948,7 +948,7 @@ p {
     transparent 0 31px,
     rgba(84, 104, 132, 0.11) 32px 33px
   );
-  box-shadow: -8px 9px 0 rgba(91, 145, 174, 0.15);
+  box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
   transform: none;
 }
 .reward-policy__paper::before {
@@ -1160,7 +1160,7 @@ p {
   z-index: 0;
   background: rgba(91, 145, 174, 0.15);
   clip-path: var(--common-awards-sheet-edge);
-  transform: translate(-8px, 9px);
+  transform: translate(8px, 9px);
 }
 .common-awards-sheet__edge {
   position: absolute;
@@ -1214,7 +1214,7 @@ p {
   border: 2px solid var(--ink);
   border-radius: 50%;
   background: #f5f0e7;
-  box-shadow: 4px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
 .judge-grid img {
@@ -2018,6 +2018,54 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .common-awards-sheet {
     padding-inline: 30px;
+    --common-awards-sheet-edge: polygon(
+      0.8% 0.6%,
+      8% 0.17%,
+      16% 0.5%,
+      24% 0.15%,
+      33% 0.57%,
+      41% 0.22%,
+      50% 0.55%,
+      58% 0.12%,
+      66% 0.5%,
+      75% 0.2%,
+      83% 0.55%,
+      91% 0.15%,
+      99.2% 0.6%,
+      99.7% 7%,
+      99.1% 14%,
+      99.8% 22%,
+      99.2% 31%,
+      99.7% 40%,
+      99.1% 50%,
+      99.8% 61%,
+      99.2% 72%,
+      99.7% 82%,
+      99.1% 92%,
+      99.4% 99.3%,
+      91% 99.7%,
+      83% 99.4%,
+      75% 99.8%,
+      66% 99.4%,
+      58% 99.8%,
+      50% 99.4%,
+      41% 99.7%,
+      33% 99.4%,
+      24% 99.8%,
+      16% 99.4%,
+      8% 99.7%,
+      0.7% 99.3%,
+      0.25% 91%,
+      0.9% 83%,
+      0.2% 74%,
+      0.8% 65%,
+      0.25% 56%,
+      0.9% 47%,
+      0.2% 38%,
+      0.8% 29%,
+      0.25% 20%,
+      0.9% 12%
+    );
   }
   .common-award-notes .award-note {
     grid-template-rows: 145px auto;
@@ -2121,9 +2169,6 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .awards-showcase .section-title {
     gap: 12px;
-  }
-  .awards-showcase .section-title span {
-    width: 42px;
   }
   .reward-policy__paper {
     min-height: 0;
