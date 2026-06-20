@@ -41,7 +41,6 @@ img {
   max-width: 100%;
 }
 
-/* The original animated entrance stays as the first screen. */
 .home-stage {
   position: relative;
   width: 100%;
@@ -49,15 +48,15 @@ img {
   height: 100dvh;
   overflow: hidden;
   isolation: isolate;
-  background: #2f2a2b url("../imgs/main/main.jpg") center / contain no-repeat;
+  background: #2f2a2b url("../imgs/main/main.jpg") right center / cover no-repeat;
 }
 .home-artboard {
   position: absolute;
-  left: 50%;
+  left: 100%;
   top: 50%;
   width: 1920px;
   height: 1080px;
-  transform: translate(-50%, -50%);
+  transform: translate(-100%, -50%);
   pointer-events: none;
 }
 .logo-motion {
