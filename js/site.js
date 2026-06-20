@@ -95,22 +95,26 @@ function sizeArtboard() {
   artboard.style.width = `${artboardWidth}px`;
   artboard.style.height = `${artboardHeight}px`;
 
+  const submitBtn = stage.querySelector('.submit-button');
+  // fallback to height * 0.76 if button not found
+  const buttonTop = submitBtn ? submitBtn.offsetTop : height * 0.76;
+
   let logoScale;
   let logoLeft;
   let logoTop;
   if (useCover) {
     logoScale = Math.min((width * 0.94) / 974, (height * 0.58) / 719);
     logoLeft = (width - 949 * logoScale) / 2;
-    logoTop = Math.max(20, height * 0.70 - 679.8 * logoScale);
+    // Anchor to button. Push down dynamically for smaller screens to avoid the face.
+    logoTop = Math.max(20, buttonTop - 679.8 * logoScale + (1 - logoScale) * 90);
   } else {
     logoScale = Math.min(width / 1920, height / 1080);
     // Restore the exact 1920x1080 horizontal visual center
     logoLeft = (width - 974 * logoScale) / 2 + 12.5 * logoScale;
     
-    // Anchor the logo's bottom to the submit button (which is at top: 76%)
-    // This perfectly matches the 1920x1080 position (logoTop: 141) and dynamically 
-    // pushes the logo down on narrower screens to avoid the right character's face.
-    logoTop = height * 0.76 - 679.8 * logoScale;
+    // Anchor to button. Push down dynamically for smaller screens.
+    // At 1920x1080 (logoScale=1), it perfectly matches original logoTop (141).
+    logoTop = buttonTop - 679.8 * logoScale + (1 - logoScale) * 90;
   }
   Object.assign(logoMotion.style, {
     left: `${logoLeft}px`,
