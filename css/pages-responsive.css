@@ -344,12 +344,12 @@ body.organizer-open .site-nav [data-organizer-link] {
     transform: translateY(-7px) rotate(-45deg);
   }
   .site-brand {
-    order: 1;
+    order: 2;
     width: 50px;
     height: 42px;
   }
   .header-submit {
-    order: 2;
+    order: 1;
   }
   .header-submit,
   .countdown-cta {
