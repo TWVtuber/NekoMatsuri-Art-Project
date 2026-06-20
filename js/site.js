@@ -296,10 +296,8 @@ if (heroDeclaration) {
     heroDeclaration.classList.add("is-circle-drawn");
   } else {
     const heroDeclarationObserver = new IntersectionObserver(
-      ([entry], observer) => {
-        if (!entry.isIntersecting) return;
-        heroDeclaration.classList.add("is-circle-drawn");
-        observer.disconnect();
+      ([entry]) => {
+        heroDeclaration.classList.toggle("is-circle-drawn", entry.isIntersecting);
       },
       { threshold: 0.45 },
     );
@@ -325,13 +323,9 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
   highlighterMarks.forEach((mark) => mark.classList.add("is-marked"));
 } else {
   const highlighterObserver = new IntersectionObserver(
-    (entries, observer) => {
-      const enteringMarks = entries.filter((entry) => entry.isIntersecting);
-
-      enteringMarks.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-marked");
-        observer.unobserve(entry.target);
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-marked", entry.isIntersecting);
       });
     },
     { threshold: 0.01, rootMargin: "0px 0px -2% 0px" },
