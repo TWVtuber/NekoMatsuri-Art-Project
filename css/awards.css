@@ -91,7 +91,7 @@
   position: absolute;
   inset: 2px;
   z-index: 2;
-  background-color: #F6F7E8;
+  background-color: #fffafa;
   background-image:
     linear-gradient(
       90deg,
@@ -258,7 +258,6 @@
 .common-award-notes {
   margin: 48px 0 0;
   padding-top: 44px;
-  border-top: 2px dashed rgba(0, 0, 0, 0.25);
 }
 .common-award-notes .award-note {
   grid-template-rows: 155px auto;
@@ -558,4 +557,3 @@
   grid-column: 3;
   grid-row: 1;
 }
-
