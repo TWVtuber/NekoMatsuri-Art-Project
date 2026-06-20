@@ -514,6 +514,6 @@ img {
   max-width: 100%;
   min-height: 100vh;
   background-color: var(--paper);
-  background-image: radial-gradient(#262626 0.75px, transparent 0.75px);
+  background-image: radial-gradient(rgba(38, 38, 38, 0.4) 0.75px, transparent 0.75px);
   background-size: 30px 30px;
 }
