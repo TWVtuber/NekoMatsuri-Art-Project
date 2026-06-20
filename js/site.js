@@ -89,6 +89,9 @@ function sizeArtboard() {
   const width = stage.clientWidth;
   const height = stage.clientHeight;
   const useCover = window.matchMedia("(max-width: 820px)").matches;
+  const usePad = window.matchMedia(
+    "(min-width: 768px) and (max-width: 960px)",
+  ).matches;
   const backgroundScale = useCover
     ? Math.max(width / 1920, height / 1080)
     : Math.min(width / 1920, height / 1080);
@@ -108,6 +111,10 @@ function sizeArtboard() {
     logoScale = backgroundScale;
     logoLeft = (width - artboardWidth) / 2 + 485.5 * logoScale;
     logoTop = (height - artboardHeight) / 2 + 141 * logoScale;
+  }
+  if (usePad) {
+    logoScale *= 0.8;
+    logoTop += 72;
   }
   Object.assign(logoMotion.style, {
     left: `${logoLeft}px`,
