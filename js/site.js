@@ -89,6 +89,9 @@ function sizeArtboard() {
   const width = stage.clientWidth;
   const height = stage.clientHeight;
   const useCover = window.matchMedia("(max-width: 820px)").matches;
+  const usePad = window.matchMedia(
+    "(min-width: 768px) and (max-width: 960px)",
+  ).matches;
   const backgroundScale = Math.max(width / 1920, height / 1080);
   const artboardWidth = 1920 * backgroundScale;
   const artboardHeight = 1080 * backgroundScale;
@@ -168,6 +171,23 @@ new IntersectionObserver(
   },
   { threshold: 0.015 },
 ).observe(activity);
+
+const heroDeclaration = document.querySelector(".hero-declaration");
+if (heroDeclaration) {
+  if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+    heroDeclaration.classList.add("is-circle-drawn");
+  } else {
+    const heroDeclarationObserver = new IntersectionObserver(
+      ([entry], observer) => {
+        if (!entry.isIntersecting) return;
+        heroDeclaration.classList.add("is-circle-drawn");
+        observer.disconnect();
+      },
+      { threshold: 0.45 },
+    );
+    heroDeclarationObserver.observe(heroDeclaration);
+  }
+}
 
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.getElementById("site-navigation");

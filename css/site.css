@@ -470,21 +470,52 @@ p {
   isolation: isolate;
   display: table;
   margin: 40px 10px 46px;
-  padding: 3px 10px 4px;
+  padding: 14px 28px 15px;
   color: #9f2446;
   font-size: 23px;
   font-weight: 700;
   text-align: left;
   transform: rotate(0.4deg);
 }
-.hero-copy .hero-declaration::before {
-  content: "";
+.hero-copy .hero-declaration__text {
+  position: relative;
+  z-index: 1;
+}
+.hero-copy .hero-declaration__circle {
   position: absolute;
-  inset: -7px -14px -6px;
+  inset: -22px -34px -20px -30px;
   z-index: -1;
-  border: 3px solid rgba(224, 72, 112, 0.72);
-  border-radius: 48% 52% 46% 54% / 55% 46% 54% 45%;
-  transform: rotate(-2.2deg);
+  width: calc(100% + 64px);
+  height: calc(100% + 42px);
+  overflow: visible;
+  pointer-events: none;
+  transform: rotate(-2deg);
+}
+.hero-copy .hero-declaration__circle-line {
+  fill: none;
+  stroke: #e84c76;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 760;
+  stroke-dashoffset: 760;
+  filter: drop-shadow(0 1px 0 rgba(159, 36, 70, 0.14));
+  animation: none;
+  opacity: 0.9;
+}
+.hero-copy .hero-declaration.is-circle-drawn .hero-declaration__circle-line {
+  animation: hero-brush-circle 0.5s linear forwards;
+}
+@keyframes hero-brush-circle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy .hero-declaration__circle-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }
 .hero-copy .hero-closing {
   display: table;
