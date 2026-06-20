@@ -2415,48 +2415,6 @@ body.organizer-open .site-nav [data-organizer-link] {
   .role-award-note {
     grid-template-rows: 92px auto;
   }
-  .site-footer {
-    margin-top: var(--section-gap);
-  }
-  .site-footer__inner {
-    flex-direction: column;
-    width: min(calc(100% - 34px), 1280px);
-    padding: 31px 0;
-    text-align: center;
-  }
-  .site-footer {
-    font-size: 12px;
-  }
-  .footer-actions {
-    order: 1;
-  }
-  .footer-identity {
-    order: 2;
-    margin-top: 44px;
-  }
-  .footer-organizers {
-    justify-content: center;
-  }
-  .footer-organizer {
-    font-size: 14px;
-  }
-  .footer-organizer img {
-    height: 58px;
-  }
-  .footer-organizer:last-child img {
-    height: 54px;
-  }
-  .footer-actions {
-    justify-content: center;
-    margin-left: 0;
-  }
-  .footer-contact {
-    font-size: 13px;
-  }
-  .footer-contact a,
-  .site-footer .footer-links {
-    font-size: 14px;
-  }
   .faq-launcher {
     flex-direction: column;
     align-items: stretch;
@@ -2475,6 +2433,65 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .faq-card p {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 845px) {
+  .site-footer {
+    margin-top: var(--section-gap);
+    font-size: 12px;
+  }
+  .site-footer__inner {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 0;
+    width: min(calc(100% - 34px), 1280px);
+    padding: 31px 0;
+    text-align: center;
+  }
+  .footer-actions {
+    display: contents;
+    margin-left: 0;
+  }
+  .footer-identity {
+    grid-column: 1;
+    grid-row: 3;
+    width: 100%;
+    margin-top: 34px;
+  }
+  .footer-organizers {
+    justify-content: center;
+  }
+  .footer-organizer {
+    font-size: 14px;
+  }
+  .footer-organizer img {
+    height: 58px;
+  }
+  .footer-organizer:last-child img {
+    height: 54px;
+  }
+  .footer-contact {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    padding-bottom: 34px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    margin-bottom: 34px;
+    font-size: 13px;
+  }
+  .site-footer .footer-links {
+    grid-column: 1;
+    grid-row: 2;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 34px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    text-align: center;
+  }
+  .footer-contact a,
+  .site-footer .footer-links {
+    font-size: 14px;
   }
 }
 
