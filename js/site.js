@@ -72,6 +72,70 @@ const stage = document.querySelector(".home-stage");
 const logoMotion = document.getElementById("logo-motion");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const entranceImages = [...stage.querySelectorAll("img")];
+const pvModal = document.getElementById("pv-modal");
+const pvModalClose = document.getElementById("pv-modal-close");
+const pvModalIframe = document.getElementById("pv-modal-iframe");
+const pvModalSoundIcon = document.getElementById("pv-modal-sound-icon");
+const pvModalSoundText = document.getElementById("pv-modal-sound-text");
+const activityRoot = document.getElementById("activity");
+let entranceAssetsReady = false;
+let pvModalClosed = !pvModal;
+let entranceStarted = false;
+let pvReturnFocus = null;
+
+function sendPvCommand(command, args = []) {
+  if (!pvModalIframe?.contentWindow || pvModalClosed) return;
+  pvModalIframe.contentWindow.postMessage(
+    JSON.stringify({ event: "command", func: command, args }),
+    "*",
+  );
+}
+
+function requestPvAutoplay() {
+  if (pvModal?.classList.contains("is-closing")) return;
+  sendPvCommand("mute");
+  sendPvCommand("playVideo");
+}
+
+function setPvSoundNote(hasSound) {
+  if (pvModalSoundIcon) {
+    pvModalSoundIcon.textContent = hasSound ? "volume_up" : "volume_off";
+  }
+  if (pvModalSoundText) {
+    pvModalSoundText.textContent = hasSound
+      ? "目前為有聲播放，可由播放器調整音量"
+      : "已靜音自動播放，點擊播放器可開啟聲音";
+  }
+}
+
+function openPvModal({ withSound = false, restart = false, returnFocus = null } = {}) {
+  if (!pvModal || !pvModalIframe) return;
+
+  pvReturnFocus = returnFocus;
+  pvModalClosed = false;
+  pvModal.hidden = false;
+  pvModal.classList.remove("is-closing");
+  pvModal.removeAttribute("aria-hidden");
+  document.body.classList.add("pv-is-open");
+  stage.inert = true;
+  stage.setAttribute("aria-hidden", "true");
+  activityRoot.inert = true;
+  activityRoot.setAttribute("aria-hidden", "true");
+  pvModal.focus({ preventScroll: true });
+
+  if (restart) sendPvCommand("seekTo", [0, true]);
+  sendPvCommand(withSound ? "unMute" : "mute");
+  sendPvCommand("playVideo");
+  setPvSoundNote(withSound);
+}
+
+if (pvModalIframe) {
+  pvModalIframe.addEventListener("load", () => {
+    requestPvAutoplay();
+    window.setTimeout(requestPvAutoplay, 500);
+    window.setTimeout(requestPvAutoplay, 1500);
+  });
+}
 
 function waitForImages() {
   return Promise.all(
@@ -166,13 +230,51 @@ function scheduleHop() {
   );
 }
 
-waitForImages().then(() =>
+function startEntranceAnimation() {
+  if (!entranceAssetsReady || !pvModalClosed || entranceStarted) return;
+  entranceStarted = true;
   requestAnimationFrame(() => {
     sizeArtboard();
     stage.classList.add("is-playing");
     window.setTimeout(scheduleHop, 2900);
-  }),
-);
+  });
+}
+
+function closePvModal() {
+  if (!pvModal || pvModalClosed || pvModal.classList.contains("is-closing")) return;
+
+  sendPvCommand("pauseVideo");
+  pvModal.classList.add("is-closing");
+  pvModal.setAttribute("aria-hidden", "true");
+
+  const closeDuration = reduceMotion.matches ? 0 : 360;
+  window.setTimeout(() => {
+    pvModal.hidden = true;
+    document.body.classList.remove("pv-is-open");
+    stage.inert = false;
+    stage.removeAttribute("aria-hidden");
+    activityRoot.inert = false;
+    activityRoot.removeAttribute("aria-hidden");
+    pvModalClosed = true;
+    startEntranceAnimation();
+    if (pvReturnFocus?.isConnected) pvReturnFocus.focus({ preventScroll: true });
+    pvReturnFocus = null;
+  }, closeDuration);
+}
+
+if (pvModal && pvModalClose) {
+  pvModalClose.addEventListener("click", closePvModal);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !pvModalClosed) closePvModal();
+  });
+  requestAnimationFrame(() => pvModal.focus({ preventScroll: true }));
+}
+
+waitForImages().then(() => {
+  entranceAssetsReady = true;
+  sizeArtboard();
+  startEntranceAnimation();
+});
 new ResizeObserver(sizeArtboard).observe(stage);
 reduceMotion.addEventListener("change", () => {
   clearTimeout(hopTimer);
@@ -464,3 +566,12 @@ window.addEventListener("popstate", () => {
   else if (document.body.classList.contains("organizer-open"))
     hideOrganizer(window.location.hash || "#activity", false);
 });
+
+// Reopen the themed PV modal from the activity photo.
+const pvOverlay = document.getElementById('pv-overlay');
+
+if (pvOverlay) {
+  pvOverlay.addEventListener('click', () => {
+    openPvModal({ withSound: true, restart: true, returnFocus: pvOverlay });
+  });
+}
