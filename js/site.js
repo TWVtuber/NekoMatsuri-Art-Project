@@ -153,9 +153,7 @@ function sizeArtboard() {
   const width = stage.clientWidth;
   const height = stage.clientHeight;
   const useDesktop = width >= 1200;
-  const useLaptop = width >= 1024;
   const useCover = width < 1024;
-  const useTablet = width >= 600 && width < 1024;
   const backgroundScale = Math.max(width / 1920, height / 1080);
   const artboardWidth = 1920 * backgroundScale;
   const artboardHeight = 1080 * backgroundScale;
@@ -164,65 +162,36 @@ function sizeArtboard() {
 
   const submitBtn = stage.querySelector('.submit-button');
   // fallback to height * 0.76 if button not found
-  const buttonRect = submitBtn ? submitBtn.getBoundingClientRect() : null;
-  const stageRect = stage.getBoundingClientRect();
-  const buttonTop = buttonRect
-    ? buttonRect.top - stageRect.top
-    : height * 0.76;
+  const buttonTop = submitBtn ? submitBtn.offsetTop : height * 0.76;
   const logoStyle = window.getComputedStyle(logoMotion);
   const marginTop = parseFloat(logoStyle.marginTop) || 0;
 
-  let logoScale;
-  let logoLeft;
-  let logoTop;
-  if (useCover) {
-    const mobileProgress = Math.max(0, Math.min(1, (width - 360) / 160));
-    const mobileLogoRatio = 0.78 + 0.16 * mobileProgress;
-    logoScale = Math.min((width * mobileLogoRatio) / 974, (height * 0.58) / 719);
-    if (useTablet) {
-      logoScale *= 0.8;
-    }
-    logoLeft = (width - 949 * logoScale) / 2;
-    logoTop = Math.max(
-      24,
-      height * 0.5 - (719 * logoScale) / 2 - marginTop + 80,
-    );
-  } else {
-    logoScale = Math.min(width / 1920, height / 1080);
-    // Restore the exact 1920x1080 horizontal visual center
-    logoLeft = (width - 974 * logoScale) / 2 + 12.5 * logoScale;
-    
-    // Exactly proportional distance to button. Subtract marginTop to counter CSS margin.
-    // At 1920x1080 (logoScale=1), it perfectly matches original logoTop (141).
-    logoTop = buttonTop - 679.8 * logoScale - marginTop;
-  }
-  if (useLaptop) {
-    logoScale *= 1.12;
-    logoLeft = (width - 974 * logoScale) / 2;
-    logoTop = useDesktop
-      ? (height - 719 * logoScale) / 2 - marginTop
-      : Math.max(
-          24,
-          height * 0.62 - (719 * logoScale) / 2 - marginTop,
-        );
-  }
   const maxLogoRatio = width < 600 ? 0.8 : 0.5;
-  const maxLogoScale = (width * maxLogoRatio) / 974;
-  if (logoScale > maxLogoScale) {
-    logoScale = maxLogoScale;
-    logoLeft = (width - 974 * logoScale) / 2;
-    logoTop = useDesktop
-      ? (height - 719 * logoScale) / 2 - marginTop
-      : Math.max(
-          24,
-          height * 0.62 - (719 * logoScale) / 2 - marginTop,
-        );
-  }
+  const topSafePadding = useCover ? 24 : 48;
+  const logoButtonGap = width < 600 ? 32 : width < 1024 ? 40 : 48;
+  const safeAreaBottom = Math.max(
+    topSafePadding + 160,
+    buttonTop - logoButtonGap,
+  );
+  const safeAreaHeight = safeAreaBottom - topSafePadding;
+  const maxLogoScaleByWidth = (width * maxLogoRatio) / 974;
+  const maxLogoScaleByHeight = safeAreaHeight / 719;
+  const logoScale = Math.min(maxLogoScaleByWidth, maxLogoScaleByHeight);
+  const logoWidth = 974 * logoScale;
+  const logoHeight = 719 * logoScale;
+  const logoLeft = (width - logoWidth) / 2;
+  const preferredLogoTop = useDesktop
+    ? (height - logoHeight) / 2
+    : topSafePadding + (safeAreaHeight - logoHeight) / 2;
+  const minLogoTop = topSafePadding;
+  const maxLogoTop = safeAreaBottom - logoHeight;
+  const logoTop =
+    Math.min(Math.max(preferredLogoTop, minLogoTop), maxLogoTop) - marginTop;
   Object.assign(logoMotion.style, {
     left: `${logoLeft}px`,
     top: `${logoTop}px`,
-    width: `${974 * logoScale}px`,
-    height: `${719 * logoScale}px`,
+    width: `${logoWidth}px`,
+    height: `${logoHeight}px`,
   });
 }
 
