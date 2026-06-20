@@ -88,10 +88,9 @@ function waitForImages() {
 function sizeArtboard() {
   const width = stage.clientWidth;
   const height = stage.clientHeight;
-  const useCover = window.matchMedia("(max-width: 820px)").matches;
-  const usePad = window.matchMedia(
-    "(min-width: 768px) and (max-width: 960px)",
-  ).matches;
+  const usePad = width > 820 && width <= 960;
+  const useCover = width <= 820;
+  const useWideMobile = width > 520 && width <= 820;
   const backgroundScale = Math.max(width / 1920, height / 1080);
   const artboardWidth = 1920 * backgroundScale;
   const artboardHeight = 1080 * backgroundScale;
@@ -100,7 +99,11 @@ function sizeArtboard() {
 
   const submitBtn = stage.querySelector('.submit-button');
   // fallback to height * 0.76 if button not found
-  const buttonTop = submitBtn ? submitBtn.offsetTop : height * 0.76;
+  const buttonRect = submitBtn ? submitBtn.getBoundingClientRect() : null;
+  const stageRect = stage.getBoundingClientRect();
+  const buttonTop = buttonRect
+    ? buttonRect.top - stageRect.top
+    : height * 0.76;
   const logoStyle = window.getComputedStyle(logoMotion);
   const marginTop = parseFloat(logoStyle.marginTop) || 0;
 
@@ -108,10 +111,17 @@ function sizeArtboard() {
   let logoLeft;
   let logoTop;
   if (useCover) {
-    logoScale = Math.min((width * 0.94) / 974, (height * 0.58) / 719);
+    const mobileProgress = Math.max(0, Math.min(1, (width - 360) / 160));
+    const mobileLogoRatio = 0.78 + 0.16 * mobileProgress;
+    logoScale = Math.min((width * mobileLogoRatio) / 974, (height * 0.58) / 719);
+    if (useWideMobile) {
+      logoScale *= 0.8;
+    }
     logoLeft = (width - 949 * logoScale) / 2;
-    // Exactly proportional distance to button. Subtract marginTop to counter CSS margin.
-    logoTop = buttonTop - 679.8 * logoScale - marginTop;
+    logoTop = Math.max(
+      24,
+      height * 0.5 - (719 * logoScale) / 2 - marginTop + 80,
+    );
   } else {
     logoScale = Math.min(width / 1920, height / 1080);
     // Restore the exact 1920x1080 horizontal visual center
@@ -122,8 +132,12 @@ function sizeArtboard() {
     logoTop = buttonTop - 679.8 * logoScale - marginTop;
   }
   if (usePad) {
-    logoScale *= 0.8;
-    logoTop += 72;
+    logoScale *= 1.25;
+    logoLeft = (width - 974 * logoScale) / 2;
+    logoTop = Math.max(
+      24,
+      height * 0.62 - (719 * logoScale) / 2 - marginTop,
+    );
   }
   Object.assign(logoMotion.style, {
     left: `${logoLeft}px`,
