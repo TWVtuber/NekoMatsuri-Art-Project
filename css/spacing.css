@@ -1,0 +1,88 @@
+/*
+ * 全站主要區塊間距
+ * 日後只需要修改下方三個數值：
+ *   --section-gap-desktop：桌面版區塊間距
+ *   --section-gap-mobile：手機版區塊間距
+ *   --section-title-gap：區塊標題與內容的間距
+ */
+:root {
+  --section-gap-desktop: 120px;
+  --section-gap-mobile: 80px;
+  --section-title-gap: 36px;
+  --section-gap: var(--section-gap-desktop);
+
+  /* 補償卡片旋轉後縮短的可見間距，通常不需修改。 */
+  --hero-gap-adjust: 0px;
+  --countdown-gap-adjust: 20px;
+  --notes-gap-adjust: 14px;
+  --rules-gap-adjust: 7px;
+  --judges-gap-adjust: 3px;
+  --ending-gap-adjust: 4px;
+}
+
+/* Header → 活動介紹 */
+.site-header {
+  margin-bottom: var(--section-gap);
+}
+
+/* 活動介紹 → 計時器 */
+.hero {
+  margin-bottom: calc(var(--section-gap) + var(--hero-gap-adjust));
+}
+
+/* 計時器 → 活動主題 */
+.countdown-section {
+  margin-bottom: calc(var(--section-gap) + var(--countdown-gap-adjust));
+  padding-block: 0;
+}
+
+/* 活動主題 → 活動規則 → 獎勵辦法 */
+.notes-grid {
+  gap: calc(var(--section-gap) + var(--notes-gap-adjust));
+  margin-bottom: calc(var(--section-gap) + var(--rules-gap-adjust));
+}
+
+/* 獎勵辦法 → 評審與獎項 */
+.section {
+  margin-bottom: var(--section-gap);
+}
+
+/* 評審與獎項 → 角色獎項 */
+.common-awards-sheet {
+  margin-bottom: calc(var(--section-gap) + var(--judges-gap-adjust));
+}
+
+/* 角色獎項 → 投稿疑問 → Footer */
+.awards-showcase {
+  margin-bottom: calc(var(--section-gap) + var(--ending-gap-adjust));
+}
+
+.faq-launcher {
+  margin-bottom: 0;
+}
+
+.site-footer {
+  margin-top: calc(var(--section-gap) + var(--ending-gap-adjust));
+}
+
+/* 區塊標題與卡片內容 */
+.section-title,
+.awards-showcase .section-title {
+  margin-bottom: var(--section-title-gap);
+}
+
+.reward-policy__paper {
+  margin-top: 0;
+}
+
+@media (max-width: 820px) {
+  :root {
+    --section-gap: var(--section-gap-mobile);
+    --hero-gap-adjust: 6px;
+    --countdown-gap-adjust: 9px;
+    --notes-gap-adjust: 5px;
+    --rules-gap-adjust: 2px;
+    --judges-gap-adjust: 0px;
+    --ending-gap-adjust: 2px;
+  }
+}

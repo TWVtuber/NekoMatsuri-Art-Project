@@ -391,7 +391,6 @@ organizerBackButtons.forEach((button) =>
   button.addEventListener("click", () => history.back()),
 );
 
-
 document
   .querySelectorAll(
     '.site-header a[href^="#"]:not([data-faq-link]):not([data-organizer-link])',
