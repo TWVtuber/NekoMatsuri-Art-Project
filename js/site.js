@@ -11,25 +11,25 @@ document.addEventListener(
   { capture: true },
 );
 
-// document.addEventListener(
-//   "keydown",
-//   (event) => {
-//     const key = event.key.toLowerCase();
-//     const opensDeveloperTools =
-//       event.key === "F12" ||
-//       ((event.ctrlKey || event.metaKey) &&
-//         event.shiftKey &&
-//         blockedDeveloperShortcuts.has(key));
-//     const opensPageSource =
-//       (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
+document.addEventListener(
+  "keydown",
+  (event) => {
+    const key = event.key.toLowerCase();
+    const opensDeveloperTools =
+      event.key === "F12" ||
+      ((event.ctrlKey || event.metaKey) &&
+        event.shiftKey &&
+        blockedDeveloperShortcuts.has(key));
+    const opensPageSource =
+      (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
 
-//     if (opensDeveloperTools || opensPageSource) {
-//       event.preventDefault();
-//       event.stopImmediatePropagation();
-//     }
-//   },
-//   { capture: true },
-// );
+    if (opensDeveloperTools || opensPageSource) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  },
+  { capture: true },
+);
 
 document.addEventListener(
   "dragstart",
@@ -108,7 +108,11 @@ function setPvSoundNote(hasSound) {
   }
 }
 
-function openPvModal({ withSound = false, restart = false, returnFocus = null } = {}) {
+function openPvModal({
+  withSound = false,
+  restart = false,
+  returnFocus = null,
+} = {}) {
   if (!pvModal || !pvModalIframe) return;
 
   pvReturnFocus = returnFocus;
@@ -160,7 +164,7 @@ function sizeArtboard() {
   artboard.style.width = `${artboardWidth}px`;
   artboard.style.height = `${artboardHeight}px`;
 
-  const submitBtn = stage.querySelector('.submit-button');
+  const submitBtn = stage.querySelector(".submit-button");
   // fallback to height * 0.76 if button not found
   const buttonTop = submitBtn ? submitBtn.offsetTop : height * 0.76;
   const logoStyle = window.getComputedStyle(logoMotion);
@@ -225,7 +229,8 @@ function startEntranceAnimation() {
 }
 
 function closePvModal() {
-  if (!pvModal || pvModalClosed || pvModal.classList.contains("is-closing")) return;
+  if (!pvModal || pvModalClosed || pvModal.classList.contains("is-closing"))
+    return;
 
   sendPvCommand("pauseVideo");
   pvModal.classList.add("is-closing");
@@ -241,7 +246,8 @@ function closePvModal() {
     activityRoot.removeAttribute("aria-hidden");
     pvModalClosed = true;
     startEntranceAnimation();
-    if (pvReturnFocus?.isConnected) pvReturnFocus.focus({ preventScroll: true });
+    if (pvReturnFocus?.isConnected)
+      pvReturnFocus.focus({ preventScroll: true });
     pvReturnFocus = null;
   }, closeDuration);
 }
@@ -281,7 +287,10 @@ if (heroDeclaration) {
   } else {
     const heroDeclarationObserver = new IntersectionObserver(
       ([entry]) => {
-        heroDeclaration.classList.toggle("is-circle-drawn", entry.isIntersecting);
+        heroDeclaration.classList.toggle(
+          "is-circle-drawn",
+          entry.isIntersecting,
+        );
       },
       { threshold: 0.45 },
     );
@@ -297,7 +306,9 @@ const highlighterMarks = [
 
 highlighterMarks.forEach((mark) => {
   mark.classList.add("marker-highlight");
-  const finalAlpha = getComputedStyle(mark).getPropertyValue("--marker-alpha").trim();
+  const finalAlpha = getComputedStyle(mark)
+    .getPropertyValue("--marker-alpha")
+    .trim();
   mark.style.setProperty("--marker-final-alpha", finalAlpha || "1");
 });
 
@@ -608,10 +619,10 @@ window.addEventListener("popstate", () => {
 });
 
 // Reopen the themed PV modal from the activity photo.
-const pvOverlay = document.getElementById('pv-overlay');
+const pvOverlay = document.getElementById("pv-overlay");
 
 if (pvOverlay) {
-  pvOverlay.addEventListener('click', () => {
+  pvOverlay.addEventListener("click", () => {
     openPvModal({ withSound: true, restart: true, returnFocus: pvOverlay });
   });
 }
