@@ -17,11 +17,59 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=37" />
+    <link rel="stylesheet" href="css/site.css?v=47" />
     <link rel="stylesheet" href="css/spacing.css?v=1" />
   </head>
-  <body>
-    <section class="home-stage" aria-label="貓祭不繪讓你俄史計劃入口">
+  <body class="pv-is-open">
+    <div
+      class="pv-modal"
+      id="pv-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pv-modal-title"
+    >
+      <div class="pv-modal__backdrop" aria-hidden="true"></div>
+      <div class="pv-modal__content">
+        <button
+          class="pv-modal__close"
+          id="pv-modal-close"
+          type="button"
+          aria-label="關閉動畫 PV，進入網站"
+        >
+          <span aria-hidden="true"></span>
+        </button>
+        <h1 class="visually-hidden" id="pv-modal-title">配音動畫 PV</h1>
+        <div class="pv-modal__player">
+          <iframe
+            id="pv-modal-iframe"
+            src="https://www.youtube.com/embed/rGvC4lvYZ4w?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=rGvC4lvYZ4w&playsinline=1&rel=0"
+            title="《貓祭不繪讓你俄史計劃》配音動畫 PV"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <footer class="pv-modal__footer">
+          <p id="pv-modal-sound-note">
+            <span class="material-symbols-outlined" id="pv-modal-sound-icon" aria-hidden="true">volume_off</span>
+            <span id="pv-modal-sound-text">已靜音自動播放，點擊播放器可開啟聲音</span>
+          </p>
+          <a
+            class="pv-modal__youtube"
+            href="https://www.youtube.com/watch?v=rGvC4lvYZ4w"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            YOUTUBE 觀看
+            <span class="material-symbols-outlined" aria-hidden="true">open_in_new</span>
+          </a>
+        </footer>
+      </div>
+    </div>
+
+    <section class="home-stage" aria-label="貓祭不繪讓你俄史計劃入口" inert aria-hidden="true">
       <div class="home-artboard" id="home-artboard">
         <img
           class="home-layer home-pink-vfx"
@@ -41,7 +89,7 @@
       <a class="submit-button" href="#activity">進入活動網站</a>
     </section>
 
-    <div class="sketch-page" id="activity">
+    <div class="sketch-page" id="activity" inert aria-hidden="true">
       <header class="site-header">
         <div class="site-header__inner">
           <a class="site-brand" href="#activity" aria-label="活動資訊首頁"> </a>
@@ -80,10 +128,26 @@
             <span class="tape tape--pink" aria-hidden="true"></span>
             <div class="hero-photo-stack" aria-label="活動主視覺相片">
               <figure class="hero-photo">
-                <img
-                  src="imgs/main/main.jpg"
-                  alt="貓祭不繪讓你俄史計劃活動主視覺"
-                />
+                <div style="position: relative; width: 100%; aspect-ratio: 1292/727; border: 2px solid var(--ink);">
+                  <button
+                    class="hero-pv-trigger"
+                    id="pv-overlay"
+                    type="button"
+                    aria-label="開啟配音動畫 PV，有聲播放"
+                    title="開啟配音動畫 PV"
+                  ></button>
+                  <iframe
+                    id="pv-iframe"
+                    style="width: 100%; height: 100%; border: none; display: block;"
+                    src="https://www.youtube.com/embed/rGvC4lvYZ4w?enablejsapi=1"
+                    title="《#貓祭不繪讓你俄史計劃》配音動畫PV #Vtuber #貓祭"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+                <figcaption>配音動畫 PV</figcaption>
               </figure>
               <figure class="hero-photo hero-photo--secondary">
                 <img
@@ -169,20 +233,20 @@
             <ul class="check-list">
               <li>
                 須以《繪俄史藝術高等學院－三年 C
-                班》以下六位人物：貓祭、祭煜、沈曦、沈澈、沈樂、沈月，擇一或複數角色創作即可；人物設定請參考提供之素材。
+                班》以下六位人物：<b>貓祭、祭煜、沈曦、沈澈、沈樂、沈月，擇一或複數角色創作即可</b>；人物設定請參考提供之素材。
               </li>
-              <li>創作內容中可以有其他老師、學生等，但不列入評分判定。</li>
+              <li>創作內容中可以有其他老師、學生等，但<b>不列入評分判定</b>。</li>
               <li>
-                繪圖主題以「繪俄史藝術高等學院」為主，不相關題材將不會予以參賽資格。
+                繪圖主題以「<b>繪俄史藝術高等學院</b>」為主，不相關題材將不會予以參賽資格。
               </li>
-              <li>本次繪畫可添加服飾、配件、髮型等，形式不拘。</li>
+              <li>本次繪畫<b>可添加服飾、配件、髮型</b>等，形式不拘。</li>
               <li>
-                內容不得違反善良風俗，禁止血腥、暴力、R18
-                色情等題材，不得涉及重製、改作、描圖、抄襲、仿冒、使用 AI
-                繪製或其他侵害他人權益之情事。
+                內容不得違反善良風俗，<b>禁止血腥、暴力、R18
+                色情等題材</b>，<b>不得涉及重製、改作、描圖、抄襲、仿冒、使用 AI
+                繪製</b>或其他侵害他人權益之情事。
               </li>
               <li>
-                禁止使用非本人繪製（若取得雙方同意代發比賽，則不在此限）及未授權之圖片素材於投稿作品中；若發現違規情形，將取消參賽資格。
+                <b>禁止使用非本人繪製</b>（若取得雙方同意代發比賽，則不在此限）<b>及未授權之圖片素材</b>於投稿作品中；若發現違規情形，將取消參賽資格。
               </li>
             </ul>
             <a
@@ -219,30 +283,30 @@
             <h2>活動規則</h2>
             <ol class="rule-list">
               <li>
-                繪圖尺寸不小於 A4、解析度 150
-                dpi，直橫式皆可；表現手法不限，插畫、漫畫、動畫等皆可，黑白或彩色不拘。
+                繪圖尺寸<b>不小於 A4、解析度 150
+                dpi</b>，直橫式皆可；表現手法不限，插畫、漫畫、動畫等皆可，<b>黑白或彩色不拘</b>。
               </li>
-              <li>作品上傳須使用 PNG、JPG、GIF 或 MP4 格式。</li>
-              <li>每張作品僅會獲得一個獎項，不會重複得獎。</li>
+              <li>作品上傳須使用 <b>PNG、JPG、GIF 或 MP4</b> 格式。</li>
+              <li><b>每張作品僅會獲得一個獎項</b>，不會重複得獎。</li>
               <li>
-                參賽者包括但不限於學院之老師、學生..等，校外人士也可以參加。
+                參賽者包括但不限於學院之老師、學生..等，<b>校外人士也可以參加</b>。
               </li>
               <li>
                 所有參賽作品皆可能由主辦方選中、編輯後用於 X（原
-                Twitter）及其他宣傳。參賽者授權主辦單位以「非直接銷售」為目的使用作品，如社群宣傳、新聞稿件、封面圖等；除本活動獎金外，不另支付版稅及其他費用。主辦單位使用作品時，須明確標示創作者，以達互利共榮之效。
+                Twitter）及其他宣傳。參賽者<b>授權主辦單位以「非直接銷售」為目的使用作品</b>，如社群宣傳、新聞稿件、封面圖等；除本活動獎金外，不另支付版稅及其他費用。主辦單位使用作品時，須明確標示創作者，以達互利共榮之效。
               </li>
               <li>
-                未經原著作人同意，主辦方不得將得獎作品用於任何直接營利行為，亦不得製作為禮贈品。
+                <b>未經原著作人同意，主辦方不得將得獎作品用於任何直接營利行為，亦不得製作為禮贈品。</b>
               </li>
               <li>
-                活動期間，參賽者可為自己的作品宣傳或直播，也可將作品發布至個人社群平台。
+                活動期間，<b>參賽者可為自己的作品宣傳或直播，也可將作品發布至個人社群平台</b>。
               </li>
               <li>
-                為保障所有參加者之權利，主辦方不強制要求繪製縮時錄影；如作品有疑慮，參賽者須提供自行創作證明供主辦方審查。若發生前述情形且無法提交證明，參賽者應自負一切法律責任；主辦單位有權立即取消其參賽或獲獎資格，並追回全數獎金。
+                為保障所有參加者之權利，主辦方不強制要求繪製縮時錄影；如作品有疑慮，<b>參賽者須提供自行創作證明</b>供主辦方審查。若發生前述情形且無法提交證明，參賽者應自負一切法律責任；主辦單位有權立即取消其參賽或獲獎資格，並追回全數獎金。
               </li>
               <li>
-                繪圖作品必須為活動開始前未曾上傳至任何社群平台之作品；活動開始後，須於
-                X（原 Twitter）貼文加上指定 Tag，並將作品上傳至指定雲端。
+                繪圖作品必須為活動開始前<b>未曾上傳至任何社群平台之作品</b>；活動開始後，須於
+                X（原 Twitter）貼文<b>加上指定 Tag，並將作品上傳至指定雲端</b>。
               </li>
             </ol>
           </article>
@@ -277,14 +341,14 @@
                     >（※以及各種神秘力量贊助）</span
                   >
                 </li>
-                <li>海外得獎者獎金須扣除轉帳等手續費用（僅接受 PayPal）。</li>
+                <li>海外得獎者獎金<b>須扣除轉帳等手續費用（僅接受 PayPal）</b>。</li>
                 <li>
                   投稿期限為即日起至
                   <strong>2026/07/19 23:59</strong
                   >，並且將以貼文形式公布獎項獲得者。
                 </li>
                 <li>
-                  投稿即代表遵守以上規定，本活動各項辦法若有未盡事宜，主辦單位有權隨時修正且擁有最終解釋權。
+                  投稿即代表遵守以上規定，本活動各項辦法若有未盡事宜，<b>主辦單位有權隨時修正且擁有最終解釋權</b>。
                 </li>
               </ol>
               <div class="reward-policy__prizes">
@@ -493,7 +557,11 @@
           <button class="faq-back" type="button" data-faq-back>
             ← 回上一頁
           </button>
-          <h1 id="faq-title">常見問題</h1>
+          <div class="section-title">
+            <span></span>
+            <h1 id="faq-title">常見問題</h1>
+            <span></span>
+          </div>
         </div>
 
         <div class="faq-list">
@@ -604,11 +672,10 @@
           class="max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop pb-24 space-y-24"
         >
           <!-- Title Area -->
-          <div class="text-center relative py-8">
-            <h1 class="handwritten text-6xl font-bold">主辦單位介紹</h1>
-            <div
-              class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-48 h-1 bg-black/10"
-            ></div>
+          <div class="section-title" style="margin-top: 32px; margin-bottom: 16px;">
+            <span></span>
+            <h1 aria-hidden="true">主辦單位介紹</h1>
+            <span></span>
           </div>
           <section
             class="journal-container relative min-h-[600px] flex flex-col md:flex-row overflow-hidden journal-container-1"
@@ -876,6 +943,6 @@
       </footer>
     </div>
 
-    <script src="js/site.js?v=20"></script>
+    <script src="js/site.js?v=24"></script>
   </body>
 </html>
