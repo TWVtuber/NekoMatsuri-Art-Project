@@ -1,7 +1,11 @@
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 
 if (window.location.hash) {
-  history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+  history.replaceState(
+    null,
+    "",
+    `${window.location.pathname}${window.location.search}`,
+  );
 }
 
 function resetInitialScroll() {
@@ -25,20 +29,24 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const entranceImages = [...stage.querySelectorAll("img")];
 
 function waitForImages() {
-  return Promise.all(entranceImages.map((image) => {
-    if (image.complete) return Promise.resolve();
-    return new Promise((resolve) => {
-      image.addEventListener("load", resolve, { once: true });
-      image.addEventListener("error", resolve, { once: true });
-    });
-  }));
+  return Promise.all(
+    entranceImages.map((image) => {
+      if (image.complete) return Promise.resolve();
+      return new Promise((resolve) => {
+        image.addEventListener("load", resolve, { once: true });
+        image.addEventListener("error", resolve, { once: true });
+      });
+    }),
+  );
 }
 
 function sizeArtboard() {
   const width = stage.clientWidth;
   const height = stage.clientHeight;
   const useCover = window.matchMedia("(max-width: 820px)").matches;
-  const backgroundScale = useCover ? Math.max(width / 1920, height / 1080) : Math.min(width / 1920, height / 1080);
+  const backgroundScale = useCover
+    ? Math.max(width / 1920, height / 1080)
+    : Math.min(width / 1920, height / 1080);
   const artboardWidth = 1920 * backgroundScale;
   const artboardHeight = 1080 * backgroundScale;
   artboard.style.width = `${artboardWidth}px`;
@@ -48,34 +56,48 @@ function sizeArtboard() {
   let logoLeft;
   let logoTop;
   if (useCover) {
-    logoScale = Math.min((width * .94) / 974, (height * .58) / 719);
+    logoScale = Math.min((width * 0.94) / 974, (height * 0.58) / 719);
     logoLeft = (width - 949 * logoScale) / 2;
-    logoTop = Math.max(20, height * .7 - 823 * logoScale + 2);
+    logoTop = Math.max(20, height * 0.7 - 823 * logoScale + 2);
   } else {
     logoScale = backgroundScale;
     logoLeft = (width - artboardWidth) / 2 + 485.5 * logoScale;
     logoTop = (height - artboardHeight) / 2 + 141 * logoScale;
   }
-  Object.assign(logoMotion.style, { left: `${logoLeft}px`, top: `${logoTop}px`, width: `${974 * logoScale}px`, height: `${719 * logoScale}px` });
+  Object.assign(logoMotion.style, {
+    left: `${logoLeft}px`,
+    top: `${logoTop}px`,
+    width: `${974 * logoScale}px`,
+    height: `${719 * logoScale}px`,
+  });
 }
 
 let hopTimer;
 function scheduleHop() {
   if (reduceMotion.matches) return;
-  hopTimer = window.setTimeout(() => {
-    logoMotion.classList.add("is-hopping");
-    logoMotion.addEventListener("animationend", () => {
-      logoMotion.classList.remove("is-hopping");
-      scheduleHop();
-    }, { once: true });
-  }, 3600 + Math.random() * 4200);
+  hopTimer = window.setTimeout(
+    () => {
+      logoMotion.classList.add("is-hopping");
+      logoMotion.addEventListener(
+        "animationend",
+        () => {
+          logoMotion.classList.remove("is-hopping");
+          scheduleHop();
+        },
+        { once: true },
+      );
+    },
+    3600 + Math.random() * 4200,
+  );
 }
 
-waitForImages().then(() => requestAnimationFrame(() => {
-  sizeArtboard();
-  stage.classList.add("is-playing");
-  window.setTimeout(scheduleHop, 2900);
-}));
+waitForImages().then(() =>
+  requestAnimationFrame(() => {
+    sizeArtboard();
+    stage.classList.add("is-playing");
+    window.setTimeout(scheduleHop, 2900);
+  }),
+);
 new ResizeObserver(sizeArtboard).observe(stage);
 reduceMotion.addEventListener("change", () => {
   clearTimeout(hopTimer);
@@ -84,9 +106,72 @@ reduceMotion.addEventListener("change", () => {
 });
 
 const activity = document.getElementById("activity");
-new IntersectionObserver(([entry]) => {
-  document.body.classList.toggle("activity-visible", entry.isIntersecting);
-}, { threshold: .015 }).observe(activity);
+new IntersectionObserver(
+  ([entry]) => {
+    document.body.classList.toggle("activity-visible", entry.isIntersecting);
+  },
+  { threshold: 0.015 },
+).observe(activity);
+
+const sectionNavLinks = [
+  ...document.querySelectorAll(
+    '.site-nav a[href^="#"]:not([data-faq-link]):not([data-organizer-link])',
+  ),
+]
+  .map((link) => ({
+    link,
+    section: document.querySelector(link.getAttribute("href")),
+  }))
+  .filter(({ section }) => section);
+const faqNavLink = document.querySelector(".site-nav [data-faq-link]");
+const organizerNavLink = document.querySelector(
+  ".site-nav [data-organizer-link]",
+);
+
+function setActiveNav(activeLink) {
+  [...sectionNavLinks.map(({ link }) => link), organizerNavLink, faqNavLink]
+    .filter(Boolean)
+    .forEach((link) => {
+      const isActive = link === activeLink;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+}
+
+let navScrollFrame;
+function updateActiveNav() {
+  navScrollFrame = null;
+  if (document.body.classList.contains("faq-open")) {
+    setActiveNav(faqNavLink);
+    return;
+  }
+  if (document.body.classList.contains("organizer-open")) {
+    setActiveNav(organizerNavLink);
+    return;
+  }
+
+  const marker = window.innerHeight * 0.35;
+  const orderedSections = [...sectionNavLinks].sort(
+    (a, b) =>
+      a.section.getBoundingClientRect().top -
+      b.section.getBoundingClientRect().top,
+  );
+  const active = orderedSections.reduce(
+    (current, item) =>
+      item.section.getBoundingClientRect().top <= marker ? item : current,
+    orderedSections[0],
+  );
+  setActiveNav(active?.link);
+}
+
+function scheduleActiveNavUpdate() {
+  if (!navScrollFrame) navScrollFrame = requestAnimationFrame(updateActiveNav);
+}
+
+window.addEventListener("scroll", scheduleActiveNavUpdate, { passive: true });
+window.addEventListener("resize", scheduleActiveNavUpdate);
+scheduleActiveNavUpdate();
 
 const deadline = new Date("2026-07-19T23:59:00+08:00");
 function updateCountdown() {
@@ -97,11 +182,155 @@ function updateCountdown() {
   const seconds = Math.floor((difference % 60000) / 1000);
   document.getElementById("days").textContent = String(days).padStart(2, "0");
   document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
-  if (difference === 0) document.getElementById("countdown-title").textContent = "本次投稿已截止";
+  document.getElementById("minutes").textContent = String(minutes).padStart(
+    2,
+    "0",
+  );
+  document.getElementById("seconds").textContent = String(seconds).padStart(
+    2,
+    "0",
+  );
+  if (difference === 0)
+    document.getElementById("countdown-title").textContent = "本次投稿已截止";
 }
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
 document.getElementById("current-year").textContent = new Date().getFullYear();
+
+const faqView = document.getElementById("faq");
+const organizerView = document.getElementById("organizers");
+const faqLinks = [...document.querySelectorAll("[data-faq-link]")];
+const organizerLinks = [...document.querySelectorAll("[data-organizer-link]")];
+const faqBackButtons = [...document.querySelectorAll("[data-faq-back]")];
+const organizerBackButtons = [
+  ...document.querySelectorAll("[data-organizer-back]"),
+];
+let faqReturnHash = "#activity";
+let organizerReturnHash = "#activity";
+
+document.querySelectorAll(".faq-card").forEach((card, index) => {
+  const heading = card.querySelector("h2");
+  const answer = card.querySelector("p");
+  const answerId = `faq-answer-${index + 1}`;
+  const questionContent = heading.innerHTML;
+
+  answer.id = answerId;
+  answer.hidden = true;
+  heading.innerHTML = `<button class="faq-question" type="button" aria-expanded="false" aria-controls="${answerId}">${questionContent}</button>`;
+
+  heading.querySelector(".faq-question").addEventListener("click", (event) => {
+    const question = event.currentTarget;
+    const willOpen = question.getAttribute("aria-expanded") !== "true";
+    question.setAttribute("aria-expanded", String(willOpen));
+    card.classList.toggle("is-open", willOpen);
+    answer.hidden = !willOpen;
+  });
+});
+
+function showFaq(updateHistory = true) {
+  if (
+    !document.body.classList.contains("faq-open") &&
+    window.location.hash !== "#faq"
+  ) {
+    faqReturnHash = window.location.hash || "#activity";
+  }
+  document.body.classList.add("faq-open", "activity-visible");
+  document.body.classList.remove("organizer-open");
+  organizerView.hidden = true;
+  faqView.hidden = false;
+  if (updateHistory && window.location.hash !== "#faq")
+    history.pushState({ faq: true }, "", "#faq");
+  document.title = `常見問題｜${document.title.replace(/^(常見問題|主辦單位介紹)｜/, "")}`;
+  setActiveNav(faqNavLink);
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}
+
+function showOrganizer(updateHistory = true) {
+  if (
+    !document.body.classList.contains("organizer-open") &&
+    window.location.hash !== "#organizers"
+  ) {
+    organizerReturnHash = window.location.hash || "#activity";
+  }
+  document.body.classList.remove("faq-open");
+  document.body.classList.add("organizer-open", "activity-visible");
+  faqView.hidden = true;
+  organizerView.hidden = false;
+  if (updateHistory && window.location.hash !== "#organizers") {
+    history.pushState({ organizers: true }, "", "#organizers");
+  }
+  document.title = `主辦單位介紹｜${document.title.replace(/^(常見問題|主辦單位介紹)｜/, "")}`;
+  setActiveNav(organizerNavLink);
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}
+
+function hideFaq(targetHash = faqReturnHash, updateHistory = true) {
+  document.body.classList.remove("faq-open");
+  faqView.hidden = true;
+  document.title = document.title.replace(/^常見問題｜/, "");
+  if (updateHistory) history.pushState(null, "", targetHash);
+  requestAnimationFrame(() => {
+    document.querySelector(targetHash)?.scrollIntoView({ behavior: "auto" });
+    scheduleActiveNavUpdate();
+  });
+}
+
+function hideOrganizer(targetHash = organizerReturnHash, updateHistory = true) {
+  document.body.classList.remove("organizer-open");
+  organizerView.hidden = true;
+  document.title = document.title.replace(/^主辦單位介紹｜/, "");
+  if (updateHistory) history.pushState(null, "", targetHash);
+  requestAnimationFrame(() => {
+    document.querySelector(targetHash)?.scrollIntoView({ behavior: "auto" });
+    scheduleActiveNavUpdate();
+  });
+}
+
+faqLinks.forEach((link) =>
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showFaq();
+  }),
+);
+
+faqBackButtons.forEach((button) =>
+  button.addEventListener("click", () => history.back()),
+);
+organizerLinks.forEach((link) =>
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showOrganizer();
+  }),
+);
+organizerBackButtons.forEach((button) =>
+  button.addEventListener("click", () => history.back()),
+);
+
+
+document
+  .querySelectorAll(
+    '.site-header a[href^="#"]:not([data-faq-link]):not([data-organizer-link])',
+  )
+  .forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (
+        !document.body.classList.contains("faq-open") &&
+        !document.body.classList.contains("organizer-open")
+      )
+        return;
+      event.preventDefault();
+      const targetHash = link.getAttribute("href");
+      if (document.body.classList.contains("faq-open")) hideFaq(targetHash);
+      else hideOrganizer(targetHash);
+    });
+  });
+
+window.addEventListener("popstate", () => {
+  if (window.location.hash === "#faq") showFaq(false);
+  else if (window.location.hash === "#organizers") showOrganizer(false);
+  else if (document.body.classList.contains("faq-open"))
+    hideFaq(window.location.hash || "#activity", false);
+  else if (document.body.classList.contains("organizer-open"))
+    hideOrganizer(window.location.hash || "#activity", false);
+});
