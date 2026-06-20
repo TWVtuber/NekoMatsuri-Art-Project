@@ -307,6 +307,44 @@ if (heroDeclaration) {
   }
 }
 
+const highlighterMarks = [
+  ...document.querySelectorAll(
+    ".hero-lead, .hero-closing, .check-list b, .rule-list b, .reward-policy__list b",
+  ),
+];
+
+highlighterMarks.forEach((mark) => {
+  mark.classList.add("marker-highlight");
+  const finalAlpha = getComputedStyle(mark).getPropertyValue("--marker-alpha").trim();
+  mark.style.setProperty("--marker-final-alpha", finalAlpha || "1");
+});
+
+document.body.classList.add("marker-motion-ready");
+
+if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+  highlighterMarks.forEach((mark) => mark.classList.add("is-marked"));
+} else {
+  const highlighterObserver = new IntersectionObserver(
+    (entries, observer) => {
+      const enteringMarks = entries.filter((entry) => entry.isIntersecting);
+
+      enteringMarks.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-marked");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.01, rootMargin: "0px 0px -2% 0px" },
+  );
+
+  // Let the browser paint the zero-width strokes before observing them.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      highlighterMarks.forEach((mark) => highlighterObserver.observe(mark));
+    });
+  });
+}
+
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.getElementById("site-navigation");
 const mobileNavQuery = window.matchMedia("(max-width: 820px)");
