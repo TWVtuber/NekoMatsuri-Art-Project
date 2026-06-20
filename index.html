@@ -3,14 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="貓祭不繪讓你俄史計劃—校園創作活動、投稿規則與獎項資訊。"
+    />
     <link href="logo.ico" rel="icon" type="image/x-icon" />
     <title>貓祭不繪讓你俄史計劃</title>
     <link rel="preload" as="image" href="imgs/main/main.jpg" />
     <link rel="preload" as="image" href="imgs/main/LOGO.png" />
-    <link rel="stylesheet" href="css/home.css?v=6" />
+    <link rel="stylesheet" href="css/site.css?v=7" />
   </head>
   <body>
-    <main class="home-stage" aria-label="貓祭不繪讓你俄史計劃主視覺">
+    <section class="home-stage" aria-label="貓祭不繪讓你俄史計劃入口">
       <div class="home-artboard" id="home-artboard">
         <img
           class="home-layer home-pink-vfx"
@@ -27,10 +31,355 @@
         <img class="home-white-bg" src="imgs/main/LOGO_whiteBG.png" alt="" />
         <img class="home-vfx" src="imgs/main/LOGO_vfx.png" alt="" />
       </div>
-      <a class="submit-button" href="site.html#info" title="進入活動網站"
-        >我要投稿</a
-      >
-    </main>
-    <script src="js/home.js?v=6"></script>
+      <a class="submit-button" href="#activity">進入活動網站</a>
+    </section>
+
+    <div class="sketch-page" id="activity">
+      <header class="site-header">
+        <a class="site-brand" href="#activity" aria-label="活動資訊首頁">
+          <!--<img src="imgs/main/LOGO.png" alt="" />-->
+          <span>貓祭不繪讓你俄史計劃</span>
+        </a>
+        <nav class="site-nav" aria-label="活動導覽">
+          <a href="#about">活動介紹</a>
+          <a href="#rules">活動主題</a>
+          <a href="#awards">獎項</a>
+          <a href="#judges">評審</a>
+        </nav>
+        <a class="label-button label-button--pink" href="#submit">立即投稿</a>
+      </header>
+
+      <main class="page-content">
+        <section class="hero" id="about">
+          <article class="paper-card hero-copy">
+            <span class="tape tape--pink" aria-hidden="true"></span>
+            <p class="eyebrow">CREATOR SUPPORT PROJECT · 2026</p>
+            <h1>貓祭不繪讓你俄史計劃</h1>
+            <p>
+              繪俄史，會餓死，畫畫就真的得餓死嗎？同是創作者，貓祭想支援仍然拿著筆、為作品熬夜，也會為自己的進步雀躍的你。
+            </p>
+            <span class="stamp">繪俄史藝術高等學院 × 貓祭 NekoMatsuri</span>
+          </article>
+          <aside class="hero-badge" aria-label="活動紀念徽章">
+            <span class="tape tape--blue" aria-hidden="true"></span>
+            <img src="imgs/badge.png" alt="活動紀念徽章設計" />
+            <p>Draw your own story!</p>
+          </aside>
+        </section>
+
+        <section class="countdown-section" aria-labelledby="countdown-title">
+          <div class="countdown-card">
+            <span class="countdown-pin" aria-hidden="true"></span>
+            <h2 id="countdown-title">距離投稿截止（7/19）還有</h2>
+            <div class="countdown" aria-live="polite">
+              <div class="time-card">
+                <strong id="days">--</strong><span>天</span>
+              </div>
+              <div class="time-card">
+                <strong id="hours">--</strong><span>時</span>
+              </div>
+              <div class="time-card">
+                <strong id="minutes">--</strong><span>分</span>
+              </div>
+              <div class="time-card">
+                <strong id="seconds">--</strong><span>秒</span>
+              </div>
+            </div>
+            <a class="countdown-cta" href="#submit">我要投稿！</a>
+          </div>
+        </section>
+
+        <section class="notes-grid" id="rules" aria-label="活動主題與活動規則">
+          <article class="paper-card note-card note-card--rules">
+            <span class="tape tape--green" aria-hidden="true"></span>
+            <h2>活動主題</h2>
+            <ul class="check-list">
+              <li>
+                須以《繪俄史藝術高等學院－三年 C
+                班》以下六位人物：貓祭、祭煜、沈曦、沈澈、沈樂、沈月，擇一或複數角色創作即可；人物設定請參考提供之素材。
+              </li>
+              <li>創作內容中可以有其他老師、學生等，但不列入評分判定。</li>
+              <li>
+                繪圖主題以「繪俄史藝術高等學院」為主，不相關題材將不會予以參賽資格。
+              </li>
+              <li>本次繪畫可添加服飾、配件、髮型等，形式不拘。</li>
+              <li>
+                內容不得違反善良風俗，禁止血腥、暴力、R18
+                色情等題材，不得涉及重製、改作、描圖、抄襲、仿冒、使用 AI
+                繪製或其他侵害他人權益之情事。
+              </li>
+              <li>
+                禁止使用非本人繪製（若取得雙方同意代發比賽，則不在此限）及未授權之圖片素材於投稿作品中；若發現違規情形，將取消參賽資格。
+              </li>
+            </ul>
+            <a
+              class="character-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><svg
+                class="character-link__art"
+                viewBox="0 0 340 92"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path
+                  class="character-link__body"
+                  d="M24 4 H303 Q330 4 330 30 V56 L285 87 H24 Q5 87 5 68 V25 Q5 4 24 4 Z"
+                />
+                <path
+                  class="character-link__fold"
+                  d="M327 56 L299 45 L286 84 Z"
+                />
+                <path
+                  class="character-link__fold-lines"
+                  d="M286 84 L299 45 L327 56"
+                /></svg
+              ><span class="character-link__label">活動主要人物設計</span></a
+            >
+          </article>
+
+          <article class="paper-card note-card note-card--guidelines">
+            <span class="tape tape--pink tape--right" aria-hidden="true"></span>
+            <h2>活動規則</h2>
+            <ol class="rule-list">
+              <li>
+                繪圖尺寸不小於 A4、解析度 150
+                dpi，直橫式皆可；表現手法不限，插畫、漫畫、動畫等皆可，黑白或彩色不拘。
+              </li>
+              <li>作品上傳須使用 PNG、JPG、GIF 或 MP4 格式。</li>
+              <li>每張作品僅會獲得一個獎項，不會重複得獎。</li>
+              <li>參賽者包括但不限於學院之老師、學生等。</li>
+              <li>
+                所有參賽作品皆可能由主辦方選中、編輯後用於 X（原
+                Twitter）及其他宣傳。參賽者授權主辦單位以「非直接銷售」為目的使用作品，如社群宣傳、新聞稿件、封面圖等；除本活動獎金外，不另支付版稅及其他費用。主辦單位使用作品時，須明確標示創作者，以達互利共榮之效。
+              </li>
+              <li>
+                未經原著作人同意，主辦方不得將得獎作品用於任何直接營利行為，亦不得製作為禮贈品。
+              </li>
+              <li>
+                活動期間，參賽者可為自己的作品宣傳或直播，也可將作品發布至個人社群平台。
+              </li>
+              <li>
+                為保障所有參加者之權利，主辦方不強制要求繪製縮時錄影；如作品有疑慮，參賽者須提供自行創作證明供主辦方審查。若發生前述情形且無法提交證明，參賽者應自負一切法律責任；主辦單位有權立即取消其參賽或獲獎資格，並追回全數獎金。
+              </li>
+              <li>
+                繪圖作品必須為活動開始前未曾上傳至任何社群平台之作品；活動開始後，須於
+                X（原 Twitter）貼文加上指定 Tag，並將作品上傳至指定雲端。
+              </li>
+            </ol>
+          </article>
+        </section>
+
+        <div class="awards-showcase">
+          <section class="section judges-section" id="judges">
+            <div class="section-title">
+              <span></span>
+              <h2>評審陣容</h2>
+              <span></span>
+            </div>
+            <div class="judge-note paper-card">
+              <span class="tape tape--pink" aria-hidden="true"></span>
+              <p class="judge-note__scope">共同評選</p>
+              <h3>金獎、銀獎、銅獎、互動獎、卡哇獎、搞怪獎</h3>
+              <div class="judge-grid">
+                <figure>
+                  <div class="judge-portrait">
+                    <img
+                      src="imgs/judges/NekoMatsuri.webp"
+                      alt="貓祭 NekoMatsuri"
+                    />
+                  </div>
+                  <figcaption>
+                    貓祭 NekoMatsuri<strong>評分占比 40%</strong>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <div class="judge-portrait">
+                    <img
+                      src="imgs/judges/AoiHinamori.webp"
+                      alt="Aoi Hinamori"
+                    />
+                  </div>
+                  <figcaption>
+                    Aoi Hinamori<strong>評分占比 30%</strong>
+                  </figcaption>
+                </figure>
+                <figure>
+                  <div class="judge-portrait">
+                    <img
+                      src="imgs/judges/President.webp"
+                      alt="繪俄史藝術高等學院校長"
+                    />
+                  </div>
+                  <figcaption>
+                    繪俄史藝術高等學院校長<strong>評分占比 30%</strong>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+
+          <section class="section awards-section" id="awards">
+            <div class="section-title">
+              <span></span>
+              <h2>獎項一覽</h2>
+              <span></span>
+            </div>
+            <p class="section-lead">
+              每張作品只會獲得一個獎項；每張便條紙都標示了負責評審。
+            </p>
+
+            <h3 class="award-group-title">共同評選獎項</h3>
+            <div class="award-note-grid">
+              <figure class="award-note award-note--yellow">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/繪俄史金獎.png" alt="繪俄史金獎獎盃" />
+                <figcaption>
+                  <strong>金獎</strong><span>NT$ 5,000</span
+                  ><small>評審：貓祭 40%・Aoi 30%・校長 30%</small>
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--blue">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/繪俄史銀獎.png" alt="繪俄史銀獎獎盃" />
+                <figcaption>
+                  <strong>銀獎</strong><span>NT$ 3,000</span
+                  ><small>評審：貓祭 40%・Aoi 30%・校長 30%</small>
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--pink">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/繪俄史銅獎.png" alt="繪俄史銅獎獎盃" />
+                <figcaption>
+                  <strong>銅獎</strong><span>NT$ 2,000</span
+                  ><small>評審：貓祭 40%・Aoi 30%・校長 30%</small>
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--green">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/互動獎.png" alt="互動獎獎盃" />
+                <figcaption>
+                  <strong>互動獎</strong><span>NT$ 1,500</span
+                  ><small>評審：貓祭 40%・Aoi 30%・校長 30%</small>
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--pink">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/卡哇獎.png" alt="卡哇獎獎盃" />
+                <figcaption>
+                  <strong>卡哇獎</strong><span>NT$ 1,000</span
+                  ><small>評審：貓祭 40%・Aoi 30%・校長 30%</small>
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--yellow">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/搞怪獎.png" alt="搞怪獎獎盃" />
+                <figcaption>
+                  <strong>搞怪獎</strong
+                  ><small>評審：貓祭 40%・Aoi 30%・校長 30%</small>
+                </figcaption>
+              </figure>
+            </div>
+
+            <h3 class="award-group-title">角色獎項</h3>
+            <div class="award-note-grid award-note-grid--special">
+              <figure class="award-note award-note--pink">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/沈曦獎.png" alt="沈曦獎獎盃" />
+                <figcaption>
+                  <strong>沈曦獎</strong
+                  ><small class="award-judge"
+                    ><img
+                      src="imgs/judges/NekoMatsuri.webp"
+                      alt=""
+                    />負責評審：貓祭</small
+                  >
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--yellow">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/貓祭獎.png" alt="貓祭獎獎盃" />
+                <figcaption>
+                  <strong>貓祭獎</strong
+                  ><small class="award-judge"
+                    ><img
+                      src="imgs/judges/大雄&amp;New Project.webp"
+                      alt=""
+                    />負責評審：貓祭＆阿姬</small
+                  >
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--green">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/祭煜獎.png" alt="祭煜獎獎盃" />
+                <figcaption>
+                  <strong>祭煜獎</strong
+                  ><small class="award-judge"
+                    ><img
+                      src="imgs/judges/Tsuki.webp"
+                      alt=""
+                    />負責評審：沈月</small
+                  >
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--blue">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/沈月獎.png" alt="沈月獎獎盃" />
+                <figcaption>
+                  <strong>沈月獎</strong
+                  ><small class="award-judge"
+                    ><img
+                      src="imgs/judges/Ivan.webp"
+                      alt=""
+                    />負責評審：沈澈</small
+                  >
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--green">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/沈澈獎.png" alt="沈澈獎獎盃" />
+                <figcaption>
+                  <strong>沈澈獎</strong
+                  ><small class="award-judge"
+                    ><img
+                      src="imgs/judges/David.webp"
+                      alt=""
+                    />負責評審：沈樂</small
+                  >
+                </figcaption>
+              </figure>
+              <figure class="award-note award-note--pink">
+                <span class="note-tape" aria-hidden="true"></span
+                ><img src="imgs/trophies/沈樂獎.png" alt="沈樂獎獎盃" />
+                <figcaption>
+                  <strong>沈樂獎</strong
+                  ><small class="award-judge"
+                    ><img
+                      src="imgs/judges/抖內贊助.png"
+                      alt=""
+                    />負責評審：祭煜</small
+                  >
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <a class="footer-brand" href="#activity">貓祭不繪讓你俄史計劃</a>
+        <p>
+          © <span id="current-year">2026</span> 貓祭 NekoMatsuri &amp;
+          繪俄史藝術高等學院
+        </p>
+        <div>
+          <a href="#rules">活動規章</a><a href="#judges">主辦單位</a
+          ><a href="#submit">聯絡我們</a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="js/site.js?v=6"></script>
   </body>
 </html>
