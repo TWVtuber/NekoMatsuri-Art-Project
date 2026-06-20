@@ -311,15 +311,47 @@ if (heroDeclaration) {
     heroDeclaration.classList.add("is-circle-drawn");
   } else {
     const heroDeclarationObserver = new IntersectionObserver(
-      ([entry], observer) => {
-        if (!entry.isIntersecting) return;
-        heroDeclaration.classList.add("is-circle-drawn");
-        observer.disconnect();
+      ([entry]) => {
+        heroDeclaration.classList.toggle("is-circle-drawn", entry.isIntersecting);
       },
       { threshold: 0.45 },
     );
     heroDeclarationObserver.observe(heroDeclaration);
   }
+}
+
+const highlighterMarks = [
+  ...document.querySelectorAll(
+    ".hero-lead, .hero-closing, .check-list b, .rule-list b, .reward-policy__list b",
+  ),
+];
+
+highlighterMarks.forEach((mark) => {
+  mark.classList.add("marker-highlight");
+  const finalAlpha = getComputedStyle(mark).getPropertyValue("--marker-alpha").trim();
+  mark.style.setProperty("--marker-final-alpha", finalAlpha || "1");
+});
+
+document.body.classList.add("marker-motion-ready");
+
+if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+  highlighterMarks.forEach((mark) => mark.classList.add("is-marked"));
+} else {
+  const highlighterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-marked", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.01, rootMargin: "0px 0px -2% 0px" },
+  );
+
+  // Let the browser paint the zero-width strokes before observing them.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      highlighterMarks.forEach((mark) => highlighterObserver.observe(mark));
+    });
+  });
 }
 
 const navToggle = document.querySelector(".nav-toggle");

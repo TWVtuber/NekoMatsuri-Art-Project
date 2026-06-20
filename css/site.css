@@ -678,13 +678,17 @@ p {
   line-height: 1.85;
 }
 .hero-copy .hero-lead {
+  --marker-color: 255 224 72;
+  --marker-alpha: 0.66;
+  --marker-start: 34%;
+  --marker-end: 86%;
   display: table;
   padding: 2px 9px 4px;
   background: linear-gradient(
     to bottom,
-    transparent 34%,
-    rgba(255, 224, 72, 0.66) 34% 86%,
-    transparent 86%
+    transparent var(--marker-start),
+    rgb(var(--marker-color) / var(--marker-alpha)) var(--marker-start) var(--marker-end),
+    transparent var(--marker-end)
   );
   box-decoration-break: clone;
   font-size: 23px;
@@ -744,14 +748,18 @@ p {
   }
 }
 .hero-copy .hero-closing {
+  --marker-color: 122 224 181;
+  --marker-alpha: 0.58;
+  --marker-start: 37%;
+  --marker-end: 88%;
   display: table;
   margin-top: 39px;
   padding: 1px 8px 3px;
   background: linear-gradient(
     to bottom,
-    transparent 37%,
-    rgba(122, 224, 181, 0.58) 37% 88%,
-    transparent 88%
+    transparent var(--marker-start),
+    rgb(var(--marker-color) / var(--marker-alpha)) var(--marker-start) var(--marker-end),
+    transparent var(--marker-end)
   );
   font-size: 22px;
   font-weight: 700;
@@ -1217,17 +1225,68 @@ p {
 
 /* 活動主題 (White paper): Yellow highlighter */
 .note-card--rules .check-list b {
-  background: linear-gradient(180deg, transparent 55%, #ffeeb3 55%, #ffeeb3 95%, transparent 95%);
+  --marker-color: 255 238 179;
+  --marker-start: 55%;
+  --marker-end: 95%;
+  background: linear-gradient(180deg, transparent var(--marker-start), rgb(var(--marker-color) / var(--marker-alpha)) var(--marker-start), rgb(var(--marker-color) / var(--marker-alpha)) var(--marker-end), transparent var(--marker-end));
 }
 
 /* 活動規則 (Yellow paper): Pink highlighter (high contrast against yellow paper) */
 .note-card--guidelines .rule-list b {
-  background: linear-gradient(180deg, transparent 55%, #ffbecd 55%, #ffbecd 95%, transparent 95%);
+  --marker-color: 255 190 205;
+  --marker-start: 55%;
+  --marker-end: 95%;
+  background: linear-gradient(180deg, transparent var(--marker-start), rgb(var(--marker-color) / var(--marker-alpha)) var(--marker-start), rgb(var(--marker-color) / var(--marker-alpha)) var(--marker-end), transparent var(--marker-end));
 }
 
 /* 獎勵辦法 (Off-white paper): Green highlighter */
 .reward-policy__list b {
-  background: linear-gradient(180deg, transparent 55%, #c3e2a9 55%, #c3e2a9 95%, transparent 95%);
+  --marker-color: 195 226 169;
+  --marker-start: 55%;
+  --marker-end: 95%;
+  background: linear-gradient(180deg, transparent var(--marker-start), rgb(var(--marker-color) / var(--marker-alpha)) var(--marker-start), rgb(var(--marker-color) / var(--marker-alpha)) var(--marker-end), transparent var(--marker-end));
+}
+
+/* Highlighter strokes reveal only when their text enters the viewport. */
+@property --marker-alpha {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.marker-highlight {
+  --marker-alpha: 1;
+  background-repeat: no-repeat !important;
+  background-position: left top !important;
+  background-size: 100% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.marker-motion-ready .marker-highlight:not(.is-marked) {
+  --marker-alpha: 0;
+  background-size: 0% 100%;
+}
+
+.marker-motion-ready .marker-highlight {
+  transition:
+    background-size 1.45s cubic-bezier(0.16, 0.72, 0.18, 1),
+    --marker-alpha 0.42s ease-out;
+  transition-delay: var(--marker-delay, 0ms);
+}
+
+.marker-motion-ready .marker-highlight.is-marked {
+  --marker-alpha: var(--marker-final-alpha, 1);
+  background-size: 100% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker-motion-ready .marker-highlight,
+  .marker-motion-ready .marker-highlight.is-marked {
+    --marker-alpha: var(--marker-final-alpha, 1);
+    background-size: 100% 100%;
+    transition: none;
+  }
 }
 
 .section {
@@ -2415,24 +2474,49 @@ body.organizer-open .site-nav [data-organizer-link] {
   .role-award-note {
     grid-template-rows: 92px auto;
   }
+  .faq-launcher {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 30px 25px 25px;
+    text-align: center;
+  }
+  .faq-launcher__button {
+    justify-content: space-between;
+    min-width: 0;
+  }
+  .faq-heading {
+    margin-bottom: 42px;
+  }
+  .faq-card {
+    padding: 24px 20px;
+  }
+  .faq-card p {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 845px) {
   .site-footer {
     margin-top: var(--section-gap);
+    font-size: 12px;
   }
   .site-footer__inner {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 0;
     width: min(calc(100% - 34px), 1280px);
     padding: 31px 0;
     text-align: center;
   }
-  .site-footer {
-    font-size: 12px;
-  }
   .footer-actions {
-    order: 1;
+    display: contents;
+    margin-left: 0;
   }
   .footer-identity {
-    order: 2;
-    margin-top: 44px;
+    grid-column: 1;
+    grid-row: 3;
+    width: 100%;
+    margin-top: 34px;
   }
   .footer-organizers {
     justify-content: center;
@@ -2446,12 +2530,23 @@ body.organizer-open .site-nav [data-organizer-link] {
   .footer-organizer:last-child img {
     height: 54px;
   }
-  .footer-actions {
-    justify-content: center;
-    margin-left: 0;
-  }
   .footer-contact {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    padding-bottom: 34px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    margin-bottom: 34px;
     font-size: 13px;
+  }
+  .site-footer .footer-links {
+    grid-column: 1;
+    grid-row: 2;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 34px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    text-align: center;
   }
   .footer-contact a,
   .site-footer .footer-links {
