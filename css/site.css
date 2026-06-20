@@ -401,6 +401,14 @@ img {
   outline: 4px solid #70d6ff;
   outline-offset: 5px;
 }
+@media (max-width: 599.95px) {
+  .home-stage .submit-button {
+    top: auto;
+    bottom: 88px;
+    width: min(400px, calc(100vw - 40px));
+    min-width: 0;
+  }
+}
 .home-stage.is-playing {
   background-size: cover;
   background-position: right center;
