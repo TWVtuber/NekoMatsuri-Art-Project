@@ -27,7 +27,7 @@ html {
 body {
   margin: 0;
   overflow-x: hidden;
-  background: #f6c28d;
+  background: var(--paper);
   color: var(--ink);
   font-family: "jf-openhuninn", sans-serif;
 }
@@ -489,6 +489,8 @@ img {
   font-size: 24px;
 }
 .sketch-page {
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   background-color: var(--paper);
   background-image: radial-gradient(#262626 0.75px, transparent 0.75px);
@@ -1015,6 +1017,125 @@ p {
   align-items: start;
   gap: var(--section-gap);
   margin-bottom: var(--section-gap);
+}
+.section-mascot {
+  position: absolute;
+  z-index: 5;
+  width: clamp(96px, 10vw, 142px);
+  height: clamp(108px, 12vw, 162px);
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(3px 5px 0 rgba(39, 34, 30, 0.14));
+}
+.mascot-motion-ready .section-mascot {
+  opacity: 0;
+  translate: 0 18px;
+  scale: 0.84;
+  transition:
+    opacity 0.28s ease-in,
+    translate 0.28s ease-in,
+    scale 0.28s ease-in;
+  will-change: opacity, translate, scale;
+}
+.mascot-motion-ready .section-mascot.is-visible {
+  animation: mascot-bounce-in 0.72s cubic-bezier(0.2, 0.75, 0.3, 1) both;
+}
+@keyframes mascot-bounce-in {
+  0% {
+    opacity: 0;
+    translate: 0 22px;
+    scale: 0.78;
+  }
+  48% {
+    opacity: 1;
+    translate: 0 -10px;
+    scale: 1.08;
+  }
+  68% {
+    translate: 0 5px;
+    scale: 0.96;
+  }
+  84% {
+    translate: 0 -3px;
+    scale: 1.025;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-motion-ready .section-mascot,
+  .mascot-motion-ready .section-mascot.is-visible {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+    transition: none;
+    animation: none;
+  }
+}
+.countdown-mascot--top-left {
+  top: -96px;
+  left: 12px;
+  transform: rotate(-5deg);
+}
+.countdown-mascot--bottom-right {
+  right: 12px;
+  bottom: -94px;
+  transform: rotate(5deg);
+}
+.rules-mascot {
+  top: -118px;
+  left: clamp(36px, 12%, 130px);
+  transform: rotate(-4deg);
+}
+.section-title {
+  position: relative;
+}
+.title-mascot {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.title-mascot--right {
+  right: clamp(8px, 8vw, 90px);
+  left: auto;
+}
+.title-mascot--left {
+  right: auto;
+  left: clamp(8px, 8vw, 90px);
+}
+.role-awards-mascot {
+  top: -112px;
+  right: clamp(20px, 8vw, 100px);
+  left: auto;
+  width: 96px;
+  height: 110px;
+  transform: rotate(4deg);
+}
+.faq-launcher-mascot {
+  top: -112px;
+  left: 12px;
+  width: 96px;
+  height: 110px;
+  transform: rotate(-4deg);
+}
+@media (min-width: 1280px) {
+  .role-awards-mascot {
+    top: 50%;
+    right: auto;
+    left: calc(50% + clamp(120px, 15vw, 190px));
+    width: clamp(96px, 10vw, 142px);
+    height: clamp(108px, 12vw, 162px);
+    transform: translateX(60%) translateY(-50%) rotate(4deg);
+  }
+  .faq-launcher-mascot {
+    top: 50%;
+    left: -100px;
+    width: clamp(96px, 10vw, 142px);
+    height: clamp(108px, 12vw, 162px);
+    transform: translateY(-50%) rotate(-4deg);
+  }
 }
 .note-card {
   min-height: 430px;
@@ -1768,6 +1889,7 @@ p {
   border-radius: 50%;
 }
 .role-awards-title {
+  position: relative;
   justify-content: center;
   margin-bottom: 7px;
   text-align: center;
@@ -2206,6 +2328,16 @@ body.organizer-open .site-nav [data-organizer-link] {
 }
 
 @media (max-width: 1023.95px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .sketch-page {
+    width: 100%;
+    max-width: 100%;
+  }
   .countdown-section {
     margin-top: 0;
   }
@@ -2474,11 +2606,26 @@ body.organizer-open .site-nav [data-organizer-link] {
   .role-award-note {
     grid-template-rows: 92px auto;
   }
+  .role-awards-mascot {
+    top: -78px;
+    right: 12px;
+    left: auto;
+    width: 72px;
+    height: 78px;
+    transform: rotate(4deg);
+  }
   .faq-launcher {
     flex-direction: column;
     align-items: stretch;
     padding: 30px 25px 25px;
     text-align: center;
+  }
+  .faq-launcher-mascot {
+    top: -80px;
+    left: 10px;
+    width: 72px;
+    height: 78px;
+    transform: rotate(-4deg);
   }
   .faq-launcher__button {
     justify-content: space-between;
@@ -2620,19 +2767,12 @@ body.organizer-open .site-nav [data-organizer-link] {
 }
 
 @media (max-width: 599.95px) {
-  html,
-  body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    background: var(--paper);
-  }
   .home-stage,
   .sketch-page,
   .site-header,
   .page-content {
-    width: 100vw;
-    max-width: 100vw;
+    width: 100%;
+    max-width: 100%;
   }
   .home-stage.is-playing {
     background-size: cover;
@@ -2651,6 +2791,53 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .page-content {
     padding-inline: 20px;
+  }
+  .section-mascot {
+    width: 82px;
+    height: 96px;
+  }
+  .countdown-mascot--top-left {
+    top: -62px;
+    left: 4px;
+  }
+  .countdown-mascot--bottom-right {
+    right: 4px;
+    bottom: -66px;
+  }
+  .rules-mascot {
+    top: -76px;
+    left: 24px;
+  }
+  .title-mascot--right {
+    top: -76px;
+    left: auto;
+    right: 4px;
+    width: 68px;
+    height: 76px;
+    transform: rotate(4deg);
+  }
+  .title-mascot--left {
+    top: -76px;
+    right: auto;
+    left: 4px;
+    width: 68px;
+    height: 76px;
+    transform: rotate(-4deg);
+  }
+  .role-awards-mascot {
+    top: -76px;
+    left: auto;
+    right: 4px;
+    width: 68px;
+    height: 76px;
+    transform: rotate(4deg);
+  }
+  .faq-launcher-mascot {
+    top: -78px;
+    left: 8px;
+    width: 68px;
+    height: 76px;
+    transform: rotate(-4deg);
   }
   .hero-copy {
     padding: 34px 10px;
