@@ -17,10 +17,10 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=64" />
-    <link rel="stylesheet" href="css/event.css?v=1" />
+    <link rel="stylesheet" href="css/site.css?v=65" />
+    <link rel="stylesheet" href="css/event.css?v=9" />
     <link rel="stylesheet" href="css/awards.css?v=1" />
-    <link rel="stylesheet" href="css/pages-responsive.css?v=1" />
+    <link rel="stylesheet" href="css/pages-responsive.css?v=5" />
     <link rel="stylesheet" href="css/spacing.css?v=2" />
 
     <!-- Google tag (gtag.js) -->
@@ -149,7 +149,7 @@
             <a href="#rules">活動主題與規則</a>
             <a href="#rewards">獎勵辦法</a>
             <a href="#awards">評審與獎項</a>
-            <a href="#organizers" data-organizer-link>主辦單位介紹</a>
+            <a href="#organizers" data-organizer-link>參與人員</a>
             <a href="#faq" data-faq-link>常見問題</a>
           </nav>
           <a
@@ -272,6 +272,49 @@
                 但卻因為成品笑了，替自己的進步雀躍了
               </p>
               <p class="hero-closing">同是創作者，我舉辦了這場盛宴───</p>
+              <section
+                class="activity-hashtags"
+                aria-labelledby="activity-hashtags-title"
+              >
+                <div class="activity-hashtags__heading">
+                  <h2 id="activity-hashtags-title">活動相關Hashtag</h2>
+                  <button
+                    class="activity-hashtags__copy-all"
+                    type="button"
+                    data-copy-hashtag="#貓祭不繪讓你俄史計劃 #繪俄史藝術高等學院"
+                    aria-label="複製兩個活動 Hashtag"
+                    title="複製活動 Hashtag"
+                  >
+                    <span class="material-symbols-outlined" aria-hidden="true"
+                      >content_copy</span
+                    >
+                    <span class="hashtag-copy-label">點我複製Hashtag</span>
+                  </button>
+                </div>
+                <div class="activity-hashtags__list">
+                  <div class="activity-hashtag">
+                    <a
+                      href="https://x.com/hashtag/貓祭不繪讓你俄史計劃"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >#貓祭不繪讓你俄史計劃</a
+                    >
+                  </div>
+                  <div class="activity-hashtag">
+                    <a
+                      href="https://x.com/hashtag/繪俄史藝術高等學院"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >#繪俄史藝術高等學院</a
+                    >
+                  </div>
+                </div>
+                <span
+                  class="visually-hidden"
+                  id="hashtag-copy-status"
+                  aria-live="polite"
+                ></span>
+              </section>
             </div>
           </article>
         </section>
@@ -466,9 +509,15 @@
               </ol>
               <div class="reward-policy__prizes">
                 <ul class="reward-prize-list">
-                  <li><b>金&emsp;賞</b><wbr /><span>新台幣 5,000 元（一名）</span></li>
-                  <li><b>銀&emsp;賞</b><wbr /><span>新台幣 3,000 元（一名）</span></li>
-                  <li><b>銅&emsp;賞</b><wbr /><span>新台幣 2,000 元（一名）</span></li>
+                  <li>
+                    <b>金&emsp;賞</b><wbr /><span>新台幣 5,000 元（一名）</span>
+                  </li>
+                  <li>
+                    <b>銀&emsp;賞</b><wbr /><span>新台幣 3,000 元（一名）</span>
+                  </li>
+                  <li>
+                    <b>銅&emsp;賞</b><wbr /><span>新台幣 2,000 元（一名）</span>
+                  </li>
                   <li>
                     <b>互動獎</b><wbr /><span>新台幣 1,500 元（一名）</span
                     ><small>即為大於一個的角色進行互動，且十分生動。</small>
@@ -581,21 +630,30 @@
             <div class="award-note-grid common-award-notes">
               <figure class="award-note award-note--yellow">
                 <span class="note-tape" aria-hidden="true"></span
-                ><img src="imgs/trophies/繪俄史金獎.webp" alt="繪俄史金獎獎盃" />
+                ><img
+                  src="imgs/trophies/繪俄史金獎.webp"
+                  alt="繪俄史金獎獎盃"
+                />
                 <figcaption>
                   <strong>金賞</strong>（取一名）<span>NT$ 5,000</span>
                 </figcaption>
               </figure>
               <figure class="award-note award-note--blue">
                 <span class="note-tape" aria-hidden="true"></span
-                ><img src="imgs/trophies/繪俄史銀獎.webp" alt="繪俄史銀獎獎盃" />
+                ><img
+                  src="imgs/trophies/繪俄史銀獎.webp"
+                  alt="繪俄史銀獎獎盃"
+                />
                 <figcaption>
                   <strong>銀賞</strong>（取一名）<span>NT$ 3,000</span>
                 </figcaption>
               </figure>
               <figure class="award-note award-note--pink">
                 <span class="note-tape" aria-hidden="true"></span
-                ><img src="imgs/trophies/繪俄史銅獎.webp" alt="繪俄史銅獎獎盃" />
+                ><img
+                  src="imgs/trophies/繪俄史銅獎.webp"
+                  alt="繪俄史銅獎獎盃"
+                />
                 <figcaption>
                   <strong>銅賞</strong>（取一名）<span>NT$ 2,000</span>
                 </figcaption>
@@ -957,7 +1015,7 @@
                 <!-- Polaroid Caption -->
                 <div class="mt-6 text-center">
                   <span class="handwritten text-2xl font-bold text-black"
-                    >【主辦】貓祭<br
+                    >貓祭 NekoMatsuri<br
                   /></span>
                 </div>
               </div>
@@ -1126,6 +1184,162 @@
               <span class="material-symbols-outlined text-[120px]">school</span>
             </div>
           </section>
+
+          <div class="section-title organizer-credits-title">
+            <span></span>
+            <h2 id="organizer-credits-title">其他感謝人員</h2>
+            <span></span>
+          </div>
+          <section
+            class="journal-container organizer-credits"
+            aria-labelledby="organizer-credits-title"
+          >
+            <div class="corner-label organizer-credits__label">特別感謝</div>
+            <div class="binder-holes" aria-hidden="true">
+              <div class="hole"></div>
+              <div class="hole"></div>
+              <div class="hole"></div>
+              <div class="hole"></div>
+              <div class="hole"></div>
+              <div class="hole"></div>
+            </div>
+            <div class="organizer-credits__content grid-pattern">
+              <ul class="organizer-credits__notes" aria-label="感謝人員名單">
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/star_2290"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >筱星 朔光</a
+                    >、<a
+                      href="https://x.com/Nekolive_Chiang"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >阿強</a
+                    >
+                  </h3>
+                  <p>Live 2D動畫／協助</p>
+                </li>
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/lilimxxxdeer?s=20"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >湮月 緋花</a
+                    >
+                  </h3>
+                  <p>Live 2D拆圖</p>
+                </li>
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/Nk_in_1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >亞狸YaRi</a
+                    >
+                  </h3>
+                  <p>Live 2D拆圖＋繪製貓祭、祭煜立繪</p>
+                </li>
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/Shiyan_429"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >十炎Shiyan</a
+                    >
+                  </h3>
+                  <p>繪製沈家漫畫、Q版</p>
+                </li>
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/Poppy_Sliaccio"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >潑皮貓貓POPPY</a
+                    >
+                  </h3>
+                  <p>繪製獎盃精稿</p>
+                </li>
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/oishitakoyaki_"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >章魚燒｜蘭子</a
+                    >
+                  </h3>
+                  <p>比賽整體美工</p>
+                </li>
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/Kananunn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >夏楠</a
+                    >
+                  </h3>
+                  <p>活動PV</p>
+                </li>
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/KalinKonta"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Kalin風凜魂太</a
+                    >
+                    、<a
+                      href="https://www.linkedin.com/in/mingru-lu"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Teresa Lu</a
+                    >
+                  </h3>
+                  <p>網頁設計</p>
+                </li>
+                <li class="credit-note">
+                  <div class="credit-note__tape" aria-hidden="true"></div>
+                  <h3>
+                    <a
+                      href="https://x.com/nekomatsuri_25"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >貓祭</a
+                    >
+                  </h3>
+                  <p>Logo、PV分鏡、美工、繪製獎盃草稿、統籌活動</p>
+                </li>
+              </ul>
+
+              <dl class="organizer-sponsors">
+                <div class="sponsor-note">
+                  <span class="sponsor-note__pin" aria-hidden="true"></span>
+                  <dt>大額贊助</dt>
+                  <dd>喵波、君大、某茶、兔子、Jeff</dd>
+                </div>
+                <div class="sponsor-note">
+                  <span class="sponsor-note__pin" aria-hidden="true"></span>
+                  <dt>小額贊助</dt>
+                  <dd>李翔、刺客戰鬥、薄香貓、初山、阿太</dd>
+                </div>
+              </dl>
+            </div>
+          </section>
         </div>
       </main>
 
@@ -1161,7 +1375,10 @@
               <a href="https://portaly.cc/KalinLai-void" target="_blank"
                 >Kalin風凜魂太</a
               >
-              & Teresa Lu
+              &
+              <a href="https://www.linkedin.com/in/mingru-lu" target="_blank"
+                >Teresa Lu</a
+              >
             </p>
           </div>
           <div class="footer-actions">
@@ -1176,13 +1393,13 @@
             <nav class="footer-links" aria-label="頁尾導覽">
               <a href="#rules">活動規章</a>
               <a href="#awards">評審與獎項</a>
-              <a href="#organizers" data-organizer-link>主辦單位介紹</a>
+              <a href="#organizers" data-organizer-link>參與人員</a>
             </nav>
           </div>
         </div>
       </footer>
     </div>
 
-    <script src="js/site.js?v=29"></script>
+    <script src="js/site.js?v=31"></script>
   </body>
 </html>

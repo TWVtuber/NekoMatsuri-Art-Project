@@ -157,6 +157,8 @@ function sizeArtboard() {
   const width = stage.clientWidth;
   const height = stage.clientHeight;
   const useDesktop = width >= 1200;
+  const useLaptop = width >= 1024 && width < 1200;
+  const useTablet = width >= 600 && width < 1024;
   const useCover = width < 1024;
   const backgroundScale = Math.max(width / 1920, height / 1080);
   const artboardWidth = 1920 * backgroundScale;
@@ -170,7 +172,8 @@ function sizeArtboard() {
   const logoStyle = window.getComputedStyle(logoMotion);
   const marginTop = parseFloat(logoStyle.marginTop) || 0;
 
-  const maxLogoRatio = width < 600 ? 0.8 : 0.5;
+  const maxLogoRatio =
+    width < 600 ? 0.8 : useTablet ? 0.72 : useLaptop ? 0.62 : 0.5;
   const topSafePadding = useCover ? 24 : 48;
   const logoButtonGap = width < 600 ? 32 : width < 1024 ? 40 : 48;
   const safeAreaBottom = Math.max(
@@ -184,9 +187,17 @@ function sizeArtboard() {
   const logoWidth = 974 * logoScale;
   const logoHeight = 719 * logoScale;
   const logoLeft = (width - logoWidth) / 2;
+  const logoVisualOffset =
+    width < 600
+      ? height * 0.1
+      : useTablet
+        ? height * 0.14
+        : useLaptop
+          ? height * 0.14
+          : 0;
   const preferredLogoTop = useDesktop
     ? (height - logoHeight) / 2
-    : topSafePadding + (safeAreaHeight - logoHeight) / 2;
+    : topSafePadding + (safeAreaHeight - logoHeight) / 2 + logoVisualOffset;
   const minLogoTop = topSafePadding;
   const maxLogoTop = safeAreaBottom - logoHeight;
   const logoTop =
@@ -626,3 +637,44 @@ if (pvOverlay) {
     openPvModal({ withSound: true, restart: true, returnFocus: pvOverlay });
   });
 }
+
+const hashtagCopyStatus = document.getElementById('hashtag-copy-status');
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.cssText = 'position:fixed;opacity:0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand('copy');
+  textarea.remove();
+  if (!copied) throw new Error('Copy command failed');
+}
+
+document.querySelectorAll('[data-copy-hashtag]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const hashtag = button.dataset.copyHashtag;
+    const label = button.querySelector('.hashtag-copy-label');
+    const icon = button.querySelector('.material-symbols-outlined');
+    if (label && !label.dataset.defaultLabel) {
+      label.dataset.defaultLabel = label.textContent;
+    }
+    try {
+      await copyText(hashtag);
+      if (label) label.textContent = '已複製';
+      if (icon) icon.textContent = 'done';
+      if (hashtagCopyStatus) hashtagCopyStatus.textContent = `已複製 ${hashtag}`;
+      window.setTimeout(() => {
+        if (label) label.textContent = label.dataset.defaultLabel;
+        if (icon) icon.textContent = 'content_copy';
+      }, 1600);
+    } catch {
+      if (hashtagCopyStatus) hashtagCopyStatus.textContent = '複製失敗，請手動複製 Hashtag';
+    }
+  });
+});
