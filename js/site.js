@@ -339,6 +339,30 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
   });
 }
 
+const sectionMascots = [...document.querySelectorAll(".section-mascot")];
+
+if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+  sectionMascots.forEach((mascot) => mascot.classList.add("is-visible"));
+} else {
+  document.body.classList.add("mascot-motion-ready");
+
+  const mascotObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.01 },
+  );
+
+  // Paint the hidden state first so every re-entry produces a visible fade.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      sectionMascots.forEach((mascot) => mascotObserver.observe(mascot));
+    });
+  });
+}
+
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.getElementById("site-navigation");
 const mobileNavQuery = window.matchMedia("(max-width: 820px)");
