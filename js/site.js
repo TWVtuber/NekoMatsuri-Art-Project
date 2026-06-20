@@ -626,3 +626,44 @@ if (pvOverlay) {
     openPvModal({ withSound: true, restart: true, returnFocus: pvOverlay });
   });
 }
+
+const hashtagCopyStatus = document.getElementById('hashtag-copy-status');
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.cssText = 'position:fixed;opacity:0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand('copy');
+  textarea.remove();
+  if (!copied) throw new Error('Copy command failed');
+}
+
+document.querySelectorAll('[data-copy-hashtag]').forEach((button) => {
+  button.addEventListener('click', async () => {
+    const hashtag = button.dataset.copyHashtag;
+    const label = button.querySelector('.hashtag-copy-label');
+    const icon = button.querySelector('.material-symbols-outlined');
+    if (label && !label.dataset.defaultLabel) {
+      label.dataset.defaultLabel = label.textContent;
+    }
+    try {
+      await copyText(hashtag);
+      if (label) label.textContent = '已複製';
+      if (icon) icon.textContent = 'done';
+      if (hashtagCopyStatus) hashtagCopyStatus.textContent = `已複製 ${hashtag}`;
+      window.setTimeout(() => {
+        if (label) label.textContent = label.dataset.defaultLabel;
+        if (icon) icon.textContent = 'content_copy';
+      }, 1600);
+    } catch {
+      if (hashtagCopyStatus) hashtagCopyStatus.textContent = '複製失敗，請手動複製 Hashtag';
+    }
+  });
+});
