@@ -258,7 +258,6 @@
 .common-award-notes {
   margin: 48px 0 0;
   padding-top: 44px;
-  border-top: 2px dashed rgba(0, 0, 0, 0.25);
 }
 .common-award-notes .award-note {
   grid-template-rows: 155px auto;

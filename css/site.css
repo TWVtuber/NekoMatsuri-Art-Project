@@ -39,7 +39,8 @@ html {
 }
 body {
   margin: 0;
-  overflow-x: hidden;
+  /* `hidden` creates a scrolling ancestor and can disable the sticky navbar. */
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   font-family: "jf-openhuninn", sans-serif;
