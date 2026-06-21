@@ -542,12 +542,12 @@ body.organizer-open .site-nav [data-organizer-link] {
   .role-award-note {
     grid-template-rows: 92px auto;
   }
-  .role-awards-mascot {
-    top: -78px;
+  .section-mascot.role-awards-mascot {
+    top: calc(22px - clamp(126px, 20vw, 172px));
     right: 12px;
     left: auto;
-    width: 72px;
-    height: 78px;
+    width: clamp(112px, 18vw, 150px);
+    height: clamp(126px, 20vw, 172px);
     transform: rotate(4deg);
   }
   .faq-launcher {
@@ -556,11 +556,11 @@ body.organizer-open .site-nav [data-organizer-link] {
     padding: 30px 25px 25px;
     text-align: center;
   }
-  .faq-launcher-mascot {
-    top: -150px;
+  .section-mascot.faq-launcher-mascot {
+    top: calc(0px - clamp(126px, 20vw, 172px));
     left: 20px;
-    width: 72px;
-    height: 78px;
+    width: clamp(112px, 18vw, 150px);
+    height: clamp(126px, 20vw, 172px);
     transform: rotate(-4deg);
   }
   .faq-launcher__button {
@@ -764,35 +764,35 @@ body.organizer-open .site-nav [data-organizer-link] {
     top: -76px;
     left: 24px;
   }
-  .title-mascot--right {
-    top: -76px;
+  .section-mascot.title-mascot--right {
+    top: -122px;
     left: auto;
     right: 4px;
-    width: 68px;
-    height: 76px;
+    width: 104px;
+    height: 122px;
     transform: rotate(4deg);
   }
-  .title-mascot--left {
-    top: -76px;
+  .section-mascot.title-mascot--left {
+    top: -122px;
     right: auto;
     left: 4px;
-    width: 68px;
-    height: 76px;
+    width: 104px;
+    height: 122px;
     transform: rotate(-4deg);
   }
-  .role-awards-mascot {
-    top: -76px;
+  .section-mascot.role-awards-mascot {
+    top: -122px;
     left: auto;
     right: 4px;
-    width: 68px;
-    height: 76px;
+    width: 104px;
+    height: 122px;
     transform: rotate(4deg);
   }
-  .faq-launcher-mascot {
-    top: -116px;
+  .section-mascot.faq-launcher-mascot {
+    top: -122px;
     left: 12px;
-    width: 68px;
-    height: 76px;
+    width: 104px;
+    height: 122px;
     transform: rotate(-4deg);
   }
   .hero-copy {

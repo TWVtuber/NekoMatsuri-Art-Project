@@ -399,7 +399,7 @@ mobileNavQuery.addEventListener("change", () => setMobileNavOpen(false));
 
 const sectionNavLinks = [
   ...document.querySelectorAll(
-    '.site-nav a[href^="#"]:not([data-faq-link]):not([data-organizer-link])',
+    '.site-nav a[href^="#"]:not([data-faq-link]):not([data-organizer-link]):not([data-related-data-link])',
   ),
 ]
   .map((link) => ({
@@ -432,6 +432,10 @@ function updateActiveNav() {
   }
   if (document.body.classList.contains("organizer-open")) {
     setActiveNav(organizerNavLink);
+    return;
+  }
+  if (document.body.classList.contains("related-data-open")) {
+    setActiveNav(null);
     return;
   }
 
@@ -484,14 +488,20 @@ document.getElementById("current-year").textContent = new Date().getFullYear();
 
 const faqView = document.getElementById("faq");
 const organizerView = document.getElementById("organizers");
+const relatedDataView = document.getElementById("related-data");
 const faqLinks = [...document.querySelectorAll("[data-faq-link]")];
 const organizerLinks = [...document.querySelectorAll("[data-organizer-link]")];
+const relatedDataLinks = [...document.querySelectorAll("[data-related-data-link]")];
 const faqBackButtons = [...document.querySelectorAll("[data-faq-back]")];
 const organizerBackButtons = [
   ...document.querySelectorAll("[data-organizer-back]"),
 ];
+const relatedDataBackButtons = [
+  ...document.querySelectorAll("[data-related-data-back]"),
+];
 let faqReturnHash = "#activity";
 let organizerReturnHash = "#activity";
+let relatedDataReturnHash = "#activity";
 
 document.querySelectorAll(".faq-card").forEach((card, index) => {
   const heading = card.querySelector("h2");
@@ -520,12 +530,13 @@ function showFaq(updateHistory = true) {
     faqReturnHash = window.location.hash || "#activity";
   }
   document.body.classList.add("faq-open", "activity-visible");
-  document.body.classList.remove("organizer-open");
+  document.body.classList.remove("organizer-open", "related-data-open");
   organizerView.hidden = true;
+  relatedDataView.hidden = true;
   faqView.hidden = false;
   if (updateHistory && window.location.hash !== "#faq")
     history.pushState({ faq: true }, "", "#faq");
-  document.title = `常見問題｜${document.title.replace(/^(常見問題|主辦單位介紹)｜/, "")}`;
+  document.title = `常見問題｜${document.title.replace(/^(常見問題|主辦單位介紹|繪畫主題資料)｜/, "")}`;
   setActiveNav(faqNavLink);
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
@@ -537,14 +548,15 @@ function showOrganizer(updateHistory = true) {
   ) {
     organizerReturnHash = window.location.hash || "#activity";
   }
-  document.body.classList.remove("faq-open");
+  document.body.classList.remove("faq-open", "related-data-open");
   document.body.classList.add("organizer-open", "activity-visible");
   faqView.hidden = true;
+  relatedDataView.hidden = true;
   organizerView.hidden = false;
   if (updateHistory && window.location.hash !== "#organizers") {
     history.pushState({ organizers: true }, "", "#organizers");
   }
-  document.title = `主辦單位介紹｜${document.title.replace(/^(常見問題|主辦單位介紹)｜/, "")}`;
+  document.title = `主辦單位介紹｜${document.title.replace(/^(常見問題|主辦單位介紹|繪畫主題資料)｜/, "")}`;
   setActiveNav(organizerNavLink);
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
@@ -571,6 +583,40 @@ function hideOrganizer(targetHash = organizerReturnHash, updateHistory = true) {
   });
 }
 
+function showRelatedData(updateHistory = true) {
+  if (
+    !document.body.classList.contains("related-data-open") &&
+    window.location.hash !== "#related-data"
+  ) {
+    relatedDataReturnHash = window.location.hash || "#activity";
+  }
+  document.body.classList.remove("faq-open", "organizer-open");
+  document.body.classList.add("related-data-open", "activity-visible");
+  faqView.hidden = true;
+  organizerView.hidden = true;
+  relatedDataView.hidden = false;
+  if (updateHistory && window.location.hash !== "#related-data") {
+    history.pushState({ relatedData: true }, "", "#related-data");
+  }
+  document.title = `繪畫主題資料｜${document.title.replace(/^(常見問題|主辦單位介紹|繪畫主題資料)｜/, "")}`;
+  setActiveNav(null);
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}
+
+function hideRelatedData(
+  targetHash = relatedDataReturnHash,
+  updateHistory = true,
+) {
+  document.body.classList.remove("related-data-open");
+  relatedDataView.hidden = true;
+  document.title = document.title.replace(/^繪畫主題資料｜/, "");
+  if (updateHistory) history.pushState(null, "", targetHash);
+  requestAnimationFrame(() => {
+    document.querySelector(targetHash)?.scrollIntoView({ behavior: "auto" });
+    scheduleActiveNavUpdate();
+  });
+}
+
 faqLinks.forEach((link) =>
   link.addEventListener("click", (event) => {
     event.preventDefault();
@@ -590,33 +636,52 @@ organizerLinks.forEach((link) =>
 organizerBackButtons.forEach((button) =>
   button.addEventListener("click", () => history.back()),
 );
+relatedDataLinks.forEach((link) =>
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showRelatedData();
+  }),
+);
+relatedDataBackButtons.forEach((button) =>
+  button.addEventListener("click", () => history.back()),
+);
 
 document
   .querySelectorAll(
-    '.site-header a[href^="#"]:not([data-faq-link]):not([data-organizer-link])',
+    '.site-header a[href^="#"]:not([data-faq-link]):not([data-organizer-link]):not([data-related-data-link])',
   )
   .forEach((link) => {
     link.addEventListener("click", (event) => {
       if (
         !document.body.classList.contains("faq-open") &&
-        !document.body.classList.contains("organizer-open")
+        !document.body.classList.contains("organizer-open") &&
+        !document.body.classList.contains("related-data-open")
       )
         return;
       event.preventDefault();
       const targetHash = link.getAttribute("href");
       if (document.body.classList.contains("faq-open")) hideFaq(targetHash);
-      else hideOrganizer(targetHash);
+      else if (document.body.classList.contains("organizer-open"))
+        hideOrganizer(targetHash);
+      else hideRelatedData(targetHash);
     });
   });
 
 window.addEventListener("popstate", () => {
   if (window.location.hash === "#faq") showFaq(false);
   else if (window.location.hash === "#organizers") showOrganizer(false);
+  else if (window.location.hash === "#related-data") showRelatedData(false);
   else if (document.body.classList.contains("faq-open"))
     hideFaq(window.location.hash || "#activity", false);
   else if (document.body.classList.contains("organizer-open"))
     hideOrganizer(window.location.hash || "#activity", false);
+  else if (document.body.classList.contains("related-data-open"))
+    hideRelatedData(window.location.hash || "#activity", false);
 });
+
+if (window.location.hash === "#faq") showFaq(false);
+else if (window.location.hash === "#organizers") showOrganizer(false);
+else if (window.location.hash === "#related-data") showRelatedData(false);
 
 // Reopen the themed PV modal from the activity photo.
 const pvOverlay = document.getElementById('pv-overlay');
