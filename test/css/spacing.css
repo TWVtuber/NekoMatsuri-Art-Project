@@ -1,0 +1,182 @@
+/*
+ * 全站主要區塊間距
+ * 以「視覺上露出的物件邊界」計算間距：
+ * 若區塊有絕對定位的角色圖、圖釘等裝飾露出卡片外，
+ * 下一個區塊會從露出物件最下方再往下保留固定距離。
+ */
+:root {
+  --section-gap-mobile: 64px;
+  --section-gap-tablet: 80px;
+  --section-gap-laptop: 80px;
+  --section-gap-desktop: 80px;
+  --section-gap: var(--section-gap-laptop);
+  --section-title-gap: 34px;
+
+  --countdown-mascot-top-overhang: 0px;
+  --countdown-mascot-bottom-overhang: 0px;
+  --note-card-mascot-top-overhang: 0px;
+  --section-title-mascot-top-overhang: 0px;
+  --role-awards-mascot-top-overhang: 0px;
+  --faq-launcher-mascot-top-overhang: 0px;
+  --faq-launcher-mascot-bottom-overhang: 0px;
+  --notes-gap-adjust: 8px;
+  --judges-gap-adjust: 4px;
+  --ending-gap-adjust: 10px;
+  --view-back-title-gap: 48px;
+}
+
+/* Header → 活動介紹 */
+.site-header {
+  margin-bottom: var(--section-gap);
+}
+
+/* 活動介紹 → 計時器；計入倒數卡片上方露出的角色圖。 */
+.hero {
+  margin-bottom: calc(var(--section-gap) + var(--countdown-mascot-top-overhang));
+}
+
+/* 計時器 → 活動主題；從右下角色圖最下方開始算固定間距。 */
+.countdown-section {
+  margin-bottom: calc(
+    var(--section-gap) + var(--countdown-mascot-bottom-overhang)
+  );
+  padding-block: 0;
+}
+
+/* 活動主題 → 活動規則 → 獎勵辦法 */
+.notes-grid {
+  gap: calc(
+    var(--section-gap) + var(--note-card-mascot-top-overhang) +
+      var(--notes-gap-adjust)
+  );
+  margin-bottom: calc(var(--section-gap) + var(--section-title-mascot-top-overhang));
+}
+
+/* 獎勵辦法 → 評審與獎項；計入下一個標題 Q 圖外露高度。 */
+.section {
+  margin-bottom: var(--section-gap);
+}
+.reward-policy {
+  margin-bottom: calc(var(--section-gap) + var(--section-title-mascot-top-overhang));
+}
+
+/* 評審與獎項 → 角色獎項 */
+.common-awards-sheet {
+  margin-bottom: calc(
+    var(--section-gap) + var(--role-awards-mascot-top-overhang) +
+      var(--judges-gap-adjust)
+  );
+}
+
+/* 角色獎項 → 投稿疑問；計入投稿疑問卡片上方露出的角色圖。 */
+.awards-showcase {
+  margin-bottom: calc(
+    var(--section-gap) + var(--faq-launcher-mascot-top-overhang) +
+      var(--ending-gap-adjust)
+  );
+}
+
+/* 投稿疑問 → Footer；從卡片／外露圖最下方開始算固定距離。 */
+.faq-launcher {
+  margin-bottom: calc(
+    var(--section-gap) + var(--faq-launcher-mascot-bottom-overhang)
+  );
+}
+
+.site-footer {
+  margin-top: 0;
+}
+
+/* 區塊標題與卡片內容 */
+.section-title,
+.awards-showcase .section-title {
+  margin-bottom: var(--section-title-gap);
+}
+
+.reward-policy__paper {
+  margin-top: 0;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-gap: var(--section-gap-laptop);
+    --section-title-gap: 34px;
+    --countdown-mascot-top-overhang: 108px;
+    --countdown-mascot-bottom-overhang: 104px;
+    --note-card-mascot-top-overhang: 166px;
+    --section-title-mascot-top-overhang: 80px;
+    --role-awards-mascot-top-overhang: 112px;
+    --faq-launcher-mascot-top-overhang: 152px;
+    --faq-launcher-mascot-bottom-overhang: 0px;
+    --notes-gap-adjust: 10px;
+    --view-back-title-gap: 48px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1023.95px) {
+  :root {
+    --section-gap: var(--section-gap-tablet);
+    --section-title-gap: 32px;
+    --countdown-mascot-top-overhang: 74px;
+    --countdown-mascot-bottom-overhang: 88px;
+    --note-card-mascot-top-overhang: 78px;
+    --section-title-mascot-top-overhang: 78px;
+    --role-awards-mascot-top-overhang: 78px;
+    --faq-launcher-mascot-top-overhang: 150px;
+    --faq-launcher-mascot-bottom-overhang: 0px;
+    --notes-gap-adjust: 6px;
+    --judges-gap-adjust: 2px;
+    --ending-gap-adjust: 2px;
+    --view-back-title-gap: 44px;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --section-gap: var(--section-gap-desktop);
+    --section-title-gap: 36px;
+    --countdown-mascot-top-overhang: 116px;
+    --countdown-mascot-bottom-overhang: 112px;
+    --note-card-mascot-top-overhang: 170px;
+    --section-title-mascot-top-overhang: 82px;
+    --role-awards-mascot-top-overhang: 112px;
+    --faq-launcher-mascot-top-overhang: 152px;
+    --faq-launcher-mascot-bottom-overhang: 0px;
+    --notes-gap-adjust: 12px;
+    --judges-gap-adjust: 4px;
+    --ending-gap-adjust: 4px;
+    --view-back-title-gap: 50px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --faq-launcher-mascot-top-overhang: 0px;
+    --faq-launcher-mascot-bottom-overhang: 80px;
+    --ending-gap-adjust: 80px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --role-awards-mascot-top-overhang: 32px;
+  }
+}
+
+@media (max-width: 599.95px) {
+  :root {
+    --section-gap: var(--section-gap-mobile);
+    --section-title-gap: 28px;
+    --countdown-mascot-top-overhang: 72px;
+    --countdown-mascot-bottom-overhang: 96px;
+    --note-card-mascot-top-overhang: 76px;
+    --section-title-mascot-top-overhang: 122px;
+    --role-awards-mascot-top-overhang: 122px;
+    --faq-launcher-mascot-top-overhang: 122px;
+    --faq-launcher-mascot-bottom-overhang: 0px;
+    --notes-gap-adjust: 4px;
+    --judges-gap-adjust: 0px;
+    --ending-gap-adjust: 2px;
+    --view-back-title-gap: 40px;
+  }
+}
