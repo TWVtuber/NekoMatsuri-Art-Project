@@ -667,3 +667,65 @@ document.querySelectorAll('[data-copy-hashtag]').forEach((button) => {
     }
   });
 });
+
+const academyModal = document.getElementById('academy-modal');
+const academyModalTrigger = document.getElementById('academy-info-trigger');
+const academyModalClose = document.getElementById('academy-modal-close');
+const academyPresidentLink = document.getElementById('academy-president-link');
+
+function openAcademyModal() {
+  if (!academyModal) return;
+  academyModal.hidden = false;
+  document.body.classList.add('academy-is-open');
+  activityRoot.inert = true;
+  activityRoot.setAttribute('aria-hidden', 'true');
+  stage.inert = true;
+  stage.setAttribute('aria-hidden', 'true');
+  academyModal.focus({ preventScroll: true });
+  academyModalClose?.focus({ preventScroll: true });
+}
+
+function closeAcademyModal({ restoreFocus = true } = {}) {
+  if (!academyModal || academyModal.hidden) return;
+  academyModal.hidden = true;
+  document.body.classList.remove('academy-is-open');
+  activityRoot.inert = false;
+  activityRoot.removeAttribute('aria-hidden');
+  stage.inert = false;
+  stage.removeAttribute('aria-hidden');
+  if (restoreFocus) academyModalTrigger?.focus({ preventScroll: true });
+}
+
+academyModalTrigger?.addEventListener('click', openAcademyModal);
+academyModalClose?.addEventListener('click', closeAcademyModal);
+academyModal?.querySelector('[data-academy-close]')?.addEventListener('click', closeAcademyModal);
+academyPresidentLink?.addEventListener('click', (event) => {
+  event.preventDefault();
+  closeAcademyModal({ restoreFocus: false });
+  showOrganizer();
+  requestAnimationFrame(() => {
+    document.getElementById('academy-president-message')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  });
+});
+document.addEventListener('keydown', (event) => {
+  if (!academyModal || academyModal.hidden) return;
+  if (event.key === 'Escape') {
+    closeAcademyModal();
+    return;
+  }
+  if (event.key === 'Tab') {
+    const focusable = [...academyModal.querySelectorAll('button, a[href]')];
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first?.focus();
+    }
+  }
+});

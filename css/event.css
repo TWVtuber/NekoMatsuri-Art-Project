@@ -301,7 +301,7 @@ p {
   letter-spacing: 0.06em;
 }
 .activity-hashtags__copy-all {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 5px;
   padding: 2px 4px;
@@ -837,6 +837,43 @@ p {
     700 15px/1 Arial,
     sans-serif;
   text-align: center;
+}
+
+.academy-info-trigger {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 5px;
+  width: 100%;
+  margin: 26px 0 6px;
+  padding: 2px 1px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.45;
+  text-align: right;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+.academy-info-trigger::before {
+  content: "✦";
+  color: var(--pink-strong);
+  font-size: 12px;
+  transform: rotate(-10deg);
+}
+.academy-info-trigger span {
+  color: var(--pink-strong);
+  white-space: nowrap;
+}
+.academy-info-trigger:hover {
+  color: var(--pink-strong);
+}
+.academy-info-trigger:focus-visible {
+  outline: 3px solid var(--pink-strong);
+  outline-offset: 4px;
 }
 .character-link {
   position: absolute;
