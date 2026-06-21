@@ -339,8 +339,8 @@ const cardPopTargets = [
   ...document.querySelectorAll(
     [
       ".page-content .countdown-card",
-      ".page-content .reward-policy__paper",
-      ".page-content .paper-card:not(.hero-copy)",
+      ".page-content .reward-policy",
+      ".page-content .paper-card:not(.hero-copy):not(.reward-policy__paper)",
       ".page-content .faq-card",
       ".page-content .paper-sheet",
     ].join(", "),

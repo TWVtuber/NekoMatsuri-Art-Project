@@ -1377,16 +1377,18 @@ p {
   scroll-margin-top: 96px;
 }
 .reward-policy__paper {
+  --reward-policy-paper-fill: #fffef8;
+  --reward-policy-line-fill: rgba(84, 104, 132, 0.11);
   max-width: 1100px;
   min-height: 660px;
   margin: 0 auto;
   padding: clamp(48px, 6vw, 72px);
   border-radius: 24px 24px 18px 18px;
-  background-color: #fffef8;
+  background-color: var(--reward-policy-paper-fill);
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0 31px,
-    rgba(84, 104, 132, 0.11) 32px 33px
+    var(--reward-policy-line-fill) 32px 33px
   );
   box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
   transform: none;
@@ -1410,7 +1412,12 @@ p {
   z-index: -1;
   border: 2px solid var(--ink);
   border-radius: 28px 28px 20px 20px;
-  background: #f3f0e8;
+  background-color: var(--reward-policy-paper-fill);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 31px,
+    var(--reward-policy-line-fill) 32px 33px
+  );
   transform: none;
 }
 .reward-policy__columns {
