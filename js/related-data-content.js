@@ -117,7 +117,7 @@
     return `<div class="manila-texture related-profile related-profile--${escapeHtml(profileKey)}">
       <aside class="related-profile__sidebar">
         <div class="related-profile__portrait-wrap">
-          <span class="tape related-data-photo-tape" aria-hidden="true"></span>
+          <span class="related-data-photo-tape" aria-hidden="true"></span>
           <div class="related-photo-card polaroid-frame related-profile__portrait">${imageViewerTrigger({ source: profile.portrait, title: `${profile.name}證件照`, description: profile.relationship, lazy: false })}</div>
           <div class="related-profile__name-card"><h2>${escapeHtml(profile.name)}｜${escapeHtml(profile.romanized)}</h2></div>
           <p class="related-profile__artist">繪製：${artistName}</p>
@@ -145,14 +145,14 @@
     const yue = linkCharacterMentions("沈月");
     const gallery = renderGallery(data.gallery);
     const portraits = [
-      ["沈曦", "imgs/characters/證件/照片/沈曦-證件.jpg"],
-      ["沈澈", "imgs/characters/證件/照片/沈澈-證件.jpg"],
-      ["沈樂", "imgs/characters/證件/照片/沈樂-證件.jpg"],
-      ["沈月", "imgs/characters/證件/照片/沈月-證件.jpg"],
+      ["沈曦", "imgs/characters/證件/照片/沈曦-證件.jpg", "#d34b4b"],
+      ["沈澈", "imgs/characters/證件/照片/沈澈-證件.jpg", "#5d9dd5"],
+      ["沈樂", "imgs/characters/證件/照片/沈樂-證件.jpg", "#d49a32"],
+      ["沈月", "imgs/characters/證件/照片/沈月-證件.jpg", "#7584c8"],
     ]
       .map(
-        ([name, source]) =>
-          `<figure class="related-photo-card">${imageViewerTrigger({ source, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure>`,
+        ([name, source, color]) =>
+          `<div class="related-family__portrait-wrap" style="--profile-accent:${escapeHtml(color)}"><span class="related-data-photo-tape" aria-hidden="true"></span><figure class="related-photo-card">${imageViewerTrigger({ source, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure></div>`,
       )
       .join("");
     return `<div class="manila-texture related-overview related-family">
