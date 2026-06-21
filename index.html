@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/site.css?v=70" />
     <link rel="stylesheet" href="css/event.css?v=30" />
     <link rel="stylesheet" href="css/awards.css?v=1" />
-    <link rel="stylesheet" href="css/pages-responsive.css?v=12" />
+    <link rel="stylesheet" href="css/pages-responsive.css?v=13" />
     <link rel="stylesheet" href="css/spacing.css?v=10" />
     <link rel="stylesheet" href="css/related-data.css?v=28" />
     <link rel="stylesheet" href="css/classroom-map.css?v=14" />
@@ -1280,18 +1280,12 @@
             <div
               class="w-full md:w-5/12 p-12 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r-2 border-dashed border-outline-variant"
             >
-              <div
-                class="w-full max-w-sm bg-white p-4 pb-12 shadow-lg rotate-[2deg] relative border border-black/10"
-              >
+              <div class="organizer-polaroid rotate-[2deg]">
                 <!-- Decorative Washi Tape -->
-                <div
-                  class="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-blue-200/60 -rotate-3 border border-black/5 z-10"
-                ></div>
+                <div class="washi-tape-accent organizer-polaroid__tape"></div>
 
                 <!-- Polaroid Image -->
-                <div
-                  class="aspect-square overflow-hidden border border-black/5"
-                >
+                <div class="organizer-polaroid__image">
                   <img
                     alt="貓祭"
                     class="w-full h-full object-cover grayscale-[0.2]"
@@ -1300,8 +1294,8 @@
                 </div>
 
                 <!-- Polaroid Caption -->
-                <div class="mt-6 text-center">
-                  <span class="handwritten text-2xl font-bold text-black"
+                <div class="organizer-polaroid__caption">
+                  <span class="handwritten font-bold text-black"
                     >貓祭 NekoMatsuri<br
                   /></span>
                 </div>
@@ -1399,19 +1393,17 @@
             <div
               class="w-full md:w-5/12 p-12 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r-2 border-dashed border-outline-variant"
             >
-              <div
-                class="w-full max-w-sm notebook-line p-2 bg-white rotate-[1deg] shadow-lg relative"
-              >
-                <div
-                  class="washi-tape-accent -top-4 left-1/2 -translate-x-1/2 -rotate-3 bg-blue-200/50"
-                ></div>
-                <img
-                  alt="校長"
-                  class="w-full aspect-[4/5] object-cover grayscale-[0.3]"
-                  src="./imgs/Oraganizer/President.jpg"
-                />
-                <div class="mt-4 text-center">
-                  <span class="handwritten text-3xl font-bold">校長</span>
+              <div class="organizer-polaroid rotate-[1deg]">
+                <div class="washi-tape-accent organizer-polaroid__tape"></div>
+                <div class="organizer-polaroid__image">
+                  <img
+                    alt="校長"
+                    class="w-full h-full object-cover grayscale-[0.3]"
+                    src="./imgs/Oraganizer/President.jpg"
+                  />
+                </div>
+                <div class="organizer-polaroid__caption">
+                  <span class="handwritten font-bold">校長</span>
                 </div>
               </div>
             </div>
@@ -1437,9 +1429,6 @@
               </div>
               <!-- Bottom Social Links -->
               <div class="mt-12 pt-8 border-t-2 border-black/10">
-                <h3 class="handwritten text-xl font-bold mb-4">
-                  協辦單位：繪俄史藝術高等學院
-                </h3>
                 <div class="flex flex-wrap gap-4">
                   <a
                     class="notebook-line bg-[#f3f4f6] text-[#111827] border-[#111827] px-4 py-2 flex items-center gap-2 hover:opacity-80 transition-colors shadow-[2px_2px_0px_#1d1c15]"
