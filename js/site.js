@@ -365,12 +365,21 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     target.classList.add("is-scroll-motion-visible"),
   );
 } else {
+  document.body.classList.add("scroll-motion-ready");
+
   const updateScrollMotionTargets = (entries) => {
     entries.forEach((entry) => {
       entry.target.classList.toggle(
         "is-scroll-motion-visible",
         entry.isIntersecting,
       );
+
+      if (entry.target.matches(".countdown-card")) {
+        entry.target
+          .closest(".countdown-board")
+          ?.querySelector(".countdown-pin")
+          ?.classList.toggle("is-pinned", entry.isIntersecting);
+      }
     });
   };
 
