@@ -987,6 +987,15 @@ p {
     transform: rotate(-4deg);
   }
 }
+@media (min-width: 1440px) {
+  .faq-launcher-mascot {
+    top: 50%;
+    left: -120px;
+    width: 170px;
+    height: 194px;
+    transform: translateY(-50%) rotate(-4deg);
+  }
+}
 .note-card {
   min-height: 430px;
   padding-top: 60px;
@@ -1325,6 +1334,10 @@ p {
   color: #4c4842;
 }
 .reward-policy {
+  scroll-margin-top: 96px;
+}
+#rules,
+#academy-president-message {
   scroll-margin-top: 96px;
 }
 .reward-policy__paper {

@@ -7,21 +7,21 @@
 :root {
   --section-gap-mobile: 64px;
   --section-gap-tablet: 80px;
-  --section-gap-laptop: 96px;
-  --section-gap-desktop: 120px;
+  --section-gap-laptop: 80px;
+  --section-gap-desktop: 80px;
   --section-gap: var(--section-gap-laptop);
   --section-title-gap: 34px;
 
-  --countdown-mascot-top-overhang: 96px;
-  --countdown-mascot-bottom-overhang: 94px;
-  --note-card-mascot-top-overhang: 118px;
-  --section-title-mascot-top-overhang: 80px;
-  --role-awards-mascot-top-overhang: 112px;
-  --faq-launcher-mascot-top-overhang: 152px;
+  --countdown-mascot-top-overhang: 0px;
+  --countdown-mascot-bottom-overhang: 0px;
+  --note-card-mascot-top-overhang: 0px;
+  --section-title-mascot-top-overhang: 0px;
+  --role-awards-mascot-top-overhang: 0px;
+  --faq-launcher-mascot-top-overhang: 0px;
   --faq-launcher-mascot-bottom-overhang: 0px;
   --notes-gap-adjust: 8px;
   --judges-gap-adjust: 4px;
-  --ending-gap-adjust: 4px;
+  --ending-gap-adjust: 10px;
   --view-back-title-gap: 48px;
 }
 
@@ -149,6 +149,20 @@
   }
 }
 
+@media (min-width: 1440px) {
+  :root {
+    --faq-launcher-mascot-top-overhang: 0px;
+    --faq-launcher-mascot-bottom-overhang: 80px;
+    --ending-gap-adjust: 80px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --role-awards-mascot-top-overhang: 32px;
+  }
+}
+
 @media (max-width: 599.95px) {
   :root {
     --section-gap: var(--section-gap-mobile);
@@ -156,9 +170,9 @@
     --countdown-mascot-top-overhang: 72px;
     --countdown-mascot-bottom-overhang: 96px;
     --note-card-mascot-top-overhang: 76px;
-    --section-title-mascot-top-overhang: 76px;
-    --role-awards-mascot-top-overhang: 76px;
-    --faq-launcher-mascot-top-overhang: 116px;
+    --section-title-mascot-top-overhang: 122px;
+    --role-awards-mascot-top-overhang: 122px;
+    --faq-launcher-mascot-top-overhang: 122px;
     --faq-launcher-mascot-bottom-overhang: 0px;
     --notes-gap-adjust: 4px;
     --judges-gap-adjust: 0px;
