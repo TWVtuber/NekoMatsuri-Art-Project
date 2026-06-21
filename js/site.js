@@ -365,20 +365,29 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     target.classList.add("is-scroll-motion-visible"),
   );
 } else {
-  const scrollMotionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-scroll-motion-visible");
-        scrollMotionObserver.unobserve(entry.target);
-      });
-    },
+  const revealScrollMotionTargets = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-scroll-motion-visible");
+      observer.unobserve(entry.target);
+    });
+  };
+
+  // Hero photos should start moving just before they enter the viewport so
+  // visitors never see them waiting at the edge of the screen.
+  const heroMotionObserver = new IntersectionObserver(
+    revealScrollMotionTargets,
+    { threshold: 0.01, rootMargin: "0px 0px 10% 0px" },
+  );
+  const cardMotionObserver = new IntersectionObserver(
+    revealScrollMotionTargets,
     { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
   );
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      scrollMotionTargets.forEach((target) => scrollMotionObserver.observe(target));
+      heroZoomTargets.forEach((target) => heroMotionObserver.observe(target));
+      cardPopTargets.forEach((target) => cardMotionObserver.observe(target));
     });
   });
 }
