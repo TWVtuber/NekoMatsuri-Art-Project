@@ -1440,7 +1440,7 @@ p {
 
 .scroll-zoom-out-left,
 .scroll-pop-up {
-  --scroll-rest-transform: none;
+  --scroll-rest-transform: translateZ(0);
   transform-origin: center;
   will-change: transform;
 }
