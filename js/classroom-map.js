@@ -78,7 +78,7 @@
           <div class="classroom-activity__legend-card">
             <h3>評分圖例</h3>
             <ul>
-              <li class="is-cat"><i aria-hidden="true"></i><span><strong>貓家</strong><small>核心計分對象</small></span></li>
+              <li class="is-cat"><i aria-hidden="true"></i><span><strong><a href="https://x.com/hashtag/貓祭不繪讓你俄史計劃" target="_blank" rel="noopener noreferrer">#貓祭不繪讓你俄史計劃</a></strong><small>核心計分對象</small></span></li>
               <li class="is-shen"><i aria-hidden="true"></i><span><strong>沈家</strong><small>核心計分對象</small></span></li>
               <li class="is-ip"><i aria-hidden="true"></i><span><strong>貓祭旗下 IP</strong><small>額外加分對象</small></span></li>
             </ul>
