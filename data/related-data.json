@@ -1,15 +1,21 @@
 {
   "neko": {
     "kind": "profile",
+    "tab": {
+      "title": "貓祭",
+      "color": "#ffcbd3",
+      "order": 2,
+      "default": true
+    },
     "name": "貓祭",
     "romanized": "NekoMatsuri",
-    "portrait": "imgs/characters/貓祭-證件.jpg",
+    "portrait": "imgs/characters/證件/照片/貓祭-證件.jpg",
     "accent": "#e85078",
     "meta": [
       ["性別", "女"],
       ["生日", "01/25"],
       ["身高", "158cm"],
-      ["職位", "三年 C 班 ── 班導"]
+      ["身份", "三年 C 班 ── 班導"]
     ],
     "relationship": "三年 C 班班導，親哥哥祭煜是該班學生。",
     "personality": "直來直往，非常爽快。",
@@ -24,53 +30,81 @@
       "辦公室的桌上總會莫名其妙多出很多錢"
     ],
     "notes": [
-      "個性其實很溫和，熱於與學生互動。",
-      "年紀跟身高比各位學生略為嬌小，所以很常被人看不起，但那些人隔天都不會出現在學校裡。",
-      "",
+      "個性其實很溫和，熱於與學生互動。年紀跟身高比各位學生略為嬌小，所以很常被人看不起，但那些人隔天都不會出現在學校裡。",
       "可能出遠門了吧?"
     ],
-    "artist": "亞狸",
+    "artist": { "name": "亞狸YaRi", "url": "https://x.com/Nk_in_1" },
+    "sidebarImage": {
+      "src": "imgs/characters/證件/【貓祭】教職證.jpg",
+      "alt": "貓祭教職證",
+      "variant": "document"
+    },
     "gallery": [
+      ["imgs/characters/3C-Pics/【貓祭】TAG公開.jpg", "TAG 公開"],
+      ["imgs/characters/3C-Pics/【貓祭】不信任的眼神.jpg", "不信任的眼神"],
+      [
+        "imgs/characters/3C-Pics/【貓祭】入職沒跟我說這是24小時制.jpg",
+        "入職沒跟我說這是 24 小時制"
+      ],
+      ["imgs/characters/3C-Pics/【貓祭】初見3C.jpg", "初見三年 C 班"],
+      ["imgs/characters/3C-Pics/【貓祭】塔努努好香.jpg", "塔努努好香"],
       [
         "imgs/characters/3C-Pics/【貓祭】學院老師全身.png",
         "三年 C 班導師貓祭全身設計"
       ],
       [
+        "imgs/characters/3C-Pics/【貓祭】班上美男子太多了.jpg",
+        "班上美男子太多了"
+      ],
+      [
         "imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.png",
         "為了哥哥，特別來同一班，但是是老師"
+      ],
+      [
+        "imgs/characters/3C-Pics/【貓祭】與塔努努審學生證.jpg",
+        "與塔努努審學生證"
       ]
     ]
   },
   "matsuri": {
     "kind": "profile",
+    "tab": { "title": "祭煜", "color": "#ffcbd3", "order": 3 },
     "name": "祭煜",
     "romanized": "Jiyu",
-    "portrait": "imgs/characters/祭煜-證件.jpg",
+    "portrait": "imgs/characters/證件/照片/祭煜-證件.jpg",
     "accent": "#e85078",
     "meta": [
       ["性別", "男"],
       ["生日", "05/21"],
-      ["班級", "三年 C 班"],
+      ["身份", "三年 C 班同學"],
       ["關係", "貓祭的親哥哥"]
     ],
     "relationship": "貓祭班導的親哥哥，也是三年 C 班學生。",
     "personality": "看起來非常輕浮，但實際非常重視他人。",
     "story": [
       "在網路上似乎頗有名，很多女同學慕名轉至三年 C 班。",
-      "成績相當不錯，但因為外表相當輕浮，很常被誤以為是壞學生。"
+      "成績相當不錯，但因為外表相當輕浮，很常被誤以為是壞學生。",
+      "對於妹妹的空降完全沒有頭緒。"
     ],
     "facts": [
       "三年 C 班同學",
       "常常被右手邊的側馬尾女同學盯著看",
-      "出手非常大方，似乎持有黑卡",
-      "對於妹妹空降成為班導完全沒有頭緒"
+      "出手非常大方，似乎持有黑卡"
     ],
-    "notes": "表面上看起來對妹妹十分不順眼，其實很疼她。放學時基本上會一起回家，還會幫忙拎包；也常被妹妹調侃身旁需要放一台除濕機。",
-    "artist": "亞狸",
+    "notes": [
+      "表面上看起來對妹妹十分不順眼，其實很疼她。放學時基本上會一起回家，還會幫忙拎包。",
+      "很常被妹妹調侃「你旁邊需要放一台除濕機，滿地別人的口水」"
+    ],
+    "artist": { "name": "亞狸YaRi", "url": "https://x.com/Nk_in_1" },
+    "sidebarImage": {
+      "src": "imgs/characters/證件/【祭煜】學生證.png",
+      "alt": "祭煜學生證",
+      "variant": "document"
+    },
     "gallery": [
       [
-        "imgs/characters/3C-Pics/【貓祭】不信任的眼神.jpg",
-        "祭煜與三年 C 班相關圖文"
+        "imgs/characters/3C-Pics/3C相關圖文/【郭喵】一定是不小心的.jpg",
+        "一定是不小心的"
       ],
       [
         "imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.png",
@@ -80,20 +114,21 @@
   },
   "shen-xi": {
     "kind": "profile",
+    "tab": { "title": "沈曦", "color": "#cfe3ff", "order": 5 },
     "name": "沈曦",
     "romanized": "Lumin",
-    "portrait": "imgs/characters/沈曦-證件.jpg",
+    "portrait": "imgs/characters/證件/照片/沈曦-證件.jpg",
     "accent": "#d34b4b",
     "meta": [
       ["性別", "男"],
       ["生日", "06/12"],
-      ["排行", "沈家四胞胎・大哥"],
+      ["關係", "沈家四胞胎・大哥"],
       ["種族", "花豹（黑配紅）"]
     ],
-    "relationship": "沈家四胞胎的大哥，與沈澈共同照顧弟妹。",
+    "relationship": "三年 C 班的學生，沈家四胞胎的大哥。",
     "personality": "成熟穩重，溫柔可靠。",
     "story": [
-      "擅長照顧他人，總是把責任攬在自己身上；待人有禮，做事井井有條。",
+      "擅長照顧他人，總是把責任攬在自己身上。待人有禮，做事井井有條。",
       "是師生眼中的特級模範生，在校內擁有極高人氣，也經常替弟妹收拾爛攤子。"
     ],
     "facts": [
@@ -102,32 +137,42 @@
       "與沈澈共同照顧弟妹",
       "靠投資養起沈家全家"
     ],
-    "notes": "表面上無所不能，實際上壓力最大，也不擅長向別人傾訴煩惱。是沈家企業的繼承者，背後似乎有相當龐大的企業。",
-    "artist": "戸屋",
+    "notes": [
+      "表面上無所不能，實際上壓力最大。不擅長向別人傾訴煩惱。",
+      "沈家企業的繼承者，背後似乎有相當龐大的企業。"
+    ],
+    "artist": { "name": "戸屋", "url": "https://www.threads.com/@toyadolls" },
+    "sidebarImage": {
+      "src": "imgs/characters/證件/【沈曦】學生證.jpg",
+      "alt": "沈曦學生證",
+      "variant": "document"
+    },
+    "cornerImage": {
+      "src": "imgs/characters/Q/沈家_01_沈曦Q.webp",
+      "alt": "沈曦 Q 版角色圖"
+    },
     "gallery": [
-      [
-        "imgs/characters/3C-Pics/沈家相關/【沈曦】證件.jpg",
-        "三好學生，眼鏡上帶著銀鍊"
-      ],
       [
         "imgs/characters/3C-Pics/沈家相關/【沈曦】觀察日記.jpg",
         "超級資優生，品學兼優"
-      ]
+      ],
+      ["imgs/characters/3C-Pics/沈家相關/【沈曦】漫畫.png", "沈曦漫畫"]
     ]
   },
   "shen-che": {
     "kind": "profile",
+    "tab": { "title": "沈澈", "color": "#cfe3ff", "order": 6 },
     "name": "沈澈",
     "romanized": "David",
-    "portrait": "imgs/characters/沈澈-證件.jpg",
+    "portrait": "imgs/characters/證件/照片/沈澈-證件.jpg",
     "accent": "#5d9dd5",
     "meta": [
       ["性別", "男"],
       ["生日", "04/20"],
-      ["排行", "沈家四胞胎・二哥"],
+      ["關係", "沈家四胞胎・二哥"],
       ["種族", "花豹（白配藍）"]
     ],
-    "relationship": "沈家四胞胎的二哥，與沈月感情特別好。",
+    "relationship": "三年 C 班的學生，沈家四胞胎的二哥。",
     "personality": "冰山毒舌，善於傾聽。",
     "story": [
       "對女生非常有一套，因此有許多仰慕者，但本人並不在意。外人眼中是個非常毒舌的存在。",
@@ -139,32 +184,42 @@
       "與沈月感情特別好",
       "兼職服裝模特拍攝"
     ],
-    "notes": "擁有極強的共感能力，能察覺他人的情緒變化。比起直接安慰，更喜歡靜靜陪伴在身邊；以上僅限沈家人。",
-    "artist": "十炎",
+    "notes": [
+      "半夜經常被弟妹敲房門談心。擁有極強的共感能力，能察覺他人的情緒變化。比起直接安慰他人，更喜歡靜靜陪伴在身邊。",
+      { "text": "(※以上僅限沈家人)", "tone": "muted" }
+    ],
+    "artist": { "name": "十炎Shiyan", "url": "https://x.com/Shiyan_429" },
+    "sidebarImage": {
+      "src": "imgs/characters/證件/【沈澈】學生證.jpg",
+      "alt": "沈澈學生證",
+      "variant": "document"
+    },
+    "cornerImage": {
+      "src": "imgs/characters/Q/沈家_01_沈澈Q.webp",
+      "alt": "沈澈 Q 版角色圖"
+    },
     "gallery": [
-      [
-        "imgs/characters/3C-Pics/沈家相關/【沈澈】證件.jpg",
-        "冷酷帥氣，但也是最妹控的那個"
-      ],
       [
         "imgs/characters/3C-Pics/沈家相關/【沈澈】無能狂怒.jpg",
         "非常照顧妹妹，基本上都待在身邊"
-      ]
+      ],
+      ["imgs/characters/3C-Pics/沈家相關/【沈澈】漫畫.png", "沈澈漫畫"]
     ]
   },
   "shen-le": {
     "kind": "profile",
+    "tab": { "title": "沈樂", "color": "#cfe3ff", "order": 7 },
     "name": "沈樂",
     "romanized": "Ivan",
-    "portrait": "imgs/characters/沈樂-證件.jpg",
+    "portrait": "imgs/characters/證件/照片/沈樂-證件.jpg",
     "accent": "#d49a32",
     "meta": [
       ["性別", "男"],
       ["生日", "01/14"],
-      ["排行", "沈家四胞胎・三哥"],
+      ["關係", "沈家四胞胎・三哥"],
       ["種族", "花豹（杏配黃）"]
     ],
-    "relationship": "沈家四胞胎的三哥，經常與沈澈談心。",
+    "relationship": "三年 C 班的學生，沈家四胞胎的三哥。",
     "personality": "開朗活潑，樂觀外向。",
     "story": [
       "情緒來得快、去得也快，是天生的氣氛製造機，意外也是校內許多學生的傾訴對象。",
@@ -172,28 +227,43 @@
     ],
     "facts": [
       "家裡的開心果",
-      "校園知名人物（搞事的那種出名）",
+      {
+        "parts": [
+          "校園知名人物",
+          { "text": "（※搞事的那種出名）", "tone": "muted" }
+        ]
+      },
       "經常與沈澈談心",
       "能迅速與他人打成一片"
     ],
-    "notes": "靜謐的夜晚總會迎來隔日晨陽，沈樂就是這樣的存在。外表是接收大家負面情緒的開心果，夜晚卻會找二哥偷偷談心；打呼聲意外地非常大。",
-    "artist": "十炎",
+    "notes": [
+      "靜謐的夜晚，總會迎來隔日的晨陽，沈樂就是這樣的存在。外表是個接收大家負面情緒的開心果，但其實夜晚時會找二哥偷偷談心。",
+      "打呼聲意外的很大聲（是真的很大聲）"
+    ],
+    "artist": { "name": "十炎Shiyan", "url": "https://x.com/Shiyan_429" },
+    "sidebarImage": {
+      "src": "imgs/characters/證件/【沈樂】學生證.jpg",
+      "alt": "沈樂學生證",
+      "variant": "document"
+    },
+    "cornerImage": {
+      "src": "imgs/characters/Q/沈家_01_沈樂Q.webp",
+      "alt": "沈樂 Q 版角色圖"
+    },
     "gallery": [
-      [
-        "imgs/characters/3C-Pics/沈家相關/【沈樂】證件.jpg",
-        "陽光開朗，歡樂代表"
-      ],
       [
         "imgs/characters/3C-Pics/沈家相關/【沈樂】無能狂怒.jpg",
         "常跟二哥鬥嘴吵架，通常居下風"
-      ]
+      ],
+      ["imgs/characters/3C-Pics/沈家相關/【沈樂】漫畫.png", "沈樂漫畫"]
     ]
   },
   "shen-yue": {
     "kind": "profile",
+    "tab": { "title": "沈月", "color": "#cfe3ff", "order": 8 },
     "name": "沈月",
     "romanized": "Tsuki",
-    "portrait": "imgs/characters/沈月-證件.jpg",
+    "portrait": "imgs/characters/證件/照片/沈月-證件.jpg",
     "accent": "#7584c8",
     "meta": [
       ["性別", "女"],
@@ -201,32 +271,73 @@
       ["排行", "沈家四胞胎・四妹"],
       ["種族", "鯊魚"]
     ],
-    "relationship": "沈家四胞胎的四妹，受到三位哥哥的保護與疼愛。",
+    "relationship": "三年 C 班的學生，沈家四胞胎的四妹。",
     "personality": "安靜內向，溫柔細心。",
     "story": [
-      "不擅長主動表達情感，但十分重視家人；觀察力敏銳，經常是最先察覺他人情緒的人。",
-      "看似柔弱，其實相當堅強；在外人眼中是高嶺之花般的存在。"
+      "不擅長主動表達情感，但十分重視家人。觀察力敏銳，經常是最先察覺他人情緒的人。",
+      "受到三位哥哥的保護與疼愛。"
     ],
     "facts": [
       "是條魚，很需要水",
       "沈家的掌上明珠",
       "喜歡海水",
-      "很怕熱，乾掉會黑化",
+      {
+        "parts": ["很怕熱，", { "text": "乾掉會黑化", "tone": "danger" }]
+      },
       "缺水會散發魚乾的香味"
     ],
-    "notes": "黑化的沈月會無差別咬人，但如果聞到哥哥的味道便不會下殺手。身為肉食性鯊魚，每日需要補充一公噸的水。",
-    "artist": "湖尼 ʜᴜɴɪ",
+    "notes": [
+      {
+        "parts": [
+          "看似柔弱，其實相當堅強。",
+          { "text": "（※肉食性鯊魚）", "tone": "muted" }
+        ]
+      },
+      {
+        "parts": [
+          "在外人眼中是高嶺之花般的存在。",
+          { "text": "（※但主要是沈家的哥哥們是物理上的高嶺）", "tone": "muted" }
+        ]
+      },
+      "黑化的沈月會無差別咬人，但如果聞到哥哥的味道不會下殺手。"
+    ],
+    "artist": { "name": "湖尼ʜᴜɴɪ", "url": "https://x.com/Hunifox" },
+    "sidebarImage": {
+      "src": "imgs/characters/證件/【沈月】學生證.jpg",
+      "alt": "沈月學生證",
+      "variant": "document"
+    },
+    "cornerImage": {
+      "src": "imgs/characters/Q/沈家_01_沈月Q.webp",
+      "alt": "沈月 Q 版角色圖"
+    },
     "gallery": [
-      [
-        "imgs/characters/3C-Pics/沈家相關/【沈月】證件.jpg",
-        "非常文靜，黑化有二種型態"
-      ],
       [
         "imgs/characters/3C-Pics/沈家相關/【沈月】一公噸的補水.jpg",
         "是條鯊魚，每日需要補充一公噸的水"
-      ]
+      ],
+      ["imgs/characters/3C-Pics/沈家相關/【沈月】好香的魚干.jpg", "好香的魚乾"],
+      ["imgs/characters/3C-Pics/沈家相關/【沈月】月下美人.jpg", "月下美人"],
+      ["imgs/characters/3C-Pics/沈家相關/【沈月】漫畫.png", "沈月漫畫"],
+      ["imgs/characters/3C-Pics/沈家相關/【沈月】觀察日記.jpg", "沈月觀察日記"],
+      ["imgs/characters/3C-Pics/沈家相關/【沈月】雙生.jpg", "雙生"],
+      ["imgs/characters/3C-Pics/沈家相關/【沈月】黑化.jpg", "沈月黑化設定"]
     ]
   },
-  "class-c": { "kind": "classroom" },
-  "shen-family": { "kind": "family" }
+  "shen-family": {
+    "kind": "family",
+    "tab": { "title": "【沈家】相關資訊", "color": "#cfe3ff", "order": 4 },
+    "gallery": [
+      ["imgs/characters/3C-Pics/沈家相關/【沈家】Q版行列.png", "沈家 Q 版行列"],
+      [
+        "imgs/characters/3C-Pics/沈家相關/【沈家】三年C班的四胞胎.jpg",
+        "三年 C 班的沈家四胞胎"
+      ],
+      [
+        "imgs/characters/3C-Pics/沈家相關/【沈家】你為什麼不幫大哥.jpg",
+        "你為什麼不幫大哥"
+      ],
+      ["imgs/characters/3C-Pics/沈家相關/【沈家】全彩日常.jpg", "沈家全彩日常"]
+    ]
+  }
 }

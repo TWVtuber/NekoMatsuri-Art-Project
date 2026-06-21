@@ -3,59 +3,130 @@
     String(value).replace(
       /[&<>"]/g,
       (character) =>
-        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[
-          character
-        ],
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character],
     );
 
-  function renderTextBlocks(value) {
-    const lines = Array.isArray(value) ? value : [value];
-    return lines
-      .map((line) => {
-        if (line === "") {
-          return '<div class="related-profile__text-spacer" aria-hidden="true"></div>';
-        }
-        return `<p>${escapeHtml(line ?? "")}</p>`;
+  const supportedTextTones = new Set(["muted", "danger"]);
+  const characterTabs = {
+    貓祭: "neko",
+    祭煜: "matsuri",
+    沈曦: "shen-xi",
+    沈澈: "shen-che",
+    沈樂: "shen-le",
+    沈月: "shen-yue",
+  };
+  const characterNamePattern = /(貓祭|祭煜|沈曦|沈澈|沈樂|沈月)/g;
+
+  const getToneClass = (tone) =>
+    supportedTextTones.has(tone) ? ` related-profile__text--${tone}` : "";
+
+  function linkCharacterMentions(value, currentProfileKey = "") {
+    return String(value ?? "")
+      .split(characterNamePattern)
+      .map((part) => {
+        const target = characterTabs[part];
+        if (!target || target === currentProfileKey) return escapeHtml(part);
+        return `<a class="related-character-link" href="#related-data" data-related-character-target="${target}">${escapeHtml(part)}</a>`;
       })
       .join("");
   }
 
-  function profileTemplate(profile) {
+  function renderInlineParts(value, currentProfileKey = "") {
+    const item =
+      value && typeof value === "object" ? value : { text: value ?? "" };
+    const parts = Array.isArray(item.parts) ? item.parts : [item];
+    return parts
+      .map((part) => {
+        const fragment =
+          part && typeof part === "object" ? part : { text: part ?? "" };
+        return `<span class="related-profile__text${getToneClass(fragment.tone)}">${linkCharacterMentions(fragment.text, currentProfileKey)}</span>`;
+      })
+      .join("");
+  }
+
+  function renderTextBlocks(value, currentProfileKey = "") {
+    const lines = Array.isArray(value) ? value : [value];
+    return lines
+      .map((line) => {
+        const block =
+          line && typeof line === "object" ? line : { text: line ?? "" };
+        if (!Array.isArray(block.parts) && block.text === "") {
+          return '<div class="related-profile__text-spacer" aria-hidden="true"></div>';
+        }
+        return `<p class="related-profile__text">${renderInlineParts(block, currentProfileKey)}</p>`;
+      })
+      .join("");
+  }
+
+  function imageViewerTrigger({
+    source,
+    title,
+    description = "",
+    lazy = true,
+  }) {
+    return `<button class="image-viewer-trigger" type="button" data-image-viewer-src="${escapeHtml(source)}" data-image-viewer-title="${escapeHtml(title)}" data-image-viewer-description="${escapeHtml(description)}" aria-label="開啟${escapeHtml(title)}完整圖片"><img src="${escapeHtml(source)}" alt="${escapeHtml(title)}"${lazy ? ' loading="lazy" decoding="async"' : ""} draggable="false" /></button>`;
+  }
+
+  function renderGallery(gallery = [], currentProfileKey = "") {
+    return gallery
+      .map(
+        ([source, caption, description = ""]) =>
+          `<figure class="paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${imageViewerTrigger({ source, title: caption, description })}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`,
+      )
+      .join("");
+  }
+
+  function profileTemplate(profile, profileKey) {
+    const artist =
+      profile.artist && typeof profile.artist === "object"
+        ? profile.artist
+        : { name: profile.artist ?? "", url: "" };
+    const artistName = artist.url
+      ? `<a href="${escapeHtml(artist.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(artist.name)}</a>`
+      : escapeHtml(artist.name);
+    const sidebarImage = profile.sidebarImage;
+    const sidebarImageVariant = ["document", "mascot"].includes(
+      sidebarImage?.variant,
+    )
+      ? sidebarImage.variant
+      : "document";
+    const sidebarImageMarkup = sidebarImage?.src
+      ? `<figure class="related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "" })}</figure>`
+      : "";
+    const cornerImageMarkup = profile.cornerImage?.src
+      ? `<img class="related-profile__corner-mascot" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" />`
+      : "";
     const meta = profile.meta
       .map(
         ([label, value]) =>
-          `<li><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></li>`,
+          `<li><span>${escapeHtml(label)}</span><strong>${linkCharacterMentions(value, profileKey)}</strong></li>`,
       )
       .join("");
     const facts = profile.facts
-      .map(
-        (fact) =>
-          `<li><span class="related-data-bullet" aria-hidden="true"></span><span>${escapeHtml(fact)}</span></li>`,
-      )
+      .map((fact) => {
+        return `<li><span class="related-data-bullet" aria-hidden="true"></span><span class="related-profile__fact-text">${renderInlineParts(fact, profileKey)}</span></li>`;
+      })
       .join("");
-    const story = renderTextBlocks(profile.story);
-    const notes = renderTextBlocks(profile.notes);
-    const gallery = profile.gallery
-      .map(
-        ([source, caption]) =>
-          `<figure class="related-profile__gallery-item"><div class="paper-sheet"><img src="${escapeHtml(source)}" alt="${escapeHtml(caption)}" loading="lazy" /></div><figcaption>${escapeHtml(caption)}</figcaption></figure>`,
-      )
-      .join("");
+    const story = renderTextBlocks(profile.story, profileKey);
+    const notes = renderTextBlocks(profile.notes, profileKey);
+    const gallery = renderGallery(profile.gallery, profileKey);
 
     return `<div class="manila-texture related-profile" style="--profile-accent:${profile.accent}">
       <aside class="related-profile__sidebar">
         <div class="related-profile__portrait-wrap">
           <span class="tape related-data-photo-tape" aria-hidden="true"></span>
-          <div class="polaroid-frame related-profile__portrait"><img src="${escapeHtml(profile.portrait)}" alt="${escapeHtml(profile.name)}證件照" /></div>
+          <div class="polaroid-frame related-profile__portrait">${imageViewerTrigger({ source: profile.portrait, title: `${profile.name}證件照`, description: profile.relationship, lazy: false })}</div>
           <div class="related-profile__name-card"><h2>${escapeHtml(profile.name)}｜${escapeHtml(profile.romanized)}</h2></div>
-          <p class="related-profile__artist">繪製：${escapeHtml(profile.artist)}</p>
+          <p class="related-profile__artist">繪製：${artistName}</p>
         </div>
         <section class="sticky-note related-profile__facts"><h3>個人資料</h3><ul>${meta}</ul><div class="related-profile__quick-list"><ul>${facts}</ul></div></section>
+        ${sidebarImageMarkup}
       </aside>
       <div class="related-profile__main">
+        ${cornerImageMarkup}
         <article class="paper-sheet related-profile__paper">
-          <section><h3>人物關係</h3><p>${escapeHtml(profile.relationship)}</p></section>
-          <section><h3>性格</h3><p>${escapeHtml(profile.personality)}</p></section>
+          <section><h3>人物關係</h3><p>${linkCharacterMentions(profile.relationship, profileKey)}</p></section>
+          <section><h3>性格</h3><p>${linkCharacterMentions(profile.personality, profileKey)}</p></section>
           <section><h3>背景與相關設定</h3>${story}</section>
           <section><h3>備註</h3>${notes}</section>
         </article>
@@ -64,60 +135,72 @@
     </div>`;
   }
 
-  function classroomTemplate() {
-    const seats = [
-      ["沈月", "沈樂", "阿強"],
-      ["沈曦", "沈澈", "阿醜"],
-      ["貓祭", "利貝", ""],
-      ["祭煜", "阿雄", ""],
-    ];
-    const seatHtml = seats
-      .flat()
-      .map(
-        (name) =>
-          `<div class="class-seat${!name ? " is-empty" : ""}">${escapeHtml(name)}</div>`,
-      )
-      .join("");
-    return `<div class="manila-texture related-overview">
-      <article class="paper-sheet related-overview__paper"><h2>三年 C 班相關設定</h2>
-        <div class="classroom-layout"><div class="classroom-layout__balcony">陽台</div><div class="classroom-layout__board">黑板</div><div class="classroom-layout__seats">${seatHtml}</div><div class="classroom-layout__desk">講台</div></div>
-        <ul class="related-overview__legend"><li><i class="is-cat"></i>紅色底為貓家：貓祭、祭煜</li><li><i class="is-shen"></i>藍色底為沈家：沈月、沈曦、沈樂、沈澈</li><li><i class="is-ip"></i>紫色底為貓祭旗下 IP：阿強、阿醜、利貝、阿雄</li></ul>
-        <p>本次繪圖比賽主要繪製評分標準為貓家以及沈家；額外繪製紫色底人物尚有加分，但並非本次活動主軸。</p>
-      </article>
-      <section class="related-uniforms"><h2>繪俄史藝術高等學院制服</h2><div><figure class="paper-sheet"><img src="imgs/characters/Objects/制服%26運動服/制服男.jpg" alt="男性制服與運動服設定" loading="lazy" /><figcaption>男性制服／運動服</figcaption></figure><figure class="paper-sheet"><img src="imgs/characters/Objects/制服%26運動服/制服女.jpg" alt="女性制服與運動服設定" loading="lazy" /><figcaption>女性制服／運動服</figcaption></figure></div></section>
-    </div>`;
-  }
-
-  function familyTemplate() {
+  function familyTemplate(data) {
+    const xi = linkCharacterMentions("沈曦");
+    const che = linkCharacterMentions("沈澈");
+    const le = linkCharacterMentions("沈樂");
+    const yue = linkCharacterMentions("沈月");
+    const gallery = renderGallery(data.gallery);
     const portraits = [
-      ["沈曦", "imgs/characters/沈曦-證件.jpg"],
-      ["沈澈", "imgs/characters/沈澈-證件.jpg"],
-      ["沈樂", "imgs/characters/沈樂-證件.jpg"],
-      ["沈月", "imgs/characters/沈月-證件.jpg"],
+      ["沈曦", "imgs/characters/證件/照片/沈曦-證件.jpg"],
+      ["沈澈", "imgs/characters/證件/照片/沈澈-證件.jpg"],
+      ["沈樂", "imgs/characters/證件/照片/沈樂-證件.jpg"],
+      ["沈月", "imgs/characters/證件/照片/沈月-證件.jpg"],
     ]
       .map(
         ([name, source]) =>
-          `<figure><img src="${source}" alt="${name}證件照" /><figcaption>${name}</figcaption></figure>`,
+          `<figure>${imageViewerTrigger({ source, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure>`,
       )
       .join("");
     return `<div class="manila-texture related-overview related-family">
       <section><h2>沈家四胞胎相關設定</h2><div class="related-family__portraits">${portraits}</div></section>
-      <article class="paper-sheet related-family__names"><h3>沈家對應稱呼</h3><div class="related-family__table-wrap"><table><thead><tr><th>名字</th><th>對沈曦</th><th>對沈澈</th><th>對沈樂</th><th>對沈月</th></tr></thead><tbody><tr><th>沈曦</th><td>—</td><td>澈</td><td>樂</td><td>月</td></tr><tr><th>沈澈</th><td>大哥</td><td>—</td><td>笨蛋</td><td>妹妹</td></tr><tr><th>沈樂</th><td>大哥</td><td>哥</td><td>—</td><td>妹</td></tr><tr><th>沈月</th><td>大哥</td><td>二哥</td><td>三哥</td><td>—</td></tr></tbody></table></div></article>
-      <section class="related-family__gallery"><img src="imgs/characters/3C-Pics/沈家相關/【沈家】全彩日常.jpg" alt="沈家全彩日常" loading="lazy" /><img src="imgs/characters/3C-Pics/沈家相關/【沈家】三年C班的四胞胎.jpg" alt="三年 C 班的沈家四胞胎" loading="lazy" /></section>
-      <p class="related-profile__credit">相關設定繪製：十炎 Shiyan</p>
+      <article class="paper-sheet related-family__names"><h3>沈家對應稱呼</h3><div class="related-family__table-wrap"><table><thead><tr><th>名字</th><th>對${xi}</th><th>對${che}</th><th>對${le}</th><th>對${yue}</th></tr></thead><tbody><tr><th>${xi}</th><td>—</td><td>澈</td><td>樂</td><td>月</td></tr><tr><th>${che}</th><td>大哥</td><td>—</td><td>笨蛋</td><td>妹妹</td></tr><tr><th>${le}</th><td>大哥</td><td>哥</td><td>—</td><td>妹</td></tr><tr><th>${yue}</th><td>大哥</td><td>二哥</td><td>三哥</td><td>—</td></tr></tbody></table></div></article>
+      <section class="related-profile__gallery related-family__photo-gallery"><h3>沈家相關照片</h3><div>${gallery}</div></section>
     </div>`;
   }
 
+  function renderTabs(relatedData) {
+    const tabList = document.querySelector(
+      "#related-data [data-related-data-tabs]",
+    );
+    if (!tabList) return;
+
+    const tabs = Object.entries(relatedData)
+      .filter(([, data]) => data.tab?.title && data.tab?.color)
+      .sort(
+        ([, first], [, second]) =>
+          (first.tab.order ?? Number.MAX_SAFE_INTEGER) -
+          (second.tab.order ?? Number.MAX_SAFE_INTEGER),
+      );
+    const defaultKey =
+      tabs.find(([, data]) => data.tab.default)?.[0] ?? tabs[0]?.[0];
+
+    const renderTabGroup = (groupTabs) =>
+      groupTabs
+      .map(([key, data], index) => {
+        const isSelected = key === defaultKey;
+        const marginClass = index === groupTabs.length - 1 ? "" : " mr-[-8px]";
+        return `<button class="folder-tab px-5 py-2 font-label-md text-label-md${marginClass} ${isSelected ? "active-tab text-black" : "inactive-tab text-on-surface-variant"}" type="button" role="tab" aria-selected="${isSelected}" aria-controls="folder-panel-${escapeHtml(key)}" id="folder-tab-${escapeHtml(key)}" data-folder-target="${escapeHtml(key)}" style="--folder-tab-color: ${escapeHtml(data.tab.color)}">${escapeHtml(data.tab.title)}</button>`;
+      })
+      .join("");
+
+    const primaryTabs = tabs.filter(([, data]) => (data.tab.order ?? 0) < 4);
+    const shenFamilyTabs = tabs.filter(([, data]) => (data.tab.order ?? 0) >= 4);
+
+    tabList.classList.add("related-data-tabs");
+    tabList.innerHTML = `<div class="related-data-tabs__group">${renderTabGroup(primaryTabs)}</div><div class="related-data-tabs__group related-data-tabs__group--end">${renderTabGroup(shenFamilyTabs)}</div>`;
+  }
+
   function renderRelatedData(relatedData) {
+    renderTabs(relatedData);
     document
       .querySelectorAll("#related-data [data-profile-key]")
       .forEach((panel) => {
         const data = relatedData[panel.dataset.profileKey];
         if (!data) return;
-        if (data.kind === "profile") panel.innerHTML = profileTemplate(data);
-        else if (data.kind === "classroom")
-          panel.innerHTML = classroomTemplate();
-        else if (data.kind === "family") panel.innerHTML = familyTemplate();
+        if (data.kind === "profile")
+          panel.innerHTML = profileTemplate(data, panel.dataset.profileKey);
+        else if (data.kind === "family") panel.innerHTML = familyTemplate(data);
         panel.classList.remove("related-data-panel--placeholder");
         panel.classList.add("is-rendered");
       });
