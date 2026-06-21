@@ -1109,6 +1109,38 @@ body.organizer-open .site-nav [data-organizer-link] {
     z-index: 5;
 }
 
+.organizer-polaroid {
+  position: relative;
+  width: min(100%, 300px);
+  padding: 12px 12px 34px;
+  border: 2px solid #1d1c15;
+  background: #fff;
+  box-shadow: 8px 8px 0 rgb(0 0 0 / 10%);
+}
+
+.organizer-polaroid__tape {
+  top: -16px;
+  left: 50%;
+  background: rgb(191 219 254 / 60%);
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+.organizer-polaroid__image {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid #1d1c15;
+}
+
+.organizer-polaroid__caption {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.organizer-polaroid__caption span {
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
 .journal-container-1 {
   border-left-color: rgb(255, 205, 210);
 }
