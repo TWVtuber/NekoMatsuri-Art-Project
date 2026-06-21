@@ -365,22 +365,23 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     target.classList.add("is-scroll-motion-visible"),
   );
 } else {
-  const revealScrollMotionTargets = (entries, observer) => {
+  const updateScrollMotionTargets = (entries) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-scroll-motion-visible");
-      observer.unobserve(entry.target);
+      entry.target.classList.toggle(
+        "is-scroll-motion-visible",
+        entry.isIntersecting,
+      );
     });
   };
 
   // Hero photos should start moving just before they enter the viewport so
   // visitors never see them waiting at the edge of the screen.
   const heroMotionObserver = new IntersectionObserver(
-    revealScrollMotionTargets,
+    updateScrollMotionTargets,
     { threshold: 0.01, rootMargin: "0px 0px 10% 0px" },
   );
   const cardMotionObserver = new IntersectionObserver(
-    revealScrollMotionTargets,
+    updateScrollMotionTargets,
     { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
   );
 
