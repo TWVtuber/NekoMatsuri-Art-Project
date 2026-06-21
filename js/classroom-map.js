@@ -64,17 +64,6 @@
         <h2 id="classroom-activity-title">三年 C 班座位表</h2>
       </header>
       <div class="classroom-activity__layout">
-        <aside class="classroom-activity__legend">
-          <div class="classroom-activity__legend-card">
-            <h3>評分圖例</h3>
-            <ul>
-              <li class="is-cat"><i aria-hidden="true"></i><span><strong>貓家</strong><small>核心計分對象</small></span></li>
-              <li class="is-shen"><i aria-hidden="true"></i><span><strong>沈家</strong><small>核心計分對象</small></span></li>
-              <li class="is-ip"><i aria-hidden="true"></i><span><strong>貓祭旗下 IP</strong><small>額外加分對象</small></span></li>
-            </ul>
-            <div class="classroom-activity__note"><span aria-hidden="true">活動規則整理</span><p>主要評分角色為貓家與沈家；繪製紫色標示的 IP 角色可獲額外加分，但不是本次活動主軸。</p></div>
-          </div>
-        </aside>
         <article class="classroom-activity__board">
           <div class="classroom-activity__balcony">陽台</div>
           <div class="classroom-activity__room">
@@ -83,6 +72,17 @@
             <div class="classroom-activity__seats" aria-label="七欄五排座位配置">${seatGrid}</div>
           </div>
         </article>
+        <aside class="classroom-activity__legend">
+          <div class="classroom-activity__legend-card">
+            <h3>評分圖例</h3>
+            <ul>
+              <li class="is-cat"><i aria-hidden="true"></i><span><strong>貓家</strong><small>核心計分對象</small></span></li>
+              <li class="is-shen"><i aria-hidden="true"></i><span><strong>沈家</strong><small>核心計分對象</small></span></li>
+              <li class="is-ip"><i aria-hidden="true"></i><span><strong>貓祭旗下 IP</strong><small>額外加分對象</small></span></li>
+            </ul>
+            <div class="classroom-activity__note"><span>活動規則整理</span><p>主要評分角色為貓家與沈家；繪製紫色標示的 IP 角色可獲額外加分，但不是本次活動主軸。</p></div>
+          </div>
+        </aside>
       </div>
     </section>`;
   }

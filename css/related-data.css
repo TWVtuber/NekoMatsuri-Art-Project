@@ -27,12 +27,12 @@
 }
 
 .related-data-view.bulletin-bg {
-  background-color: #fef9ee;
-  background-image:
-    radial-gradient(#cdc6b3 0.5px, transparent 0.5px),
-    radial-gradient(#cdc6b3 0.5px, #fef9ee 0.5px);
-  background-position: 0 0, 10px 10px;
-  background-size: 20px 20px;
+  background-color: var(--paper);
+  background-image: radial-gradient(
+    rgba(38, 38, 38, 0.4) 0.75px,
+    transparent 0.75px
+  );
+  background-size: 30px 30px;
 }
 
 /* Keep the Stitch folder menu geometry intact. */
@@ -58,13 +58,15 @@
   height: 34px;
   padding-top: 5px !important;
   padding-bottom: 5px !important;
-  border-top: 1px solid #1d1c15;
-  border-right: 1px solid #1d1c15;
-  border-left: 1px solid #1d1c15;
-  background: #cdc6b3;
+  border-top: 1px solid #4b4738;
+  border-right: 1px solid #4b4738;
+  border-left: 1px solid #4b4738;
+  background: #d7d0be;
   clip-path: polygon(0% 100%, 12% 0%, 88% 0%, 100% 100%);
-  color: #4b4738;
+  color: #29271f;
   font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   transition:
     height 0.2s ease,
     background-color 0.2s ease,
@@ -72,7 +74,8 @@
     box-shadow 0.2s ease;
 }
 
-.related-data-view .active-tab {
+.related-data-view .folder-tab.active-tab,
+.related-data-view .folder-tab[aria-selected="true"] {
   z-index: 50 !important;
   height: 44px;
   padding-top: 9px !important;
@@ -80,15 +83,26 @@
   background-color: var(--folder-tab-color, #f7e381) !important;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
   color: #1d1c15 !important;
-  font-weight: 700;
+  font-weight: 800 !important;
   opacity: 1;
 }
 
 .related-data-view .inactive-tab {
   z-index: 10;
   height: 34px;
-  background-color: #cdc6b3 !important;
-  opacity: 0.85;
+  background-color: #d7d0be !important;
+  color: #29271f !important;
+  opacity: 1;
+}
+
+.related-data-view .inactive-tab:hover {
+  background-color: #e6dfcd !important;
+  color: #11100d !important;
+}
+
+.related-data-view .folder-tab:focus-visible {
+  outline: 3px solid #1264d5;
+  outline-offset: 2px;
 }
 
 .related-data-view .related-data-panel[hidden] {
@@ -291,6 +305,24 @@
 
 .related-profile__facts strong {
   text-align: right;
+}
+
+.related-profile__facts .related-profile__social a {
+  color: var(--profile-accent, #1d6fc0);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.related-profile__facts .related-profile__social a:hover,
+.related-profile__facts .related-profile__social a:focus-visible {
+  color: #111;
+}
+
+.related-profile__facts .related-profile__social a:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
 .related-profile__sidebar-art {
