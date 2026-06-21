@@ -948,18 +948,26 @@
               aria-label="角色資料夾"
             >
               <button
-                class="folder-tab px-5 py-2 font-label-md text-label-md mr-[-8px] active-tab text-black"
+                class="folder-tab px-5 py-2 font-label-md text-label-md mr-[-8px] inactive-tab text-on-surface-variant"
                 type="button"
                 role="tab"
-                aria-selected="true"
+                aria-selected="false"
+                aria-controls="folder-panel-class-c"
+                id="folder-tab-class-c"
+                data-folder-target="class-c"
+                style="--folder-tab-color: #f7e381"
               >
                 【三年C班】相關
               </button>
               <button
-                class="folder-tab px-8 py-3 font-label-md text-label-md mr-[-8px] inactive-tab text-on-surface-variant"
+                class="folder-tab px-8 py-3 font-label-md text-label-md mr-[-8px] active-tab text-black"
                 type="button"
                 role="tab"
-                aria-selected="false"
+                aria-selected="true"
+                aria-controls="folder-panel-neko"
+                id="folder-tab-neko"
+                data-folder-target="neko"
+                style="--folder-tab-color: #ffcbd3"
               >
                 【貓祭】個資
               </button>
@@ -968,6 +976,10 @@
                 type="button"
                 role="tab"
                 aria-selected="false"
+                aria-controls="folder-panel-matsuri"
+                id="folder-tab-matsuri"
+                data-folder-target="matsuri"
+                style="--folder-tab-color: #ffcbd3"
               >
                 【祭煜】個資
               </button>
@@ -976,6 +988,10 @@
                 type="button"
                 role="tab"
                 aria-selected="false"
+                aria-controls="folder-panel-shen-family"
+                id="folder-tab-shen-family"
+                data-folder-target="shen-family"
+                style="--folder-tab-color: #cfe3ff"
               >
                 【沈家】相關資料
               </button>
@@ -984,6 +1000,10 @@
                 type="button"
                 role="tab"
                 aria-selected="false"
+                aria-controls="folder-panel-shen-xi"
+                id="folder-tab-shen-xi"
+                data-folder-target="shen-xi"
+                style="--folder-tab-color: #cfe3ff"
               >
                 【沈曦】個資
               </button>
@@ -992,6 +1012,10 @@
                 type="button"
                 role="tab"
                 aria-selected="false"
+                aria-controls="folder-panel-shen-che"
+                id="folder-tab-shen-che"
+                data-folder-target="shen-che"
+                style="--folder-tab-color: #cfe3ff"
               >
                 【沈澈】個資
               </button>
@@ -1000,6 +1024,10 @@
                 type="button"
                 role="tab"
                 aria-selected="false"
+                aria-controls="folder-panel-shen-le"
+                id="folder-tab-shen-le"
+                data-folder-target="shen-le"
+                style="--folder-tab-color: #cfe3ff"
               >
                 【沈樂】個資
               </button>
@@ -1008,181 +1036,305 @@
                 type="button"
                 role="tab"
                 aria-selected="false"
+                aria-controls="folder-panel-shen-yue"
+                id="folder-tab-shen-yue"
+                data-folder-target="shen-yue"
+                style="--folder-tab-color: #cfe3ff"
               >
                 【沈月】個資
               </button>
             </div>
 
-            <div
-              class="manila-texture w-full min-h-[800px] p-6 md:p-12 relative z-10 overflow-hidden"
-              style="
-                background-color: rgb(254, 249, 238);
-                background-image: none;
-              "
+            <section
+              class="related-data-panel"
+              id="folder-panel-neko"
+              role="tabpanel"
+              aria-labelledby="folder-tab-neko"
+              data-folder-panel="neko"
+              data-profile-key="neko"
             >
               <div
-                class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 relative"
+                class="manila-texture w-full min-h-[800px] p-6 md:p-12 relative z-10 overflow-hidden"
+                style="
+                  background-color: rgb(254, 249, 238);
+                  background-image: none;
+                "
               >
-                <div class="md:col-span-4 space-y-8 z-20">
-                  <div class="relative group">
-                    <div class="clip-item"></div>
-                    <div
-                      class="polaroid-frame shadow-xl rotate-[-3deg] transition-transform group-hover:rotate-0"
-                    >
-                      <img
-                        alt="貓祭角色肖像"
-                        class="w-full aspect-[4/5] object-cover filter brightness-95"
-                        src="imgs/characters/貓祭-證件.jpg"
-                      />
-                    </div>
-                    <div
-                      class="masking-tape-yellow mx-auto w-fit px-8 py-2 -mt-10 relative z-30 transform -rotate-1"
-                    >
+                <div
+                  class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 relative"
+                >
+                  <div class="md:col-span-4 space-y-8 z-20">
+                    <div class="relative group">
+                      <span
+                        class="tape tape--pink related-data-photo-tape"
+                        aria-hidden="true"
+                      ></span>
                       <div
-                        class="font-headline-md text-headline-md text-black text-center hand-drawn"
+                        class="polaroid-frame shadow-xl rotate-[-3deg] transition-transform group-hover:rotate-0"
                       >
-                        貓祭｜NekoMatsuri
+                        <img
+                          alt="貓祭角色肖像"
+                          class="w-full aspect-[4/5] object-cover filter brightness-95"
+                          src="imgs/characters/貓祭-證件.jpg"
+                        />
+                      </div>
+                      <div
+                        class="masking-tape-yellow mx-auto w-fit px-8 py-2 -mt-10 relative z-30 transform -rotate-1"
+                      >
+                        <div
+                          class="font-headline-md text-headline-md text-black text-center hand-drawn"
+                        >
+                          貓祭｜NekoMatsuri
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="space-y-6 pt-4">
-                    <div
-                      class="sticky-note bg-[#fef3c7] p-6 border border-black/10 rotate-[2deg] relative"
-                    >
-                      <h2
-                        class="font-headline-md text-headline-md mb-4 underline decoration-1 hand-drawn"
+                    <div class="space-y-6 pt-4">
+                      <div
+                        class="sticky-note bg-[#fef3c7] p-6 border border-black/10 rotate-[2deg] relative"
                       >
-                        個人資料
-                      </h2>
-                      <ul class="space-y-3 font-label-md text-label-md">
-                        <li
-                          class="flex justify-between border-b border-black/5 pb-1"
+                        <h2
+                          class="font-headline-md text-headline-md mb-4 underline decoration-1 hand-drawn"
                         >
-                          <span>性別:</span><strong>女</strong>
-                        </li>
-                        <li
-                          class="flex justify-between border-b border-black/5 pb-1"
-                        >
-                          <span>生日:</span><strong>01/25</strong>
-                        </li>
-                        <li
-                          class="flex justify-between border-b border-black/5 pb-1"
-                        >
-                          <span>身高:</span><strong>158cm</strong>
-                        </li>
-                        <li
-                          class="flex justify-between border-b border-black/5 pb-1"
-                        >
-                          <span>職位:</span
-                          ><strong class="text-tertiary">班導師</strong>
-                        </li>
-                      </ul>
-                      <div class="mt-6 pt-4 border-t border-black/10">
-                        <ul class="space-y-2">
-                          <li>・首次任職班導師</li>
-                          <li>・是某間企業的老闆</li>
-                          <li>・非常幸運，超級福星</li>
-                          <li>・辦公室的桌上，總會莫名其妙多出很多錢</li>
+                          個人資料
+                        </h2>
+                        <ul class="space-y-3 font-label-md text-label-md">
+                          <li
+                            class="flex justify-between border-b border-black/5 pb-1"
+                          >
+                            <span>性別:</span><strong>女</strong>
+                          </li>
+                          <li
+                            class="flex justify-between border-b border-black/5 pb-1"
+                          >
+                            <span>生日:</span><strong>01/25</strong>
+                          </li>
+                          <li
+                            class="flex justify-between border-b border-black/5 pb-1"
+                          >
+                            <span>身高:</span><strong>158cm</strong>
+                          </li>
+                          <li
+                            class="flex justify-between border-b border-black/5 pb-1"
+                          >
+                            <span>職位:</span
+                            ><strong class="text-tertiary">班導師</strong>
+                          </li>
                         </ul>
+                        <div class="mt-6 pt-4 border-t border-black/10">
+                          <ul class="space-y-2">
+                            <li class="flex items-start gap-2">
+                              <span
+                                class="related-data-bullet"
+                                aria-hidden="true"
+                              ></span>
+                              <span class="font-note-text text-sm"
+                                >首次任職班導師</span
+                              >
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span
+                                class="related-data-bullet"
+                                aria-hidden="true"
+                              ></span>
+                              <span class="font-note-text text-sm"
+                                >是某間企業的老闆</span
+                              >
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span
+                                class="related-data-bullet"
+                                aria-hidden="true"
+                              ></span>
+                              <span class="font-note-text text-sm"
+                                >非常幸運，超級福星</span
+                              >
+                            </li>
+                            <li class="flex items-start gap-2">
+                              <span
+                                class="related-data-bullet"
+                                aria-hidden="true"
+                              ></span>
+                              <span class="font-note-text text-sm"
+                                >辦公室的桌上，總會莫名其妙多出很多錢</span
+                              >
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="md:col-span-8 space-y-6 relative z-10">
-                  <div class="paper-sheet p-8 md:p-12 rotate-[0.5deg]">
-                    <section class="mb-10">
+                  <div class="md:col-span-8 space-y-6 relative z-10">
+                    <div class="paper-sheet p-8 md:p-12 rotate-[0.5deg]">
+                      <section class="mb-10">
+                        <h2
+                          class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
+                          style="color: rgb(186, 26, 26)"
+                        >
+                          人物簡介
+                        </h2>
+                        <p
+                          class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed italic"
+                        >
+                          「三年C班班導，親哥哥祭煜是該班學生。個性直來直往，非常爽快。」
+                        </p>
+                      </section>
+                      <div class="space-y-8">
+                        <section>
+                          <h2
+                            class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
+                            style="color: #ba1a1a"
+                          >
+                            背景與經歷
+                          </h2>
+                          <p
+                            class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
+                          >
+                            「從小天資聰穎，嫌棄當前教育太弱智，國中畢業後即創業。因為對錢財特別了解，所以特約為投資理財老師，但是課本封面上寫的是『斂財』...？」
+                          </p>
+                        </section>
+                        <section>
+                          <h2
+                            class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
+                            style="color: #ba1a1a"
+                          >
+                            備註
+                          </h2>
+                          <p
+                            class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
+                          >
+                            「從小天資聰穎，嫌棄當前教育太弱智，國中畢業後即創業。因為對錢財特別了解所以特約為投資理財老師但是課本封面上寫的是斂財...?」
+                          </p>
+                        </section>
+                      </div>
+                    </div>
+
+                    <section class="mb-12">
                       <h2
-                        class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
-                        style="color: rgb(186, 26, 26)"
+                        class="font-headline-md text-headline-md text-on-surface mb-6 hand-drawn underline decoration-2"
                       >
-                        人物簡介
+                        學院相關照片
                       </h2>
-                      <p
-                        class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed italic"
-                      >
-                        「三年C班班導，親哥哥祭煜是該班學生。個性直來直往，非常爽快。」
-                      </p>
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                          <div class="paper-sheet p-4 rotate-[-1deg]">
+                            <div
+                              class="aspect-video bg-surface-variant flex items-center justify-center border border-dashed border-outline"
+                            >
+                              {{DATA:IMAGE:NEKO_FULL_DESIGN}}
+                            </div>
+                          </div>
+                          <p class="text-center text-sm">
+                            三年C班導師貓祭全身設計
+                          </p>
+                        </div>
+                        <div class="space-y-3">
+                          <div class="paper-sheet p-4 rotate-[1deg]">
+                            <div
+                              class="aspect-video bg-surface-variant flex items-center justify-center border border-dashed border-outline"
+                            >
+                              {{DATA:IMAGE:NEKO_BROTHER_CONTEXT}}
+                            </div>
+                          </div>
+                          <p class="text-center text-sm">
+                            為了哥哥，特別來同一班，但是是老師
+                          </p>
+                        </div>
+                      </div>
                     </section>
-                    <div class="space-y-8">
-                      <section>
-                        <h2
-                          class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
-                          style="color: #ba1a1a"
-                        >
-                          背景與經歷
-                        </h2>
-                        <p
-                          class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
-                        >
-                          「從小天資聰穎，嫌棄當前教育太弱智，國中畢業後即創業。因為對錢財特別了解，所以特約為投資理財老師，但是課本封面上寫的是『斂財』...？」
-                        </p>
-                      </section>
-                      <section>
-                        <h2
-                          class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
-                          style="color: #ba1a1a"
-                        >
-                          備註
-                        </h2>
-                        <p
-                          class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
-                        >
-                          「從小天資聰穎，嫌棄當前教育太弱智，國中畢業後即創業。因為對錢財特別了解所以特約為投資理財老師但是課本封面上寫的是斂財...?」
-                        </p>
-                      </section>
-                    </div>
                   </div>
-
-                  <section class="mb-12">
-                    <h2
-                      class="font-headline-md text-headline-md text-on-surface mb-6 hand-drawn underline decoration-2"
-                    >
-                      學院相關照片
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <div class="space-y-3">
-                        <div class="paper-sheet p-4 rotate-[-1deg]">
-                          <img
-                            class="aspect-video w-full object-cover border border-outline"
-                            src="imgs/characters/3C-Pics/【貓祭】學院老師全身.png"
-                            alt="三年C班導師貓祭全身設計"
-                            loading="lazy"
-                          />
-                        </div>
-                        <p class="text-center text-sm">
-                          三年C班導師貓祭全身設計
-                        </p>
-                      </div>
-                      <div class="space-y-3">
-                        <div class="paper-sheet p-4 rotate-[1deg]">
-                          <img
-                            class="aspect-video w-full object-cover border border-outline"
-                            src="imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.png"
-                            alt="貓祭與哥哥初次見面的情境圖"
-                            loading="lazy"
-                          />
-                        </div>
-                        <p class="text-center text-sm">
-                          為了哥哥，特別來同一班，但是是老師
-                        </p>
-                      </div>
-                    </div>
-                  </section>
                 </div>
-              </div>
 
-              <div
-                class="absolute -top-4 right-12 w-40 h-10 confidential-tape opacity-50 z-30"
-              ></div>
-              <div
-                class="absolute bottom-10 -right-8 w-48 h-12 confidential-tape opacity-20 z-30 rotate-[15deg]"
-              ></div>
-              <div
-                class="absolute top-1/2 left-4 w-12 h-12 bg-primary/5 rounded-full blur-xl z-0"
-              ></div>
-            </div>
+                <div
+                  class="absolute -top-4 right-12 w-40 h-10 confidential-tape opacity-50 z-30"
+                ></div>
+                <div
+                  class="absolute bottom-10 -right-8 w-48 h-12 confidential-tape opacity-20 z-30 rotate-[15deg]"
+                ></div>
+                <div
+                  class="absolute top-1/2 left-4 w-12 h-12 bg-primary/5 rounded-full blur-xl z-0"
+                ></div>
+              </div>
+            </section>
+
+            <section
+              class="related-data-panel related-data-panel--placeholder manila-texture"
+              id="folder-panel-class-c"
+              role="tabpanel"
+              aria-labelledby="folder-tab-class-c"
+              data-folder-panel="class-c"
+              data-profile-key="class-c"
+              hidden
+            >
+              <p>【三年C班】相關資料準備中</p>
+            </section>
+            <section
+              class="related-data-panel related-data-panel--placeholder manila-texture"
+              id="folder-panel-matsuri"
+              role="tabpanel"
+              aria-labelledby="folder-tab-matsuri"
+              data-folder-panel="matsuri"
+              data-profile-key="matsuri"
+              hidden
+            >
+              <p>【祭煜】角色資料準備中</p>
+            </section>
+            <section
+              class="related-data-panel related-data-panel--placeholder manila-texture"
+              id="folder-panel-shen-family"
+              role="tabpanel"
+              aria-labelledby="folder-tab-shen-family"
+              data-folder-panel="shen-family"
+              data-profile-key="shen-family"
+              hidden
+            >
+              <p>【沈家】相關資料準備中</p>
+            </section>
+            <section
+              class="related-data-panel related-data-panel--placeholder manila-texture"
+              id="folder-panel-shen-xi"
+              role="tabpanel"
+              aria-labelledby="folder-tab-shen-xi"
+              data-folder-panel="shen-xi"
+              data-profile-key="shen-xi"
+              hidden
+            >
+              <p>【沈曦】角色資料準備中</p>
+            </section>
+            <section
+              class="related-data-panel related-data-panel--placeholder manila-texture"
+              id="folder-panel-shen-che"
+              role="tabpanel"
+              aria-labelledby="folder-tab-shen-che"
+              data-folder-panel="shen-che"
+              data-profile-key="shen-che"
+              hidden
+            >
+              <p>【沈澈】角色資料準備中</p>
+            </section>
+            <section
+              class="related-data-panel related-data-panel--placeholder manila-texture"
+              id="folder-panel-shen-le"
+              role="tabpanel"
+              aria-labelledby="folder-tab-shen-le"
+              data-folder-panel="shen-le"
+              data-profile-key="shen-le"
+              hidden
+            >
+              <p>【沈樂】角色資料準備中</p>
+            </section>
+            <section
+              class="related-data-panel related-data-panel--placeholder manila-texture"
+              id="folder-panel-shen-yue"
+              role="tabpanel"
+              aria-labelledby="folder-tab-shen-yue"
+              data-folder-panel="shen-yue"
+              data-profile-key="shen-yue"
+              hidden
+            >
+              <p>【沈月】角色資料準備中</p>
+            </section>
           </div>
 
           <button
@@ -1750,6 +1902,7 @@
     </div>
 
     <script src="js/site.js?v=34"></script>
-    <script src="js/related-data.js?v=1"></script>
+    <script src="js/related-data-content.js?v=2"></script>
+    <script src="js/related-data.js?v=2"></script>
   </body>
 </html>

@@ -1,12 +1,12 @@
 <!doctype html>
-<html class="light" lang="en" style="">
+<html lang="zh-Hant" style="">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Campus Sketchbook - Student Records: Neko Matsuri</title>
+    <title>校園漫畫大賽 - 三年C班座位表 (活動地圖版)</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Mono:wght@400;500;700&amp;family=Gaegu:wght@400;700&amp;display=swap"
       rel="stylesheet"
     />
     <link
@@ -19,51 +19,56 @@
         theme: {
           extend: {
             colors: {
-              "inverse-on-surface": "#f5f0e5",
-              "surface-variant": "#e7e2d7",
-              "on-tertiary": "#ffffff",
-              background: "#fef9ee",
-              "outline-variant": "#cdc6b3",
-              "on-surface": "#1d1c15",
-              "on-primary-fixed": "#211b00",
-              "on-tertiary-fixed-variant": "#742965",
-              "surface-container-lowest": "#ffffff",
-              "surface-bright": "#fef9ee",
-              surface: "#fef9ee",
-              "on-primary-container": "#776811",
-              "error-container": "#ffdad6",
-              "primary-fixed": "#f7e381",
-              "on-secondary-fixed": "#221b00",
-              "surface-container": "#f2ede2",
-              "tertiary-container": "#ffe1f2",
-              "tertiary-fixed-dim": "#fface7",
-              secondary: "#6c5e1f",
-              "on-surface-variant": "#4b4738",
-              "on-tertiary-container": "#9c4b89",
-              error: "#ba1a1a",
-              "secondary-fixed": "#f6e295",
-              tertiary: "#90417e",
-              "primary-fixed-dim": "#dac768",
-              "on-error-container": "#93000a",
-              "on-secondary-container": "#706223",
-              "surface-container-low": "#f8f3e8",
-              "on-background": "#1d1c15",
               "inverse-primary": "#dac768",
-              "surface-tint": "#6c5e04",
-              "surface-container-highest": "#e7e2d7",
-              primary: "#6c5e04",
-              "primary-container": "#feea87",
-              "inverse-surface": "#323029",
-              "tertiary-fixed": "#ffd7f0",
-              "surface-container-high": "#ede8dd",
-              "on-secondary": "#ffffff",
-              "surface-dim": "#dedacf",
               "on-primary": "#ffffff",
-              "secondary-fixed-dim": "#d9c67c",
+              "on-tertiary-container": "#9c4b89",
+              "tertiary-container": "#ffe1f2",
+              "surface-dim": "#dedacf",
+              error: "#ba1a1a",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-highest": "#e7e2d7",
+              "surface-container-low": "#f8f3e8",
+              surface: "#fef9ee",
+              "surface-container-high": "#ede8dd",
+              "primary-container": "#feea87",
               "on-error": "#ffffff",
-              outline: "#7c7766",
+              background: "#fef9ee",
               "on-tertiary-fixed": "#3a0032",
+              tertiary: "#90417e",
+              "tertiary-fixed-dim": "#fface7",
+              "secondary-fixed": "#f6e295",
+              "on-surface": "#1d1c15",
+              "on-secondary-fixed": "#221b00",
+              "on-primary-fixed-variant": "#524700",
+              "on-surface-variant": "#4b4738",
+              outline: "#7c7766",
               "on-secondary-fixed-variant": "#534607",
+              "tertiary-fixed": "#ffd7f0",
+              secondary: "#6c5e1f",
+              "error-container": "#ffdad6",
+              "secondary-container": "#f3df92",
+              "on-secondary": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "inverse-surface": "#323029",
+              "secondary-fixed-dim": "#d9c67c",
+              "on-tertiary-fixed-variant": "#742965",
+              "on-secondary-container": "#706223",
+              "surface-container": "#f2ede2",
+              "primary-fixed": "#f7e381",
+              "surface-variant": "#e7e2d7",
+              "surface-bright": "#fef9ee",
+              "primary-fixed-dim": "#dac768",
+              "inverse-on-surface": "#f5f0e5",
+              "on-primary-container": "#776811",
+              "on-primary-fixed": "#211b00",
+              "on-error-container": "#93000a",
+              "on-background": "#1d1c15",
+              primary: "#6c5e04",
+              "outline-variant": "#cdc6b3",
+              "surface-tint": "#6c5e04",
+              "pastel-red": "#fff1f0",
+              "pastel-blue": "#f0f9ff",
+              "pastel-purple": "#fdf4ff",
             },
             borderRadius: {
               DEFAULT: "0.125rem",
@@ -71,486 +76,404 @@
               xl: "0.5rem",
               full: "0.75rem",
             },
-            spacing: {
-              "stack-overlap": "-12px",
-              "margin-mobile": "16px",
-              base: "8px",
-              "margin-desktop": "48px",
-              gutter: "24px",
-            },
             fontFamily: {
-              "headline-md": ["Bricolage Grotesque"],
-              "body-lg": ["Plus Jakarta Sans"],
-              "headline-xl": ["Bricolage Grotesque"],
-              "label-md": ["Space Mono"],
-              "headline-lg": ["Bricolage Grotesque"],
-              "note-text": ["Bricolage Grotesque"],
-              "body-md": ["Plus Jakarta Sans"],
-            },
-            fontSize: {
-              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
-              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
-              "headline-xl": [
-                "48px",
-                {
-                  lineHeight: "1.1",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "800",
-                },
-              ],
-              "label-md": ["14px", { lineHeight: "1.2", fontWeight: "500" }],
-              "headline-lg": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
-              "note-text": ["18px", { lineHeight: "1.2", fontWeight: "400" }],
-              "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+              headline: ["Bricolage Grotesque", "sans-serif"],
+              body: ["Plus Jakarta Sans", "sans-serif"],
+              mono: ["Space Mono", "monospace"],
+              handwritten: ["Gaegu", "cursive"],
             },
           },
         },
       };
     </script>
     <style>
-      .bulletin-bg {
+      .sketch-bg {
         background-color: #fef9ee;
-        background-image:
-          radial-gradient(#cdc6b3 0.5px, transparent 0.5px),
-          radial-gradient(#cdc6b3 0.5px, #fef9ee 0.5px);
-        background-size: 20px 20px;
-        background-position:
-          0 0,
-          10px 10px;
+        background-image: radial-gradient(#7c7766 0.5px, transparent 0.5px);
+        background-size: 24px 24px;
       }
-      .folder-tab {
-        clip-path: polygon(0% 100%, 12% 0%, 88% 0%, 100% 100%);
-        border-top: 1px solid #1d1c15;
-        border-left: 1px solid #1d1c15;
-        border-right: 1px solid #1d1c15;
-        transition: all 0.2s ease;
-        position: relative;
-      }
-      .active-tab {
-        background-color: #f7e381 !important;
-        z-index: 50 !important;
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-        color: #1d1c15 !important;
-        font-weight: 700;
-      }
-      .inactive-tab {
-        background-color: #cdc6b3;
-        z-index: 10;
-        opacity: 0.85;
-      }
-      .manila-texture {
-        background-color: #fef3c7; /* Light Yellow Folder Background */
-        background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
+
+      .sticker-card {
         border: 1px solid #1d1c15;
-        box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s ease;
       }
-      .polaroid-frame {
-        padding: 12px 12px 48px 12px;
-        background: #fff;
+
+      .sticker-card:hover {
+        transform: scale(1.02);
+        z-index: 20;
+      }
+
+      .photo-card {
         border: 1px solid #1d1c15;
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-      }
-      .scribble-line {
-        border-bottom: 2px solid #1d1c15;
-        width: 100%;
-        height: 1px;
-        margin-bottom: 12px;
-      }
-      .masking-tape-yellow {
-        background-color: #ffe98a;
-        border-left: 1px dashed rgba(0, 0, 0, 0.1);
-        border-right: 1px dashed rgba(0, 0, 0, 0.1);
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-        transform: rotate(1.5deg);
+        padding: 6px 6px 12px 6px;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
         position: relative;
+        box-shadow: none;
       }
-      .masking-tape-yellow::before,
-      .masking-tape-yellow::after {
-        content: "";
+
+      .pushpin {
+        width: 8px;
+        height: 8px;
+        background: #1d1c15;
+        border-radius: 50%;
         position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 4px;
-        background: inherit;
-        filter: brightness(0.95);
-      }
-      .masking-tape-yellow::before {
-        left: -2px;
-        transform: skewY(-5deg);
-      }
-      .masking-tape-yellow::after {
-        right: -2px;
-        transform: skewY(5deg);
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
       }
 
-      .confidential-tape {
-        background-color: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(1px);
-        border: 1px dashed #7c7766;
-        transform: rotate(-2deg);
+      .doodle {
+        font-family: "Gaegu", cursive;
+        pointer-events: none;
       }
 
-      .hand-drawn {
-        font-family: "Bricolage Grotesque", sans-serif;
-        letter-spacing: -0.01em;
+      .photo-frame {
+        width: 100%;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(29, 28, 21, 0.1);
       }
 
-      .sticky-note {
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-      }
-      .sticky-note:hover {
-        transform: scale(1.02) rotate(0deg);
-      }
-
-      .paper-sheet {
-        background: #ffffff;
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e7e2d7;
-        position: relative;
-      }
-
-      .clip-item {
+      .tape-effect {
         position: absolute;
         top: -10px;
         left: 50%;
-        transform: translateX(-50%);
-        width: 40px;
+        transform: translateX(-50%) rotate(-2deg);
+        width: 60px;
         height: 20px;
-        background: #94a3b8;
-        border-radius: 4px;
-        border: 1px solid #475569;
-        z-index: 30;
+        background: rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(1px);
       }
     </style>
   </head>
-  <body class="bulletin-bg text-on-surface font-body-md overflow-x-hidden">
-    <main
-      class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop min-h-screen"
-    >
-      <!-- Dossier Header -->
+  <body
+    class="bg-surface font-body text-on-surface min-h-screen sketch-bg p-margin-mobile md:p-margin-desktop"
+  >
+    <header class="max-w-6xl mx-auto mb-12 text-center relative">
       <div
-        class="max-w-6xl mx-auto mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
+        class="inline-block bg-white border border-on-surface px-8 py-4 relative"
       >
-        <div>
-          <h1
-            class="font-headline-xl text-headline-xl text-on-background hand-drawn"
-          >
-            繪畫主題資料
-          </h1>
-        </div>
-      </div>
-      <!-- High-Contrast Folder Layout -->
-      <div class="max-w-6xl mx-auto relative min-h-[900px]">
-        <!-- High-Contrast Tabs -->
-        <div class="flex flex-wrap items-end -mb-[1px] relative z-20">
-          <button
-            class="folder-tab px-5 py-2 font-label-md text-label-md mr-[-8px] active-tab text-black"
-          >
-            【三年C班】相關
-          </button>
-          <button
-            class="folder-tab px-8 py-3 font-label-md text-label-md mr-[-8px] inactive-tab text-on-surface-variant"
-          >
-            【貓祭】個資
-          </button>
-          <button
-            class="folder-tab px-5 py-2 font-label-md text-label-md mr-[-8px] inactive-tab text-on-surface-variant"
-          >
-            【祭煜】個資
-          </button>
-          <button
-            class="folder-tab inactive-tab px-5 py-2 font-label-md text-label-md mr-[-8px] text-on-surface-variant"
-          >
-            【沈家】相關資料
-          </button>
-          <button
-            class="folder-tab inactive-tab px-5 py-2 font-label-md text-label-md mr-[-8px] text-on-surface-variant"
-          >
-            【沈曦】個資
-          </button>
-          <button
-            class="folder-tab inactive-tab px-5 py-2 font-label-md text-label-md mr-[-8px] text-on-surface-variant"
-          >
-            【沈澈】個資然
-          </button>
-          <button
-            class="folder-tab inactive-tab px-5 py-2 font-label-md text-label-md mr-[-8px] text-on-surface-variant"
-          >
-            【沈樂】個資人
-          </button>
-          <button
-            class="folder-tab inactive-tab px-5 py-2 font-label-md text-label-md text-on-surface-variant"
-          >
-            【沈月】個資
-          </button>
-        </div>
-        <!-- Main Folder Body -->
-        <div
-          class="manila-texture w-full min-h-[800px] p-6 md:p-12 relative z-10 overflow-hidden"
-          style="background-color: rgb(254, 249, 238); background-image: none"
+        <h1
+          class="font-headline text-4xl md:text-5xl font-extrabold text-on-surface"
         >
-          <div
-            class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 relative"
+          三年C班座位表
+        </h1>
+      </div>
+      <div
+        class="absolute top-0 right-0 doodle text-4xl text-primary animate-bounce opacity-40"
+      >
+        ⭐
+      </div>
+      <div
+        class="absolute -bottom-4 left-10 doodle text-3xl text-tertiary opacity-40"
+      >
+        ❤️
+      </div>
+    </header>
+    <main
+      class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 items-start"
+    >
+      <!-- Left: Scoring/Legend -->
+      <aside class="lg:col-span-1 space-y-6">
+        <div class="sticker-card bg-white p-6 relative">
+          <h2
+            class="font-headline text-xl font-bold mb-4 border-b border-on-surface pb-1 flex items-center gap-2"
           >
-            <!-- Overlapping Sheets & Content -->
-            <!-- Left Column -->
-            <div class="md:col-span-4 space-y-8 z-20">
-              <!-- Tilted Photo Frame -->
-              <div class="relative group">
-                <div class="clip-item"></div>
-                <div
-                  class="polaroid-frame shadow-xl rotate-[-3deg] transition-transform group-hover:rotate-0"
+            <span class="material-symbols-outlined text-sm">description</span>
+            評分圖例
+          </h2>
+          <div class="space-y-4 font-body text-sm">
+            <div
+              class="flex gap-3 items-center p-2 rounded-md bg-pastel-red border border-red-100"
+            >
+              <div class="w-4 h-4 bg-red-400 rounded-sm"></div>
+              <p class="">
+                <span class="font-bold">貓家 (Neko Family)</span><br /><span
+                  class="text-xs opacity-70"
+                  >核心計分對象</span
                 >
-                  <img
-                    alt="Neko Matsuri Portrait"
-                    class="w-full aspect-[4/5] object-cover filter brightness-95"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9ejG47g7yIgcFD4FEk1zh6WbWKTL1vA2BPtg8Koxoj_gO1yUxkGPqcNMRNG33idSEN7zMzZga_UUJ1R-iUD032D9i-rQ_dB9zGAx_PE7KUMaQ5-F-QCo-f4-qXa97IOH_uTwkaRJ6NFr71NQILx7m5-s99tRD4Jwz4HTmUlkLtguKoQuO2_XcKM_yy4_tnHqSbQcQ2ffpBCBqG7cZ6uwzQaZz5gUoEQoxhvX2GqByrNUJg3r1KdToD2T1P8PfdkWvTgz1ZP5oteTE_7A"
-                  />
-                </div>
-                <div
-                  class="masking-tape-yellow mx-auto w-fit px-8 py-2 -mt-10 relative z-30 transform -rotate-1"
-                >
-                  <div
-                    class="font-headline-md text-headline-md text-black text-center hand-drawn"
-                  >
-                    貓祭｜NekoMatsuri
-                  </div>
-                </div>
-              </div>
-              <!-- Sticky Notes -->
-              <div class="space-y-6 pt-4">
-                <!-- Stats Sticky -->
-                <div
-                  class="sticky-note bg-[#fef3c7] p-6 border border-black/10 rotate-[2deg] relative"
-                >
-                  <h3
-                    class="font-headline-md text-headline-md mb-4 underline decoration-1 hand-drawn"
-                  >
-                    個人資料
-                  </h3>
-                  <ul class="space-y-3 font-label-md text-label-md">
-                    <li
-                      class="flex justify-between border-b border-black/5 pb-1"
-                    >
-                      <span class="">性別:</span>
-                      <span class="font-bold">女</span>
-                    </li>
-                    <li
-                      class="flex justify-between border-b border-black/5 pb-1"
-                    >
-                      <span class="">生日:</span>
-                      <span class="font-bold">01/25</span>
-                    </li>
-                    <li
-                      class="flex justify-between border-b border-black/5 pb-1"
-                    >
-                      <span class="">身高:</span>
-                      <span class="font-bold">158cm</span>
-                    </li>
-                    <li
-                      class="flex justify-between border-b border-black/5 pb-1"
-                    >
-                      <span class="">職位:</span>
-                      <span class="text-tertiary font-bold">班導師</span>
-                    </li>
-                  </ul>
-                  <div class="mt-6 pt-4 border-t border-black/10 space-y-2">
-                    <ul class="space-y-2">
-                      <li class="flex items-start gap-2">
-                        <span
-                          class="w-1.5 h-1.5 rounded-full bg-on-surface mt-2 shrink-0"
-                        ></span>
-                        <span class="font-note-text text-sm"
-                          >首次任職班導師</span
-                        >
-                      </li>
-                      <li class="flex items-start gap-2">
-                        <span
-                          class="w-1.5 h-1.5 rounded-full bg-on-surface mt-2 shrink-0"
-                        ></span>
-                        <span class="font-note-text text-sm"
-                          >是某間企業的老闆</span
-                        >
-                      </li>
-                      <li class="flex items-start gap-2">
-                        <span
-                          class="w-1.5 h-1.5 rounded-full bg-on-surface mt-2 shrink-0"
-                        ></span>
-                        <span class="font-note-text text-sm"
-                          >非常幸運，超級福星</span
-                        >
-                      </li>
-                      <li class="flex items-start gap-2">
-                        <span
-                          class="w-1.5 h-1.5 rounded-full bg-on-surface mt-2 shrink-0"
-                        ></span>
-                        <span class="font-note-text text-sm"
-                          >辦公室的桌上，總會莫名其妙多出很多錢</span
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <!-- Extra Money Fact Sticky -->
-              </div>
+              </p>
             </div>
-            <!-- Right Column: Overlapping Paper Sheets -->
-            <div class="md:col-span-8 space-y-6 relative z-10">
-              <!-- Main Profile Sheet -->
-              <div class="paper-sheet p-8 md:p-12 rotate-[0.5deg]">
-                <div class="flex justify-between items-start mb-6">
-                  <div></div>
-                  <div class="text-right"></div>
-                </div>
-
-                <section class="mb-10">
-                  <h3
-                    class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
-                    style="color: rgb(186, 26, 26)"
-                  >
-                    人物簡介
-                  </h3>
-                  <div class="space-y-4">
-                    <p
-                      class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed italic"
-                    >
-                      「三年C班班導，親哥哥祭煜是該班學生。個性直來直往，非常爽快。」
-                    </p>
-                  </div>
-                </section>
-                <!-- Handwritten Memo Section -->
-                <div class="space-y-8">
-                  <section class="">
-                    <h3
-                      class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
-                      style="color: #ba1a1a"
-                    >
-                      背景與經歷
-                    </h3>
-                    <div class="space-y-4">
-                      <p
-                        class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
-                      >
-                        「從小天資聰穎，嫌棄當前教育太弱智，國中畢業後即創業。因為對錢財特別了解，所以特約為投資理財老師，但是課本封面上寫的是『斂財』...？」
-                      </p>
-                    </div>
-                  </section>
-                  <section class="">
-                    <h3
-                      class="font-headline-md text-headline-md mb-4 hand-drawn font-bold"
-                      style="color: #ba1a1a"
-                    >
-                      備註
-                    </h3>
-                    <div class="space-y-4">
-                      <p
-                        class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
-                      >
-                        「從小天資聰穎，嫌棄當前教育太弱智，國中畢業後即創業。因為對錢財特別了解所以特約為投資理財老師但是課本封面上寫的是斂財...?」
-                      </p>
-                    </div>
-                  </section>
-                </div>
-              </div>
-              <!-- Strengths/Weaknesses as separate overlapping notes -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4"></div>
-              <!-- Footer actions -->
-              <div class="mb-12">
-                <h3
-                  class="font-headline-md text-headline-md text-on-surface mb-6 hand-drawn underline decoration-2"
+            <div
+              class="flex gap-3 items-center p-2 rounded-md bg-pastel-blue border border-blue-100"
+            >
+              <div class="w-4 h-4 bg-blue-400 rounded-sm"></div>
+              <p class="">
+                <span class="font-bold">沈家 (Shen Family)</span><br /><span
+                  class="text-xs opacity-70"
+                  >核心計分對象</span
                 >
-                  學院相關照片
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div class="space-y-3">
-                    <div class="paper-sheet p-4 rotate-[-1deg]">
-                      <div
-                        class="aspect-video bg-surface-container-highest flex items-center justify-center border border-dashed border-outline"
-                      >
-                        {{DATA:IMAGE:NEKO_FULL_DESIGN}}
-                      </div>
-                    </div>
-                    <p class="text-center font-note-text text-sm">
-                      三年C班導師貓祭全身設計
-                    </p>
-                  </div>
-                  <div class="space-y-3">
-                    <div class="paper-sheet p-4 rotate-[1deg]">
-                      <div
-                        class="aspect-video bg-surface-container-highest flex items-center justify-center border border-dashed border-outline"
-                      >
-                        {{DATA:IMAGE:NEKO_BROTHER_CONTEXT}}
-                      </div>
-                    </div>
-                    <p class="text-center font-note-text text-sm">
-                      為了哥哥，特別來同一班，但是是老師
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </p>
+            </div>
+            <div
+              class="flex gap-3 items-center p-2 rounded-md bg-pastel-purple border border-purple-100"
+            >
+              <div class="w-4 h-4 bg-purple-400 rounded-sm"></div>
+              <p class="">
+                <span class="font-bold">紫色區域 (Neko's IP)</span><br /><span
+                  class="text-xs opacity-70"
+                  >加分題！額外加成</span
+                >
+              </p>
             </div>
           </div>
-          <!-- Decorative Tape & Overlays -->
+          <!-- Variant 2: Sketchbook Note / Post-it -->
+          <div class="mt-8 relative pt-4">
+            <div
+              class="bg-yellow-50 border border-on-surface/20 p-4 rotate-1 shadow-sm relative"
+            >
+              <div class="tape-effect"></div>
+              <p
+                class="font-handwritten text-lg leading-snug text-on-surface-variant"
+              >
+                📝
+                <span class="underline decoration-primary/30"
+                  >活動規則整理：</span
+                ><br />• 評分核心：貓家 (紅底)、沈家 (藍底)<br />•
+                加分項目：貓祭旗下 IP (紫底)<br />•
+                注意事項：本活動以貓家與沈家角色為主要評分標準，繪製 IP
+                角色可獲得額外加分。
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="hidden lg:block text-center opacity-30 pointer-events-none">
+          <span class="material-symbols-outlined text-6xl">edit_note</span>
+          <p class="font-handwritten text-xl">Campus Sketchbook Archive</p>
+        </div>
+      </aside>
+      <!-- Right: Seating Chart Board -->
+      <div
+        class="lg:col-span-3 bg-white border border-on-surface p-8 relative min-h-[600px] shadow-sm"
+      >
+        <!-- Board Header -->
+        <div class="flex justify-between mb-12 items-end">
           <div
-            class="absolute -top-4 right-12 w-40 h-10 confidential-tape opacity-50 z-30"
+            class="bg-surface-container-low border border-on-surface px-16 py-3 font-headline font-bold text-2xl mx-auto rounded-b-lg border-t-0"
+          >
+            陽台
+          </div>
+        </div>
+        <!-- The Grid -->
+        <div class="grid grid-cols-7 gap-3 relative">
+          <!-- Row 1 -->
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
           ></div>
           <div
-            class="absolute bottom-10 -right-8 w-48 h-12 confidential-tape opacity-20 z-30 rotate-[15deg]"
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <!-- 沈樂 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-blue">
+              <span class="material-symbols-outlined text-blue-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">沈樂</div>
+          </div>
+          <!-- 沈月 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-blue">
+              <span class="material-symbols-outlined text-blue-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">沈月</div>
+          </div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
           ></div>
           <div
-            class="absolute top-1/2 left-4 w-12 h-12 bg-primary/5 rounded-full blur-xl z-0"
+            class="sticker-card bg-white p-3 font-headline font-bold text-center border-dashed text-xs flex items-center justify-center"
           ></div>
+          <!-- 阿強 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-purple">
+              <span class="material-symbols-outlined text-purple-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">阿強</div>
+          </div>
+          <!-- Row 2 -->
+          <div
+            class="row-span-5 sticker-card bg-on-background/5 font-headline font-bold flex items-center justify-center text-center p-2 [writing-mode:vertical-rl] text-lg"
+          >
+            黑板
+          </div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <!-- 沈澈 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-blue">
+              <span class="material-symbols-outlined text-blue-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">沈澈</div>
+          </div>
+          <!-- 沈曦 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-blue">
+              <span class="material-symbols-outlined text-blue-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">沈曦</div>
+          </div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <!-- 阿醜 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-purple">
+              <span class="material-symbols-outlined text-purple-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">阿醜</div>
+          </div>
+          <!-- Row 3: Teacher -->
+          <div class="photo-card bg-pastel-red" style="aspect-ratio: 1 / 1">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-red overflow-hidden">
+              <img
+                alt="貓祭 (老師)"
+                class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDPyh3gEwxX_x_5ynlKjzMPP_k7rkIEEVnGbmXw9YLUEGb79lKjrBgF2qk8JQBKqDqoOA169yvvvBC6366zRDP7FYSVBGyKvqYWb6rqo2NtpX3roV1TR3a81Zcc0eS8T8ckiRbrFEFU2l1Lbi_BwOGKPoi-p5bZqPbf2RRjtjl7Pc7vLzjYztiOfTU3YJAiCc33_Tgep3FlLROwyugudSFJsH_xr6vIgOuYVUzrjBzS3gCpnAhfmgIR2OKVRFxP8ID5LQ4idEFLwoevLI"
+              />
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">
+              貓祭 (老師)
+            </div>
+          </div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <!-- Row 4 -->
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <!-- 利貝 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-purple">
+              <span class="material-symbols-outlined text-purple-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">利貝</div>
+          </div>
+          <!-- Row 5 -->
+
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <!-- 阿雄 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-purple">
+              <span class="material-symbols-outlined text-purple-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">阿雄</div>
+          </div>
+          <!-- Row 6 -->
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <div
+            class="sticker-card bg-surface-dim/10 border-dashed opacity-30"
+          ></div>
+          <!-- 祭煜 -->
+          <div class="photo-card bg-white">
+            <div class="pushpin"></div>
+            <div class="photo-frame bg-pastel-red">
+              <span class="material-symbols-outlined text-red-300 text-2xl"
+                >person</span
+              >
+            </div>
+            <div class="font-handwritten font-bold text-base mt-1">祭煜</div>
+          </div>
+        </div>
+        <!-- Decoration Doodles -->
+        <div
+          class="absolute bottom-4 left-1/2 -translate-x-1/2 doodle text-primary/30 text-lg flex gap-12"
+        >
+          <span class="">(๑•̀ㅂ•́)و✧</span>
+          <span class="">✧◝(⁰▿⁰)◜✧</span>
+          <span class="">✎... Activity Map</span>
         </div>
       </div>
     </main>
-    <!-- Mobile Bottom Nav -->
-    <nav
-      class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-highest border-t border-outline-variant z-[100]"
-    >
-      <div
-        class="flex flex-col items-center justify-center text-on-surface-variant"
-      >
-        <span class="material-symbols-outlined">photo_library</span>
-        <span class="font-label-md text-[10px]">Gallery</span>
-      </div>
-      <div
-        class="flex flex-col items-center justify-center text-on-surface-variant"
-      >
-        <span class="material-symbols-outlined">gavel</span>
-        <span class="font-label-md text-[10px]">Rules</span>
-      </div>
-      <div
-        class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full px-5 py-1"
-      >
-        <span class="material-symbols-outlined">person</span>
-        <span class="font-label-md text-[10px]">Profile</span>
-      </div>
-      <div
-        class="flex flex-col items-center justify-center text-on-surface-variant"
-      >
-        <span class="material-symbols-outlined">groups</span>
-        <span class="font-label-md text-[10px]">Organizers</span>
-      </div>
-    </nav>
-    <script>
-      // Tab toggling logic
-      const tabs = document.querySelectorAll(".folder-tab");
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          tabs.forEach((t) => {
-            t.classList.remove("active-tab");
-            t.classList.add("inactive-tab");
-            t.classList.remove("text-black");
-            t.classList.add("text-on-surface-variant");
-          });
-          tab.classList.remove("inactive-tab");
-          tab.classList.add("active-tab");
-          tab.classList.remove("text-on-surface-variant");
-          tab.classList.add("text-black");
-        });
-      });
-    </script>
+    <footer class="max-w-6xl mx-auto mt-20 pb-12"></footer>
   </body>
 </html>
