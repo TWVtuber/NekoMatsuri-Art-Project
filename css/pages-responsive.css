@@ -56,7 +56,7 @@
 }
 .faq-back {
   display: table;
-  margin: 0 0 32px;
+  margin: 0 0 var(--view-back-title-gap);
   padding: 10px 17px;
   border: 2px solid var(--ink);
   background: white;
@@ -201,7 +201,7 @@ body.faq-open .site-nav [data-faq-link] {
 }
 .organizer-view__heading {
   width: min(calc(100% - 40px), 1152px);
-  margin: 0 auto 22px;
+  margin: 0 auto var(--view-back-title-gap);
 }
 .organizer-frame {
   display: block;
@@ -251,6 +251,27 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .countdown-section {
     margin-top: 0;
+  }
+  .countdown-mascot {
+    width: clamp(112px, 18vw, 150px);
+    height: clamp(126px, 20vw, 172px);
+  }
+  .section-mascot:is(
+    [src$="沈家_01_沈月Q.webp"],
+    [src$="沈家_01_沈樂Q.webp"],
+    [src$="沈家_01_沈澈Q.webp"],
+    [src$="沈家_01_沈曦Q.webp"]
+  ) {
+    width: clamp(112px, 18vw, 150px);
+    height: clamp(126px, 20vw, 172px);
+  }
+  .countdown-mascot--top-left {
+    top: -74px;
+    left: clamp(10px, 4vw, 32px);
+  }
+  .countdown-mascot--bottom-right {
+    right: clamp(10px, 4vw, 32px);
+    bottom: -88px;
   }
   .home-stage {
     background-size: cover;
@@ -536,8 +557,8 @@ body.organizer-open .site-nav [data-organizer-link] {
     text-align: center;
   }
   .faq-launcher-mascot {
-    top: -80px;
-    left: 10px;
+    top: -150px;
+    left: 20px;
     width: 72px;
     height: 78px;
     transform: rotate(-4deg);
@@ -718,13 +739,26 @@ body.organizer-open .site-nav [data-organizer-link] {
     width: 82px;
     height: 96px;
   }
+  .countdown-mascot {
+    width: 104px;
+    height: 122px;
+  }
+  .section-mascot:is(
+    [src$="沈家_01_沈月Q.webp"],
+    [src$="沈家_01_沈樂Q.webp"],
+    [src$="沈家_01_沈澈Q.webp"],
+    [src$="沈家_01_沈曦Q.webp"]
+  ) {
+    width: 104px;
+    height: 122px;
+  }
   .countdown-mascot--top-left {
-    top: -62px;
-    left: 4px;
+    top: -72px;
+    left: 10px;
   }
   .countdown-mascot--bottom-right {
-    right: 4px;
-    bottom: -66px;
+    right: 10px;
+    bottom: -96px;
   }
   .rules-mascot {
     top: -76px;
@@ -755,8 +789,8 @@ body.organizer-open .site-nav [data-organizer-link] {
     transform: rotate(4deg);
   }
   .faq-launcher-mascot {
-    top: -78px;
-    left: 8px;
+    top: -116px;
+    left: 12px;
     width: 68px;
     height: 76px;
     transform: rotate(-4deg);
@@ -772,6 +806,11 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .countdown-card {
     padding: 54px 16px 38px;
+  }
+  .countdown-card::before {
+    left: -4px;
+    bottom: 24px;
+    font-size: 132px;
   }
   .countdown {
     gap: 7px;
