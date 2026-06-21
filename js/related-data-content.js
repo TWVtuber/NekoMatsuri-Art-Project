@@ -102,8 +102,16 @@
           `<li><span>${escapeHtml(label)}</span><strong>${linkCharacterMentions(value, profileKey)}</strong></li>`,
       )
       .join("");
-    const socialLink = profile.twitter
-      ? `<li class="related-profile__social"><span>Twitter / X</span><strong><a href="${escapeHtml(profile.twitter)}" target="_blank" rel="noopener noreferrer" aria-label="在 Twitter / X 查看 ${escapeHtml(profile.name)} 的個人頁面">查看帳號 <span aria-hidden="true">↗</span></a></strong></li>`
+    const relatedLink = profile.relatedLink ??
+      (profile.twitter
+        ? {
+            label: "Twitter / X",
+            url: profile.twitter,
+            text: "查看帳號",
+          }
+        : null);
+    const socialLink = relatedLink
+      ? `<li class="related-profile__social"><span>${escapeHtml(relatedLink.label)}</span><strong><a href="${escapeHtml(relatedLink.url)}" target="_blank" rel="noopener noreferrer" aria-label="查看 ${escapeHtml(profile.name)}的${escapeHtml(relatedLink.label)}">${escapeHtml(relatedLink.text)} <span aria-hidden="true">↗</span></a></strong></li>`
       : "";
     const facts = profile.facts
       .map((fact) => {
@@ -180,11 +188,10 @@
 
     const renderTabGroup = (groupTabs) =>
       groupTabs
-      .map(([key, data], index) => {
+      .map(([key, data]) => {
         const isSelected = key === defaultKey;
-        const marginClass = index === groupTabs.length - 1 ? "" : " mr-[-8px]";
         const colorClass = data.tab.color === "#ffcbd3" ? " folder-tab--pink" : " folder-tab--blue";
-        return `<button class="folder-tab${colorClass} px-5 py-2 font-label-md text-label-md${marginClass} ${isSelected ? "active-tab text-black" : "inactive-tab text-on-surface-variant"}" type="button" role="tab" aria-selected="${isSelected}" aria-controls="folder-panel-${escapeHtml(key)}" id="folder-tab-${escapeHtml(key)}" data-folder-target="${escapeHtml(key)}">${escapeHtml(data.tab.title)}</button>`;
+        return `<button class="folder-tab${colorClass} px-5 py-2 font-label-md text-label-md ${isSelected ? "active-tab text-black" : "inactive-tab text-on-surface-variant"}" type="button" role="tab" aria-selected="${isSelected}" aria-controls="folder-panel-${escapeHtml(key)}" id="folder-tab-${escapeHtml(key)}" data-folder-target="${escapeHtml(key)}">${escapeHtml(data.tab.title)}</button>`;
       })
       .join("");
 

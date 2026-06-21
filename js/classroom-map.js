@@ -23,7 +23,14 @@
       tabTarget: "shen-le",
       portrait: "imgs/characters/證件/照片/沈樂-證件.jpg",
     },
-    { row: 1, column: 7, name: "阿強", group: "ip" },
+    {
+      row: 1,
+      column: 7,
+      name: "阿強",
+      group: "ip",
+      portrait: "imgs/characters/證件/照片/阿強-頭貼.png",
+      externalUrl: "https://x.com/Nekolive_Chiang",
+    },
     {
       row: 2,
       column: 1,
@@ -40,9 +47,30 @@
       tabTarget: "shen-che",
       portrait: "imgs/characters/證件/照片/沈澈-證件.jpg",
     },
-    { row: 2, column: 7, name: "阿醜", group: "ip" },
-    { row: 3, column: 7, name: "利貝", group: "ip" },
-    { row: 4, column: 7, name: "阿雄", group: "ip" },
+    {
+      row: 2,
+      column: 7,
+      name: "阿醜",
+      group: "ip",
+      portrait: "imgs/characters/證件/照片/阿醜-頭貼.png",
+      externalUrl: "https://x.com/Nekolive_Ugly",
+    },
+    {
+      row: 3,
+      column: 7,
+      name: "利貝",
+      group: "ip",
+      portrait: "imgs/characters/證件/照片/利貝-頭貼.png",
+      externalUrl: "https://x.com/Nekolive_Liber",
+    },
+    {
+      row: 4,
+      column: 7,
+      name: "阿雄",
+      group: "ip",
+      portrait: "imgs/characters/證件/照片/阿雄-頭貼.png",
+      externalUrl: "https://x.com/Nekolive_Xiong",
+    },
     {
       row: 5,
       column: 7,
@@ -71,6 +99,9 @@
       : '<span class="classroom-activity__portrait-placeholder" aria-hidden="true">✦</span>';
 
     const content = `<div class="classroom-activity__photo-frame">${portrait}</div><strong>${escapeHtml(seat.name)}${seat.role ? `（${escapeHtml(seat.role)}）` : ""}</strong>`;
+    if (seat.externalUrl) {
+      return `<a class="classroom-activity__seat classroom-activity__seat--${seat.group} is-clickable" href="${escapeHtml(seat.externalUrl)}" target="_blank" rel="noopener noreferrer" aria-label="前往${escapeHtml(seat.name)}的 X 帳號">${content}</a>`;
+    }
     if (seat.tabTarget) {
       return `<a class="classroom-activity__seat classroom-activity__seat--${seat.group} is-clickable" href="#related-data" data-related-character-target="${escapeHtml(seat.tabTarget)}" aria-label="查看${escapeHtml(seat.name)}角色資料">${content}</a>`;
     }

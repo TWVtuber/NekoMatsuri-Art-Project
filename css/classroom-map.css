@@ -241,7 +241,7 @@
   flex-direction: column;
   overflow: hidden;
   padding: 3px 4px 4px;
-  border: 1px solid var(--classroom-ink);
+  border: 1px solid currentColor;
   background: #fff;
   color: inherit;
   text-decoration: none;

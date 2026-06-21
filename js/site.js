@@ -383,15 +383,16 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     });
   };
 
-  // Hero photos should start moving just before they enter the viewport so
-  // visitors never see them waiting at the edge of the screen.
+  // The positive margins form a hysteresis zone around the viewport. They
+  // keep an element intersecting while its own entrance transform settles,
+  // but still reset it after it has fully left so a later re-entry can replay.
   const heroMotionObserver = new IntersectionObserver(
     updateScrollMotionTargets,
-    { threshold: 0.01, rootMargin: "0px 0px 10% 0px" },
+    { threshold: 0.01, rootMargin: "96px 0px" },
   );
   const cardMotionObserver = new IntersectionObserver(
     updateScrollMotionTargets,
-    { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
+    { threshold: 0.01, rootMargin: "96px 0px" },
   );
 
   requestAnimationFrame(() => {
@@ -415,10 +416,11 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
         entry.target.classList.toggle("is-visible", entry.isIntersecting);
       });
     },
-    { threshold: 0.01 },
+    { threshold: 0.01, rootMargin: "48px 0px" },
   );
 
-  // Paint the hidden state first so every re-entry produces a visible fade.
+  // Paint the hidden state first so re-entering the buffered viewport replays
+  // the animation without flickering at the visible edge.
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       sectionMascots.forEach((mascot) => mascotObserver.observe(mascot));

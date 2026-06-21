@@ -72,6 +72,11 @@
     "name": "祭煜",
     "romanized": "Jiyu",
     "portrait": "imgs/characters/證件/照片/祭煜-證件.jpg",
+    "relatedLink": {
+      "label": "相關設定",
+      "url": "https://drive.google.com/drive/folders/1z4ZEe9vQY2KM0mD36t1ZPNITFTng7hl5",
+      "text": "查看資料"
+    },
     "meta": [
       ["性別", "男"],
       ["生日", "05/21"],
