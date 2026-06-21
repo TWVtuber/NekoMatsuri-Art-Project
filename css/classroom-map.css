@@ -154,6 +154,10 @@
 .classroom-activity__note p { margin: 6px 0 0; font-size: 13px; line-height: 1.5; }
 
 .classroom-activity__board {
+  container-type: inline-size;
+  display: flex;
+  aspect-ratio: 2.08 / 1;
+  flex-direction: column;
   min-width: 0;
   padding: clamp(12px, 1.6vw, 18px);
   box-shadow: 3px 4px 0 rgb(29 28 21 / 9%);
@@ -161,24 +165,25 @@
 
 .classroom-activity__balcony {
   width: 100%;
-  margin: 0 auto 9px;
-  padding: 6px 12px;
+  margin: 0 auto clamp(3px, 0.95cqi, 9px);
+  padding: clamp(2px, 0.65cqi, 6px) clamp(4px, 1.25cqi, 12px);
   border: 1px solid var(--classroom-ink);
   background: #f2ede2;
-  font-size: 20px;
+  font-size: clamp(8px, 2.1cqi, 20px);
   font-weight: 800;
   text-align: center;
 }
 
 .classroom-activity__room {
-  --classroom-room-height: clamp(330px, 33vw, 380px);
-  --classroom-seat-gap: clamp(3px, 0.5vw, 7px);
+  --classroom-seat-gap: clamp(1px, 0.7cqi, 7px);
   display: grid;
   grid-template-columns:
-    clamp(38px, 5.5vw, 56px)
+    clamp(15px, 5.8cqi, 56px)
     minmax(0, 1fr)
     minmax(0, 7fr);
   gap: var(--classroom-seat-gap);
+  min-height: 0;
+  flex: 1 1 auto;
   width: 100%;
 }
 
@@ -186,10 +191,10 @@
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   gap: var(--classroom-seat-gap);
-  min-height: var(--classroom-room-height);
+  min-height: 0;
   border: 1px solid var(--classroom-ink);
   background: #f7f5ef;
-  font-size: 18px;
+  font-size: clamp(7px, 1.9cqi, 18px);
   font-weight: 800;
   text-align: center;
 }
@@ -211,12 +216,12 @@
 
 .classroom-activity__blackboard {
   display: grid;
-  min-height: var(--classroom-room-height);
+  min-height: 0;
   place-items: center;
   border: 1px solid var(--classroom-ink);
   background: #f4f4f4;
   color: var(--classroom-ink);
-  font-size: 19px;
+  font-size: clamp(7px, 2cqi, 19px);
   font-weight: 800;
   letter-spacing: 0.16em;
   writing-mode: vertical-rl;
@@ -228,7 +233,7 @@
   grid-template-rows: repeat(5, 1fr);
   gap: var(--classroom-seat-gap);
   min-width: 0;
-  min-height: var(--classroom-room-height);
+  min-height: 0;
 }
 
 .classroom-activity__seat {
@@ -240,7 +245,7 @@
   justify-content: center;
   flex-direction: column;
   overflow: hidden;
-  padding: 3px 4px 4px;
+  padding: clamp(1px, 0.3cqi, 3px) clamp(1px, 0.42cqi, 4px) clamp(1px, 0.42cqi, 4px);
   border: 1px solid currentColor;
   background: #fff;
   color: inherit;
@@ -255,7 +260,7 @@
   position: relative;
   display: grid;
   width: 100%;
-  min-height: clamp(30px, 4vw, 38px);
+  min-height: 0;
   flex: 1 1 auto;
   place-items: center;
   overflow: hidden;
@@ -281,8 +286,8 @@
 }
 
 .classroom-activity__seat strong {
-  margin-top: 3px;
-  font-size: clamp(12px, 1.1vw, 14px);
+  margin-top: clamp(1px, 0.3cqi, 3px);
+  font-size: clamp(5px, 1.45cqi, 14px);
   line-height: 1.2;
 }
 
@@ -295,7 +300,10 @@
   background: transparent;
   opacity: 0.85;
 }
-.classroom-activity__portrait-placeholder { opacity: 0.45; font-size: 23px; }
+.classroom-activity__portrait-placeholder {
+  opacity: 0.45;
+  font-size: clamp(8px, 2.4cqi, 23px);
+}
 
 .classroom-activity__seat.is-clickable { cursor: pointer; }
 
@@ -338,7 +346,7 @@ body.classroom-map-preview > [data-classroom-map] {
   .classroom-activity { padding: 18px 14px; }
   .classroom-activity__header { margin-bottom: 28px; }
   .classroom-activity__legend ul { grid-template-columns: 1fr; }
-  .classroom-activity__board { padding: 14px; }
+  .classroom-activity__board { padding: clamp(5px, 1.5cqi, 14px); }
   .classroom-activity__balcony { width: 100%; }
 }
 
