@@ -102,6 +102,9 @@
           `<li><span>${escapeHtml(label)}</span><strong>${linkCharacterMentions(value, profileKey)}</strong></li>`,
       )
       .join("");
+    const socialLink = profile.twitter
+      ? `<li class="related-profile__social"><span>Twitter / X</span><strong><a href="${escapeHtml(profile.twitter)}" target="_blank" rel="noopener noreferrer" aria-label="在 Twitter / X 查看 ${escapeHtml(profile.name)} 的個人頁面">查看帳號 <span aria-hidden="true">↗</span></a></strong></li>`
+      : "";
     const facts = profile.facts
       .map((fact) => {
         return `<li><span class="related-data-bullet" aria-hidden="true"></span><span class="related-profile__fact-text">${renderInlineParts(fact, profileKey)}</span></li>`;
@@ -119,7 +122,7 @@
           <div class="related-profile__name-card"><h2>${escapeHtml(profile.name)}｜${escapeHtml(profile.romanized)}</h2></div>
           <p class="related-profile__artist">繪製：${artistName}</p>
         </div>
-        <section class="sticky-note related-profile__facts"><h3>個人資料</h3><ul>${meta}</ul><div class="related-profile__quick-list"><ul>${facts}</ul></div></section>
+        <section class="sticky-note related-profile__facts"><h3>個人資料</h3><ul>${meta}${socialLink}</ul><div class="related-profile__quick-list"><ul>${facts}</ul></div></section>
         ${sidebarImageMarkup}
       </aside>
       <div class="related-profile__main">
