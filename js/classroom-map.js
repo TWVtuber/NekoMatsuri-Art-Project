@@ -3,21 +3,54 @@
     String(value).replace(
       /[&<>"]/g,
       (character) =>
-        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[
-          character
-        ],
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[character],
     );
 
   const seats = [
-    { row: 1, column: 1, name: "沈月", group: "shen", tabTarget: "shen-yue", portrait: "imgs/characters/證件/照片/沈月-證件.jpg" },
-    { row: 1, column: 2, name: "沈樂", group: "shen", tabTarget: "shen-le", portrait: "imgs/characters/證件/照片/沈樂-證件.jpg" },
+    {
+      row: 1,
+      column: 1,
+      name: "沈月",
+      group: "shen",
+      tabTarget: "shen-yue",
+      portrait: "imgs/characters/證件/照片/沈月-證件.jpg",
+    },
+    {
+      row: 1,
+      column: 2,
+      name: "沈樂",
+      group: "shen",
+      tabTarget: "shen-le",
+      portrait: "imgs/characters/證件/照片/沈樂-證件.jpg",
+    },
     { row: 1, column: 7, name: "阿強", group: "ip" },
-    { row: 2, column: 1, name: "沈曦", group: "shen", tabTarget: "shen-xi", portrait: "imgs/characters/證件/照片/沈曦-證件.jpg" },
-    { row: 2, column: 2, name: "沈澈", group: "shen", tabTarget: "shen-che", portrait: "imgs/characters/證件/照片/沈澈-證件.jpg" },
+    {
+      row: 2,
+      column: 1,
+      name: "沈曦",
+      group: "shen",
+      tabTarget: "shen-xi",
+      portrait: "imgs/characters/證件/照片/沈曦-證件.jpg",
+    },
+    {
+      row: 2,
+      column: 2,
+      name: "沈澈",
+      group: "shen",
+      tabTarget: "shen-che",
+      portrait: "imgs/characters/證件/照片/沈澈-證件.jpg",
+    },
     { row: 2, column: 7, name: "阿醜", group: "ip" },
     { row: 3, column: 7, name: "利貝", group: "ip" },
     { row: 4, column: 7, name: "阿雄", group: "ip" },
-    { row: 5, column: 7, name: "祭煜", group: "cat", tabTarget: "matsuri", portrait: "imgs/characters/證件/照片/祭煜-證件.jpg" },
+    {
+      row: 5,
+      column: 7,
+      name: "祭煜",
+      group: "cat",
+      tabTarget: "matsuri",
+      portrait: "imgs/characters/證件/照片/祭煜-證件.jpg",
+    },
   ];
 
   const teacher = {
@@ -37,7 +70,7 @@
       ? `<img src="${escapeHtml(seat.portrait)}" alt="" loading="lazy" decoding="async" />`
       : '<span class="classroom-activity__portrait-placeholder" aria-hidden="true">✦</span>';
 
-    const content = `<span class="classroom-activity__pushpin" aria-hidden="true"></span><div class="classroom-activity__photo-frame">${portrait}</div><strong>${escapeHtml(seat.name)}${seat.role ? `（${escapeHtml(seat.role)}）` : ""}</strong>`;
+    const content = `<div class="classroom-activity__photo-frame">${portrait}</div><strong>${escapeHtml(seat.name)}${seat.role ? `（${escapeHtml(seat.role)}）` : ""}</strong>`;
     if (seat.tabTarget) {
       return `<a class="classroom-activity__seat classroom-activity__seat--${seat.group} is-clickable" href="#related-data" data-related-character-target="${escapeHtml(seat.tabTarget)}" aria-label="查看${escapeHtml(seat.name)}角色資料">${content}</a>`;
     }
@@ -76,13 +109,12 @@
         </article>
         <aside class="classroom-activity__legend">
           <div class="classroom-activity__legend-card">
-            <h3>評分圖例</h3>
             <ul>
-              <li class="is-cat"><i aria-hidden="true"></i><span><strong><a href="https://x.com/hashtag/貓祭不繪讓你俄史計劃" target="_blank" rel="noopener noreferrer">#貓祭不繪讓你俄史計劃</a></strong><small>核心計分對象</small></span></li>
+              <li class="is-cat"><i aria-hidden="true"></i><span><strong>貓家</strong><small>核心計分對象</small></span></li>
               <li class="is-shen"><i aria-hidden="true"></i><span><strong>沈家</strong><small>核心計分對象</small></span></li>
               <li class="is-ip"><i aria-hidden="true"></i><span><strong>貓祭旗下 IP</strong><small>額外加分對象</small></span></li>
             </ul>
-            <div class="classroom-activity__note"><span>活動規則整理</span><p>主要評分角色為貓家與沈家；繪製紫色標示的 IP 角色可獲額外加分，但不是本次活動主軸。</p></div>
+            <div class="classroom-activity__note"><span>註：</span><p>主要評分角色為貓家與沈家；繪製紫色標示的 IP 角色可獲額外加分，但不是本次活動主軸。</p></div>
           </div>
         </aside>
       </div>
