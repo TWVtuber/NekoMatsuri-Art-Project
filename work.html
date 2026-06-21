@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="貓祭不繪讓你俄史計劃作品展示頁。"
+    />
+    <link href="logo.ico" rel="icon" type="image/x-icon" />
+    <title>作品展示｜貓祭不繪讓你俄史計劃</title>
+    <script src="js/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/site.css?v=68" />
+    <link rel="stylesheet" href="css/event.css?v=25" />
+    <link rel="stylesheet" href="css/awards.css?v=1" />
+    <link rel="stylesheet" href="css/work-gallery.css?v=1" />
+    <link rel="stylesheet" href="css/pages-responsive.css?v=9" />
+    <link rel="stylesheet" href="css/spacing.css?v=2" />
+  </head>
+  <body class="work-page activity-visible">
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-brand" href="index.html#activity" aria-label="回活動首頁">
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="開啟導覽列"
+        >
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="活動導覽">
+          <a href="index.html#about">活動介紹</a>
+          <a href="index.html#rules">主題與規則</a>
+          <a href="index.html#rewards">獎勵辦法</a>
+          <a href="index.html#awards">評審與獎項</a>
+          <a href="work.html" aria-current="page">作品展示</a>
+          <a href="index.html#organizers">參與人員</a>
+          <a href="index.html#faq">常見問題</a>
+        </nav>
+        <a
+          class="header-submit"
+          href="https://forms.gle/M6ds1JfNyQWvcxud7"
+          target="_blank"
+          rel="noopener noreferrer"
+          >我要投稿！</a
+        >
+      </div>
+    </header>
+
+    <main class="page-content work-page__content">
+      <section
+        class="work-gallery section"
+        id="works"
+        aria-labelledby="works-title"
+      >
+        <div class="section-title">
+          <span></span>
+          <h1 id="works-title">作品展示</h1>
+          <span></span>
+        </div>
+        <div class="work-gallery__paper paper-card">
+          <span class="tape tape--blue" aria-hidden="true"></span>
+          <div class="work-gallery__toolbar" aria-label="作品篩選工具">
+            <div class="work-gallery__filters" role="list">
+              <button
+                class="work-gallery__filter is-active"
+                type="button"
+                data-work-filter="all"
+                aria-pressed="true"
+              >
+                All
+              </button>
+              <button
+                class="work-gallery__filter"
+                type="button"
+                data-work-filter="neko"
+                aria-pressed="false"
+              >
+                Neko Family
+              </button>
+              <button
+                class="work-gallery__filter"
+                type="button"
+                data-work-filter="shen"
+                aria-pressed="false"
+              >
+                Shen Family
+              </button>
+              <button
+                class="work-gallery__filter"
+                type="button"
+                data-work-filter="ip"
+                aria-pressed="false"
+              >
+                IP Characters
+              </button>
+            </div>
+            <label class="work-gallery__search">
+              <span class="visually-hidden">搜尋作品</span>
+              <input
+                type="search"
+                data-work-search
+                placeholder="Search artwork..."
+                autocomplete="off"
+              />
+              <span class="material-symbols-outlined" aria-hidden="true"
+                >search</span
+              >
+            </label>
+          </div>
+          <div class="work-gallery__grid" data-work-grid>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="neko"
+              data-work-keywords="neko family no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="shen"
+              data-work-keywords="shen family no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="ip"
+              data-work-keywords="ip characters no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--portrait"
+              data-work-category="neko"
+              data-work-keywords="neko portrait no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="shen"
+              data-work-keywords="shen warm no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="ip"
+              data-work-keywords="ip no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="neko"
+              data-work-keywords="neko no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="shen"
+              data-work-keywords="shen cream no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--square"
+              data-work-category="ip"
+              data-work-keywords="ip square no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="neko"
+              data-work-keywords="neko pink no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="shen"
+              data-work-keywords="shen no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="ip"
+              data-work-keywords="ip no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--portrait"
+              data-work-category="neko"
+              data-work-keywords="neko tall no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--square"
+              data-work-category="shen"
+              data-work-keywords="shen square no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--landscape"
+              data-work-category="ip"
+              data-work-keywords="ip no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+            <article
+              class="work-gallery__item work-gallery__item--portrait"
+              data-work-category="shen"
+              data-work-keywords="shen tall no file"
+            >
+              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
+            </article>
+          </div>
+          <p class="work-gallery__empty" data-work-empty hidden>
+            找不到符合條件的作品。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="footer-identity">
+          <div class="footer-organizers" aria-label="主辦與協辦單位">
+            <div class="footer-organizer">
+              <span>主辦</span>
+              <a href="https://lit.link/en/NekoMatsuri" target="_blank"
+                ><img src="imgs/neko_Logo.webp" alt="貓祭 Neko Matsuri"
+              /></a>
+            </div>
+            <div class="footer-organizer">
+              <span>協辦</span>
+              <a href="https://x.com/INU_Art_" target="_blank"
+                ><img src="imgs/badge.webp" alt="繪俄史藝術高等學院"
+              /></a>
+            </div>
+          </div>
+          <p>
+            © <span id="current-year">2026</span>
+            <a href="https://lit.link/en/NekoMatsuri" target="_blank"
+              >貓祭 NekoMatsuri</a
+            >
+            &amp;
+            <a href="https://x.com/INU_Art_" target="_blank"
+              >繪俄史藝術高等學院.</a
+            >&nbsp;All Rights Reserved.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="頁尾導覽">
+          <a href="index.html#rules">主題與規則</a>
+          <a href="index.html#awards">評審與獎項</a>
+          <a href="work.html" aria-current="page">作品展示</a>
+          <a href="index.html#organizers">參與人員</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="js/work-gallery.js?v=1"></script>
+  </body>
+</html>

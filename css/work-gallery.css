@@ -1,0 +1,233 @@
+.work-page {
+  min-height: 100vh;
+}
+
+.work-page .site-header {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+
+.work-page .site-nav a[aria-current="page"],
+.work-page .footer-links a[aria-current="page"] {
+  color: var(--pink-strong);
+  border-bottom-color: var(--pink-strong);
+}
+
+.work-page__content {
+  padding-top: var(--section-gap);
+}
+
+.work-gallery {
+  scroll-margin-top: 96px;
+}
+
+.work-gallery__paper {
+  position: relative;
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  padding: clamp(30px, 5vw, 56px);
+  background:
+    radial-gradient(#cdc6b3 0.55px, transparent 0.55px) 0 0 / 20px 20px,
+    radial-gradient(#cdc6b3 0.55px, transparent 0.55px) 10px 10px / 20px
+      20px,
+    #fef9ee;
+}
+
+.work-gallery__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.work-gallery__filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.work-gallery__filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 7px 24px;
+  border: 1.5px solid var(--ink);
+  background: #f2ede2;
+  color: #4b4738;
+  font:
+    700 17px/1.2 "jf-openhuninn",
+    sans-serif;
+  cursor: pointer;
+  transform: rotate(-1deg);
+  transition:
+    background-color 0.16s ease,
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.work-gallery__filter:nth-child(even) {
+  transform: rotate(0.8deg);
+}
+
+.work-gallery__filter:hover,
+.work-gallery__filter:focus-visible {
+  background: #f3df92;
+  box-shadow: 2px 2px 0 var(--ink);
+  outline: none;
+  transform: translate(-1px, -1px) rotate(0deg);
+}
+
+.work-gallery__filter.is-active {
+  background: #feea87;
+  color: #776811;
+}
+
+.work-gallery__filter[data-work-filter="shen"]:hover,
+.work-gallery__filter[data-work-filter="shen"].is-active {
+  background: #ffe1f2;
+}
+
+.work-gallery__filter[data-work-filter="ip"]:hover,
+.work-gallery__filter[data-work-filter="ip"].is-active {
+  background: #ffdad6;
+}
+
+.work-gallery__search {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: min(100%, 280px);
+}
+
+.work-gallery__search input {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 42px 8px 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 0;
+  background: #f8f3e8;
+  color: var(--ink);
+  font:
+    700 14px/1.2 "jf-openhuninn",
+    sans-serif;
+}
+
+.work-gallery__search input:focus {
+  outline: 3px solid rgba(201, 44, 86, 0.26);
+  outline-offset: 2px;
+}
+
+.work-gallery__search .material-symbols-outlined {
+  position: absolute;
+  right: 12px;
+  color: #4b4738;
+  font-size: 21px;
+  pointer-events: none;
+}
+
+.work-gallery__grid {
+  column-count: 4;
+  column-gap: 12px;
+  margin: 0 auto;
+}
+
+.work-gallery__item {
+  display: grid;
+  position: relative;
+  place-items: center;
+  width: 100%;
+  min-height: 0;
+  margin: 0 0 12px;
+  border: 1.5px solid var(--ink);
+  background: #f2f2f2;
+  color: rgba(29, 28, 21, 0.62);
+  break-inside: avoid;
+  overflow: hidden;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.work-gallery__item[hidden] {
+  display: none;
+}
+
+.work-gallery__item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(29, 28, 21, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.work-gallery__item:hover::after,
+.work-gallery__item:focus-within::after {
+  opacity: 1;
+}
+
+.work-gallery__placeholder-icon {
+  padding: 12px;
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 1;
+}
+
+.work-gallery__item--landscape {
+  aspect-ratio: 4 / 3;
+}
+
+.work-gallery__item--portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.work-gallery__item--square {
+  aspect-ratio: 1;
+}
+
+.work-gallery__empty {
+  margin: 28px 0 0;
+  color: #4b4738;
+  font:
+    700 18px/1.5 "jf-openhuninn",
+    sans-serif;
+  text-align: center;
+}
+
+@media (max-width: 1023.95px) {
+  .work-gallery__grid {
+    column-count: 2;
+    column-gap: 12px;
+  }
+
+  .work-gallery__item {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 599.95px) {
+  .work-gallery__paper {
+    padding: 30px 20px;
+  }
+
+  .work-gallery__toolbar,
+  .work-gallery__filters {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .work-gallery__filter,
+  .work-gallery__search {
+    width: 100%;
+  }
+
+  .work-gallery__grid {
+    column-count: 1;
+  }
+}
