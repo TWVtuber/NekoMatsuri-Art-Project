@@ -225,13 +225,17 @@
     padding: 30px 20px;
   }
 
-  .work-gallery__toolbar,
-  .work-gallery__filters {
-    align-items: stretch;
+  .work-gallery__toolbar {
+    align-items: center;
     flex-direction: column;
   }
 
-  .work-gallery__filter,
+  .work-gallery__filters {
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+  }
+
   .work-gallery__search {
     width: 100%;
   }
