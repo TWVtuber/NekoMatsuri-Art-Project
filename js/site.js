@@ -339,8 +339,8 @@ const cardPopTargets = [
   ...document.querySelectorAll(
     [
       ".page-content .countdown-card",
-      ".page-content .reward-policy",
-      ".page-content .paper-card:not(.hero-copy):not(.reward-policy__paper)",
+      ".page-content .reward-policy__paper",
+      ".page-content .paper-card:not(.hero-copy)",
       ".page-content .faq-card",
       ".page-content .paper-sheet",
     ].join(", "),
@@ -353,7 +353,7 @@ scrollMotionTargets.forEach((target) => {
 
   target.style.setProperty(
     "--scroll-rest-transform",
-    originalTransform === "none" ? "none" : originalTransform,
+    originalTransform === "none" ? "translateZ(0)" : originalTransform,
   );
 });
 
