@@ -122,6 +122,39 @@
   background: white;
   box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
 }
+
+.scroll-fly-in {
+  --scroll-fly-rest-transform: none;
+  --scroll-fly-x: -34vw;
+  --scroll-fly-y: 72px;
+  --scroll-fly-rotate: -18deg;
+  opacity: 0;
+  transform:
+    translate3d(var(--scroll-fly-x), var(--scroll-fly-y), 0)
+    rotate(var(--scroll-fly-rotate))
+    scale(1.18)
+    var(--scroll-fly-rest-transform);
+  transform-origin: center;
+  transition:
+    opacity 0.48s ease,
+    transform 0.82s cubic-bezier(0.17, 0.84, 0.32, 1.18);
+  will-change: opacity, transform;
+}
+
+.scroll-fly-in.is-scroll-fly-visible {
+  opacity: 1;
+  transform: var(--scroll-fly-rest-transform);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fly-in,
+  .scroll-fly-in.is-scroll-fly-visible {
+    opacity: 1;
+    transform: var(--scroll-fly-rest-transform);
+    transition: none;
+  }
+}
+
 .hero-copy {
   display: flow-root;
   width: 100%;
