@@ -4,9 +4,22 @@
   const image = document.getElementById("image-viewer-image");
   const title = document.getElementById("image-viewer-title");
   const description = document.getElementById("image-viewer-description");
+  const descriptionText = document.getElementById(
+    "image-viewer-description-text",
+  );
+  const sourceLink = document.getElementById("image-viewer-source-link");
   const zoomLabel = document.getElementById("image-viewer-zoom");
 
-  if (!viewer || !viewport || !image || !title || !description || !zoomLabel) {
+  if (
+    !viewer ||
+    !viewport ||
+    !image ||
+    !title ||
+    !description ||
+    !descriptionText ||
+    !sourceLink ||
+    !zoomLabel
+  ) {
     return;
   }
 
@@ -79,8 +92,11 @@
     returnFocus = trigger;
     title.textContent = trigger.dataset.imageViewerTitle || "圖片預覽";
     const body = trigger.dataset.imageViewerDescription || "";
-    description.textContent = body;
-    description.hidden = !body;
+    const link = trigger.dataset.imageViewerLink || "";
+    descriptionText.textContent = body;
+    sourceLink.href = link || "#";
+    sourceLink.hidden = !link;
+    description.hidden = !body && !link;
     image.alt = title.textContent;
     image.src = trigger.dataset.imageViewerSrc;
     viewer.hidden = false;
@@ -206,7 +222,7 @@
     if (event.key === "Tab") {
       const focusable = [
         ...viewer.querySelectorAll(
-          '.image-viewer__close, .image-viewer__viewport, .image-viewer__toolbar button',
+          '.image-viewer__close, .image-viewer__viewport, .image-viewer__toolbar button, .image-viewer__caption a:not([hidden])',
         ),
       ];
       const currentIndex = focusable.indexOf(document.activeElement);

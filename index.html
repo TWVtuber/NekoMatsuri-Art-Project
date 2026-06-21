@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="css/awards.css?v=1" />
     <link rel="stylesheet" href="css/pages-responsive.css?v=11" />
     <link rel="stylesheet" href="css/spacing.css?v=10" />
-    <link rel="stylesheet" href="css/related-data.css?v=23" />
+    <link rel="stylesheet" href="css/related-data.css?v=27" />
     <link rel="stylesheet" href="css/classroom-map.css?v=13" />
 
     <!-- Google tag (gtag.js) -->
@@ -195,7 +195,17 @@
         </div>
         <footer class="image-viewer__caption">
           <h2 id="image-viewer-title"></h2>
-          <p id="image-viewer-description" hidden></p>
+          <p id="image-viewer-description" hidden>
+            <span id="image-viewer-description-text"></span>
+            <a
+              id="image-viewer-source-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              hidden
+              >查看原始貼文</a
+            >
+          </p>
         </footer>
       </div>
     </div>
@@ -1102,6 +1112,25 @@
             <div data-related-data-panels></div>
           </section>
 
+          <figure class="related-class-photo related-photo-card">
+            <button
+              class="image-viewer-trigger related-class-photo__button"
+              type="button"
+              data-image-viewer-src="imgs/characters/3C-Pics/【貓祭】3C合照單色.jpg"
+              data-image-viewer-title="三年 C 班合照"
+              data-image-viewer-link="https://x.com/nekomatsuri_25/status/2066241660762415208"
+              aria-label="放大查看三年 C 班合照"
+            >
+              <img
+                src="imgs/characters/3C-Pics/【貓祭】3C合照單色.jpg"
+                alt="三年 C 班合照"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              />
+            </button>
+          </figure>
+
           <button
             class="faq-back faq-back--bottom"
             type="button"
@@ -1667,8 +1696,8 @@
 
     <script src="js/site.js?v=37"></script>
     <script src="js/classroom-map.js?v=8"></script>
-    <script src="js/related-data-content.js?v=12"></script>
+    <script src="js/related-data-content.js?v=15"></script>
     <script src="js/related-data.js?v=4"></script>
-    <script src="js/image-viewer.js?v=1"></script>
+    <script src="js/image-viewer.js?v=2"></script>
   </body>
 </html>
