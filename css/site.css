@@ -116,12 +116,9 @@ body.academy-is-open {
   text-underline-offset: 4px;
 }
 .academy-modal__close {
-  position: fixed;
-  z-index: 2;
-  top: calc(var(--academy-modal-padding) + 20px);
-  right: calc(
-    (100vw - min(100vw - var(--academy-modal-padding) * 2, 620px)) / 2 + 24px
-  );
+  position: absolute;
+  top: 14px;
+  right: 14px;
   width: 42px;
   height: 42px;
   padding: 0;
