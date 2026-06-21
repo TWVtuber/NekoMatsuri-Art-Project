@@ -60,7 +60,6 @@
   align-items: start;
 }
 
-.classroom-activity__legend-card,
 .classroom-activity__board {
   background: #fff;
 }
@@ -71,19 +70,10 @@
 
 .classroom-activity__legend-card {
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr) minmax(230px, 0.85fr);
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 0.85fr);
   gap: 14px;
   align-items: stretch;
   padding: 14px;
-}
-
-.classroom-activity__legend h3 {
-  display: grid;
-  margin: 0;
-  padding-right: 18px;
-  place-items: center;
-  border-right: 1px solid var(--classroom-ink);
-  font-size: 21px;
 }
 
 .classroom-activity__legend ul {
@@ -99,7 +89,13 @@
   display: flex;
   gap: 11px;
   align-items: center;
+  justify-content: center;
   padding: 8px;
+  text-align: left;
+}
+
+.classroom-activity__legend li > span {
+  width: auto;
 }
 
 .classroom-activity__legend li.is-cat { background: #fff1f0; }
@@ -290,18 +286,6 @@
   line-height: 1.2;
 }
 
-.classroom-activity__pushpin {
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  z-index: 3;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--classroom-ink);
-  transform: translateX(-50%);
-}
-
 .classroom-activity__seat--cat { color: #d91d2b; }
 .classroom-activity__seat--shen { color: #075bc8; }
 .classroom-activity__seat--ip { color: #7051b7; }
@@ -347,11 +331,6 @@ body.classroom-map-preview > [data-classroom-map] {
 @media (max-width: 900px) {
   .classroom-activity__legend-card {
     grid-template-columns: 1fr;
-  }
-  .classroom-activity__legend h3 {
-    padding: 0 0 10px;
-    border-right: 0;
-    border-bottom: 1px solid var(--classroom-ink);
   }
 }
 
