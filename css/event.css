@@ -495,6 +495,67 @@ p {
   text-align: center;
   transform: rotate(-1deg);
 }
+@media (min-width: 1024px) and (max-width: 1199.95px) {
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: clamp(48px, 6vw, 72px);
+    padding-left: clamp(48px, 6vw, 72px);
+  }
+  .hero-logo-title {
+    position: relative;
+    order: 1;
+    top: auto;
+    left: auto;
+    width: min(62%, 560px);
+    margin: -24px auto 28px;
+    transform: rotate(-3deg);
+  }
+  .hero-logo-title img {
+    top: -24%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .about-text {
+    order: 2;
+    padding-top: 0;
+    text-align: center;
+  }
+  .about-text > p,
+  .hero-copy .hero-lead,
+  .hero-copy .hero-declaration,
+  .hero-copy .hero-closing {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .hero-copy .hero-declaration {
+    text-align: center;
+  }
+  .activity-hashtags::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .activity-hashtags__heading,
+  .activity-hashtags__list {
+    justify-content: center;
+  }
+  .hero-photo-stack {
+    order: 3;
+    float: none;
+    width: min(90%, 720px);
+    margin: 34px auto 0;
+    gap: 34px;
+  }
+  .hero-photo--secondary {
+    width: 94%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .activity-hashtags {
+    width: min(100%, 680px);
+  }
+}
 .tape {
   position: absolute;
   z-index: 4;
@@ -534,19 +595,43 @@ p {
   margin: 0 0 var(--section-gap);
   padding: 0 20px;
 }
-.countdown-card {
+.countdown-board {
   position: relative;
   width: min(100%, 720px);
+}
+.countdown-card {
+  position: relative;
+  width: 100%;
   padding: 56px 40px 48px;
   border: 2px solid var(--ink);
   background: var(--pink);
   text-align: center;
   transform: rotate(-2deg);
   box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+.countdown-card::before {
+  content: "alarm";
+  position: absolute;
+  left: 22px;
+  bottom: 16px;
+  z-index: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Material Symbols Outlined";
+  font-size: clamp(96px, 18vw, 168px);
+  font-weight: 400;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transform: rotate(-10deg);
+}
+.countdown-card > * {
+  position: relative;
+  z-index: 1;
 }
 .countdown-pin {
   position: absolute;
-  z-index: 2;
+  z-index: 8;
   top: -18px;
   left: 50%;
   width: 38px;
@@ -615,6 +700,51 @@ p {
     transform 0.12s,
     box-shadow 0.12s;
 }
+.countdown-card .countdown-cta {
+  display: inline-block;
+  padding: 16px 34px;
+  font-size: clamp(24px, 3.2vw, 32px);
+  letter-spacing: 0.08em;
+  box-shadow: 7px 7px 0 black;
+  transform-origin: center;
+  animation: countdown-cta-wiggle 1.9s ease-in-out infinite;
+}
+.countdown-card .countdown-cta:hover {
+  box-shadow: 4px 4px 0 black;
+  animation-play-state: paused;
+  transform: translate(3px, 3px) rotate(-1deg) scale(1.04);
+}
+.countdown-card .countdown-cta:active {
+  box-shadow: 2px 2px 0 black;
+  transform: translate(5px, 5px) rotate(0deg) scale(0.98);
+}
+@keyframes countdown-cta-wiggle {
+  0%,
+  68%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  72% {
+    transform: rotate(-3deg) scale(1.045);
+  }
+  76% {
+    transform: rotate(3deg) scale(1.045);
+  }
+  80% {
+    transform: rotate(-2deg) scale(1.035);
+  }
+  84% {
+    transform: rotate(2deg) scale(1.035);
+  }
+  88% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .countdown-card .countdown-cta {
+    animation: none;
+  }
+}
 
 .notes-grid {
   display: grid;
@@ -625,7 +755,7 @@ p {
 }
 .section-mascot {
   position: absolute;
-  z-index: 5;
+  z-index: 7;
   width: clamp(96px, 10vw, 142px);
   height: clamp(108px, 12vw, 162px);
   object-fit: contain;
@@ -690,10 +820,30 @@ p {
   bottom: -94px;
   transform: rotate(5deg);
 }
+@media (min-width: 1024px) {
+  .section-mascot:is(
+    [src$="沈家_01_沈月Q.webp"],
+    [src$="沈家_01_沈樂Q.webp"],
+    [src$="沈家_01_沈澈Q.webp"],
+    [src$="沈家_01_沈曦Q.webp"]
+  ) {
+    width: clamp(115px, 12vw, 170px);
+    height: clamp(130px, 14.4vw, 194px);
+  }
+  .countdown-mascot--top-left {
+    left: -18px;
+  }
+}
 .rules-mascot {
   top: -118px;
   left: clamp(36px, 12%, 130px);
   transform: rotate(-4deg);
+}
+@media (min-width: 1200px) {
+  .rules-mascot {
+    top: -170px;
+    left: clamp(-96px, -5vw, -64px);
+  }
 }
 .section-title {
   position: relative;
@@ -719,8 +869,8 @@ p {
   transform: rotate(4deg);
 }
 .faq-launcher-mascot {
-  top: -112px;
-  left: 12px;
+  top: -152px;
+  left: 24px;
   width: 96px;
   height: 110px;
   transform: rotate(-4deg);
@@ -730,16 +880,16 @@ p {
     top: 50%;
     right: auto;
     left: calc(50% + clamp(120px, 15vw, 190px));
-    width: clamp(96px, 10vw, 142px);
-    height: clamp(108px, 12vw, 162px);
+    width: clamp(115px, 12vw, 170px);
+    height: clamp(130px, 14.4vw, 194px);
     transform: translateX(60%) translateY(-50%) rotate(4deg);
   }
   .faq-launcher-mascot {
-    top: 50%;
-    left: -100px;
-    width: clamp(96px, 10vw, 142px);
-    height: clamp(108px, 12vw, 162px);
-    transform: translateY(-50%) rotate(-4deg);
+    top: -150px;
+    left: clamp(-88px, -6vw, -40px);
+    width: clamp(115px, 12vw, 170px);
+    height: clamp(130px, 14.4vw, 194px);
+    transform: rotate(-4deg);
   }
 }
 .note-card {
