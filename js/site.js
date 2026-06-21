@@ -334,40 +334,43 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
   });
 }
 
-const flyInTargets = [
+const heroZoomTargets = [...document.querySelectorAll(".page-content .hero-photo")];
+const cardPopTargets = [
   ...document.querySelectorAll(
     [
-      ".page-content .hero-photo",
       ".page-content .countdown-card",
-      ".page-content .paper-card:not(.hero-copy)",
+      ".page-content .reward-policy",
+      ".page-content .paper-card:not(.hero-copy):not(.reward-policy__paper)",
       ".page-content .faq-card",
       ".page-content .paper-sheet",
     ].join(", "),
   ),
 ].filter((target, index, targets) => targets.indexOf(target) === index);
+const scrollMotionTargets = [...heroZoomTargets, ...cardPopTargets];
 
-flyInTargets.forEach((target, index) => {
+scrollMotionTargets.forEach((target) => {
   const originalTransform = getComputedStyle(target).transform;
-  const isFromRight = index % 2 === 1;
 
   target.style.setProperty(
-    "--scroll-fly-rest-transform",
+    "--scroll-rest-transform",
     originalTransform === "none" ? "none" : originalTransform,
   );
-  target.style.setProperty("--scroll-fly-x", isFromRight ? "34vw" : "-34vw");
-  target.style.setProperty("--scroll-fly-rotate", isFromRight ? "18deg" : "-18deg");
-  target.classList.add("scroll-fly-in");
 });
 
+heroZoomTargets.forEach((target) => target.classList.add("scroll-zoom-out-left"));
+cardPopTargets.forEach((target) => target.classList.add("scroll-pop-up"));
+
 if (reduceMotion.matches || !("IntersectionObserver" in window)) {
-  flyInTargets.forEach((target) => target.classList.add("is-scroll-fly-visible"));
+  scrollMotionTargets.forEach((target) =>
+    target.classList.add("is-scroll-motion-visible"),
+  );
 } else {
-  const flyInObserver = new IntersectionObserver(
+  const scrollMotionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-scroll-fly-visible");
-        flyInObserver.unobserve(entry.target);
+        entry.target.classList.add("is-scroll-motion-visible");
+        scrollMotionObserver.unobserve(entry.target);
       });
     },
     { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
@@ -375,7 +378,7 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      flyInTargets.forEach((target) => flyInObserver.observe(target));
+      scrollMotionTargets.forEach((target) => scrollMotionObserver.observe(target));
     });
   });
 }

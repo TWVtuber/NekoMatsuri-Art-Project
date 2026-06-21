@@ -123,38 +123,6 @@
   box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
 }
 
-.scroll-fly-in {
-  --scroll-fly-rest-transform: none;
-  --scroll-fly-x: -34vw;
-  --scroll-fly-y: 72px;
-  --scroll-fly-rotate: -18deg;
-  opacity: 0;
-  transform:
-    translate3d(var(--scroll-fly-x), var(--scroll-fly-y), 0)
-    rotate(var(--scroll-fly-rotate))
-    scale(1.18)
-    var(--scroll-fly-rest-transform);
-  transform-origin: center;
-  transition:
-    opacity 0.48s ease,
-    transform 0.82s cubic-bezier(0.17, 0.84, 0.32, 1.18);
-  will-change: opacity, transform;
-}
-
-.scroll-fly-in.is-scroll-fly-visible {
-  opacity: 1;
-  transform: var(--scroll-fly-rest-transform);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-fly-in,
-  .scroll-fly-in.is-scroll-fly-visible {
-    opacity: 1;
-    transform: var(--scroll-fly-rest-transform);
-    transition: none;
-  }
-}
-
 .hero-copy {
   display: flow-root;
   width: 100%;
@@ -1468,4 +1436,45 @@ p {
   color: #5d5852;
   font-size: 18px;
   line-height: 1.55;
+}
+
+.scroll-zoom-out-left,
+.scroll-pop-up {
+  --scroll-rest-transform: none;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.scroll-zoom-out-left {
+  transform:
+    translate3d(34vw, 0, 0)
+    scale(1.28)
+    var(--scroll-rest-transform);
+  transition:
+    transform 0.86s cubic-bezier(0.17, 0.84, 0.32, 1.08);
+}
+
+.scroll-pop-up {
+  transform:
+    translate3d(0, 74px, 0)
+    scale(0.92)
+    var(--scroll-rest-transform);
+  transition:
+    transform 0.72s cubic-bezier(0.18, 1.35, 0.36, 1);
+}
+
+.scroll-zoom-out-left.is-scroll-motion-visible,
+.scroll-pop-up.is-scroll-motion-visible {
+  transform: var(--scroll-rest-transform);
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-zoom-out-left,
+  .scroll-pop-up,
+  .scroll-zoom-out-left.is-scroll-motion-visible,
+  .scroll-pop-up.is-scroll-motion-visible {
+    transform: var(--scroll-rest-transform);
+    transition: none;
+  }
 }
