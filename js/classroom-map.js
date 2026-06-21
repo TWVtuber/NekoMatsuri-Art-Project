@@ -60,8 +60,10 @@
     ).join("");
 
     return `<section class="classroom-activity" aria-labelledby="classroom-activity-title">
-      <header class="classroom-activity__header">
+      <header class="section-title classroom-activity__header">
+        <span></span>
         <h2 id="classroom-activity-title">三年 C 班座位表</h2>
+        <span></span>
       </header>
       <div class="classroom-activity__layout">
         <article class="classroom-activity__board">

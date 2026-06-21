@@ -71,7 +71,7 @@
     return gallery
       .map(
         ([source, caption, description = ""]) =>
-          `<figure class="paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${imageViewerTrigger({ source, title: caption, description })}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`,
+          `<figure class="related-photo-card paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${imageViewerTrigger({ source, title: caption, description })}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`,
       )
       .join("");
   }
@@ -91,7 +91,7 @@
       ? sidebarImage.variant
       : "document";
     const sidebarImageMarkup = sidebarImage?.src
-      ? `<figure class="related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "" })}</figure>`
+      ? `<figure class="${sidebarImageVariant === "document" ? "related-photo-card " : ""}related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "" })}</figure>`
       : "";
     const cornerImageMarkup = profile.cornerImage?.src
       ? `<img class="related-profile__corner-mascot" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" />`
@@ -114,11 +114,11 @@
     const notes = renderTextBlocks(profile.notes, profileKey);
     const gallery = renderGallery(profile.gallery, profileKey);
 
-    return `<div class="manila-texture related-profile" style="--profile-accent:${profile.accent}">
+    return `<div class="manila-texture related-profile related-profile--${escapeHtml(profileKey)}">
       <aside class="related-profile__sidebar">
         <div class="related-profile__portrait-wrap">
           <span class="tape related-data-photo-tape" aria-hidden="true"></span>
-          <div class="polaroid-frame related-profile__portrait">${imageViewerTrigger({ source: profile.portrait, title: `${profile.name}證件照`, description: profile.relationship, lazy: false })}</div>
+          <div class="related-photo-card polaroid-frame related-profile__portrait">${imageViewerTrigger({ source: profile.portrait, title: `${profile.name}證件照`, description: profile.relationship, lazy: false })}</div>
           <div class="related-profile__name-card"><h2>${escapeHtml(profile.name)}｜${escapeHtml(profile.romanized)}</h2></div>
           <p class="related-profile__artist">繪製：${artistName}</p>
         </div>
@@ -152,7 +152,7 @@
     ]
       .map(
         ([name, source]) =>
-          `<figure>${imageViewerTrigger({ source, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure>`,
+          `<figure class="related-photo-card">${imageViewerTrigger({ source, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure>`,
       )
       .join("");
     return `<div class="manila-texture related-overview related-family">
@@ -183,7 +183,8 @@
       .map(([key, data], index) => {
         const isSelected = key === defaultKey;
         const marginClass = index === groupTabs.length - 1 ? "" : " mr-[-8px]";
-        return `<button class="folder-tab px-5 py-2 font-label-md text-label-md${marginClass} ${isSelected ? "active-tab text-black" : "inactive-tab text-on-surface-variant"}" type="button" role="tab" aria-selected="${isSelected}" aria-controls="folder-panel-${escapeHtml(key)}" id="folder-tab-${escapeHtml(key)}" data-folder-target="${escapeHtml(key)}" style="--folder-tab-color: ${escapeHtml(data.tab.color)}">${escapeHtml(data.tab.title)}</button>`;
+        const colorClass = data.tab.color === "#ffcbd3" ? " folder-tab--pink" : " folder-tab--blue";
+        return `<button class="folder-tab${colorClass} px-5 py-2 font-label-md text-label-md${marginClass} ${isSelected ? "active-tab text-black" : "inactive-tab text-on-surface-variant"}" type="button" role="tab" aria-selected="${isSelected}" aria-controls="folder-panel-${escapeHtml(key)}" id="folder-tab-${escapeHtml(key)}" data-folder-target="${escapeHtml(key)}">${escapeHtml(data.tab.title)}</button>`;
       })
       .join("");
 
@@ -196,17 +197,30 @@
 
   function renderRelatedData(relatedData) {
     renderTabs(relatedData);
-    document
-      .querySelectorAll("#related-data [data-profile-key]")
-      .forEach((panel) => {
-        const data = relatedData[panel.dataset.profileKey];
-        if (!data) return;
-        if (data.kind === "profile")
-          panel.innerHTML = profileTemplate(data, panel.dataset.profileKey);
-        else if (data.kind === "family") panel.innerHTML = familyTemplate(data);
-        panel.classList.remove("related-data-panel--placeholder");
-        panel.classList.add("is-rendered");
-      });
+    const panelContainer = document.querySelector(
+      "#related-data [data-related-data-panels]",
+    );
+    if (!panelContainer) return;
+
+    const panels = Object.entries(relatedData)
+      .filter(([, data]) => data.tab?.title && data.tab?.color)
+      .sort(
+        ([, first], [, second]) =>
+          (first.tab.order ?? Number.MAX_SAFE_INTEGER) -
+          (second.tab.order ?? Number.MAX_SAFE_INTEGER),
+      );
+    const defaultKey =
+      panels.find(([, data]) => data.tab.default)?.[0] ?? panels[0]?.[0];
+
+    panelContainer.innerHTML = panels
+      .map(([key, data]) => {
+        const content =
+          data.kind === "family"
+            ? familyTemplate(data)
+            : profileTemplate(data, key);
+        return `<section class="related-data-panel is-rendered" id="folder-panel-${escapeHtml(key)}" role="tabpanel" aria-labelledby="folder-tab-${escapeHtml(key)}" data-folder-panel="${escapeHtml(key)}"${key === defaultKey ? "" : " hidden"}>${content}</section>`;
+      })
+      .join("");
   }
 
   async function loadRelatedData() {
@@ -219,11 +233,13 @@
       document.dispatchEvent(new CustomEvent("related-data:ready"));
     } catch (error) {
       console.error("Unable to load related character data.", error);
-      document
-        .querySelectorAll("#related-data [data-profile-key]")
-        .forEach((panel) => {
-          panel.innerHTML = "<p>人物資料暫時無法載入，請稍後再試。</p>";
-        });
+      const panelContainer = document.querySelector(
+        "#related-data [data-related-data-panels]",
+      );
+      if (panelContainer) {
+        panelContainer.innerHTML =
+          '<p class="related-data-error">人物資料暫時無法載入，請稍後再試。</p>';
+      }
     }
   }
 

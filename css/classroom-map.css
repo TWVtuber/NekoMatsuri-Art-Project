@@ -5,9 +5,6 @@
   width: 100%;
   padding: clamp(16px, 2vw, 24px);
   overflow: hidden;
-  background-color: var(--classroom-paper);
-  background-image: radial-gradient(rgb(124 119 102 / 35%) 0.5px, transparent 0.5px);
-  background-size: 24px 24px;
   color: var(--classroom-ink);
   font-family: "jf-openhuninn", sans-serif;
 }
@@ -18,8 +15,6 @@
 
 .related-classroom-feature .classroom-activity {
   width: 100%;
-  border: 1px solid #e7e2d7;
-  box-shadow: 2px 3px 12px rgb(0 0 0 / 9%);
 }
 
 .classroom-activity *,
@@ -31,20 +26,29 @@
 .classroom-activity__header {
   position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: 20px;
   width: min(100%, 960px);
-  margin: 0 auto 18px;
+  margin: 0 auto 36px;
   text-align: center;
 }
 
 .classroom-activity__header h2 {
   margin: 0;
-  padding: 8px 20px;
-  border: 1px solid var(--classroom-ink);
-  background: #fff;
-  font-size: clamp(24px, 2.6vw, 32px);
-  font-weight: 800;
-  line-height: 1.2;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font:
+    700 clamp(36px, 5vw, 50px) / 1 "jf-openhuninn",
+    sans-serif;
+}
+
+.classroom-activity__header span {
+  flex: 0 0 3px;
+  width: 3px;
+  height: 42px;
+  background: var(--classroom-ink);
 }
 
 .classroom-activity__layout {

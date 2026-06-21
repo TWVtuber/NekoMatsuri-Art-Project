@@ -734,12 +734,14 @@ document.querySelectorAll('[data-copy-hashtag]').forEach((button) => {
 });
 
 const academyModal = document.getElementById('academy-modal');
-const academyModalTrigger = document.getElementById('academy-info-trigger');
+const academyModalTriggers = [...document.querySelectorAll('[data-academy-info-trigger]')];
 const academyModalClose = document.getElementById('academy-modal-close');
 const academyPresidentLink = document.getElementById('academy-president-link');
+let academyModalTrigger = academyModalTriggers[0] || null;
 
-function openAcademyModal() {
+function openAcademyModal(event) {
   if (!academyModal) return;
+  academyModalTrigger = event?.currentTarget || academyModalTrigger;
   academyModal.hidden = false;
   document.body.classList.add('academy-is-open');
   activityRoot.inert = true;
@@ -761,7 +763,7 @@ function closeAcademyModal({ restoreFocus = true } = {}) {
   if (restoreFocus) academyModalTrigger?.focus({ preventScroll: true });
 }
 
-academyModalTrigger?.addEventListener('click', openAcademyModal);
+academyModalTriggers.forEach((trigger) => trigger.addEventListener('click', openAcademyModal));
 academyModalClose?.addEventListener('click', closeAcademyModal);
 academyModal?.querySelector('[data-academy-close]')?.addEventListener('click', closeAcademyModal);
 academyPresidentLink?.addEventListener('click', (event) => {
