@@ -311,6 +311,10 @@ body.organizer-open .site-nav [data-organizer-link] {
   .site-nav a:last-child {
     border-bottom: 0;
   }
+  .site-nav a.is-active {
+    border-bottom-color: transparent;
+    box-shadow: inset 0 0 0 2px var(--pink-strong);
+  }
   .nav-toggle {
     display: grid;
     order: 3;
@@ -1216,8 +1220,9 @@ body.organizer-open .site-nav [data-organizer-link] {
 
 .credit-note a:hover,
 .credit-note a:focus-visible {
-  color: inherit;
-  text-decoration: none;
+  color: #9e304c;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .organizer-sponsors {
