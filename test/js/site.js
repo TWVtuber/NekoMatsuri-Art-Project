@@ -11,25 +11,25 @@ document.addEventListener(
   { capture: true },
 );
 
-// document.addEventListener(
-//   "keydown",
-//   (event) => {
-//     const key = event.key.toLowerCase();
-//     const opensDeveloperTools =
-//       event.key === "F12" ||
-//       ((event.ctrlKey || event.metaKey) &&
-//         event.shiftKey &&
-//         blockedDeveloperShortcuts.has(key));
-//     const opensPageSource =
-//       (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
+document.addEventListener(
+  "keydown",
+  (event) => {
+    const key = event.key.toLowerCase();
+    const opensDeveloperTools =
+      event.key === "F12" ||
+      ((event.ctrlKey || event.metaKey) &&
+        event.shiftKey &&
+        blockedDeveloperShortcuts.has(key));
+    const opensPageSource =
+      (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
 
-//     if (opensDeveloperTools || opensPageSource) {
-//       event.preventDefault();
-//       event.stopImmediatePropagation();
-//     }
-//   },
-//   { capture: true },
-// );
+    if (opensDeveloperTools || opensPageSource) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  },
+  { capture: true },
+);
 
 document.addEventListener(
   "dragstart",
@@ -165,7 +165,9 @@ function setupHomeParallax() {
     if (typeof requestPermission === "function") {
       const requestOnFirstTouch = async () => {
         try {
-          if ((await requestPermission.call(DeviceOrientationEvent)) === "granted") {
+          if (
+            (await requestPermission.call(DeviceOrientationEvent)) === "granted"
+          ) {
             enableOrientation();
           }
         } catch {
@@ -216,7 +218,11 @@ function setPvSoundNote(hasSound) {
   }
 }
 
-function openPvModal({ withSound = false, restart = false, returnFocus = null } = {}) {
+function openPvModal({
+  withSound = false,
+  restart = false,
+  returnFocus = null,
+} = {}) {
   if (!pvModal || !pvModalIframe) return;
 
   pvReturnFocus = returnFocus;
@@ -270,7 +276,7 @@ function sizeArtboard() {
   artboard.style.width = `${artboardWidth}px`;
   artboard.style.height = `${artboardHeight}px`;
 
-  const submitBtn = stage.querySelector('.submit-button');
+  const submitBtn = stage.querySelector(".submit-button");
   // fallback to height * 0.76 if button not found
   const buttonTop = submitBtn ? submitBtn.offsetTop : height * 0.76;
   const logoStyle = window.getComputedStyle(logoMotion);
@@ -344,7 +350,8 @@ function startEntranceAnimation() {
 }
 
 function closePvModal() {
-  if (!pvModal || pvModalClosed || pvModal.classList.contains("is-closing")) return;
+  if (!pvModal || pvModalClosed || pvModal.classList.contains("is-closing"))
+    return;
 
   sendPvCommand("pauseVideo");
   pvModal.classList.add("is-closing");
@@ -360,7 +367,8 @@ function closePvModal() {
     activityRoot.removeAttribute("aria-hidden");
     pvModalClosed = true;
     startEntranceAnimation();
-    if (pvReturnFocus?.isConnected) pvReturnFocus.focus({ preventScroll: true });
+    if (pvReturnFocus?.isConnected)
+      pvReturnFocus.focus({ preventScroll: true });
     pvReturnFocus = null;
   }, closeDuration);
 }
@@ -418,7 +426,10 @@ if (heroDeclaration) {
   } else {
     const heroDeclarationObserver = new IntersectionObserver(
       ([entry]) => {
-        heroDeclaration.classList.toggle("is-circle-drawn", entry.isIntersecting);
+        heroDeclaration.classList.toggle(
+          "is-circle-drawn",
+          entry.isIntersecting,
+        );
       },
       { threshold: 0.45 },
     );
@@ -434,7 +445,9 @@ const highlighterMarks = [
 
 highlighterMarks.forEach((mark) => {
   mark.classList.add("marker-highlight");
-  const finalAlpha = getComputedStyle(mark).getPropertyValue("--marker-alpha").trim();
+  const finalAlpha = getComputedStyle(mark)
+    .getPropertyValue("--marker-alpha")
+    .trim();
   mark.style.setProperty("--marker-final-alpha", finalAlpha || "1");
 });
 
@@ -460,7 +473,9 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
   });
 }
 
-const heroZoomTargets = [...document.querySelectorAll(".page-content .hero-photo")];
+const heroZoomTargets = [
+  ...document.querySelectorAll(".page-content .hero-photo"),
+];
 const cardPopTargets = [
   ...document.querySelectorAll(
     [
@@ -504,11 +519,15 @@ scrollMotionTargets.forEach((target) => {
   );
 });
 
-heroZoomTargets.forEach((target) => target.classList.add("scroll-zoom-out-left"));
+heroZoomTargets.forEach((target) =>
+  target.classList.add("scroll-zoom-out-left"),
+);
 [...cardPopTargets, ...sectionBackgroundTargets].forEach((target) =>
   target.classList.add("scroll-pop-up"),
 );
-stickyNoteTargets.forEach((target) => target.classList.add("scroll-stick-note"));
+stickyNoteTargets.forEach((target) =>
+  target.classList.add("scroll-stick-note"),
+);
 logoStickerTargets.forEach((target) =>
   target.classList.add("scroll-logo-sticker"),
 );
@@ -651,18 +670,19 @@ const characterImageObserver = new MutationObserver((mutations) => {
     });
   });
 });
-characterImageObserver.observe(document.body, { childList: true, subtree: true });
+characterImageObserver.observe(document.body, {
+  childList: true,
+  subtree: true,
+});
 
 document.addEventListener("visibilitychange", () => {
-  document
-    .querySelectorAll(".character-hover__animation")
-    .forEach((video) => {
-      if (document.hidden) {
-        video.pause();
-      } else {
-        video.play().catch(() => {});
-      }
-    });
+  document.querySelectorAll(".character-hover__animation").forEach((video) => {
+    if (document.hidden) {
+      video.pause();
+    } else {
+      video.play().catch(() => {});
+    }
+  });
 });
 
 const sectionMascots = [...document.querySelectorAll(".section-mascot")];
@@ -823,7 +843,9 @@ const organizerView = document.getElementById("organizers");
 const relatedDataView = document.getElementById("related-data");
 const faqLinks = [...document.querySelectorAll("[data-faq-link]")];
 const organizerLinks = [...document.querySelectorAll("[data-organizer-link]")];
-const relatedDataLinks = [...document.querySelectorAll("[data-related-data-link]")];
+const relatedDataLinks = [
+  ...document.querySelectorAll("[data-related-data-link]"),
+];
 const faqBackButtons = [...document.querySelectorAll("[data-faq-back]")];
 const organizerBackButtons = [
   ...document.querySelectorAll("[data-organizer-back]"),
@@ -836,30 +858,34 @@ let organizerReturnHash = "#activity";
 let relatedDataReturnHash = "#activity";
 
 function initializeFaqCards() {
-  document.querySelectorAll(".faq-card:not([data-faq-ready])").forEach((card, index) => {
-    const heading = card.querySelector("h2");
-    const answer = card.querySelector("p");
-    if (!heading || !answer) return;
-    const answerId = `faq-answer-${index + 1}`;
-    const questionContent = heading.innerHTML;
-    const answerReveal = document.createElement("div");
+  document
+    .querySelectorAll(".faq-card:not([data-faq-ready])")
+    .forEach((card, index) => {
+      const heading = card.querySelector("h2");
+      const answer = card.querySelector("p");
+      if (!heading || !answer) return;
+      const answerId = `faq-answer-${index + 1}`;
+      const questionContent = heading.innerHTML;
+      const answerReveal = document.createElement("div");
 
-    card.dataset.faqReady = "";
-    answer.id = answerId;
-    answer.setAttribute("aria-hidden", "true");
-    answerReveal.className = "faq-answer-reveal";
-    answerReveal.append(answer);
-    heading.after(answerReveal);
-    heading.innerHTML = `<button class="faq-question" type="button" aria-expanded="false" aria-controls="${answerId}">${questionContent}</button>`;
+      card.dataset.faqReady = "";
+      answer.id = answerId;
+      answer.setAttribute("aria-hidden", "true");
+      answerReveal.className = "faq-answer-reveal";
+      answerReveal.append(answer);
+      heading.after(answerReveal);
+      heading.innerHTML = `<button class="faq-question" type="button" aria-expanded="false" aria-controls="${answerId}">${questionContent}</button>`;
 
-    heading.querySelector(".faq-question").addEventListener("click", (event) => {
-      const question = event.currentTarget;
-      const willOpen = question.getAttribute("aria-expanded") !== "true";
-      question.setAttribute("aria-expanded", String(willOpen));
-      card.classList.toggle("is-open", willOpen);
-      answer.setAttribute("aria-hidden", String(!willOpen));
+      heading
+        .querySelector(".faq-question")
+        .addEventListener("click", (event) => {
+          const question = event.currentTarget;
+          const willOpen = question.getAttribute("aria-expanded") !== "true";
+          question.setAttribute("aria-expanded", String(willOpen));
+          card.classList.toggle("is-open", willOpen);
+          answer.setAttribute("aria-hidden", String(!willOpen));
+        });
     });
-  });
 }
 
 initializeFaqCards();
@@ -1021,86 +1047,96 @@ else if (window.location.hash === "#organizers") showOrganizer(false);
 else if (window.location.hash === "#related-data") showRelatedData(false);
 
 // Reopen the themed PV modal from the activity photo.
-const pvOverlay = document.getElementById('pv-overlay');
+const pvOverlay = document.getElementById("pv-overlay");
 
 if (pvOverlay) {
-  pvOverlay.addEventListener('click', () => {
+  pvOverlay.addEventListener("click", () => {
     openPvModal({ withSound: true, restart: true, returnFocus: pvOverlay });
   });
 }
 
-const hashtagCopyStatus = document.getElementById('hashtag-copy-status');
+const hashtagCopyStatus = document.getElementById("hashtag-copy-status");
 
 async function copyText(text) {
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(text);
     return;
   }
-  const textarea = document.createElement('textarea');
+  const textarea = document.createElement("textarea");
   textarea.value = text;
-  textarea.setAttribute('readonly', '');
-  textarea.style.cssText = 'position:fixed;opacity:0';
+  textarea.setAttribute("readonly", "");
+  textarea.style.cssText = "position:fixed;opacity:0";
   document.body.appendChild(textarea);
   textarea.select();
-  const copied = document.execCommand('copy');
+  const copied = document.execCommand("copy");
   textarea.remove();
-  if (!copied) throw new Error('Copy command failed');
+  if (!copied) throw new Error("Copy command failed");
 }
 
-document.querySelectorAll('[data-copy-hashtag]').forEach((button) => {
-  button.addEventListener('click', async () => {
+document.querySelectorAll("[data-copy-hashtag]").forEach((button) => {
+  button.addEventListener("click", async () => {
     const hashtag = button.dataset.copyHashtag;
-    const label = button.querySelector('.hashtag-copy-label');
-    const icon = button.querySelector('.material-symbols-outlined');
+    const label = button.querySelector(".hashtag-copy-label");
+    const icon = button.querySelector(".material-symbols-outlined");
     if (label && !label.dataset.defaultLabel) {
       label.dataset.defaultLabel = label.textContent;
     }
     try {
       await copyText(hashtag);
-      if (label) label.textContent = '已複製';
-      if (icon) icon.textContent = 'done';
-      if (hashtagCopyStatus) hashtagCopyStatus.textContent = `已複製 ${hashtag}`;
+      if (label) label.textContent = "已複製";
+      if (icon) icon.textContent = "done";
+      if (hashtagCopyStatus)
+        hashtagCopyStatus.textContent = `已複製 ${hashtag}`;
       window.setTimeout(() => {
         if (label) label.textContent = label.dataset.defaultLabel;
-        if (icon) icon.textContent = 'content_copy';
+        if (icon) icon.textContent = "content_copy";
       }, 1600);
     } catch {
-      if (hashtagCopyStatus) hashtagCopyStatus.textContent = '複製失敗，請手動複製 Hashtag';
+      if (hashtagCopyStatus)
+        hashtagCopyStatus.textContent = "複製失敗，請手動複製 Hashtag";
     }
   });
 });
 
-const memeModal = document.getElementById('meme-modal');
-const memeModalImage = document.getElementById('meme-modal-image');
-const memeModalStatus = document.getElementById('meme-modal-status');
-const memeModalAnnouncement = document.getElementById('meme-modal-announcement');
-const memeModalPrevious = memeModal?.querySelector('[data-meme-previous]');
-const memeModalNext = memeModal?.querySelector('[data-meme-next]');
-const memeModalViewer = memeModal?.querySelector('.meme-modal__viewer');
-
-const memeMascots = [...document.querySelectorAll('#activity .section-mascot')].filter(
-  (mascot) => !mascot.closest('#related-data'),
+const memeModal = document.getElementById("meme-modal");
+const memeModalImage = document.getElementById("meme-modal-image");
+const memeModalStatus = document.getElementById("meme-modal-status");
+const memeModalAnnouncement = document.getElementById(
+  "meme-modal-announcement",
 );
+const memeModalPrevious = memeModal?.querySelector("[data-meme-previous]");
+const memeModalNext = memeModal?.querySelector("[data-meme-next]");
+const memeModalViewer = memeModal?.querySelector(".meme-modal__viewer");
+
+const memeMascots = [
+  ...document.querySelectorAll("#activity .section-mascot"),
+].filter((mascot) => !mascot.closest("#related-data"));
 
 if (memeMascots.length) {
-  const storageKey = 'neko-matsuri-last-meme-mascot';
+  const storageKey = "neko-matsuri-last-meme-mascot";
   let previousIndex = -1;
   try {
-    previousIndex = Number.parseInt(localStorage.getItem(storageKey) ?? '-1', 10);
+    previousIndex = Number.parseInt(
+      localStorage.getItem(storageKey) ?? "-1",
+      10,
+    );
   } catch {}
 
   let selectedIndex = Math.floor(Math.random() * memeMascots.length);
   if (memeMascots.length > 1 && selectedIndex === previousIndex) {
-    selectedIndex = (selectedIndex + 1 + Math.floor(Math.random() * (memeMascots.length - 1)))
-      % memeMascots.length;
+    selectedIndex =
+      (selectedIndex +
+        1 +
+        Math.floor(Math.random() * (memeMascots.length - 1))) %
+      memeMascots.length;
   }
 
-  const trigger = document.createElement('button');
-  trigger.className = 'mascot-meme-button';
-  trigger.type = 'button';
-  trigger.dataset.memeGallery = '';
-  trigger.setAttribute('aria-label', '開啟工作小彩蛋圖片集');
-  trigger.textContent = '工作小彩蛋';
+  const trigger = document.createElement("button");
+  trigger.className = "mascot-meme-button";
+  trigger.type = "button";
+  trigger.dataset.memeGallery = "";
+  trigger.setAttribute("aria-label", "開啟工作小彩蛋圖片集");
+  trigger.textContent = "工作小彩蛋";
   memeMascots[selectedIndex].append(trigger);
 
   try {
@@ -1109,20 +1145,22 @@ if (memeMascots.length) {
 }
 
 const memeModalTriggers = [
-  ...document.querySelectorAll('[data-meme-src], [data-meme-gallery]'),
+  ...document.querySelectorAll("[data-meme-src], [data-meme-gallery]"),
 ];
-const memeModalCloseButtons = [...document.querySelectorAll('[data-meme-close]')];
+const memeModalCloseButtons = [
+  ...document.querySelectorAll("[data-meme-close]"),
+];
 function collectMemeGalleryItems() {
   return [
-  ...new Map(
-    [...document.querySelectorAll('[data-meme-src]')].map((trigger) => [
-      trigger.dataset.memeSrc,
-      {
-        src: trigger.dataset.memeSrc,
-        name: trigger.dataset.memeName || '工作',
-      },
-    ]),
-  ).values(),
+    ...new Map(
+      [...document.querySelectorAll("[data-meme-src]")].map((trigger) => [
+        trigger.dataset.memeSrc,
+        {
+          src: trigger.dataset.memeSrc,
+          name: trigger.dataset.memeName || "工作",
+        },
+      ]),
+    ).values(),
   ];
 }
 const memeGalleryItems = collectMemeGalleryItems();
@@ -1135,11 +1173,11 @@ function renderMemeDots() {
   if (!memeModalStatus) return;
   memeModalStatus.replaceChildren();
   memeGalleryItems.forEach((item, index) => {
-    const dot = document.createElement('button');
-    dot.className = 'meme-modal__dot';
-    dot.type = 'button';
-    dot.setAttribute('aria-label', `切換到${item.name}`);
-    dot.addEventListener('click', () => showMemeImage(index));
+    const dot = document.createElement("button");
+    dot.className = "meme-modal__dot";
+    dot.type = "button";
+    dot.setAttribute("aria-label", `切換到${item.name}`);
+    dot.addEventListener("click", () => showMemeImage(index));
     memeModalStatus.append(dot);
   });
 }
@@ -1153,20 +1191,26 @@ function showMemeImage(index) {
   if (memeModalStatus) {
     [...memeModalStatus.children].forEach((dot, dotIndex) => {
       const active = dotIndex === memeModalIndex;
-      dot.classList.toggle('is-active', active);
-      dot.setAttribute('aria-current', active ? 'true' : 'false');
+      dot.classList.toggle("is-active", active);
+      dot.setAttribute("aria-current", active ? "true" : "false");
     });
   }
   if (memeModalAnnouncement) memeModalAnnouncement.textContent = item.name;
-  memeModalViewer?.classList.add('is-switching');
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    memeModalViewer?.classList.remove('is-switching');
-  }));
+  memeModalViewer?.classList.add("is-switching");
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => {
+      memeModalViewer?.classList.remove("is-switching");
+    }),
+  );
 }
 
 renderMemeDots();
-document.addEventListener('organizers-content:ready', () => {
-  memeGalleryItems.splice(0, memeGalleryItems.length, ...collectMemeGalleryItems());
+document.addEventListener("organizers-content:ready", () => {
+  memeGalleryItems.splice(
+    0,
+    memeGalleryItems.length,
+    ...collectMemeGalleryItems(),
+  );
   renderMemeDots();
 });
 
@@ -1180,77 +1224,86 @@ function openMemeModal(event) {
   if (memeModalStatus) memeModalStatus.hidden = !memeModalIsGallery;
   const requestedIndex = memeModalIsGallery
     ? Math.floor(Math.random() * memeGalleryItems.length)
-    : memeGalleryItems.findIndex((item) => item.src === trigger.dataset.memeSrc);
+    : memeGalleryItems.findIndex(
+        (item) => item.src === trigger.dataset.memeSrc,
+      );
   showMemeImage(requestedIndex < 0 ? 0 : requestedIndex);
   memeModal.hidden = false;
-  document.body.classList.add('meme-is-open');
+  document.body.classList.add("meme-is-open");
   activityRoot.inert = true;
-  activityRoot.setAttribute('aria-hidden', 'true');
+  activityRoot.setAttribute("aria-hidden", "true");
   stage.inert = true;
-  stage.setAttribute('aria-hidden', 'true');
+  stage.setAttribute("aria-hidden", "true");
   memeModal.focus({ preventScroll: true });
-  memeModal.querySelector('.meme-modal__close')?.focus({ preventScroll: true });
+  memeModal.querySelector(".meme-modal__close")?.focus({ preventScroll: true });
 }
 
 function closeMemeModal() {
   if (!memeModal || memeModal.hidden) return;
   memeModal.hidden = true;
-  document.body.classList.remove('meme-is-open');
+  document.body.classList.remove("meme-is-open");
   activityRoot.inert = false;
-  activityRoot.removeAttribute('aria-hidden');
+  activityRoot.removeAttribute("aria-hidden");
   stage.inert = false;
-  stage.removeAttribute('aria-hidden');
-  memeModalImage.removeAttribute('src');
-  memeModalImage.alt = '';
+  stage.removeAttribute("aria-hidden");
+  memeModalImage.removeAttribute("src");
+  memeModalImage.alt = "";
   memeModalTrigger?.focus({ preventScroll: true });
   memeModalTrigger = null;
 }
 
 memeModalTriggers.forEach((trigger) =>
-  trigger.addEventListener('click', openMemeModal),
+  trigger.addEventListener("click", openMemeModal),
 );
 memeModalCloseButtons.forEach((button) =>
-  button.addEventListener('click', closeMemeModal),
+  button.addEventListener("click", closeMemeModal),
 );
-memeModalPrevious?.addEventListener('click', () => showMemeImage(memeModalIndex - 1));
-memeModalNext?.addEventListener('click', () => showMemeImage(memeModalIndex + 1));
+memeModalPrevious?.addEventListener("click", () =>
+  showMemeImage(memeModalIndex - 1),
+);
+memeModalNext?.addEventListener("click", () =>
+  showMemeImage(memeModalIndex + 1),
+);
 
-memeModalViewer?.addEventListener('pointerdown', (event) => {
+memeModalViewer?.addEventListener("pointerdown", (event) => {
   if (!memeModalIsGallery) return;
-  if (event.target.closest('button')) return;
-  if (event.pointerType === 'mouse' && event.button !== 0) return;
+  if (event.target.closest("button")) return;
+  if (event.pointerType === "mouse" && event.button !== 0) return;
   memeModalViewer.setPointerCapture(event.pointerId);
   memeSwipeStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
 });
 
-memeModalViewer?.addEventListener('pointerup', (event) => {
+memeModalViewer?.addEventListener("pointerup", (event) => {
   if (!memeSwipeStart || memeSwipeStart.id !== event.pointerId) return;
   const deltaX = event.clientX - memeSwipeStart.x;
   const deltaY = event.clientY - memeSwipeStart.y;
   memeSwipeStart = null;
-  if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.15) return;
+  if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.15)
+    return;
   showMemeImage(memeModalIndex + (deltaX < 0 ? 1 : -1));
 });
 
-memeModalViewer?.addEventListener('pointercancel', () => {
+memeModalViewer?.addEventListener("pointercancel", () => {
   memeSwipeStart = null;
 });
 
-const academyModal = document.getElementById('academy-modal');
-const academyModalTriggers = [...document.querySelectorAll('[data-academy-info-trigger]')];
-const academyModalClose = document.getElementById('academy-modal-close');
-const academyPresidentLink = document.getElementById('academy-president-link');
+const academyModal = document.getElementById("academy-modal");
+const academyModalTriggers = [
+  ...document.querySelectorAll("[data-academy-info-trigger]"),
+];
+const academyModalClose = document.getElementById("academy-modal-close");
+const academyPresidentLink = document.getElementById("academy-president-link");
 let academyModalTrigger = academyModalTriggers[0] || null;
 
 function openAcademyModal(event) {
   if (!academyModal) return;
   academyModalTrigger = event?.currentTarget || academyModalTrigger;
   academyModal.hidden = false;
-  document.body.classList.add('academy-is-open');
+  document.body.classList.add("academy-is-open");
   activityRoot.inert = true;
-  activityRoot.setAttribute('aria-hidden', 'true');
+  activityRoot.setAttribute("aria-hidden", "true");
   stage.inert = true;
-  stage.setAttribute('aria-hidden', 'true');
+  stage.setAttribute("aria-hidden", "true");
   academyModal.focus({ preventScroll: true });
   academyModalClose?.focus({ preventScroll: true });
 }
@@ -1258,45 +1311,49 @@ function openAcademyModal(event) {
 function closeAcademyModal({ restoreFocus = true } = {}) {
   if (!academyModal || academyModal.hidden) return;
   academyModal.hidden = true;
-  document.body.classList.remove('academy-is-open');
+  document.body.classList.remove("academy-is-open");
   activityRoot.inert = false;
-  activityRoot.removeAttribute('aria-hidden');
+  activityRoot.removeAttribute("aria-hidden");
   stage.inert = false;
-  stage.removeAttribute('aria-hidden');
+  stage.removeAttribute("aria-hidden");
   if (restoreFocus) academyModalTrigger?.focus({ preventScroll: true });
 }
 
-academyModalTriggers.forEach((trigger) => trigger.addEventListener('click', openAcademyModal));
-academyModalClose?.addEventListener('click', closeAcademyModal);
-academyModal?.querySelector('[data-academy-close]')?.addEventListener('click', closeAcademyModal);
-academyPresidentLink?.addEventListener('click', (event) => {
+academyModalTriggers.forEach((trigger) =>
+  trigger.addEventListener("click", openAcademyModal),
+);
+academyModalClose?.addEventListener("click", closeAcademyModal);
+academyModal
+  ?.querySelector("[data-academy-close]")
+  ?.addEventListener("click", closeAcademyModal);
+academyPresidentLink?.addEventListener("click", (event) => {
   event.preventDefault();
   closeAcademyModal({ restoreFocus: false });
   showOrganizer();
   requestAnimationFrame(() => {
-    document.getElementById('academy-president-message')?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+    document.getElementById("academy-president-message")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
   });
 });
-document.addEventListener('keydown', (event) => {
+document.addEventListener("keydown", (event) => {
   if (memeModal && !memeModal.hidden) {
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       closeMemeModal();
       return;
     }
-    if (memeModalIsGallery && event.key === 'ArrowLeft') {
+    if (memeModalIsGallery && event.key === "ArrowLeft") {
       showMemeImage(memeModalIndex - 1);
       return;
     }
-    if (memeModalIsGallery && event.key === 'ArrowRight') {
+    if (memeModalIsGallery && event.key === "ArrowRight") {
       showMemeImage(memeModalIndex + 1);
       return;
     }
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       const focusable = [
-        ...memeModal.querySelectorAll('button:not([disabled]):not([hidden])'),
+        ...memeModal.querySelectorAll("button:not([disabled]):not([hidden])"),
       ];
       const first = focusable[0];
       const last = focusable.at(-1);
@@ -1311,12 +1368,12 @@ document.addEventListener('keydown', (event) => {
     return;
   }
   if (!academyModal || academyModal.hidden) return;
-  if (event.key === 'Escape') {
+  if (event.key === "Escape") {
     closeAcademyModal();
     return;
   }
-  if (event.key === 'Tab') {
-    const focusable = [...academyModal.querySelectorAll('button, a[href]')];
+  if (event.key === "Tab") {
+    const focusable = [...academyModal.querySelectorAll("button, a[href]")];
     const first = focusable[0];
     const last = focusable.at(-1);
     if (event.shiftKey && document.activeElement === first) {
