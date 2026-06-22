@@ -70,13 +70,17 @@
   function renderGallery(gallery = [], currentProfileKey = "") {
     return gallery
       .map(
-        ([source, caption, description = ""]) =>
-          `<figure class="related-photo-card paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${imageViewerTrigger({ source, title: caption, description })}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`,
+        ({ src, caption, description = "", type = "image", poster = "" }) => {
+          const media = type === "video"
+            ? `<video class="related-profile__gallery-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"${poster ? ` poster="${escapeHtml(poster)}"` : ""} aria-label="${escapeHtml(caption)}"><source src="${escapeHtml(src)}" type="video/webm" /></video>`
+            : imageViewerTrigger({ source: src, title: caption, description });
+          return `<figure class="related-photo-card paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${media}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`;
+        },
       )
       .join("");
   }
 
-  function profileTemplate(profile, profileKey) {
+  function profileTemplate(profile, profileKey, labels) {
     const artist =
       profile.artist && typeof profile.artist === "object"
         ? profile.artist
@@ -100,16 +104,16 @@
       : "";
     const meta = profile.meta
       .map(
-        ([label, value]) =>
+        ({ label, value }) =>
           `<li><span>${escapeHtml(label)}</span><strong>${linkCharacterMentions(value, profileKey)}</strong></li>`,
       )
       .join("");
     const relatedLink = profile.relatedLink ??
       (profile.twitter
         ? {
-            label: "Twitter / X",
+            label: labels.defaultSocialLabel,
             url: profile.twitter,
-            text: "查看帳號",
+            text: labels.defaultSocialText,
           }
         : null);
     const socialLink = relatedLink
@@ -130,45 +134,45 @@
           <span class="related-data-photo-tape" aria-hidden="true"></span>
           <div class="related-photo-card polaroid-frame related-profile__portrait">${imageViewerTrigger({ source: profile.portrait, title: `${profile.name}證件照`, description: profile.relationship, lazy: false })}</div>
           <div class="related-profile__name-card"><h2>${escapeHtml(profile.name)}｜${escapeHtml(profile.romanized)}</h2></div>
-          <p class="related-profile__artist">繪製：${artistName}</p>
+          <p class="related-profile__artist">${escapeHtml(labels.artistPrefix)}${artistName}</p>
         </div>
-        <section class="sticky-note related-profile__facts"><h3>個人資料</h3><ul>${meta}${socialLink}</ul><div class="related-profile__quick-list"><ul>${facts}</ul></div></section>
+        <section class="sticky-note related-profile__facts"><h3>${escapeHtml(labels.personalDataTitle)}</h3><ul>${meta}${socialLink}</ul><div class="related-profile__quick-list"><ul>${facts}</ul></div></section>
         ${sidebarImageMarkup}
       </aside>
       <div class="related-profile__main">
         ${cornerImageMarkup}
         <article class="paper-sheet related-profile__paper">
-          <section><h3>人物關係</h3><p>${linkCharacterMentions(profile.relationship, profileKey)}</p></section>
-          <section><h3>性格</h3><p>${linkCharacterMentions(profile.personality, profileKey)}</p></section>
-          <section><h3>背景與相關設定</h3>${story}</section>
-          <section><h3>備註</h3>${notes}</section>
+          <section><h3>${escapeHtml(labels.relationshipTitle)}</h3><p>${linkCharacterMentions(profile.relationship, profileKey)}</p></section>
+          <section><h3>${escapeHtml(labels.personalityTitle)}</h3><p>${linkCharacterMentions(profile.personality, profileKey)}</p></section>
+          <section><h3>${escapeHtml(labels.storyTitle)}</h3>${story}</section>
+          <section><h3>${escapeHtml(labels.notesTitle)}</h3>${notes}</section>
         </article>
-        <section class="related-profile__gallery"><h3>學院相關照片</h3><div>${gallery}</div></section>
+        <section class="related-profile__gallery"><h3>${escapeHtml(labels.galleryTitle)}</h3><div>${gallery}</div></section>
       </div>
     </div>`;
   }
 
-  function familyTemplate(data) {
-    const xi = linkCharacterMentions("沈曦");
-    const che = linkCharacterMentions("沈澈");
-    const le = linkCharacterMentions("沈樂");
-    const yue = linkCharacterMentions("沈月");
+  function familyTemplate(data, labels) {
     const gallery = renderGallery(data.gallery);
-    const portraits = [
-      ["沈曦", "imgs/characters/證件/照片/沈曦-證件.jpg", "#d34b4b"],
-      ["沈澈", "imgs/characters/證件/照片/沈澈-證件.jpg", "#5d9dd5"],
-      ["沈樂", "imgs/characters/證件/照片/沈樂-證件.jpg", "#d49a32"],
-      ["沈月", "imgs/characters/證件/照片/沈月-證件.jpg", "#7584c8"],
-    ]
+    const portraits = data.portraits
       .map(
-        ([name, source, color]) =>
-          `<div class="related-family__portrait-wrap" style="--profile-accent:${escapeHtml(color)}"><span class="related-data-photo-tape" aria-hidden="true"></span><figure class="related-photo-card">${imageViewerTrigger({ source, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure></div>`,
+        ({ name, src, accent }) =>
+          `<div class="related-family__portrait-wrap" style="--profile-accent:${escapeHtml(accent)}"><span class="related-data-photo-tape" aria-hidden="true"></span><figure class="related-photo-card">${imageViewerTrigger({ source: src, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure></div>`,
+      )
+      .join("");
+    const tableHead = data.nameTable.columns
+      .map((column) => `<th>${linkCharacterMentions(column)}</th>`)
+      .join("");
+    const tableBody = data.nameTable.rows
+      .map(
+        ({ name, values }) =>
+          `<tr><th>${linkCharacterMentions(name)}</th>${values.map((value) => `<td>${linkCharacterMentions(value)}</td>`).join("")}</tr>`,
       )
       .join("");
     return `<div class="manila-texture related-overview related-family">
-      <section><h2>沈家四胞胎相關設定</h2><div class="related-family__portraits">${portraits}</div></section>
-      <article class="paper-sheet related-family__names"><h3>沈家對應稱呼</h3><div class="related-family__table-wrap"><table><thead><tr><th>名字</th><th>對${xi}</th><th>對${che}</th><th>對${le}</th><th>對${yue}</th></tr></thead><tbody><tr><th>${xi}</th><td>—</td><td>澈</td><td>樂</td><td>月</td></tr><tr><th>${che}</th><td>大哥</td><td>—</td><td>笨蛋</td><td>妹妹</td></tr><tr><th>${le}</th><td>大哥</td><td>哥</td><td>—</td><td>妹</td></tr><tr><th>${yue}</th><td>大哥</td><td>二哥</td><td>三哥</td><td>—</td></tr></tbody></table></div></article>
-      <section class="related-profile__gallery related-family__photo-gallery"><h3>沈家相關照片</h3><div>${gallery}</div></section>
+      <section><h2>${escapeHtml(labels.title)}</h2><div class="related-family__portraits">${portraits}</div></section>
+      <article class="paper-sheet related-family__names"><h3>${escapeHtml(labels.namesTitle)}</h3><div class="related-family__table-wrap"><table><thead><tr>${tableHead}</tr></thead><tbody>${tableBody}</tbody></table></div></article>
+      <section class="related-profile__gallery related-family__photo-gallery"><h3>${escapeHtml(labels.galleryTitle)}</h3><div>${gallery}</div></section>
     </div>`;
   }
 
@@ -225,8 +229,8 @@
       .map(([key, data]) => {
         const content =
           data.kind === "family"
-            ? familyTemplate(data)
-            : profileTemplate(data, key);
+            ? familyTemplate(data, relatedData._ui.family)
+            : profileTemplate(data, key, relatedData._ui.profile);
         return `<section class="related-data-panel is-rendered" id="folder-panel-${escapeHtml(key)}" role="tabpanel" aria-labelledby="folder-tab-${escapeHtml(key)}" data-folder-panel="${escapeHtml(key)}"${key === defaultKey ? "" : " hidden"}>${content}</section>`;
       })
       .join("");

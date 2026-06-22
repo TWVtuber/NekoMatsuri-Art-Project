@@ -1,4 +1,3 @@
-const workGallery = document.querySelector("[data-work-grid]");
 const workNavToggle = document.querySelector(".nav-toggle");
 const workSiteNav = document.getElementById("site-navigation");
 const currentYear = document.getElementById("current-year");
@@ -22,13 +21,17 @@ if (workNavToggle && workSiteNav) {
   });
 }
 
-if (workGallery) {
+function initializeWorkGallery() {
+  const workGallery = document.querySelector("[data-work-grid]");
+  if (!workGallery || workGallery.dataset.galleryReady !== undefined) return;
   const filterButtons = [
     ...document.querySelectorAll("[data-work-filter]"),
   ];
   const searchInput = document.querySelector("[data-work-search]");
   const emptyMessage = document.querySelector("[data-work-empty]");
   const workItems = [...workGallery.querySelectorAll("[data-work-category]")];
+  if (!filterButtons.length || !workItems.length) return;
+  workGallery.dataset.galleryReady = "";
   let activeFilter = "all";
 
   function normalizeText(value) {
@@ -70,3 +73,6 @@ if (workGallery) {
   searchInput?.addEventListener("input", updateGallery);
   updateGallery();
 }
+
+initializeWorkGallery();
+document.addEventListener("page-content:ready", initializeWorkGallery);

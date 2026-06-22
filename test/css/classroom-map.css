@@ -117,7 +117,7 @@
 .classroom-activity__legend strong,
 .classroom-activity__legend small { display: block; }
 .classroom-activity__legend strong {
-  font-size: clamp(18px, 2.4vw, 28px);
+  font-size: clamp(16px, 1.55vw, 18px);
   line-height: 1.15;
 }
 .classroom-activity__legend small {
@@ -406,8 +406,8 @@ body.classroom-map-preview > [data-classroom-map] {
     justify-content: flex-start;
     padding: 10px clamp(18px, 8vw, 44px);
   }
-  .classroom-activity__legend strong { font-size: clamp(18px, 6vw, 24px); }
-  .classroom-activity__legend small { font-size: clamp(12px, 4vw, 15px); }
+  .classroom-activity__legend strong { font-size: clamp(16px, 5vw, 20px); }
+  .classroom-activity__legend small { font-size: clamp(12px, 3.5vw, 14px); }
 }
 
 @media (prefers-reduced-motion: reduce) {

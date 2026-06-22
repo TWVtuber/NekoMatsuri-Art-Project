@@ -7,23 +7,33 @@
       name="description"
       content="貓祭不繪讓你俄史計劃—校園創作活動、投稿規則與獎項資訊。"
     />
-    <link href="logo.ico" rel="icon" type="image/x-icon" />
+    <link id="site-favicon" href="logo.ico" rel="icon" type="image/x-icon" />
     <title>貓祭不繪讓你俄史計劃</title>
-    <link rel="preload" as="image" href="imgs/main/main.jpg" />
-    <link rel="preload" as="image" href="imgs/main/LOGO.webp" />
-    <script src="js/tailwind-config.js"></script>
+    <link
+      id="preload-home-background"
+      rel="preload"
+      as="image"
+      href="imgs/main/main.jpg"
+    />
+    <link
+      id="preload-main-logo"
+      rel="preload"
+      as="image"
+      href="imgs/main/LOGO.webp"
+    />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/site.css?v=75" />
-    <link rel="stylesheet" href="css/event.css?v=47" />
-    <link rel="stylesheet" href="css/awards.css?v=3" />
-    <link rel="stylesheet" href="css/pages-responsive.css?v=20" />
+    <link rel="stylesheet" href="css/event.css?v=51" />
+    <link rel="stylesheet" href="css/awards.css?v=4" />
+    <link rel="stylesheet" href="css/pages-responsive.css?v=25" />
     <link rel="stylesheet" href="css/spacing.css?v=10" />
-    <link rel="stylesheet" href="css/related-data.css?v=49" />
-    <link rel="stylesheet" href="css/classroom-map.css?v=19" />
+    <link rel="stylesheet" href="css/related-data.css?v=51" />
+    <link rel="stylesheet" href="css/classroom-map.css?v=20" />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -309,9 +319,12 @@
           <nav class="site-nav" id="site-navigation" aria-label="活動導覽">
             <a href="#about">活動介紹</a>
             <a href="#rules">主題與規則</a>
+            <a href="#related-data" data-related-data-link>相關設定與資料</a>
             <a href="#rewards">獎勵辦法</a>
             <a href="#awards">評審與獎項</a>
-            <!-- <a href="work.html">作品展示</a> -->
+            <a href="work.html" disable aria-disabled="true" tabindex="-1"
+              >投稿作品</a
+            >
             <a href="#organizers" data-organizer-link>主辦與協力</a>
             <a href="#faq" data-faq-link>常見問題</a>
           </nav>
@@ -710,30 +723,77 @@
               <div class="reward-policy__prizes">
                 <ul class="reward-prize-list">
                   <li>
-                    <b>金&emsp;賞</b><wbr /><span>新台幣 5,000 元（一名）</span>
+                    <span class="reward-prize-list__heading"
+                      ><b>金&emsp;賞</b
+                      ><span class="reward-prize-list__count"
+                        >（一名）</span
+                      ></span
+                    ><span class="reward-prize-list__value fit-single-line"
+                      >新台幣 5,000 元</span
+                    ><span class="reward-prize-list__bonus fit-single-line"
+                      >插圖動態化（含拆圖建模）</span
+                    >
                   </li>
                   <li>
-                    <b>銀&emsp;賞</b><wbr /><span>新台幣 3,000 元（一名）</span>
+                    <span class="reward-prize-list__heading"
+                      ><b>銀&emsp;賞</b
+                      ><span class="reward-prize-list__count"
+                        >（一名）</span
+                      ></span
+                    ><span class="reward-prize-list__value fit-single-line"
+                      >新台幣 3,000 元</span
+                    >
                   </li>
                   <li>
-                    <b>銅&emsp;賞</b><wbr /><span>新台幣 2,000 元（一名）</span>
+                    <span class="reward-prize-list__heading"
+                      ><b>銅&emsp;賞</b
+                      ><span class="reward-prize-list__count"
+                        >（一名）</span
+                      ></span
+                    ><span class="reward-prize-list__value fit-single-line"
+                      >新台幣 2,000 元</span
+                    >
                   </li>
                   <li>
-                    <b>互動獎</b><wbr /><span>新台幣 1,500 元（一名）</span
+                    <span class="reward-prize-list__heading"
+                      ><b>互動獎</b
+                      ><span class="reward-prize-list__count"
+                        >（一名）</span
+                      ></span
+                    ><span class="reward-prize-list__value fit-single-line"
+                      >新台幣 1,500 元</span
                     ><small>即為大於一個的角色進行互動，且十分生動。</small>
                   </li>
                   <li>
-                    <b>角色獎</b><wbr /><span>新台幣 1,500 元（六名）</span
+                    <span class="reward-prize-list__heading"
+                      ><b>角色獎</b
+                      ><span class="reward-prize-list__count"
+                        >（六名）</span
+                      ></span
+                    ><span class="reward-prize-list__value fit-single-line"
+                      >新台幣 1,500 元</span
                     ><small
                       >每位學生與老師將選出自己在內的，最喜歡的作品。</small
                     >
                   </li>
                   <li>
-                    <b>卡哇獎</b><wbr /><span>新台幣 1,000 元（三名）</span
+                    <span class="reward-prize-list__heading"
+                      ><b>卡哇獎</b
+                      ><span class="reward-prize-list__count"
+                        >（三名）</span
+                      ></span
+                    ><span class="reward-prize-list__value fit-single-line"
+                      >新台幣 1,000 元</span
                     ><small>就是萌到心底暖烘烘的圖，超級卡哇伊。</small>
                   </li>
                   <li>
-                    <b>搞怪獎</b><wbr /><span>新台幣 1,000 元（三名）</span
+                    <span class="reward-prize-list__heading"
+                      ><b>搞怪獎</b
+                      ><span class="reward-prize-list__count"
+                        >（三名）</span
+                      ></span
+                    ><span class="reward-prize-list__value fit-single-line"
+                      >新台幣 1,000 元</span
                     ><small>又鬧又白癡，你能玩出什麼花樣呢？</small>
                   </li>
                 </ul>
@@ -1070,90 +1130,15 @@
             aria-labelledby="related-reference-title"
           >
             <header class="related-reference-gallery__header"></header>
-            <div class="related-reference-gallery__grid">
-              <figure
-                class="related-photo-card related-reference-card related-reference-card--president"
-              >
-                <button
-                  class="image-viewer-trigger related-reference-card__image"
-                  type="button"
-                  data-image-viewer-src="imgs/characters/Objects/素材/校長三視圖.jpg"
-                  data-image-viewer-title="校長三視圖"
-                  data-image-viewer-description="繪俄史藝術高等學院校長的外觀與設定參考。"
-                  aria-label="開啟校長三視圖完整圖片"
-                >
-                  <img
-                    src="imgs/characters/Objects/素材/校長三視圖.jpg"
-                    alt="校長三視圖設定"
-                    loading="lazy"
-                    decoding="async"
-                    draggable="false"
-                  />
-                </button>
-                <figcaption>
-                  <strong>校長三視圖</strong>
-                </figcaption>
-              </figure>
-              <figure class="related-photo-card related-reference-card">
-                <button
-                  class="image-viewer-trigger related-reference-card__image"
-                  type="button"
-                  data-image-viewer-src="imgs/characters/Objects/制服&amp;運動服/制服女.jpg"
-                  data-image-viewer-title="女生制服設定"
-                  data-image-viewer-description="女生夏冬制服、運動服與領結配色參考。"
-                  aria-label="開啟女生制服設定完整圖片"
-                >
-                  <img
-                    src="imgs/characters/Objects/制服&amp;運動服/制服女.jpg"
-                    alt="女生制服與運動服設定"
-                    loading="lazy"
-                    decoding="async"
-                    draggable="false"
-                  />
-                </button>
-                <figcaption>
-                  <strong>女生制服設定</strong>
-                </figcaption>
-              </figure>
-              <figure class="related-photo-card related-reference-card">
-                <button
-                  class="image-viewer-trigger related-reference-card__image"
-                  type="button"
-                  data-image-viewer-src="imgs/characters/Objects/制服&amp;運動服/制服男.jpg"
-                  data-image-viewer-title="男生制服設定"
-                  data-image-viewer-description="男生夏冬制服、運動服與領帶配色參考。"
-                  aria-label="開啟男生制服設定完整圖片"
-                >
-                  <img
-                    src="imgs/characters/Objects/制服&amp;運動服/制服男.jpg"
-                    alt="男生制服與運動服設定"
-                    loading="lazy"
-                    decoding="async"
-                    draggable="false"
-                  />
-                </button>
-                <figcaption>
-                  <strong>男生制服設定</strong>
-                </figcaption>
-              </figure>
-            </div>
+            <div
+              class="related-reference-gallery__grid"
+              data-related-reference-grid
+            ></div>
             <nav
               class="related-reference-links"
+              data-related-reference-links
               aria-label="校園設定相關超連結"
-            >
-              <a
-                href="https://docs.google.com/document/d/1rUOEIp6FY5nyS3ihUHNycCaXP4orZh2fbFgCWDT6DGc/edit?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                >企劃文件</a
-              >
-              <a
-                href="https://drive.google.com/drive/folders/1VE66zTbzJVTcGzXK0YxTNdHDb7yfCpxA"
-                target="_blank"
-                rel="noopener noreferrer"
-                >學院相關素材</a
-              >
-            </nav>
+            ></nav>
             <section class="related-academy-callout" aria-label="學院背景介紹">
               <button
                 class="related-academy-callout__button"
@@ -1161,7 +1146,7 @@
                 data-academy-info-trigger
               >
                 <span>認識繪俄史藝術高等學院</span>
-                <strong>了解 <span aria-hidden="true">→</span></strong>
+                <strong>前往了解 <span aria-hidden="true">→</span></strong>
               </button>
             </section>
           </section>
@@ -1187,24 +1172,10 @@
             <div data-related-data-panels></div>
           </section>
 
-          <figure class="related-class-photo related-photo-card">
-            <button
-              class="image-viewer-trigger related-class-photo__button"
-              type="button"
-              data-image-viewer-src="imgs/characters/3C-Pics/【貓祭】3C合照單色.jpg"
-              data-image-viewer-title="三年 C 班合照"
-              data-image-viewer-link="https://x.com/nekomatsuri_25/status/2066241660762415208"
-              aria-label="放大查看三年 C 班合照"
-            >
-              <img
-                src="imgs/characters/3C-Pics/【貓祭】3C合照單色.jpg"
-                alt="三年 C 班合照"
-                loading="lazy"
-                decoding="async"
-                draggable="false"
-              />
-            </button>
-          </figure>
+          <figure
+            class="related-class-photo related-photo-card"
+            data-related-class-photo
+          ></figure>
 
           <button
             class="faq-back faq-back--bottom"
@@ -1228,90 +1199,8 @@
           </div>
         </div>
 
-        <div class="faq-list">
-          <article class="faq-card">
-            <h2><span>Q</span>如果不畫沈家或貓家的人可以參加投稿嗎？</h2>
-            <p>不行，一定要有沈家的角色或貓祭跟祭煜之一。</p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>畫面一定要有完整角色嗎？</h2>
-            <p>可以不用，但必須要有可供確認之主要特徵。</p>
-          </article>
-          <article class="faq-card">
-            <h2>
-              <span>Q</span>如果創作內容有其它角色，但擋住指定繪畫角色可以嗎？
-            </h2>
-            <p>必須要有可供確認之主要特徵。</p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>可以有 R18 嗎？</h2>
-            <p>
-              內容不得違反善良風俗，禁止血腥、暴力、R18
-              色情等題材，不得涉及重製、改作、描圖、抄襲、仿冒、使用 AI
-              繪製或其他侵害他人權益之情事。
-            </p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>可以創作與學生無關的內容嗎？</h2>
-            <p>
-              創作內容需要跟「繪俄史藝術高等學院」相關，若無關者將取消參賽資格。
-            </p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>我不是學院老師或學生，能參加嗎？</h2>
-            <p>可以，只要符合參賽規則即可。</p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>我會同時獲得兩個獎項嗎？</h2>
-            <p>
-              一個作品僅能獲得一個獎項，但是如果假設你繪製兩幅不同的作品，就可能獲得兩個獎項。
-            </p>
-          </article>
-          <article class="faq-card">
-            <h2>
-              <span>Q</span
-              >作品格式一定要是規章上的那幾種嗎？如果上傳格式錯誤怎麼辦？
-            </h2>
-            <p>
-              是的，一定要符合格式。詳細請參考活動規則；有錯誤時可使用已開啟的編輯回覆自行修改。
-            </p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>我沒錄下繪畫過程，但被懷疑是 AI 怎麼辦？</h2>
-            <p>請自行提出證明，無法提出者將會直接取消資格。</p>
-          </article>
-          <article class="faq-card">
-            <h2>
-              <span>Q</span
-              >活動開始前畫好的作品，從未公開也未上傳社群，能參加嗎？
-            </h2>
-            <p>只要是在活動期間內才初次公開的作品，符合規則即可參加。</p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>投稿期限到什麼時候？會怎麼公布得獎者？</h2>
-            <p>
-              投稿期限為即日起至 2026/07/19
-              23:59，並將以貼文形式公布獎項獲得者。
-            </p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>我的作品可以拿來做參賽以外的事情嗎？</h2>
-            <p>
-              原則上允許，但因為IP版權方關係，禁止未通報情況下用於任何營利和送禮用途。
-            </p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>超過投稿時間可以補繳嗎？</h2>
-            <p>不行，到了指定時間就會將投稿申請關閉。</p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>作品可以跟別人合作製作嗎？例如動畫等。</h2>
-            <p>可以，但最終只有一筆獎金，主辦方不參與事後的獎金協調。</p>
-          </article>
-          <article class="faq-card">
-            <h2><span>Q</span>我對最終結果不滿意怎麼辦？</h2>
-            <p>主辦方保有最終解釋權。</p>
-          </article>
+        <div class="faq-list" data-faq-list aria-live="polite">
+          <p>常見問題載入中…</p>
         </div>
 
         <button class="faq-back faq-back--bottom" type="button" data-faq-back>
@@ -1385,7 +1274,7 @@
               <div class="flex-grow">
                 <div class="flex justify-between items-start mb-6">
                   <span
-                    class="handwritten text-2xl font-bold text-primary underline decoration-dashed underline-offset-4"
+                    class="organizer-quote-heading handwritten text-2xl font-bold text-primary underline decoration-dashed underline-offset-4"
                     >"貓祭想說的話："</span
                   >
                 </div>
@@ -1491,7 +1380,7 @@
               <div class="flex-grow">
                 <div class="flex justify-between items-start mb-6">
                   <span
-                    class="handwritten text-2xl font-bold text-primary underline decoration-dashed underline-offset-4"
+                    class="organizer-quote-heading handwritten text-2xl font-bold text-primary underline decoration-dashed underline-offset-4"
                     >"校長想說的話："</span
                   >
                 </div>
@@ -1662,7 +1551,15 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       >夏楠</a
+                    ><button
+                      class="credit-meme-button"
+                      type="button"
+                      data-meme-src="imgs/memes/夏楠.jpg"
+                      data-meme-name="夏楠"
+                      aria-label="開啟夏楠的彩蛋對話"
                     >
+                      <span aria-hidden="true"></span>
+                    </button>
                   </h3>
                   <p>活動PV</p>
                 </li>
@@ -1713,20 +1610,27 @@
                   <p>Logo、PV分鏡、美工、繪製獎盃草稿、統籌活動</p>
                 </li>
               </ul>
-
-              <dl class="organizer-sponsors">
-                <div class="sponsor-note">
-                  <span class="sponsor-note__pin" aria-hidden="true"></span>
-                  <dt>大額贊助</dt>
-                  <dd>喵波、君大、某茶、兔子、Jeff</dd>
-                </div>
-                <div class="sponsor-note">
-                  <span class="sponsor-note__pin" aria-hidden="true"></span>
-                  <dt>小額贊助</dt>
-                  <dd>李翔、刺客戰鬥、薄香貓、初山、阿太</dd>
-                </div>
-              </dl>
             </div>
+          </section>
+
+          <section
+            class="organizer-sponsor-list"
+            aria-labelledby="organizer-sponsor-list-title"
+          >
+            <div class="section-title organizer-sponsor-list__title">
+              <span></span>
+              <h2 id="organizer-sponsor-list-title">贊助名單</h2>
+              <span></span>
+            </div>
+            <dl class="organizer-sponsors">
+              <div class="sponsor-note">
+                <span class="sponsor-note__pin" aria-hidden="true"></span>
+                <dt>個人贊助</dt>
+                <dd>
+                  喵波、君大、某茶、兔子、Jeff、李翔、刺客戰鬥、薄香貓、初山、阿太
+                </dd>
+              </div>
+            </dl>
           </section>
         </div>
       </main>
@@ -1790,9 +1694,13 @@
       </footer>
     </div>
 
-    <script src="js/site.js?v=55"></script>
-    <script src="js/classroom-map.js?v=10"></script>
-    <script src="js/related-data-content.js?v=17"></script>
+    <script src="js/page-content.js?v=4"></script>
+    <script src="js/faq-content.js?v=2"></script>
+    <script src="js/awards-content.js?v=4"></script>
+    <script src="js/organizers-content.js?v=5"></script>
+    <script src="js/site.js?v=59"></script>
+    <script src="js/classroom-map.js?v=11"></script>
+    <script src="js/related-data-content.js?v=20"></script>
     <script src="js/related-data.js?v=12"></script>
     <script src="js/image-viewer.js?v=2"></script>
   </body>
