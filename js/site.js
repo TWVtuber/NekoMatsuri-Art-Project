@@ -71,9 +71,11 @@ const artboard = document.getElementById("home-artboard");
 const stage = document.querySelector(".home-stage");
 const logoMotion = document.getElementById("logo-motion");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const homeBackground = stage?.querySelector(".home-background");
 const entranceImages = [...stage.querySelectorAll("img")];
 const pvModal = document.getElementById("pv-modal");
 const pvModalClose = document.getElementById("pv-modal-close");
+const pvModalBackdrop = pvModal?.querySelector(".pv-modal__backdrop");
 const pvModalIframe = document.getElementById("pv-modal-iframe");
 const pvModalSoundIcon = document.getElementById("pv-modal-sound-icon");
 const pvModalSoundText = document.getElementById("pv-modal-sound-text");
@@ -82,6 +84,112 @@ let entranceAssetsReady = false;
 let pvModalClosed = !pvModal;
 let entranceStarted = false;
 let pvReturnFocus = null;
+
+function setupHomeParallax() {
+  if (!stage || !homeBackground || reduceMotion.matches) return;
+
+  const maxOffset = 9;
+  const target = { x: 0, y: 0 };
+  const current = { x: 0, y: 0 };
+  let animationFrame = 0;
+  let orientationOrigin = null;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  function renderParallax() {
+    current.x += (target.x - current.x) * 0.075;
+    current.y += (target.y - current.y) * 0.075;
+    stage.style.setProperty("--home-parallax-x", current.x.toFixed(3));
+    stage.style.setProperty("--home-parallax-y", current.y.toFixed(3));
+
+    if (
+      Math.abs(target.x - current.x) > 0.01 ||
+      Math.abs(target.y - current.y) > 0.01
+    ) {
+      animationFrame = requestAnimationFrame(renderParallax);
+    } else {
+      animationFrame = 0;
+    }
+  }
+
+  function setTarget(x, y) {
+    target.x = clamp(x, -maxOffset, maxOffset);
+    target.y = clamp(y, -maxOffset, maxOffset);
+    if (!animationFrame) animationFrame = requestAnimationFrame(renderParallax);
+  }
+
+  function handlePointerMove(event) {
+    const x = event.clientX / window.innerWidth - 0.5;
+    const y = event.clientY / window.innerHeight - 0.5;
+    setTarget(x * maxOffset * 2, y * maxOffset * 2);
+  }
+
+  function handleOrientation(event) {
+    if (!Number.isFinite(event.beta) || !Number.isFinite(event.gamma)) return;
+    if (!orientationOrigin) {
+      orientationOrigin = { beta: event.beta, gamma: event.gamma };
+      return;
+    }
+
+    const gammaDelta = clamp(event.gamma - orientationOrigin.gamma, -15, 15);
+    const betaDelta = clamp(event.beta - orientationOrigin.beta, -15, 15);
+    const screenAngle = screen.orientation?.angle ?? window.orientation ?? 0;
+    let horizontalDelta = gammaDelta;
+    let verticalDelta = betaDelta;
+
+    if (screenAngle === 90) {
+      horizontalDelta = betaDelta;
+      verticalDelta = -gammaDelta;
+    } else if (screenAngle === 270 || screenAngle === -90) {
+      horizontalDelta = -betaDelta;
+      verticalDelta = gammaDelta;
+    }
+
+    setTarget(
+      (horizontalDelta / 15) * maxOffset,
+      (verticalDelta / 15) * maxOffset,
+    );
+  }
+
+  function enableOrientation() {
+    window.addEventListener("deviceorientation", handleOrientation, {
+      passive: true,
+    });
+  }
+
+  if (window.matchMedia("(pointer: fine)").matches) {
+    stage.addEventListener("pointermove", handlePointerMove, { passive: true });
+    stage.addEventListener("pointerleave", () => setTarget(0, 0));
+  } else if ("DeviceOrientationEvent" in window) {
+    const requestPermission = DeviceOrientationEvent.requestPermission;
+    if (typeof requestPermission === "function") {
+      const requestOnFirstTouch = async () => {
+        try {
+          if ((await requestPermission.call(DeviceOrientationEvent)) === "granted") {
+            enableOrientation();
+          }
+        } catch {
+          // Motion permission was declined or is unavailable; the page stays static.
+        }
+      };
+      stage.addEventListener("pointerup", requestOnFirstTouch, { once: true });
+    } else {
+      enableOrientation();
+    }
+  }
+
+  reduceMotion.addEventListener("change", (event) => {
+    if (!event.matches) return;
+    target.x = 0;
+    target.y = 0;
+    current.x = 0;
+    current.y = 0;
+    stage.style.setProperty("--home-parallax-x", "0");
+    stage.style.setProperty("--home-parallax-y", "0");
+  });
+}
+
+setupHomeParallax();
 
 function sendPvCommand(command, args = []) {
   if (!pvModalIframe?.contentWindow || pvModalClosed) return;
@@ -259,6 +367,7 @@ function closePvModal() {
 
 if (pvModal && pvModalClose) {
   pvModalClose.addEventListener("click", closePvModal);
+  pvModalBackdrop?.addEventListener("click", closePvModal);
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !pvModalClosed) closePvModal();
   });
@@ -280,10 +389,25 @@ reduceMotion.addEventListener("change", () => {
 const activity = document.getElementById("activity");
 new IntersectionObserver(
   ([entry]) => {
-    document.body.classList.toggle("activity-visible", entry.isIntersecting);
+    if (entry.isIntersecting) {
+      document.body.classList.add("activity-visible");
+    }
   },
   { threshold: 0.015 },
 ).observe(activity);
+
+function hideHeaderAtPageTop() {
+  const isAlternateViewOpen =
+    document.body.classList.contains("faq-open") ||
+    document.body.classList.contains("organizer-open") ||
+    document.body.classList.contains("related-data-open");
+
+  if (window.scrollY <= 1 && !isAlternateViewOpen) {
+    document.body.classList.remove("activity-visible");
+  }
+}
+
+window.addEventListener("scroll", hideHeaderAtPageTop, { passive: true });
 
 const heroDeclaration = document.querySelector(".hero-declaration");
 if (heroDeclaration) {
@@ -340,13 +464,34 @@ const cardPopTargets = [
     [
       ".page-content .countdown-card",
       ".page-content .reward-policy",
-      ".page-content .paper-card:not(.hero-copy):not(.reward-policy__paper)",
+      ".page-content .paper-card:not(.hero-copy):not(.reward-policy__paper):not(.common-awards-sheet)",
       ".page-content .faq-card",
       ".page-content .paper-sheet",
     ].join(", "),
   ),
 ].filter((target, index, targets) => targets.indexOf(target) === index);
-const scrollMotionTargets = [...heroZoomTargets, ...cardPopTargets];
+const sectionBackgroundTargets = [
+  ...document.querySelectorAll(
+    ".page-content .common-awards-sheet, .faq-launcher",
+  ),
+];
+const stickyNoteTargets = [
+  ...document.querySelectorAll(".awards-showcase .award-note"),
+];
+const logoStickerTargets = [
+  ...document.querySelectorAll(".collaboration-stamps .stamp-logo"),
+];
+const hashtagStickerTargets = [
+  ...document.querySelectorAll(".activity-hashtags .activity-hashtag"),
+];
+const scrollMotionTargets = [
+  ...heroZoomTargets,
+  ...cardPopTargets,
+  ...sectionBackgroundTargets,
+  ...stickyNoteTargets,
+  ...logoStickerTargets,
+  ...hashtagStickerTargets,
+];
 
 scrollMotionTargets.forEach((target) => {
   const originalTransform = getComputedStyle(target).transform;
@@ -358,7 +503,16 @@ scrollMotionTargets.forEach((target) => {
 });
 
 heroZoomTargets.forEach((target) => target.classList.add("scroll-zoom-out-left"));
-cardPopTargets.forEach((target) => target.classList.add("scroll-pop-up"));
+[...cardPopTargets, ...sectionBackgroundTargets].forEach((target) =>
+  target.classList.add("scroll-pop-up"),
+);
+stickyNoteTargets.forEach((target) => target.classList.add("scroll-stick-note"));
+logoStickerTargets.forEach((target) =>
+  target.classList.add("scroll-logo-sticker"),
+);
+hashtagStickerTargets.forEach((target) =>
+  target.classList.add("scroll-hashtag-sticker"),
+);
 
 if (reduceMotion.matches || !("IntersectionObserver" in window)) {
   scrollMotionTargets.forEach((target) =>
@@ -394,14 +548,138 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     updateScrollMotionTargets,
     { threshold: 0.01, rootMargin: "96px 0px" },
   );
+  const stickyNoteObserver = new IntersectionObserver(
+    updateScrollMotionTargets,
+    // The lower-middle note waits 170px below its resting position. Extend
+    // the lower trigger zone so its transformed position cannot prevent the
+    // observer from ever starting the entrance animation.
+    { threshold: 0.01, rootMargin: "64px 0px 240px" },
+  );
+  const logoStickerObserver = new IntersectionObserver(
+    updateScrollMotionTargets,
+    { threshold: 0.01, rootMargin: "64px 190px" },
+  );
+  const hashtagStickerObserver = new IntersectionObserver(
+    updateScrollMotionTargets,
+    { threshold: 0.01, rootMargin: "64px 220px" },
+  );
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       heroZoomTargets.forEach((target) => heroMotionObserver.observe(target));
       cardPopTargets.forEach((target) => cardMotionObserver.observe(target));
+      sectionBackgroundTargets.forEach((target) =>
+        cardMotionObserver.observe(target),
+      );
+      stickyNoteTargets.forEach((target) => stickyNoteObserver.observe(target));
+      logoStickerTargets.forEach((target) =>
+        logoStickerObserver.observe(target),
+      );
+      hashtagStickerTargets.forEach((target) =>
+        hashtagStickerObserver.observe(target),
+      );
     });
   });
 }
+
+const characterHoverAnimations = new Map([
+  ["沈家_01_沈曦Q.webp", "imgs/characters/Q/Anims/沈家_01_沈曦Q.webm"],
+  ["沈家_01_沈澈Q.webp", "imgs/characters/Q/Anims/沈家_02_沈澈Q.webm"],
+  ["沈家_01_沈樂Q.webp", "imgs/characters/Q/Anims/沈家_03_沈樂Q.webm"],
+  ["沈家_01_沈月Q.webp", "imgs/characters/Q/Anims/沈家_04_沈月Q.webm"],
+]);
+
+function resetCharacterAnimation(video) {
+  video.pause();
+  if (video.readyState > 0) video.currentTime = 0;
+  video.closest("[data-character-hover]")?.classList.remove("is-playing");
+}
+
+function enhanceCharacterHover(image) {
+  if (image.dataset.characterStatic !== undefined) return;
+  const staticSource = image.getAttribute("src");
+  const fileName = staticSource?.split("/").at(-1);
+  const animationSource = characterHoverAnimations.get(fileName);
+  if (!staticSource || !animationSource) return;
+
+  const wrapper = document.createElement("span");
+  const video = document.createElement("video");
+  [...image.attributes].forEach(({ name, value }) => {
+    if (!["src", "alt", "loading", "decoding", "draggable"].includes(name)) {
+      wrapper.setAttribute(name, value);
+    }
+  });
+  wrapper.dataset.characterHover = "";
+  wrapper.style.setProperty("--character-animation-scale", "1.12");
+
+  image.removeAttribute("class");
+  image.removeAttribute("id");
+  image.removeAttribute("aria-hidden");
+  image.dataset.characterStatic = "";
+  image.classList.add("character-hover__static");
+
+  video.className = "character-hover__animation";
+  video.setAttribute("aria-hidden", "true");
+  video.preload = "metadata";
+  video.muted = true;
+  video.defaultMuted = true;
+  video.loop = true;
+  video.playsInline = true;
+
+  const source = document.createElement("source");
+  source.src = animationSource;
+  source.type = "video/webm";
+  video.append(source);
+
+  let hovered = false;
+  wrapper.addEventListener("mouseenter", () => {
+    if (reduceMotion.matches) return;
+    hovered = true;
+    video
+      .play()
+      .then(() => {
+        const revealAnimation = () => {
+          if (hovered) wrapper.classList.add("is-playing");
+        };
+
+        if ("requestVideoFrameCallback" in video) {
+          video.requestVideoFrameCallback(revealAnimation);
+        } else if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+          revealAnimation();
+        } else {
+          video.addEventListener("loadeddata", revealAnimation, { once: true });
+        }
+      })
+      .catch(() => {});
+  });
+  wrapper.addEventListener("mouseleave", () => {
+    hovered = false;
+    resetCharacterAnimation(video);
+  });
+
+  image.replaceWith(wrapper);
+  wrapper.append(image, video);
+}
+
+document.querySelectorAll("img").forEach(enhanceCharacterHover);
+
+const characterImageObserver = new MutationObserver((mutations) => {
+  mutations.forEach(({ addedNodes }) => {
+    addedNodes.forEach((node) => {
+      if (!(node instanceof Element)) return;
+      if (node instanceof HTMLImageElement) enhanceCharacterHover(node);
+      node.querySelectorAll("img").forEach(enhanceCharacterHover);
+    });
+  });
+});
+characterImageObserver.observe(document.body, { childList: true, subtree: true });
+
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) return;
+  document
+    .querySelectorAll(".character-hover__animation")
+    .forEach(resetCharacterAnimation);
+});
 
 const sectionMascots = [...document.querySelectorAll(".section-mascot")];
 
@@ -578,9 +856,13 @@ document.querySelectorAll(".faq-card").forEach((card, index) => {
   const answer = card.querySelector("p");
   const answerId = `faq-answer-${index + 1}`;
   const questionContent = heading.innerHTML;
+  const answerReveal = document.createElement("div");
 
   answer.id = answerId;
-  answer.hidden = true;
+  answer.setAttribute("aria-hidden", "true");
+  answerReveal.className = "faq-answer-reveal";
+  answerReveal.append(answer);
+  heading.after(answerReveal);
   heading.innerHTML = `<button class="faq-question" type="button" aria-expanded="false" aria-controls="${answerId}">${questionContent}</button>`;
 
   heading.querySelector(".faq-question").addEventListener("click", (event) => {
@@ -588,7 +870,7 @@ document.querySelectorAll(".faq-card").forEach((card, index) => {
     const willOpen = question.getAttribute("aria-expanded") !== "true";
     question.setAttribute("aria-expanded", String(willOpen));
     card.classList.toggle("is-open", willOpen);
-    answer.hidden = !willOpen;
+    answer.setAttribute("aria-hidden", String(!willOpen));
   });
 });
 
@@ -606,7 +888,6 @@ function showFaq(updateHistory = true) {
   faqView.hidden = false;
   if (updateHistory && window.location.hash !== "#faq")
     history.pushState({ faq: true }, "", "#faq");
-  document.title = `常見問題｜${document.title.replace(/^(常見問題|主辦單位介紹|繪畫主題資料)｜/, "")}`;
   setActiveNav(faqNavLink);
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
@@ -626,7 +907,6 @@ function showOrganizer(updateHistory = true) {
   if (updateHistory && window.location.hash !== "#organizers") {
     history.pushState({ organizers: true }, "", "#organizers");
   }
-  document.title = `主辦單位介紹｜${document.title.replace(/^(常見問題|主辦單位介紹|繪畫主題資料)｜/, "")}`;
   setActiveNav(organizerNavLink);
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
@@ -634,7 +914,6 @@ function showOrganizer(updateHistory = true) {
 function hideFaq(targetHash = faqReturnHash, updateHistory = true) {
   document.body.classList.remove("faq-open");
   faqView.hidden = true;
-  document.title = document.title.replace(/^常見問題｜/, "");
   if (updateHistory) history.pushState(null, "", targetHash);
   requestAnimationFrame(() => {
     document.querySelector(targetHash)?.scrollIntoView({ behavior: "auto" });
@@ -645,7 +924,6 @@ function hideFaq(targetHash = faqReturnHash, updateHistory = true) {
 function hideOrganizer(targetHash = organizerReturnHash, updateHistory = true) {
   document.body.classList.remove("organizer-open");
   organizerView.hidden = true;
-  document.title = document.title.replace(/^主辦單位介紹｜/, "");
   if (updateHistory) history.pushState(null, "", targetHash);
   requestAnimationFrame(() => {
     document.querySelector(targetHash)?.scrollIntoView({ behavior: "auto" });
@@ -668,7 +946,6 @@ function showRelatedData(updateHistory = true) {
   if (updateHistory && window.location.hash !== "#related-data") {
     history.pushState({ relatedData: true }, "", "#related-data");
   }
-  document.title = `繪畫主題資料｜${document.title.replace(/^(常見問題|主辦單位介紹|繪畫主題資料)｜/, "")}`;
   setActiveNav(null);
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
@@ -679,7 +956,6 @@ function hideRelatedData(
 ) {
   document.body.classList.remove("related-data-open");
   relatedDataView.hidden = true;
-  document.title = document.title.replace(/^繪畫主題資料｜/, "");
   if (updateHistory) history.pushState(null, "", targetHash);
   requestAnimationFrame(() => {
     document.querySelector(targetHash)?.scrollIntoView({ behavior: "auto" });
@@ -803,6 +1079,159 @@ document.querySelectorAll('[data-copy-hashtag]').forEach((button) => {
   });
 });
 
+const memeModal = document.getElementById('meme-modal');
+const memeModalImage = document.getElementById('meme-modal-image');
+const memeModalStatus = document.getElementById('meme-modal-status');
+const memeModalAnnouncement = document.getElementById('meme-modal-announcement');
+const memeModalPrevious = memeModal?.querySelector('[data-meme-previous]');
+const memeModalNext = memeModal?.querySelector('[data-meme-next]');
+const memeModalViewer = memeModal?.querySelector('.meme-modal__viewer');
+
+const memeMascots = [...document.querySelectorAll('#activity .section-mascot')].filter(
+  (mascot) => !mascot.closest('#related-data'),
+);
+
+if (memeMascots.length) {
+  const storageKey = 'neko-matsuri-last-meme-mascot';
+  let previousIndex = -1;
+  try {
+    previousIndex = Number.parseInt(localStorage.getItem(storageKey) ?? '-1', 10);
+  } catch {}
+
+  let selectedIndex = Math.floor(Math.random() * memeMascots.length);
+  if (memeMascots.length > 1 && selectedIndex === previousIndex) {
+    selectedIndex = (selectedIndex + 1 + Math.floor(Math.random() * (memeMascots.length - 1)))
+      % memeMascots.length;
+  }
+
+  const trigger = document.createElement('button');
+  trigger.className = 'mascot-meme-button';
+  trigger.type = 'button';
+  trigger.dataset.memeGallery = '';
+  trigger.setAttribute('aria-label', '開啟工作小彩蛋圖片集');
+  trigger.textContent = '工作小彩蛋';
+  memeMascots[selectedIndex].append(trigger);
+
+  try {
+    localStorage.setItem(storageKey, String(selectedIndex));
+  } catch {}
+}
+
+const memeModalTriggers = [
+  ...document.querySelectorAll('[data-meme-src], [data-meme-gallery]'),
+];
+const memeModalCloseButtons = [...document.querySelectorAll('[data-meme-close]')];
+const memeGalleryItems = [
+  ...new Map(
+    [...document.querySelectorAll('[data-meme-src]')].map((trigger) => [
+      trigger.dataset.memeSrc,
+      {
+        src: trigger.dataset.memeSrc,
+        name: trigger.dataset.memeName || '工作',
+      },
+    ]),
+  ).values(),
+];
+let memeModalTrigger = null;
+let memeModalIndex = 0;
+let memeSwipeStart = null;
+
+function renderMemeDots() {
+  if (!memeModalStatus) return;
+  memeModalStatus.replaceChildren();
+  memeGalleryItems.forEach((item, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'meme-modal__dot';
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `切換到${item.name}`);
+    dot.addEventListener('click', () => showMemeImage(index));
+    memeModalStatus.append(dot);
+  });
+}
+
+function showMemeImage(index) {
+  if (!memeGalleryItems.length || !memeModalImage) return;
+  memeModalIndex = (index + memeGalleryItems.length) % memeGalleryItems.length;
+  const item = memeGalleryItems[memeModalIndex];
+  memeModalImage.src = item.src;
+  memeModalImage.alt = `${item.name}的工作小彩蛋`;
+  if (memeModalStatus) {
+    [...memeModalStatus.children].forEach((dot, dotIndex) => {
+      const active = dotIndex === memeModalIndex;
+      dot.classList.toggle('is-active', active);
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+  }
+  if (memeModalAnnouncement) memeModalAnnouncement.textContent = item.name;
+  memeModalViewer?.classList.add('is-switching');
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    memeModalViewer?.classList.remove('is-switching');
+  }));
+}
+
+renderMemeDots();
+
+function openMemeModal(event) {
+  if (!memeModal || !memeModalImage || !memeGalleryItems.length) return;
+  const trigger = event.currentTarget;
+  memeModalTrigger = trigger;
+  const requestedIndex = trigger.dataset.memeGallery !== undefined
+    ? Math.floor(Math.random() * memeGalleryItems.length)
+    : memeGalleryItems.findIndex((item) => item.src === trigger.dataset.memeSrc);
+  showMemeImage(requestedIndex < 0 ? 0 : requestedIndex);
+  memeModal.hidden = false;
+  document.body.classList.add('meme-is-open');
+  activityRoot.inert = true;
+  activityRoot.setAttribute('aria-hidden', 'true');
+  stage.inert = true;
+  stage.setAttribute('aria-hidden', 'true');
+  memeModal.focus({ preventScroll: true });
+  memeModal.querySelector('.meme-modal__close')?.focus({ preventScroll: true });
+}
+
+function closeMemeModal() {
+  if (!memeModal || memeModal.hidden) return;
+  memeModal.hidden = true;
+  document.body.classList.remove('meme-is-open');
+  activityRoot.inert = false;
+  activityRoot.removeAttribute('aria-hidden');
+  stage.inert = false;
+  stage.removeAttribute('aria-hidden');
+  memeModalImage.removeAttribute('src');
+  memeModalImage.alt = '';
+  memeModalTrigger?.focus({ preventScroll: true });
+  memeModalTrigger = null;
+}
+
+memeModalTriggers.forEach((trigger) =>
+  trigger.addEventListener('click', openMemeModal),
+);
+memeModalCloseButtons.forEach((button) =>
+  button.addEventListener('click', closeMemeModal),
+);
+memeModalPrevious?.addEventListener('click', () => showMemeImage(memeModalIndex - 1));
+memeModalNext?.addEventListener('click', () => showMemeImage(memeModalIndex + 1));
+
+memeModalViewer?.addEventListener('pointerdown', (event) => {
+  if (event.target.closest('button')) return;
+  if (event.pointerType === 'mouse' && event.button !== 0) return;
+  memeModalViewer.setPointerCapture(event.pointerId);
+  memeSwipeStart = { id: event.pointerId, x: event.clientX, y: event.clientY };
+});
+
+memeModalViewer?.addEventListener('pointerup', (event) => {
+  if (!memeSwipeStart || memeSwipeStart.id !== event.pointerId) return;
+  const deltaX = event.clientX - memeSwipeStart.x;
+  const deltaY = event.clientY - memeSwipeStart.y;
+  memeSwipeStart = null;
+  if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.15) return;
+  showMemeImage(memeModalIndex + (deltaX < 0 ? 1 : -1));
+});
+
+memeModalViewer?.addEventListener('pointercancel', () => {
+  memeSwipeStart = null;
+});
+
 const academyModal = document.getElementById('academy-modal');
 const academyModalTriggers = [...document.querySelectorAll('[data-academy-info-trigger]')];
 const academyModalClose = document.getElementById('academy-modal-close');
@@ -848,6 +1277,33 @@ academyPresidentLink?.addEventListener('click', (event) => {
   });
 });
 document.addEventListener('keydown', (event) => {
+  if (memeModal && !memeModal.hidden) {
+    if (event.key === 'Escape') {
+      closeMemeModal();
+      return;
+    }
+    if (event.key === 'ArrowLeft') {
+      showMemeImage(memeModalIndex - 1);
+      return;
+    }
+    if (event.key === 'ArrowRight') {
+      showMemeImage(memeModalIndex + 1);
+      return;
+    }
+    if (event.key === 'Tab') {
+      const focusable = [...memeModal.querySelectorAll('button:not([disabled])')];
+      const first = focusable[0];
+      const last = focusable.at(-1);
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+    return;
+  }
   if (!academyModal || academyModal.hidden) return;
   if (event.key === 'Escape') {
     closeAcademyModal();

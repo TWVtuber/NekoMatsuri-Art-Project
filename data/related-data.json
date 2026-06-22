@@ -49,7 +49,7 @@
       ["imgs/characters/3C-Pics/【貓祭】初見3C.jpg", "初見三年 C 班"],
       ["imgs/characters/3C-Pics/【貓祭】塔努努好香.jpg", "塔努努好香"],
       [
-        "imgs/characters/3C-Pics/【貓祭】學院老師全身.png",
+        "imgs/characters/3C-Pics/【貓祭】學院老師全身.webp",
         "三年 C 班導師貓祭全身設計"
       ],
       [
@@ -57,7 +57,7 @@
         "班上美男子太多了"
       ],
       [
-        "imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.png",
+        "imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.webp",
         "為了哥哥，特別來同一班，但是是老師"
       ],
       [
@@ -101,7 +101,7 @@
     ],
     "artist": { "name": "亞狸YaRi", "url": "https://x.com/Nk_in_1" },
     "sidebarImage": {
-      "src": "imgs/characters/證件/【祭煜】學生證.png",
+      "src": "imgs/characters/證件/【祭煜】學生證.webp",
       "alt": "祭煜學生證",
       "variant": "document"
     },
@@ -111,7 +111,7 @@
         "一定是不小心的"
       ],
       [
-        "imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.png",
+        "imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.webp",
         "對妹妹貓祭空降班導非常震驚"
       ]
     ]
@@ -153,6 +153,7 @@
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈曦Q.webp",
+      "animationSrc": "imgs/characters/Q/Anims/沈家_01_沈曦Q.webm",
       "alt": "沈曦 Q 版角色圖"
     },
     "gallery": [
@@ -160,7 +161,7 @@
         "imgs/characters/3C-Pics/沈家相關/【沈曦】觀察日記.jpg",
         "超級資優生，品學兼優"
       ],
-      ["imgs/characters/3C-Pics/沈家相關/【沈曦】漫畫.png", "沈曦漫畫"]
+      ["imgs/characters/3C-Pics/沈家相關/【沈曦】漫畫.webp", "沈曦漫畫"]
     ]
   },
   "shen-che": {
@@ -200,6 +201,7 @@
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈澈Q.webp",
+      "animationSrc": "imgs/characters/Q/Anims/沈家_02_沈澈Q.webm",
       "alt": "沈澈 Q 版角色圖"
     },
     "gallery": [
@@ -207,7 +209,7 @@
         "imgs/characters/3C-Pics/沈家相關/【沈澈】無能狂怒.jpg",
         "非常照顧妹妹，基本上都待在身邊"
       ],
-      ["imgs/characters/3C-Pics/沈家相關/【沈澈】漫畫.png", "沈澈漫畫"]
+      ["imgs/characters/3C-Pics/沈家相關/【沈澈】漫畫.webp", "沈澈漫畫"]
     ]
   },
   "shen-le": {
@@ -252,6 +254,7 @@
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈樂Q.webp",
+      "animationSrc": "imgs/characters/Q/Anims/沈家_03_沈樂Q.webm",
       "alt": "沈樂 Q 版角色圖"
     },
     "gallery": [
@@ -259,7 +262,7 @@
         "imgs/characters/3C-Pics/沈家相關/【沈樂】無能狂怒.jpg",
         "常跟二哥鬥嘴吵架，通常居下風"
       ],
-      ["imgs/characters/3C-Pics/沈家相關/【沈樂】漫畫.png", "沈樂漫畫"]
+      ["imgs/characters/3C-Pics/沈家相關/【沈樂】漫畫.webp", "沈樂漫畫"]
     ]
   },
   "shen-yue": {
@@ -313,6 +316,7 @@
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈月Q.webp",
+      "animationSrc": "imgs/characters/Q/Anims/沈家_04_沈月Q.webm",
       "alt": "沈月 Q 版角色圖"
     },
     "gallery": [
@@ -322,7 +326,7 @@
       ],
       ["imgs/characters/3C-Pics/沈家相關/【沈月】好香的魚干.jpg", "好香的魚乾"],
       ["imgs/characters/3C-Pics/沈家相關/【沈月】月下美人.jpg", "月下美人"],
-      ["imgs/characters/3C-Pics/沈家相關/【沈月】漫畫.png", "沈月漫畫"],
+      ["imgs/characters/3C-Pics/沈家相關/【沈月】漫畫.webp", "沈月漫畫"],
       ["imgs/characters/3C-Pics/沈家相關/【沈月】觀察日記.jpg", "沈月觀察日記"],
       ["imgs/characters/3C-Pics/沈家相關/【沈月】雙生.jpg", "雙生"],
       ["imgs/characters/3C-Pics/沈家相關/【沈月】黑化.jpg", "沈月黑化設定"]
@@ -332,7 +336,7 @@
     "kind": "family",
     "tab": { "title": "【沈家】相關資訊", "color": "#cfe3ff", "order": 4 },
     "gallery": [
-      ["imgs/characters/3C-Pics/沈家相關/【沈家】Q版行列.png", "沈家 Q 版行列"],
+      ["imgs/characters/3C-Pics/沈家相關/【沈家】Q版行列.webp", "沈家 Q 版行列"],
       [
         "imgs/characters/3C-Pics/沈家相關/【沈家】三年C班的四胞胎.jpg",
         "三年 C 班的沈家四胞胎"

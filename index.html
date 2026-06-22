@@ -17,13 +17,13 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/site.css?v=70" />
-    <link rel="stylesheet" href="css/event.css?v=30" />
-    <link rel="stylesheet" href="css/awards.css?v=1" />
-    <link rel="stylesheet" href="css/pages-responsive.css?v=13" />
+    <link rel="stylesheet" href="css/site.css?v=74" />
+    <link rel="stylesheet" href="css/event.css?v=47" />
+    <link rel="stylesheet" href="css/awards.css?v=3" />
+    <link rel="stylesheet" href="css/pages-responsive.css?v=20" />
     <link rel="stylesheet" href="css/spacing.css?v=10" />
-    <link rel="stylesheet" href="css/related-data.css?v=32" />
-    <link rel="stylesheet" href="css/classroom-map.css?v=17" />
+    <link rel="stylesheet" href="css/related-data.css?v=49" />
+    <link rel="stylesheet" href="css/classroom-map.css?v=19" />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -152,6 +152,61 @@
     </div>
 
     <div
+      class="meme-modal"
+      id="meme-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="meme-modal-title"
+      hidden
+    >
+      <button
+        class="meme-modal__backdrop"
+        type="button"
+        data-meme-close
+        aria-label="關閉彩蛋圖片"
+      ></button>
+      <div class="meme-modal__paper">
+        <button
+          class="meme-modal__close"
+          type="button"
+          data-meme-close
+          aria-label="關閉彩蛋圖片"
+        ></button>
+        <h2 class="visually-hidden" id="meme-modal-title">幕後人員彩蛋</h2>
+        <div class="meme-modal__viewer">
+          <button
+            class="meme-modal__nav meme-modal__nav--previous"
+            type="button"
+            data-meme-previous
+            aria-label="上一張彩蛋圖片"
+          >
+            <span aria-hidden="true">‹</span>
+          </button>
+          <img id="meme-modal-image" src="" alt="" />
+          <button
+            class="meme-modal__nav meme-modal__nav--next"
+            type="button"
+            data-meme-next
+            aria-label="下一張彩蛋圖片"
+          >
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+        <div
+          class="meme-modal__status"
+          id="meme-modal-status"
+          aria-label="圖片選擇"
+        ></div>
+        <p
+          class="visually-hidden"
+          id="meme-modal-announcement"
+          aria-live="polite"
+        ></p>
+      </div>
+    </div>
+
+    <div
       class="image-viewer"
       id="image-viewer"
       role="dialog"
@@ -216,6 +271,7 @@
       inert
       aria-hidden="true"
     >
+      <div class="home-background" aria-hidden="true"></div>
       <div class="home-artboard" id="home-artboard">
         <img
           class="home-layer home-pink-vfx"
@@ -256,7 +312,7 @@
             <a href="#rewards">獎勵辦法</a>
             <a href="#awards">評審與獎項</a>
             <!-- <a href="work.html">作品展示</a> -->
-            <a href="#organizers" data-organizer-link>參與人員</a>
+            <a href="#organizers" data-organizer-link>主辦與協力</a>
             <a href="#faq" data-faq-link>常見問題</a>
           </nav>
           <a
@@ -303,20 +359,17 @@
                 </div>
                 <figcaption>配音動畫 PV</figcaption>
               </figure>
-              <figure class="hero-photo hero-photo--secondary">
-                <img
-                  src="imgs/NekoMatsuriA4.jpg"
-                  alt="貓祭於櫻花校園中的活動主視覺"
-                />
-                <figcaption>
-                  <a
-                    href="https://youtu.be/KMbRmB-PH0E"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >活動告知直播 <span aria-hidden="true">→</span></a
-                  >
-                </figcaption>
-              </figure>
+              <a
+                href="https://youtu.be/KMbRmB-PH0E"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><figure class="hero-photo hero-photo--secondary">
+                  <img src="./imgs/LiveCover.jpg" alt="活動告知直播封面" />
+                  <figcaption>
+                    活動告知直播 <span aria-hidden="true">→</span>
+                  </figcaption>
+                </figure></a
+              >
               <section
                 class="activity-hashtags"
                 aria-labelledby="activity-hashtags-title"
@@ -339,7 +392,7 @@
                 <div class="activity-hashtags__list">
                   <div class="activity-hashtag">
                     <a
-                      href="https://x.com/hashtag/貓祭不繪讓你俄史計劃"
+                      href="https://x.com/search?q=%23貓祭不繪讓你俄史計劃&amp;src=hashtag_click"
                       target="_blank"
                       rel="noopener noreferrer"
                       >#貓祭不繪讓你俄史計劃</a
@@ -347,7 +400,7 @@
                   </div>
                   <div class="activity-hashtag">
                     <a
-                      href="https://x.com/hashtag/繪俄史藝術高等學院"
+                      href="https://x.com/search?q=%23繪俄史藝術高等學院&amp;src=hashtag_click"
                       target="_blank"
                       rel="noopener noreferrer"
                       >#繪俄史藝術高等學院</a
@@ -355,7 +408,7 @@
                   </div>
                   <div class="activity-hashtag">
                     <a
-                      href="https://x.com/hashtag/繪俄史三年C班"
+                      href="https://x.com/search?q=%23繪俄史三年C班&amp;src=hashtag_click"
                       target="_blank"
                       rel="noopener noreferrer"
                       >#繪俄史三年C班</a
@@ -407,24 +460,49 @@
               </p>
               <p class="hero-closing">同是創作者，我舉辦了這場盛宴───</p>
               <div class="collaboration-stamps">
-                <span class="stamp">繪俄史藝術高等學院 × 貓祭 NekoMatsuri</span>
+                <span class="stamp">
+                  <a
+                    href="https://x.com/INU_Art_"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >繪俄史藝術高等學院</a
+                  ><span aria-hidden="true"> × </span
+                  ><a
+                    href="https://lit.link/en/NekoMatsuri"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >貓祭 NekoMatsuri</a
+                  >
+                </span>
                 <div class="stamp-logos" aria-label="合作單位 Logo">
-                  <span class="stamp-logo stamp-logo--academy">
+                  <a
+                    class="stamp-logo stamp-logo--academy"
+                    href="https://x.com/INU_Art_"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="前往繪俄史藝術高等學院的 X 頁面（另開新視窗）"
+                  >
                     <img
                       src="imgs/badge.webp"
                       alt="繪俄史藝術高等學院 Logo"
                       width="106"
                       height="106"
                     />
-                  </span>
-                  <span class="stamp-logo stamp-logo--neko">
+                  </a>
+                  <a
+                    class="stamp-logo stamp-logo--neko"
+                    href="https://lit.link/en/NekoMatsuri"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="前往貓祭 NekoMatsuri 的 Lit.Link（另開新視窗）"
+                  >
                     <img
                       src="imgs/neko_Logo.webp"
                       alt="貓祭 NekoMatsuri Logo"
                       width="106"
                       height="106"
                     />
-                  </span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -507,7 +585,9 @@
               data-academy-info-trigger
               type="button"
             >
-              「繪俄史藝術高等學院」是什麼？<span>前往了解 →</span>
+              <span class="academy-info-trigger__title"
+                >「繪俄史藝術高等學院」是什麼？</span
+              ><span class="academy-info-trigger__action">前往了解 →</span>
             </button>
             <a
               class="character-link"
@@ -1279,7 +1359,7 @@
             <div
               class="w-full md:w-5/12 p-12 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r-2 border-dashed border-outline-variant"
             >
-              <div class="organizer-polaroid rotate-[2deg]">
+              <div class="organizer-polaroid organizer-polaroid--nekomatsuri">
                 <!-- Decorative Washi Tape -->
                 <div class="washi-tape-accent organizer-polaroid__tape"></div>
 
@@ -1392,7 +1472,7 @@
             <div
               class="w-full md:w-5/12 p-12 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r-2 border-dashed border-outline-variant"
             >
-              <div class="organizer-polaroid rotate-[1deg]">
+              <div class="organizer-polaroid organizer-polaroid--president">
                 <div class="washi-tape-accent organizer-polaroid__tape"></div>
                 <div class="organizer-polaroid__image">
                   <img
@@ -1463,7 +1543,7 @@
 
           <div class="section-title organizer-credits-title">
             <span></span>
-            <h2 id="organizer-credits-title">其他感謝人員</h2>
+            <h2 id="organizer-credits-title">幕後人員</h2>
             <span></span>
           </div>
           <section
@@ -1480,7 +1560,7 @@
               <div class="hole"></div>
             </div>
             <div class="organizer-credits__content grid-pattern">
-              <ul class="organizer-credits__notes" aria-label="感謝人員名單">
+              <ul class="organizer-credits__notes" aria-label="幕後人員名單">
                 <li class="credit-note">
                   <div class="credit-note__tape" aria-hidden="true"></div>
                   <h3>
@@ -1488,7 +1568,15 @@
                       href="https://x.com/star_2290"
                       target="_blank"
                       rel="noopener noreferrer"
-                      >筱星 朔光</a
+                      >筱星朔光</a
+                    ><button
+                      class="credit-meme-button"
+                      type="button"
+                      data-meme-src="imgs/memes/筱星.jpg"
+                      data-meme-name="筱星朔光"
+                      aria-label="開啟筱星朔光的彩蛋對話"
+                    >
+                      <span aria-hidden="true"></span></button
                     >、<a
                       href="https://x.com/Nekolive_Chiang"
                       target="_blank"
@@ -1505,8 +1593,16 @@
                       href="https://x.com/lilimxxxdeer?s=20"
                       target="_blank"
                       rel="noopener noreferrer"
-                      >湮月 緋花</a
+                      >湮月緋花</a
+                    ><button
+                      class="credit-meme-button"
+                      type="button"
+                      data-meme-src="imgs/memes/緋花.jpg"
+                      data-meme-name="湮月緋花"
+                      aria-label="開啟湮月緋花的彩蛋對話"
                     >
+                      <span aria-hidden="true"></span>
+                    </button>
                   </h3>
                   <p>Live 2D拆圖</p>
                 </li>
@@ -1578,7 +1674,15 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       >Kalin風凜魂太</a
+                    ><button
+                      class="credit-meme-button"
+                      type="button"
+                      data-meme-src="imgs/memes/Kalin.jpg"
+                      data-meme-name="Kalin風凜魂太"
+                      aria-label="開啟Kalin風凜魂太的彩蛋對話"
                     >
+                      <span aria-hidden="true"></span>
+                    </button>
                     、<a
                       href="https://www.linkedin.com/in/mingru-lu"
                       target="_blank"
@@ -1596,7 +1700,15 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       >貓祭</a
+                    ><button
+                      class="credit-meme-button"
+                      type="button"
+                      data-meme-src="imgs/memes/NekoMatsuri.jpg"
+                      data-meme-name="貓祭"
+                      aria-label="開啟貓祭的彩蛋對話"
                     >
+                      <span aria-hidden="true"></span>
+                    </button>
                   </h3>
                   <p>Logo、PV分鏡、美工、繪製獎盃草稿、統籌活動</p>
                 </li>
@@ -1671,17 +1783,17 @@
               <a href="#related-data" data-related-data-link>相關設定與資料</a>
               <a href="#awards">評審與獎項</a>
               <!-- <a href="work.html">作品展示</a> -->
-              <a href="#organizers" data-organizer-link>參與人員</a>
+              <a href="#organizers" data-organizer-link>主辦與協力</a>
             </nav>
           </div>
         </div>
       </footer>
     </div>
 
-    <script src="js/site.js?v=38"></script>
+    <script src="js/site.js?v=54"></script>
     <script src="js/classroom-map.js?v=10"></script>
-    <script src="js/related-data-content.js?v=16"></script>
-    <script src="js/related-data.js?v=4"></script>
+    <script src="js/related-data-content.js?v=17"></script>
+    <script src="js/related-data.js?v=12"></script>
     <script src="js/image-viewer.js?v=2"></script>
   </body>
 </html>
