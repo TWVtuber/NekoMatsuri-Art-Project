@@ -10,7 +10,7 @@
     "name": "貓祭",
     "romanized": "NekoMatsuri",
     "portrait": "imgs/characters/證件/照片/貓祭-證件.jpg",
-    "twitter": "https://x.com/nekomatsuri_25",
+    "twitter": "https://lit.link/en/NekoMatsuri",
     "meta": [
       ["性別", "女"],
       ["生日", "01/25"],
@@ -336,7 +336,10 @@
     "kind": "family",
     "tab": { "title": "【沈家】相關資訊", "color": "#cfe3ff", "order": 4 },
     "gallery": [
-      ["imgs/characters/3C-Pics/沈家相關/【沈家】Q版行列.webp", "沈家 Q 版行列"],
+      [
+        "imgs/characters/3C-Pics/沈家相關/【沈家】Q版行列.webp",
+        "沈家 Q 版行列"
+      ],
       [
         "imgs/characters/3C-Pics/沈家相關/【沈家】三年C班的四胞胎.jpg",
         "三年 C 班的沈家四胞胎"

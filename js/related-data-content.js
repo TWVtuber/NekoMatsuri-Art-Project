@@ -107,7 +107,7 @@
     const relatedLink = profile.relatedLink ??
       (profile.twitter
         ? {
-            label: "Twitter / X",
+            label: "社群帳號",
             url: profile.twitter,
             text: "查看帳號",
           }
