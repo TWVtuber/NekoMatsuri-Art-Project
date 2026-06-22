@@ -597,12 +597,6 @@ const characterHoverAnimations = new Map([
   ["沈家_01_沈月Q.webp", "imgs/characters/Q/Anims/沈家_04_沈月Q.webm"],
 ]);
 
-function resetCharacterAnimation(video) {
-  video.pause();
-  if (video.readyState > 0) video.currentTime = 0;
-  video.closest("[data-character-hover]")?.classList.remove("is-playing");
-}
-
 function enhanceCharacterHover(image) {
   if (image.dataset.characterStatic !== undefined) return;
   const staticSource = image.getAttribute("src");
@@ -628,7 +622,8 @@ function enhanceCharacterHover(image) {
 
   video.className = "character-hover__animation";
   video.setAttribute("aria-hidden", "true");
-  video.preload = "metadata";
+  video.autoplay = true;
+  video.preload = "auto";
   video.muted = true;
   video.defaultMuted = true;
   video.loop = true;
@@ -639,34 +634,10 @@ function enhanceCharacterHover(image) {
   source.type = "video/webm";
   video.append(source);
 
-  let hovered = false;
-  wrapper.addEventListener("mouseenter", () => {
-    if (reduceMotion.matches) return;
-    hovered = true;
-    video
-      .play()
-      .then(() => {
-        const revealAnimation = () => {
-          if (hovered) wrapper.classList.add("is-playing");
-        };
-
-        if ("requestVideoFrameCallback" in video) {
-          video.requestVideoFrameCallback(revealAnimation);
-        } else if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-          revealAnimation();
-        } else {
-          video.addEventListener("loadeddata", revealAnimation, { once: true });
-        }
-      })
-      .catch(() => {});
-  });
-  wrapper.addEventListener("mouseleave", () => {
-    hovered = false;
-    resetCharacterAnimation(video);
-  });
-
   image.replaceWith(wrapper);
   wrapper.append(image, video);
+  wrapper.classList.add("is-playing");
+  video.play().catch(() => {});
 }
 
 document.querySelectorAll("img").forEach(enhanceCharacterHover);
@@ -683,10 +654,15 @@ const characterImageObserver = new MutationObserver((mutations) => {
 characterImageObserver.observe(document.body, { childList: true, subtree: true });
 
 document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) return;
   document
     .querySelectorAll(".character-hover__animation")
-    .forEach(resetCharacterAnimation);
+    .forEach((video) => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        video.play().catch(() => {});
+      }
+    });
 });
 
 const sectionMascots = [...document.querySelectorAll(".section-mascot")];

@@ -20,6 +20,45 @@
     figure.classList.add(`award-note--${tone}`);
   }
 
+  function createPrize(text) {
+    const prize = document.createElement("span");
+    prize.className = "award-prize";
+
+    text.split(/\s+\+\s+/).forEach((lineText) => {
+      const line = document.createElement("span");
+      line.className = "award-prize__line fit-single-line";
+      line.textContent = lineText;
+      prize.append(line);
+    });
+
+    return prize;
+  }
+
+  function fitPrizeLine(line) {
+    line.style.fontSize = "";
+    let fontSize = Number.parseFloat(getComputedStyle(line).fontSize);
+    const minimumFontSize = 11;
+
+    while (line.scrollWidth > line.clientWidth && fontSize > minimumFontSize) {
+      fontSize = Math.max(minimumFontSize, fontSize - 0.5);
+      line.style.fontSize = `${fontSize}px`;
+    }
+  }
+
+  function fitPrizeLines() {
+    document.querySelectorAll(".fit-single-line").forEach(fitPrizeLine);
+  }
+
+  function watchPrizeLineWidths() {
+    fitPrizeLines();
+    if (!("ResizeObserver" in window)) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach(({ target }) => fitPrizeLine(target));
+    });
+    document.querySelectorAll(".fit-single-line").forEach((line) => resizeObserver.observe(line));
+  }
+
   function applyAwards(data) {
     const title = document.getElementById("awards-title");
     if (title) title.textContent = data.sectionTitle;
@@ -50,8 +89,7 @@
       image.alt = item.alt;
       const strong = document.createElement("strong");
       strong.textContent = item.name;
-      const prize = document.createElement("span");
-      prize.textContent = item.prize;
+      const prize = createPrize(item.prize);
       figure.querySelector("figcaption").replaceChildren(strong, document.createTextNode(`（${item.count}）`), prize);
     });
 
@@ -70,8 +108,7 @@
       const caption = figure.querySelector("figcaption");
       const name = document.createElement("strong");
       name.textContent = item.name;
-      const prize = document.createElement("span");
-      prize.textContent = item.prize;
+      const prize = createPrize(item.prize);
       const judge = document.createElement("small");
       judge.className = "award-judge";
       const imageLink = externalLink(item.judgeImageUrl);
@@ -91,6 +128,9 @@
       }
       caption.replaceChildren(name, prize, judge);
     });
+
+    requestAnimationFrame(watchPrizeLineWidths);
+    document.fonts?.ready.then(fitPrizeLines);
   }
 
   fetch("data/awards.json", { cache: "no-cache" })

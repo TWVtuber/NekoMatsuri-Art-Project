@@ -779,6 +779,21 @@
   cursor: pointer;
 }
 
+video.related-profile__corner-mascot:hover {
+  animation: related-corner-mascot-hop 520ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+@keyframes related-corner-mascot-hop {
+  0%,
+  100% { transform: translateY(0) rotate(4deg); }
+  42% { transform: translateY(-13px) rotate(4deg); }
+  68% { transform: translateY(3px) rotate(4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  video.related-profile__corner-mascot:hover { animation: none; }
+}
+
 .related-profile__main:has(.related-profile__corner-mascot)
   .related-profile__paper
   > section:first-child {
@@ -1169,7 +1184,8 @@
   background: #f7f4ec;
 }
 
-.related-profile__gallery-item img {
+.related-profile__gallery-item img,
+.related-profile__gallery-video {
   display: block;
   width: 100%;
   height: auto;

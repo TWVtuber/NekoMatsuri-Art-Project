@@ -70,8 +70,12 @@
   function renderGallery(gallery = [], currentProfileKey = "") {
     return gallery
       .map(
-        ({ src, caption, description = "" }) =>
-          `<figure class="related-photo-card paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${imageViewerTrigger({ source: src, title: caption, description })}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`,
+        ({ src, caption, description = "", type = "image", poster = "" }) => {
+          const media = type === "video"
+            ? `<video class="related-profile__gallery-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"${poster ? ` poster="${escapeHtml(poster)}"` : ""} aria-label="${escapeHtml(caption)}"><source src="${escapeHtml(src)}" type="video/webm" /></video>`
+            : imageViewerTrigger({ source: src, title: caption, description });
+          return `<figure class="related-photo-card paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${media}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`;
+        },
       )
       .join("");
   }

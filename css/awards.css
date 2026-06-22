@@ -332,6 +332,11 @@
   font-size: 18px;
   font-weight: 700;
 }
+.award-note .award-prize__line {
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+}
 .award-note figcaption > small {
   display: block;
   margin-top: 13px;

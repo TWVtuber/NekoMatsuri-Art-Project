@@ -75,6 +75,13 @@
   color: var(--pink-strong);
   border-bottom-color: var(--pink-strong);
 }
+.site-nav a[disable],
+.site-nav a[disable]:hover {
+  color: #999;
+  border-bottom-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
 .header-submit {
   flex: 0 0 auto;
 }
@@ -1195,6 +1202,21 @@ p {
 [data-character-hover].is-playing > .character-hover__animation {
   opacity: 1;
 }
+[data-character-hover]:hover > .character-hover__animation {
+  animation: character-hover-hop 520ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+@keyframes character-hover-hop {
+  0%,
+  100% {
+    transform: translateY(0) scale(var(--character-animation-scale, 1));
+  }
+  42% {
+    transform: translateY(-13px) scale(var(--character-animation-scale, 1));
+  }
+  68% {
+    transform: translateY(3px) scale(var(--character-animation-scale, 1));
+  }
+}
 .mascot-motion-ready .section-mascot {
   opacity: 0;
   translate: 0 18px;
@@ -1234,6 +1256,9 @@ p {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  [data-character-hover]:hover > .character-hover__animation {
+    animation: none;
+  }
   .mascot-motion-ready .section-mascot,
   .mascot-motion-ready .section-mascot.is-visible {
     opacity: 1;
@@ -1810,10 +1835,18 @@ p {
   list-style: none;
 }
 .reward-prize-list li {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 12px;
   padding: 8px 4px 9px;
   border: 0;
   background: transparent;
   box-shadow: none;
+}
+.reward-prize-list__heading {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
 }
 .reward-prize-list b {
   display: inline-block;
@@ -1825,8 +1858,23 @@ p {
   font-weight: 700;
   white-space: nowrap;
 }
+.reward-prize-list .reward-prize-list__value {
+  display: block;
+  width: 100%;
+}
+.reward-prize-list .reward-prize-list__count {
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 400;
+}
+.reward-prize-list .reward-prize-list__bonus {
+  display: block;
+  grid-column: 2;
+  width: 100%;
+}
 .reward-prize-list small {
   display: block;
+  grid-column: 1 / -1;
   margin: 4px 0 0;
   color: #5d5852;
   font-size: 18px;

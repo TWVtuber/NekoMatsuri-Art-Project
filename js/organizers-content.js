@@ -41,7 +41,20 @@
         memeButton.dataset.memeName = meme.name;
         memeButton.setAttribute("aria-label", `開啟${meme.name}的彩蛋對話`);
       }
-      note.querySelector("p").textContent = item.contribution;
+      const contribution = note.querySelector("p");
+      contribution.replaceChildren();
+      if (typeof item.contribution === "string") {
+        contribution.textContent = item.contribution;
+      } else {
+        item.contribution.forEach((part) => {
+          const segment = document.createElement("span");
+          segment.textContent = part.text;
+          (part.variants || []).forEach((variant) => {
+            segment.classList.add(`credit-note__segment--${variant}`);
+          });
+          contribution.append(segment);
+        });
+      }
     });
     document.querySelectorAll(".organizer-sponsors .sponsor-note").forEach((note, index) => {
       const item = credits.sponsors[index];

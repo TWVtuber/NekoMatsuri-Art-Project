@@ -56,40 +56,36 @@
     },
     "gallery": [
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】TAG公開.jpg",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】TAG公開.jpg",
         "caption": "TAG 公開"
       },
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】不信任的眼神.jpg",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】不信任的眼神.jpg",
         "caption": "不信任的眼神"
       },
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】入職沒跟我說這是24小時制.jpg",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】入職沒跟我說這是24小時制.jpg",
         "caption": "入職沒跟我說這是 24 小時制"
       },
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】初見3C.jpg",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】初見3C.jpg",
         "caption": "初見三年 C 班"
       },
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】塔努努好香.jpg",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】塔努努好香.jpg",
         "caption": "塔努努好香"
       },
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】學院老師全身.webp",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】學院老師全身.webp",
         "caption": "三年 C 班導師貓祭全身設計"
       },
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】班上美男子太多了.jpg",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】班上美男子太多了.jpg",
         "caption": "班上美男子太多了"
       },
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.webp",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】與哥哥初次見面.webp",
         "caption": "為了哥哥，特別來同一班，但是是老師"
-      },
-      {
-        "src": "imgs/characters/3C-Pics/【貓祭】與塔努努審學生證.jpg",
-        "caption": "與塔努努審學生證"
       }
     ]
   },
@@ -153,11 +149,11 @@
     },
     "gallery": [
       {
-        "src": "imgs/characters/3C-Pics/3C相關圖文/【郭喵】一定是不小心的.jpg",
+        "src": "imgs/characters/3C-Pics/3C相關圖文/郭喵/【郭喵】一定是不小心的.jpg",
         "caption": "一定是不小心的"
       },
       {
-        "src": "imgs/characters/3C-Pics/【貓祭】與哥哥初次見面.webp",
+        "src": "imgs/characters/3C-Pics/貓祭/【貓祭】與哥哥初次見面.webp",
         "caption": "對妹妹貓祭空降班導非常震驚"
       }
     ]
@@ -223,12 +219,24 @@
     },
     "gallery": [
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈曦】觀察日記.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈曦/【沈曦】觀察日記.jpg",
         "caption": "超級資優生，品學兼優"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈曦】漫畫.webp",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈曦/【沈曦】漫畫.webp",
         "caption": "沈曦漫畫"
+      },
+      {
+        "src": "imgs/characters/3C-Pics/沈家相關/沈曦/沈家1.jpg",
+        "caption": "沈家日常 1"
+      },
+      {
+        "src": "imgs/characters/3C-Pics/沈家相關/沈曦/沈家2.jpg",
+        "caption": "沈家日常 2"
+      },
+      {
+        "src": "imgs/characters/3C-Pics/沈家相關/沈曦/曦祭.webp",
+        "caption": "曦祭"
       }
     ]
   },
@@ -296,11 +304,11 @@
     },
     "gallery": [
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈澈】無能狂怒.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈澈/【沈澈】無能狂怒.jpg",
         "caption": "非常照顧妹妹，基本上都待在身邊"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈澈】漫畫.webp",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈澈/【沈澈】漫畫.webp",
         "caption": "沈澈漫畫"
       }
     ]
@@ -374,11 +382,11 @@
     },
     "gallery": [
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈樂】無能狂怒.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈樂/【沈樂】無能狂怒.jpg",
         "caption": "常跟二哥鬥嘴吵架，通常居下風"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈樂】漫畫.webp",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈樂/【沈樂】漫畫.webp",
         "caption": "沈樂漫畫"
       }
     ]
@@ -470,58 +478,84 @@
     },
     "gallery": [
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈月】一公噸的補水.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】一公噸的補水.jpg",
         "caption": "是條鯊魚，每日需要補充一公噸的水"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈月】好香的魚干.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】好香的魚干.jpg",
         "caption": "好香的魚乾"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈月】月下美人.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】月下美人.jpg",
         "caption": "月下美人"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈月】漫畫.webp",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】漫畫.webp",
         "caption": "沈月漫畫"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈月】觀察日記.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】觀察日記.jpg",
         "caption": "沈月觀察日記"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈月】雙生.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】雙生.jpg",
         "caption": "雙生"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈月】黑化.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】黑化.jpg",
         "caption": "沈月黑化設定"
+      },
+      {
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/沈月黑化詳細.jpg",
+        "caption": "沈月黑化詳細設定"
+      },
+      {
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/擔心三哥的精神狀態.webp",
+        "caption": "擔心三哥的精神狀態"
+      },
+      {
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/image.webp",
+        "caption": "情書？"
+      },
+      {
+        "type": "video",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/要黑化了.webm",
+        "poster": "imgs/characters/3C-Pics/沈家相關/沈月/要黑化了.webp",
+        "caption": "要黑化了"
       }
     ]
   },
   "shen-family": {
     "kind": "family",
     "tab": {
-      "title": "【沈家】相關資訊",
+      "title": "【沈家】",
       "color": "#cfe3ff",
       "order": 4
     },
     "gallery": [
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈家】Q版行列.webp",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈家/【沈家】Q版行列.webp",
         "caption": "沈家 Q 版行列"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈家】三年C班的四胞胎.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈家/【沈家】三年C班的四胞胎.jpg",
         "caption": "三年 C 班的沈家四胞胎"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈家】你為什麼不幫大哥.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈家/【沈家】你為什麼不幫大哥.jpg",
         "caption": "你為什麼不幫大哥"
       },
       {
-        "src": "imgs/characters/3C-Pics/沈家相關/【沈家】全彩日常.jpg",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈家/【沈家】全彩日常.jpg",
         "caption": "沈家全彩日常"
+      },
+      {
+        "src": "imgs/characters/3C-Pics/沈家相關/沈家/沈家塗鴉1.webp",
+        "caption": "沈家塗鴉 1"
+      },
+      {
+        "src": "imgs/characters/3C-Pics/沈家相關/沈家/沈家塗鴉4-端午節.webp",
+        "caption": "沈家塗鴉 4・端午節"
       }
     ],
     "portraits": [
@@ -547,49 +581,23 @@
       }
     ],
     "nameTable": {
-      "columns": [
-        "名字",
-        "對沈曦",
-        "對沈澈",
-        "對沈樂",
-        "對沈月"
-      ],
+      "columns": ["名字", "對沈曦", "對沈澈", "對沈樂", "對沈月"],
       "rows": [
         {
           "name": "沈曦",
-          "values": [
-            "—",
-            "澈",
-            "樂",
-            "月"
-          ]
+          "values": ["—", "澈", "樂", "月"]
         },
         {
           "name": "沈澈",
-          "values": [
-            "大哥",
-            "—",
-            "笨蛋",
-            "妹妹"
-          ]
+          "values": ["大哥", "—", "笨蛋", "妹妹"]
         },
         {
           "name": "沈樂",
-          "values": [
-            "大哥",
-            "哥",
-            "—",
-            "妹"
-          ]
+          "values": ["大哥", "哥", "—", "妹"]
         },
         {
           "name": "沈月",
-          "values": [
-            "大哥",
-            "二哥",
-            "三哥",
-            "—"
-          ]
+          "values": ["大哥", "二哥", "三哥", "—"]
         }
       ]
     }

@@ -27,24 +27,129 @@
       }
     ],
     "awards": [
-      { "name": "金賞", "count": "取一名", "prize": "NT$ 5,000", "image": "imgs/trophies/繪俄史金獎.webp", "alt": "繪俄史金獎獎盃", "tone": "yellow" },
-      { "name": "銀賞", "count": "取一名", "prize": "NT$ 3,000", "image": "imgs/trophies/繪俄史銀獎.webp", "alt": "繪俄史銀獎獎盃", "tone": "blue" },
-      { "name": "銅賞", "count": "取一名", "prize": "NT$ 2,000", "image": "imgs/trophies/繪俄史銅獎.webp", "alt": "繪俄史銅獎獎盃", "tone": "pink" },
-      { "name": "互動獎", "count": "取一名", "prize": "NT$ 1,500", "image": "imgs/trophies/互動獎.webp", "alt": "互動獎獎盃", "tone": "green" },
-      { "name": "卡哇獎", "count": "取三名", "prize": "NT$ 1,000", "image": "imgs/trophies/卡哇獎.webp", "alt": "卡哇獎獎盃", "tone": "pink" },
-      { "name": "搞怪獎", "count": "取三名", "prize": "NT$ 1,000", "image": "imgs/trophies/搞怪獎.webp", "alt": "搞怪獎獎盃", "tone": "yellow" }
+      {
+        "name": "金賞",
+        "count": "取一名",
+        "prize": "NT$ 5,000 + 插圖動態化（含拆圖建模）",
+        "image": "imgs/trophies/繪俄史金獎.webp",
+        "alt": "繪俄史金獎獎盃",
+        "tone": "yellow"
+      },
+      {
+        "name": "銀賞",
+        "count": "取一名",
+        "prize": "NT$ 3,000",
+        "image": "imgs/trophies/繪俄史銀獎.webp",
+        "alt": "繪俄史銀獎獎盃",
+        "tone": "blue"
+      },
+      {
+        "name": "銅賞",
+        "count": "取一名",
+        "prize": "NT$ 2,000",
+        "image": "imgs/trophies/繪俄史銅獎.webp",
+        "alt": "繪俄史銅獎獎盃",
+        "tone": "pink"
+      },
+      {
+        "name": "互動獎",
+        "count": "取一名",
+        "prize": "NT$ 1,500",
+        "image": "imgs/trophies/互動獎.webp",
+        "alt": "互動獎獎盃",
+        "tone": "green"
+      },
+      {
+        "name": "卡哇獎",
+        "count": "取三名",
+        "prize": "NT$ 1,000",
+        "image": "imgs/trophies/卡哇獎.webp",
+        "alt": "卡哇獎獎盃",
+        "tone": "pink"
+      },
+      {
+        "name": "搞怪獎",
+        "count": "取三名",
+        "prize": "NT$ 1,000",
+        "image": "imgs/trophies/搞怪獎.webp",
+        "alt": "搞怪獎獎盃",
+        "tone": "yellow"
+      }
     ]
   },
   "roleAwards": {
     "title": "角色獎項",
     "description": "每個獎項下方會標示負責評審，由評審選出一件自己最喜歡的作品。",
     "awards": [
-      { "name": "沈曦獎", "prize": "NT$ 1,500", "image": "imgs/trophies/沈曦獎.webp", "alt": "沈曦獎獎盃", "tone": "pink", "judgeImage": "imgs/judges/NekoMatsuri.webp", "judgeImageAlt": "貓祭", "judgeImageUrl": "https://lit.link/en/NekoMatsuri", "judges": [{ "name": "貓祭", "url": "https://lit.link/en/NekoMatsuri" }] },
-      { "name": "貓祭獎", "prize": "NT$ 1,500", "image": "imgs/trophies/貓祭獎.webp", "alt": "貓祭獎獎盃", "tone": "pink", "judgeImage": "imgs/judges/NekoMatsuri.webp", "judgeImageAlt": "貓祭", "judgeImageUrl": "https://lit.link/en/NekoMatsuri", "judges": [{ "name": "貓祭", "url": "https://lit.link/en/NekoMatsuri" }] },
-      { "name": "祭煜獎", "prize": "NT$ 1,500", "image": "imgs/trophies/祭煜獎.webp", "alt": "祭煜獎獎盃", "tone": "yellow", "judgeImage": "imgs/judges/大雄&NekoMatsuri.webp", "judgeImageAlt": "貓祭與大雄", "judgeImageUrl": "https://lit.link/en/NekoMatsuri", "judges": [{ "name": "貓祭 (60%)", "url": "https://lit.link/en/NekoMatsuri" }, { "name": "大雄 (40%)", "url": "https://x.com/Nekolive_Xiong" }] },
-      { "name": "沈月獎", "prize": "NT$ 1,500", "image": "imgs/trophies/沈月獎.webp", "alt": "沈月獎獎盃", "tone": "green", "judgeImage": "imgs/judges/Tsuki.webp", "judgeImageAlt": "沈月", "judgeImageUrl": "https://x.com/Lumi_fish", "judges": [{ "name": "沈月", "url": "https://x.com/Lumi_fish" }] },
-      { "name": "沈澈獎", "prize": "NT$ 1,500", "image": "imgs/trophies/沈澈獎.webp", "alt": "沈澈獎獎盃", "tone": "blue", "judgeImage": "imgs/judges/David.webp", "judgeImageAlt": "沈澈", "judgeImageUrl": "https://x.com/Lumineve_2", "judges": [{ "name": "沈澈", "url": "https://x.com/Lumineve_2" }] },
-      { "name": "沈樂獎", "prize": "NT$ 1,500", "image": "imgs/trophies/沈樂獎.webp", "alt": "沈樂獎獎盃", "tone": "green", "judgeImage": "imgs/judges/Ivan.webp", "judgeImageAlt": "沈樂", "judgeImageUrl": "https://x.com/Lumineve_3", "judges": [{ "name": "沈樂", "url": "https://x.com/Lumineve_3" }] }
+      {
+        "name": "沈曦獎",
+        "prize": "NT$ 1,500",
+        "image": "imgs/trophies/沈曦獎.webp",
+        "alt": "沈曦獎獎盃",
+        "tone": "pink",
+        "judgeImage": "imgs/judges/NekoMatsuri.webp",
+        "judgeImageAlt": "貓祭",
+        "judgeImageUrl": "https://lit.link/en/NekoMatsuri",
+        "judges": [{ "name": "貓祭", "url": "https://lit.link/en/NekoMatsuri" }]
+      },
+      {
+        "name": "貓祭獎",
+        "prize": "NT$ 1,500",
+        "image": "imgs/trophies/貓祭獎.webp",
+        "alt": "貓祭獎獎盃",
+        "tone": "pink",
+        "judgeImage": "imgs/judges/NekoMatsuri.webp",
+        "judgeImageAlt": "貓祭",
+        "judgeImageUrl": "https://lit.link/en/NekoMatsuri",
+        "judges": [{ "name": "貓祭", "url": "https://lit.link/en/NekoMatsuri" }]
+      },
+      {
+        "name": "祭煜獎",
+        "prize": "NT$ 1,500",
+        "image": "imgs/trophies/祭煜獎.webp",
+        "alt": "祭煜獎獎盃",
+        "tone": "yellow",
+        "judgeImage": "imgs/judges/大雄&NekoMatsuri.webp",
+        "judgeImageAlt": "貓祭與大雄",
+        "judgeImageUrl": "https://lit.link/en/NekoMatsuri",
+        "judges": [
+          { "name": "貓祭 (60%)", "url": "https://lit.link/en/NekoMatsuri" },
+          { "name": "大雄 (40%)", "url": "https://x.com/Nekolive_Xiong" }
+        ]
+      },
+      {
+        "name": "沈月獎",
+        "prize": "NT$ 1,500",
+        "image": "imgs/trophies/沈月獎.webp",
+        "alt": "沈月獎獎盃",
+        "tone": "green",
+        "judgeImage": "imgs/judges/Tsuki.webp",
+        "judgeImageAlt": "沈月",
+        "judgeImageUrl": "https://x.com/Lumi_fish",
+        "judges": [{ "name": "沈月", "url": "https://x.com/Lumi_fish" }]
+      },
+      {
+        "name": "沈澈獎",
+        "prize": "NT$ 1,500",
+        "image": "imgs/trophies/沈澈獎.webp",
+        "alt": "沈澈獎獎盃",
+        "tone": "blue",
+        "judgeImage": "imgs/judges/David.webp",
+        "judgeImageAlt": "沈澈",
+        "judgeImageUrl": "https://x.com/Lumineve_2",
+        "judges": [{ "name": "沈澈", "url": "https://x.com/Lumineve_2" }]
+      },
+      {
+        "name": "沈樂獎",
+        "prize": "NT$ 1,500",
+        "image": "imgs/trophies/沈樂獎.webp",
+        "alt": "沈樂獎獎盃",
+        "tone": "green",
+        "judgeImage": "imgs/judges/Ivan.webp",
+        "judgeImageAlt": "沈樂",
+        "judgeImageUrl": "https://x.com/Lumineve_3",
+        "judges": [{ "name": "沈樂", "url": "https://x.com/Lumineve_3" }]
+      }
     ]
   }
 }
