@@ -282,6 +282,10 @@ body.meme-is-open {
 .meme-modal__nav--next span { transform: rotate(225deg); }
 .meme-modal__nav--previous { left: 12px; }
 .meme-modal__nav--next { right: 12px; }
+.meme-modal__nav[hidden],
+.meme-modal__status[hidden] {
+  display: none;
+}
 .meme-modal__nav:hover {
   background: #f4d66c;
   box-shadow: 2px 2px 0 #241a1b;

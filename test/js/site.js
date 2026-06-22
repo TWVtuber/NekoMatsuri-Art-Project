@@ -1170,6 +1170,7 @@ const memeGalleryItems = [
 ];
 let memeModalTrigger = null;
 let memeModalIndex = 0;
+let memeModalIsGallery = false;
 let memeSwipeStart = null;
 
 function renderMemeDots() {
@@ -1213,12 +1214,15 @@ function openMemeModal(event) {
   if (!memeModal || !memeModalImage || !memeGalleryItems.length) return;
   const trigger = event.currentTarget;
   memeModalTrigger = trigger;
-  const requestedIndex =
-    trigger.dataset.memeGallery !== undefined
-      ? Math.floor(Math.random() * memeGalleryItems.length)
-      : memeGalleryItems.findIndex(
-          (item) => item.src === trigger.dataset.memeSrc,
-        );
+  memeModalIsGallery = trigger.dataset.memeGallery !== undefined;
+  if (memeModalPrevious) memeModalPrevious.hidden = !memeModalIsGallery;
+  if (memeModalNext) memeModalNext.hidden = !memeModalIsGallery;
+  if (memeModalStatus) memeModalStatus.hidden = !memeModalIsGallery;
+  const requestedIndex = memeModalIsGallery
+    ? Math.floor(Math.random() * memeGalleryItems.length)
+    : memeGalleryItems.findIndex(
+        (item) => item.src === trigger.dataset.memeSrc,
+      );
   showMemeImage(requestedIndex < 0 ? 0 : requestedIndex);
   memeModal.hidden = false;
   document.body.classList.add("meme-is-open");
@@ -1258,6 +1262,7 @@ memeModalNext?.addEventListener("click", () =>
 );
 
 memeModalViewer?.addEventListener("pointerdown", (event) => {
+  if (!memeModalIsGallery) return;
   if (event.target.closest("button")) return;
   if (event.pointerType === "mouse" && event.button !== 0) return;
   memeModalViewer.setPointerCapture(event.pointerId);
@@ -1334,17 +1339,17 @@ document.addEventListener("keydown", (event) => {
       closeMemeModal();
       return;
     }
-    if (event.key === "ArrowLeft") {
+    if (memeModalIsGallery && event.key === "ArrowLeft") {
       showMemeImage(memeModalIndex - 1);
       return;
     }
-    if (event.key === "ArrowRight") {
+    if (memeModalIsGallery && event.key === "ArrowRight") {
       showMemeImage(memeModalIndex + 1);
       return;
     }
     if (event.key === "Tab") {
       const focusable = [
-        ...memeModal.querySelectorAll("button:not([disabled])"),
+        ...memeModal.querySelectorAll("button:not([disabled]):not([hidden])"),
       ];
       const first = focusable[0];
       const last = focusable.at(-1);
