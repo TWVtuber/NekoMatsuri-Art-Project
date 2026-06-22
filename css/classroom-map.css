@@ -173,9 +173,9 @@
   --classroom-map-font-size: 18px;
   container-type: inline-size;
   display: flex;
-  aspect-ratio: 2.08 / 1;
   flex-direction: column;
   min-width: 0;
+  max-width: 100%;
   padding: clamp(12px, 1.6vw, 18px);
   box-shadow: 3px 4px 0 rgb(29 28 21 / 9%);
 }
@@ -258,6 +258,9 @@
   width: calc(100% + 2px);
   margin-right: -1px;
   margin-left: -1px;
+  height: 140%;
+  align-self: center;
+  z-index: 1;
 }
 
 .classroom-activity__blackboard {
@@ -319,10 +322,12 @@
 .classroom-activity__seat--ip .classroom-activity__photo-frame { background: #fdf4ff; }
 
 .classroom-activity__seat img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 180ms ease;
 }
 
@@ -338,6 +343,14 @@
   line-height: 1.2;
   max-width: 100%;
   overflow-wrap: anywhere;
+}
+
+.classroom-activity__seat-role {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.65em;
+  font-weight: normal;
+  line-height: 1.2;
 }
 
 .classroom-activity__seat--cat { color: #d91d2b; }
@@ -385,9 +398,20 @@ body.classroom-map-preview > [data-classroom-map] {
   box-shadow: 2px 3px 12px rgb(0 0 0 / 9%);
 }
 
+/* Keep the full seating plan inside a desktop viewport without narrowing it. */
+@media (min-width: 901px) {
+  .classroom-activity__board {
+    height: min(720px, calc(100dvh - 200px));
+    aspect-ratio: auto;
+  }
+}
+
 @media (max-width: 900px) {
   .classroom-activity__legend-card {
     grid-template-columns: 1fr;
+  }
+  .classroom-activity__photo-frame {
+    aspect-ratio: 1;
   }
 }
 
