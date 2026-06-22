@@ -1,0 +1,35 @@
+{
+  "title": "三年 C 班座位表",
+  "layout": { "rows": 5, "columns": 7 },
+  "labels": {
+    "balcony": "陽台",
+    "blackboard": "黑板",
+    "podium": "講台",
+    "emptySeat": "空座位",
+    "seatLayout": "七欄五排座位配置"
+  },
+  "teacher": {
+    "name": "貓祭",
+    "role": "老師",
+    "group": "cat",
+    "portrait": "imgs/characters/證件/照片/貓祭-證件.jpg",
+    "characterTab": "neko"
+  },
+  "seats": [
+    { "row": 1, "column": 1, "name": "沈月", "group": "shen", "portrait": "imgs/characters/證件/照片/沈月-證件.jpg", "characterTab": "shen-yue" },
+    { "row": 1, "column": 2, "name": "沈樂", "group": "shen", "portrait": "imgs/characters/證件/照片/沈樂-證件.jpg", "characterTab": "shen-le" },
+    { "row": 1, "column": 7, "name": "阿強", "group": "ip", "portrait": "imgs/characters/證件/照片/阿強-頭貼.webp", "url": "https://x.com/Nekolive_Chiang" },
+    { "row": 2, "column": 1, "name": "沈曦", "group": "shen", "portrait": "imgs/characters/證件/照片/沈曦-證件.jpg", "characterTab": "shen-xi" },
+    { "row": 2, "column": 2, "name": "沈澈", "group": "shen", "portrait": "imgs/characters/證件/照片/沈澈-證件.jpg", "characterTab": "shen-che" },
+    { "row": 2, "column": 7, "name": "阿醜", "group": "ip", "portrait": "imgs/characters/證件/照片/阿醜-頭貼.webp", "url": "https://x.com/Nekolive_Ugly" },
+    { "row": 3, "column": 7, "name": "利貝", "group": "ip", "portrait": "imgs/characters/證件/照片/利貝-頭貼.webp", "url": "https://x.com/Nekolive_Liber" },
+    { "row": 4, "column": 7, "name": "阿雄", "group": "ip", "portrait": "imgs/characters/證件/照片/阿雄-頭貼.webp", "url": "https://x.com/Nekolive_Xiong" },
+    { "row": 5, "column": 7, "name": "祭煜", "group": "cat", "portrait": "imgs/characters/證件/照片/祭煜-證件.jpg", "characterTab": "matsuri" }
+  ],
+  "legend": [
+    { "group": "cat", "title": "貓家", "description": "核心計分對象" },
+    { "group": "shen", "title": "沈家", "description": "核心計分對象" },
+    { "group": "ip", "title": "貓祭旗下 IP", "description": "額外加分對象" }
+  ],
+  "note": "主要評分角色為貓家與沈家；繪製紫色標示的 IP 角色可獲額外加分，但不是本次活動主軸。"
+}
