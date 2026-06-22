@@ -5,7 +5,7 @@
       "target": "organizer",
       "label": "主辦",
       "image": {
-        "src": "./imgs/oraganizer/nekomatsuri.jpg",
+        "src": "imgs/oraganizer/nekomatsuri.jpg",
         "alt": "貓祭",
         "caption": "貓祭 NekoMatsuri"
       },
@@ -32,7 +32,7 @@
       "target": "president",
       "label": "協辦",
       "image": {
-        "src": "./imgs/oraganizer/President.jpg",
+        "src": "imgs/oraganizer/President.jpg",
         "alt": "校長",
         "caption": "校長"
       },
