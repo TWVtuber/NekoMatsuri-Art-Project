@@ -170,6 +170,7 @@
 .classroom-activity__board {
   --classroom-blackboard-width: clamp(15px, 5.8vw, 56px);
   --classroom-seat-gap: clamp(1px, 0.7vw, 7px);
+  --classroom-map-font-size: 18px;
   container-type: inline-size;
   display: flex;
   aspect-ratio: 2.08 / 1;
@@ -183,6 +184,8 @@
   .classroom-activity__board {
     --classroom-blackboard-width: clamp(15px, 5.8cqi, 56px);
     --classroom-seat-gap: clamp(1px, 0.7cqi, 7px);
+    /* 18px at the full-size board, scaled down with its RWD width. */
+    --classroom-map-font-size: min(18px, 1.95cqw);
   }
 }
 
@@ -211,7 +214,7 @@
   padding: clamp(2px, 0.65cqi, 6px) clamp(4px, 1.25cqi, 12px);
   border: 1px solid var(--classroom-ink);
   background: #f2ede2;
-  font-size: clamp(6px, 1.8vw, 18px);
+  font-size: var(--classroom-map-font-size);
   font-weight: 800;
   line-height: 1.05;
   text-align: center;
@@ -236,7 +239,7 @@
   min-height: 0;
   border: 1px solid var(--classroom-ink);
   background: #f7f5ef;
-  font-size: clamp(5px, 1.55vw, 16px);
+  font-size: var(--classroom-map-font-size);
   font-weight: 800;
   line-height: 1.05;
   text-align: center;
@@ -264,7 +267,7 @@
   border: 1px solid var(--classroom-ink);
   background: #f4f4f4;
   color: var(--classroom-ink);
-  font-size: clamp(4px, 1.15vw, 14px);
+  font-size: var(--classroom-map-font-size);
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0.08em;
@@ -331,7 +334,7 @@
 
 .classroom-activity__seat strong {
   margin-top: clamp(1px, 0.3cqi, 3px);
-  font-size: clamp(4px, 1.15vw, 12px);
+  font-size: var(--classroom-map-font-size);
   line-height: 1.2;
   max-width: 100%;
   overflow-wrap: anywhere;
@@ -348,15 +351,7 @@
 }
 .classroom-activity__portrait-placeholder {
   opacity: 0.45;
-  font-size: clamp(6px, 1.9vw, 20px);
-}
-
-@supports (width: 1cqi) {
-  .classroom-activity__balcony { font-size: clamp(5px, 1.85cqi, 18px); }
-  .classroom-activity__podium { font-size: clamp(5px, 1.55cqi, 16px); }
-  .classroom-activity__blackboard { font-size: clamp(4px, 1.15cqi, 14px); }
-  .classroom-activity__seat strong { font-size: clamp(4px, 1.15cqi, 12px); }
-  .classroom-activity__portrait-placeholder { font-size: clamp(6px, 1.9cqi, 20px); }
+  font-size: var(--classroom-map-font-size);
 }
 
 .classroom-activity__seat.is-clickable { cursor: pointer; }
