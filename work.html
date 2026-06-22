@@ -7,10 +7,10 @@
       name="description"
       content="貓祭不繪讓你俄史計劃作品展示頁。"
     />
-    <link href="logo.ico" rel="icon" type="image/x-icon" />
+    <link id="site-favicon" href="logo.ico" rel="icon" type="image/x-icon" />
     <title>貓祭不繪讓你俄史計劃</title>
-    <script src="js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
@@ -70,168 +70,12 @@
         </div>
         <div class="work-gallery__paper paper-card">
           <span class="tape tape--blue" aria-hidden="true"></span>
-          <div class="work-gallery__toolbar" aria-label="作品篩選工具">
-            <div class="work-gallery__filters" role="list">
-              <button
-                class="work-gallery__filter is-active"
-                type="button"
-                data-work-filter="all"
-                aria-pressed="true"
-              >
-                所有類別
-              </button>
-              <button
-                class="work-gallery__filter"
-                type="button"
-                data-work-filter="animation"
-                aria-pressed="false"
-              >
-                動畫
-              </button>
-              <button
-                class="work-gallery__filter"
-                type="button"
-                data-work-filter="comic"
-                aria-pressed="false"
-              >
-                漫畫
-              </button>
-              <button
-                class="work-gallery__filter"
-                type="button"
-                data-work-filter="illustration"
-                aria-pressed="false"
-              >
-                插畫
-              </button>
-            </div>
-            <label class="work-gallery__search">
-              <span class="visually-hidden">搜尋作品</span>
-              <input
-                type="search"
-                data-work-search
-                placeholder="請輸入名稱、作者或關鍵字"
-                autocomplete="off"
-              />
-              <span class="material-symbols-outlined" aria-hidden="true"
-                >search</span
-              >
-            </label>
-          </div>
-          <div class="work-gallery__grid" data-work-grid>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="animation"
-              data-work-keywords="動畫 no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="comic"
-              data-work-keywords="漫畫 no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="illustration"
-              data-work-keywords="插畫 no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--portrait"
-              data-work-category="animation"
-              data-work-keywords="動畫 portrait no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="comic"
-              data-work-keywords="漫畫 warm no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="illustration"
-              data-work-keywords="插畫 no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="animation"
-              data-work-keywords="動畫 no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="comic"
-              data-work-keywords="漫畫 cream no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--square"
-              data-work-category="illustration"
-              data-work-keywords="插畫 square no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="animation"
-              data-work-keywords="動畫 pink no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="comic"
-              data-work-keywords="漫畫 no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="illustration"
-              data-work-keywords="插畫 no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--portrait"
-              data-work-category="animation"
-              data-work-keywords="動畫 tall no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--square"
-              data-work-category="comic"
-              data-work-keywords="漫畫 square no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--landscape"
-              data-work-category="illustration"
-              data-work-keywords="插畫 no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-            <article
-              class="work-gallery__item work-gallery__item--portrait"
-              data-work-category="comic"
-              data-work-keywords="漫畫 tall no file"
-            >
-              <span class="material-symbols-outlined work-gallery__placeholder-icon" aria-hidden="true">image</span>
-            </article>
-          </div>
+          <div
+            class="work-gallery__toolbar"
+            data-work-toolbar
+            aria-label="作品篩選工具"
+          ></div>
+          <div class="work-gallery__grid" data-work-grid></div>
           <p class="work-gallery__empty" data-work-empty hidden>
             找不到符合條件的作品。
           </p>
@@ -297,6 +141,7 @@
       </div>
     </footer>
 
-    <script src="js/work-gallery.js?v=1"></script>
+    <script src="js/page-content.js?v=4"></script>
+    <script src="js/work-gallery.js?v=2"></script>
   </body>
 </html>

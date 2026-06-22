@@ -374,11 +374,13 @@ if (pvModal && pvModalClose) {
   requestAnimationFrame(() => pvModal.focus({ preventScroll: true }));
 }
 
-waitForImages().then(() => {
-  entranceAssetsReady = true;
-  sizeArtboard();
-  startEntranceAnimation();
-});
+Promise.resolve(window.pageContentReady)
+  .then(waitForImages)
+  .then(() => {
+    entranceAssetsReady = true;
+    sizeArtboard();
+    startEntranceAnimation();
+  });
 new ResizeObserver(sizeArtboard).observe(stage);
 reduceMotion.addEventListener("change", () => {
   clearTimeout(hopTimer);
@@ -559,9 +561,17 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     updateScrollMotionTargets,
     { threshold: 0.01, rootMargin: "64px 190px" },
   );
+  const hashtagSection = document.querySelector(".activity-hashtags");
   const hashtagStickerObserver = new IntersectionObserver(
-    updateScrollMotionTargets,
-    { threshold: 0.01, rootMargin: "64px 220px" },
+    ([entry]) => {
+      hashtagStickerTargets.forEach((target) => {
+        target.classList.toggle(
+          "is-scroll-motion-visible",
+          entry.isIntersecting,
+        );
+      });
+    },
+    { threshold: 0.01, rootMargin: "64px 0px" },
   );
 
   requestAnimationFrame(() => {
@@ -575,9 +585,7 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
       logoStickerTargets.forEach((target) =>
         logoStickerObserver.observe(target),
       );
-      hashtagStickerTargets.forEach((target) =>
-        hashtagStickerObserver.observe(target),
-      );
+      if (hashtagSection) hashtagStickerObserver.observe(hashtagSection);
     });
   });
 }
@@ -851,28 +859,35 @@ let faqReturnHash = "#activity";
 let organizerReturnHash = "#activity";
 let relatedDataReturnHash = "#activity";
 
-document.querySelectorAll(".faq-card").forEach((card, index) => {
-  const heading = card.querySelector("h2");
-  const answer = card.querySelector("p");
-  const answerId = `faq-answer-${index + 1}`;
-  const questionContent = heading.innerHTML;
-  const answerReveal = document.createElement("div");
+function initializeFaqCards() {
+  document.querySelectorAll(".faq-card:not([data-faq-ready])").forEach((card, index) => {
+    const heading = card.querySelector("h2");
+    const answer = card.querySelector("p");
+    if (!heading || !answer) return;
+    const answerId = `faq-answer-${index + 1}`;
+    const questionContent = heading.innerHTML;
+    const answerReveal = document.createElement("div");
 
-  answer.id = answerId;
-  answer.setAttribute("aria-hidden", "true");
-  answerReveal.className = "faq-answer-reveal";
-  answerReveal.append(answer);
-  heading.after(answerReveal);
-  heading.innerHTML = `<button class="faq-question" type="button" aria-expanded="false" aria-controls="${answerId}">${questionContent}</button>`;
+    card.dataset.faqReady = "";
+    answer.id = answerId;
+    answer.setAttribute("aria-hidden", "true");
+    answerReveal.className = "faq-answer-reveal";
+    answerReveal.append(answer);
+    heading.after(answerReveal);
+    heading.innerHTML = `<button class="faq-question" type="button" aria-expanded="false" aria-controls="${answerId}">${questionContent}</button>`;
 
-  heading.querySelector(".faq-question").addEventListener("click", (event) => {
-    const question = event.currentTarget;
-    const willOpen = question.getAttribute("aria-expanded") !== "true";
-    question.setAttribute("aria-expanded", String(willOpen));
-    card.classList.toggle("is-open", willOpen);
-    answer.setAttribute("aria-hidden", String(!willOpen));
+    heading.querySelector(".faq-question").addEventListener("click", (event) => {
+      const question = event.currentTarget;
+      const willOpen = question.getAttribute("aria-expanded") !== "true";
+      question.setAttribute("aria-expanded", String(willOpen));
+      card.classList.toggle("is-open", willOpen);
+      answer.setAttribute("aria-hidden", String(!willOpen));
+    });
   });
-});
+}
+
+initializeFaqCards();
+document.addEventListener("faq-content:ready", initializeFaqCards);
 
 function showFaq(updateHistory = true) {
   if (
@@ -1121,7 +1136,8 @@ const memeModalTriggers = [
   ...document.querySelectorAll('[data-meme-src], [data-meme-gallery]'),
 ];
 const memeModalCloseButtons = [...document.querySelectorAll('[data-meme-close]')];
-const memeGalleryItems = [
+function collectMemeGalleryItems() {
+  return [
   ...new Map(
     [...document.querySelectorAll('[data-meme-src]')].map((trigger) => [
       trigger.dataset.memeSrc,
@@ -1131,7 +1147,9 @@ const memeGalleryItems = [
       },
     ]),
   ).values(),
-];
+  ];
+}
+const memeGalleryItems = collectMemeGalleryItems();
 let memeModalTrigger = null;
 let memeModalIndex = 0;
 let memeModalIsGallery = false;
@@ -1171,6 +1189,10 @@ function showMemeImage(index) {
 }
 
 renderMemeDots();
+document.addEventListener('organizers-content:ready', () => {
+  memeGalleryItems.splice(0, memeGalleryItems.length, ...collectMemeGalleryItems());
+  renderMemeDots();
+});
 
 function openMemeModal(event) {
   if (!memeModal || !memeModalImage || !memeGalleryItems.length) return;

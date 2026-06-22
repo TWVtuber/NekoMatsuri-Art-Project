@@ -1218,6 +1218,10 @@ body.organizer-open .site-nav [data-organizer-link] {
   line-height: 1.25;
 }
 
+.organizer-quote-heading {
+  color: #6c5e04;
+}
+
 .journal-container-1 {
   border-left-color: rgb(255, 205, 210);
 }
