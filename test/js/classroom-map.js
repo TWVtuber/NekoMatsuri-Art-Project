@@ -28,7 +28,7 @@
       column: 7,
       name: "阿強",
       group: "ip",
-      portrait: "imgs/characters/證件/照片/阿強-頭貼.png",
+      portrait: "imgs/characters/證件/照片/阿強-頭貼.webp",
       externalUrl: "https://x.com/Nekolive_Chiang",
     },
     {
@@ -52,7 +52,7 @@
       column: 7,
       name: "阿醜",
       group: "ip",
-      portrait: "imgs/characters/證件/照片/阿醜-頭貼.png",
+      portrait: "imgs/characters/證件/照片/阿醜-頭貼.webp",
       externalUrl: "https://x.com/Nekolive_Ugly",
     },
     {
@@ -60,7 +60,7 @@
       column: 7,
       name: "利貝",
       group: "ip",
-      portrait: "imgs/characters/證件/照片/利貝-頭貼.png",
+      portrait: "imgs/characters/證件/照片/利貝-頭貼.webp",
       externalUrl: "https://x.com/Nekolive_Liber",
     },
     {
@@ -68,7 +68,7 @@
       column: 7,
       name: "阿雄",
       group: "ip",
-      portrait: "imgs/characters/證件/照片/阿雄-頭貼.png",
+      portrait: "imgs/characters/證件/照片/阿雄-頭貼.webp",
       externalUrl: "https://x.com/Nekolive_Xiong",
     },
     {
@@ -131,7 +131,10 @@
       </header>
       <div class="classroom-activity__layout">
         <article class="classroom-activity__board">
-          <div class="classroom-activity__balcony">陽台</div>
+          <div class="classroom-activity__front-wall">
+            <div class="classroom-activity__pillar" aria-hidden="true"></div>
+            <div class="classroom-activity__balcony">陽台</div>
+          </div>
           <div class="classroom-activity__room">
             <div class="classroom-activity__blackboard">黑板</div>
             <div class="classroom-activity__podium" aria-label="講台"><span>講</span>${renderPersonCard(teacher)}<span>台</span></div>

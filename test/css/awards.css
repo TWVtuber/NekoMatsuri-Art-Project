@@ -557,3 +557,77 @@
   grid-column: 3;
   grid-row: 1;
 }
+
+/* Award notes arrive like individual papers being stuck onto the board. */
+.award-note-grid .award-note.scroll-stick-note:nth-child(3n + 1) {
+  --sticky-note-start-x: -190px;
+  --sticky-note-start-y: 14px;
+  --sticky-note-start-rotate: -7deg;
+}
+
+.award-note-grid .award-note.scroll-stick-note:nth-child(3n) {
+  --sticky-note-start-x: 190px;
+  --sticky-note-start-y: 14px;
+  --sticky-note-start-rotate: 7deg;
+}
+
+.award-note-grid .award-note.scroll-stick-note:nth-child(2) {
+  --sticky-note-start-x: 0px;
+  --sticky-note-start-y: -170px;
+  --sticky-note-start-rotate: -5deg;
+}
+
+.award-note-grid .award-note.scroll-stick-note:nth-child(5) {
+  --sticky-note-start-x: 0px;
+  --sticky-note-start-y: 170px;
+  --sticky-note-start-rotate: 5deg;
+}
+
+.award-note-grid .award-note.scroll-stick-note:nth-child(3n + 1) {
+  --sticky-note-delay: 0ms;
+}
+
+.award-note-grid .award-note.scroll-stick-note:nth-child(3n + 2) {
+  --sticky-note-delay: 90ms;
+}
+
+.award-note-grid .award-note.scroll-stick-note:nth-child(3n) {
+  --sticky-note-delay: 180ms;
+}
+
+.scroll-motion-ready .award-note.scroll-stick-note {
+  opacity: 0;
+  transform: translate3d(
+      var(--sticky-note-start-x),
+      var(--sticky-note-start-y),
+      0
+    )
+    rotate(var(--sticky-note-start-rotate)) scale(0.94);
+  transition:
+    transform 0.64s cubic-bezier(0.16, 1.28, 0.3, 1),
+    opacity 0.24s ease-out;
+  transition-delay: 0s;
+  will-change: transform, opacity;
+}
+
+.scroll-motion-ready .award-note.scroll-stick-note.is-scroll-motion-visible {
+  opacity: 1;
+  transform: var(--scroll-rest-transform);
+  transition-delay: var(--sticky-note-delay);
+  will-change: auto;
+}
+
+.scroll-motion-ready
+  .award-note.scroll-stick-note.is-scroll-motion-visible:hover {
+  transform: translateY(-5px) rotate(0deg);
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-motion-ready .award-note.scroll-stick-note,
+  .scroll-motion-ready .award-note.scroll-stick-note.is-scroll-motion-visible {
+    opacity: 1;
+    transform: var(--scroll-rest-transform);
+    transition: none;
+  }
+}

@@ -93,8 +93,10 @@
     const sidebarImageMarkup = sidebarImage?.src
       ? `<figure class="${sidebarImageVariant === "document" ? "related-photo-card " : ""}related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "" })}</figure>`
       : "";
-    const cornerImageMarkup = profile.cornerImage?.src
-      ? `<img class="related-profile__corner-mascot" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" />`
+    const cornerImageMarkup = profile.cornerImage?.animationSrc
+      ? `<video class="related-profile__corner-mascot" aria-label="${escapeHtml(profile.cornerImage.alt ?? "")}" role="img" autoplay muted loop playsinline preload="auto"><source src="${escapeHtml(profile.cornerImage.animationSrc)}" type="video/webm" /></video>`
+      : profile.cornerImage?.src
+        ? `<img class="related-profile__corner-mascot" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" />`
       : "";
     const meta = profile.meta
       .map(
