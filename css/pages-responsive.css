@@ -717,8 +717,8 @@ body.organizer-open .site-nav [data-organizer-link] {
     min-height: 0;
     padding: 0 28px;
     font-size: 18px;
-    background: transparent;
-    color: transparent;
+    background: #ad173c;
+    color: #fff;
   }
 }
 

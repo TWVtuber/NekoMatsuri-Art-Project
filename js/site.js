@@ -86,7 +86,14 @@ let entranceStarted = false;
 let pvReturnFocus = null;
 
 function setupHomeParallax() {
-  if (!stage || !homeBackground || reduceMotion.matches) return;
+  if (
+    !stage ||
+    !homeBackground ||
+    reduceMotion.matches ||
+    window.getComputedStyle(homeBackground).display === "none"
+  ) {
+    return;
+  }
 
   const maxOffset = 9;
   const target = { x: 0, y: 0 };
