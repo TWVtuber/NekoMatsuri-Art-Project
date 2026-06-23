@@ -710,8 +710,11 @@
   letter-spacing: 0.01em;
   line-height: 1.2;
   white-space: nowrap;
+  cursor: pointer;
   transition:
+    width 0.2s ease,
     height 0.2s ease,
+    margin-left 0.2s ease,
     background-color 0.2s ease,
     color 0.2s ease,
     box-shadow 0.2s ease;
@@ -799,6 +802,25 @@
   --folder-tab-background: var(--folder-tab-muted-hover-color, #ddd7c7);
   background-color: #4b4738 !important;
   color: #11100d !important;
+}
+
+.related-data-view
+  .related-data-tabs--floating
+  .inactive-tab:hover {
+  z-index: 40;
+  width: calc(var(--related-tab-rail-width) + 6px);
+  margin-left: -6px;
+  box-shadow: -4px 0 7px rgb(0 0 0 / 9%);
+}
+
+@media (min-width: 1024px) {
+  .related-character-section
+    > .related-data-tabs:not(.related-data-tabs--floating)
+    .inactive-tab:hover {
+    z-index: 40;
+    height: clamp(35px, 3.4vw, 40px);
+    box-shadow: 0 -4px 7px rgb(0 0 0 / 9%);
+  }
 }
 
 .related-data-view .folder-tab:focus-visible {
@@ -1678,6 +1700,24 @@ body.image-viewer-open {
 .related-family__portraits figcaption a:hover,
 .related-family__portraits figcaption a:focus-visible {
   color: #4d328e;
+}
+
+[data-folder-panel="neko-family"] .related-family__portraits figcaption a {
+  color: #c92c56;
+}
+
+[data-folder-panel="neko-family"] .related-family__portraits figcaption a:hover,
+[data-folder-panel="neko-family"] .related-family__portraits figcaption a:focus-visible {
+  color: #941b3c;
+}
+
+[data-folder-panel="shen-family"] .related-family__portraits figcaption a {
+  color: #1d6fc0;
+}
+
+[data-folder-panel="shen-family"] .related-family__portraits figcaption a:hover,
+[data-folder-panel="shen-family"] .related-family__portraits figcaption a:focus-visible {
+  color: #124f91;
 }
 
 @media (max-width: 1023.98px) {

@@ -868,9 +868,27 @@
       "order": 9
     },
     "labels": {
-      "title": "其他角色相關設定"
+      "title": "其他角色相關設定",
+      "galleryTitle": "其他相關照片"
     },
-    "gallery": [],
+    "gallery": [
+      {
+        "src": "imgs/characters/3C-Pics/3C相關圖文/阿強/【阿強】早餐有蛋殼.jpg",
+        "caption": "早餐有蛋殼",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
+      },
+      {
+        "src": "imgs/characters/3C-Pics/3C相關圖文/阿雄/【阿雄】水色美少女.jpg",
+        "caption": "水色美少女",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
+      }
+    ],
     "portraits": [
       {
         "name": "阿強",

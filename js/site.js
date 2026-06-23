@@ -284,7 +284,7 @@ function sizeArtboard() {
   const marginTop = parseFloat(logoStyle.marginTop) || 0;
 
   const maxLogoRatio =
-    width < 600 ? 0.65 : useTablet ? 0.55 : useLaptop ? 0.5 : 0.45;
+    width < 600 ? 0.84 : useTablet ? 0.55 : useLaptop ? 0.5 : 0.45;
   const topSafePadding = useCover ? 24 : 48;
   const logoButtonGap = width < 600 ? 32 : width < 1024 ? 40 : 48;
   const safeAreaBottom = Math.max(
