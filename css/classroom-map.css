@@ -267,8 +267,6 @@
   display: grid;
   min-height: 0;
   place-items: center;
-  align-content: center;
-  gap: clamp(2px, 0.5cqi, 5px);
   border: 1px solid var(--classroom-ink);
   background: #f4f4f4;
   color: var(--classroom-ink);
@@ -277,15 +275,6 @@
   line-height: 1;
   letter-spacing: 0.08em;
   writing-mode: vertical-rl;
-}
-
-.classroom-activity__blackboard-stamp {
-  display: block;
-  width: min(35px, calc(var(--classroom-blackboard-width) * 0.62));
-  max-width: none;
-  height: auto;
-  object-fit: contain;
-  writing-mode: horizontal-tb;
 }
 
 .classroom-activity__seats {

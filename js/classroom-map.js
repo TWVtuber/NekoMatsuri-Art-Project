@@ -41,10 +41,7 @@
         <article class="classroom-activity__board">
           <div class="classroom-activity__front-wall"><div class="classroom-activity__pillar" aria-hidden="true"></div><div class="classroom-activity__balcony">${escapeHtml(data.labels.balcony)}</div></div>
           <div class="classroom-activity__room">
-            <div class="classroom-activity__blackboard">
-              <span>${escapeHtml(data.labels.blackboard)}</span>
-              <img class="classroom-activity__blackboard-stamp" src="imgs/characters/Objects/素材/校長給的好寶寶印章.png" alt="校長給的好寶寶印章" loading="lazy" decoding="async" />
-            </div>
+            <div class="classroom-activity__blackboard">${escapeHtml(data.labels.blackboard)}</div>
             <div class="classroom-activity__podium" aria-label="${escapeHtml(data.labels.podium)}"><span>講</span>${renderPersonCard(data.teacher)}<span>台</span></div>
             <div class="classroom-activity__seats" aria-label="${escapeHtml(data.labels.seatLayout)}">${seats}</div>
           </div>

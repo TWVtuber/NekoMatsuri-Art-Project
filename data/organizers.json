@@ -5,7 +5,7 @@
       "target": "organizer",
       "label": "主辦",
       "image": {
-        "src": "imgs/oraganizer/nekomatsuri.jpg",
+        "src": "imgs/organizer/nekomatsuri.webp",
         "alt": "貓祭",
         "caption": "貓祭 NekoMatsuri"
       },
@@ -32,7 +32,7 @@
       "target": "president",
       "label": "協辦",
       "image": {
-        "src": "imgs/oraganizer/President.jpg",
+        "src": "imgs/organizer/President.webp",
         "alt": "校長",
         "caption": "校長"
       },
@@ -48,18 +48,18 @@
     }
   ],
   "memes": [
-    { "key": "xiaoxing", "name": "筱星朔光", "image": "imgs/memes/筱星.jpg" },
-    { "key": "feihua", "name": "湮月緋花", "image": "imgs/memes/緋花.jpg" },
-    { "key": "xianan", "name": "夏楠", "image": "imgs/memes/夏楠.jpg" },
+    { "key": "xiaoxing", "name": "筱星朔光", "image": "imgs/memes/筱星.webp" },
+    { "key": "feihua", "name": "湮月緋花", "image": "imgs/memes/緋花.webp" },
+    { "key": "xianan", "name": "夏楠", "image": "imgs/memes/夏楠.webp" },
     {
       "key": "kalin",
       "name": "Kalin風凜魂太",
-      "image": "imgs/memes/Kalin.jpg"
+      "image": "imgs/memes/Kalin.webp"
     },
     {
       "key": "nekomatsuri",
       "name": "貓祭",
-      "image": "imgs/memes/NekoMatsuri.jpg"
+      "image": "imgs/memes/NekoMatsuri.webp"
     }
   ],
   "credits": {
