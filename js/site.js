@@ -277,7 +277,7 @@ function sizeArtboard() {
   const marginTop = parseFloat(logoStyle.marginTop) || 0;
 
   const maxLogoRatio =
-    width < 600 ? 0.8 : useTablet ? 0.72 : useLaptop ? 0.62 : 0.5;
+    width < 600 ? 0.65 : useTablet ? 0.55 : useLaptop ? 0.5 : 0.45;
   const topSafePadding = useCover ? 24 : 48;
   const logoButtonGap = width < 600 ? 32 : width < 1024 ? 40 : 48;
   const safeAreaBottom = Math.max(
@@ -395,7 +395,7 @@ new IntersectionObserver(
       document.body.classList.add("activity-visible");
     }
   },
-  { threshold: 0.015 },
+  { threshold: 0 },
 ).observe(activity);
 
 function hideHeaderAtPageTop() {
@@ -406,6 +406,8 @@ function hideHeaderAtPageTop() {
 
   if (window.scrollY <= 1 && !isAlternateViewOpen) {
     document.body.classList.remove("activity-visible");
+  } else if (window.scrollY > 1 || isAlternateViewOpen) {
+    document.body.classList.add("activity-visible");
   }
 }
 
