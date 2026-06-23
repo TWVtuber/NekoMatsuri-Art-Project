@@ -38,7 +38,8 @@
       "name": "阿強",
       "group": "ip",
       "portrait": "imgs/characters/證件/照片/阿強-頭貼.webp",
-      "url": "https://x.com/Nekolive_Chiang"
+      "url": "https://x.com/Nekolive_Chiang",
+      "characterTab": "other"
     },
     {
       "row": 2,
@@ -62,15 +63,17 @@
       "name": "阿醜",
       "group": "ip",
       "portrait": "imgs/characters/證件/照片/阿醜-頭貼.webp",
-      "url": "https://x.com/Nekolive_Ugly"
+      "url": "https://x.com/Nekolive_Ugly",
+      "characterTab": "other"
     },
     {
       "row": 3,
       "column": 7,
-      "name": "利貝",
+      "name": "阿貝",
       "group": "ip",
       "portrait": "imgs/characters/證件/照片/利貝-頭貼.webp",
-      "url": "https://x.com/Nekolive_Liber"
+      "url": "https://x.com/Nekolive_Liber",
+      "characterTab": "other"
     },
     {
       "row": 4,
@@ -78,7 +81,8 @@
       "name": "阿雄",
       "group": "ip",
       "portrait": "imgs/characters/證件/照片/阿雄-頭貼.webp",
-      "url": "https://x.com/Nekolive_Xiong"
+      "url": "https://x.com/Nekolive_Xiong",
+      "characterTab": "other"
     },
     {
       "row": 5,

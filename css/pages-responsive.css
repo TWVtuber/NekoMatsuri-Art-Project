@@ -304,16 +304,13 @@ body.organizer-open .site-nav [data-organizer-link] {
     right: clamp(10px, 4vw, 32px);
     bottom: -88px;
   }
-  .home-stage {
+  .home-background {
     background-size: cover;
-    background-position: right center;
-  }
-  .home-artboard {
-    left: 100%;
-    transform: translate(-100%, -50%);
+    background-position: center center;
   }
   .submit-button {
-    top: 66%;
+    bottom: 30px;
+    top: auto;
     font-size: 18px;
   }
   .site-header {
@@ -710,16 +707,6 @@ body.organizer-open .site-nav [data-organizer-link] {
 }
 
 @media (min-width: 1024px) {
-  .home-stage.is-playing .submit-button {
-    top: 78%;
-    bottom: auto;
-    min-width: 320px;
-    padding: 20px 54px;
-    font-size: 24px;
-  }
-}
-
-@media (min-width: 1200px) {
   .home-stage .submit-button {
     display: inline-flex;
     align-items: center;
@@ -730,6 +717,8 @@ body.organizer-open .site-nav [data-organizer-link] {
     min-height: 0;
     padding: 0 28px;
     font-size: 18px;
+    background: #ad173c;
+    color: #fff;
   }
 }
 

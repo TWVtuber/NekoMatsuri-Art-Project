@@ -25,8 +25,20 @@
     "mainLogo": { "src": "imgs/main/LOGO.webp", "alt": "貓祭不繪讓你俄史計劃" }
   },
   "partners": [
-    { "role": "主辦", "name": "貓祭 NekoMatsuri", "url": "https://lit.link/en/NekoMatsuri", "logo": "imgs/neko_Logo.webp", "alt": "貓祭 NekoMatsuri Logo" },
-    { "role": "協辦", "name": "繪俄史藝術高等學院", "url": "https://x.com/INU_Art_", "logo": "imgs/badge.webp", "alt": "繪俄史藝術高等學院 Logo" }
+    {
+      "role": "主辦",
+      "name": "貓祭 NekoMatsuri",
+      "url": "https://lit.link/en/NekoMatsuri",
+      "logo": "imgs/neko_Logo.webp",
+      "alt": "貓祭 NekoMatsuri Logo"
+    },
+    {
+      "role": "協辦",
+      "name": "繪俄史藝術高等學院",
+      "url": "https://x.com/INU_Art_",
+      "logo": "imgs/badge.webp",
+      "alt": "繪俄史藝術高等學院 Logo"
+    }
   ],
   "relatedReferences": {
     "items": [
@@ -35,19 +47,31 @@
         "src": "imgs/characters/Objects/素材/校長三視圖.jpg",
         "title": "校長三視圖",
         "alt": "校長三視圖設定",
-        "description": "繪俄史藝術高等學院校長的外觀與設定參考。"
+        "description": "繪俄史藝術高等學院校長的外觀與設定參考。",
+        "artist": {
+          "name": "𝕀ℕ𝕌",
+          "url": "https://x.com/INU_Art_"
+        }
       },
       {
         "src": "imgs/characters/Objects/制服&運動服/制服女.jpg",
         "title": "女生制服設定",
         "alt": "女生制服與運動服設定",
-        "description": "女生夏冬制服、運動服與領結配色參考。"
+        "description": "女生夏冬制服、運動服與領結配色參考。",
+        "artist": {
+          "name": "𝕀ℕ𝕌",
+          "url": "https://x.com/INU_Art_"
+        }
       },
       {
         "src": "imgs/characters/Objects/制服&運動服/制服男.jpg",
         "title": "男生制服設定",
         "alt": "男生制服與運動服設定",
-        "description": "男生夏冬制服、運動服與領帶配色參考。"
+        "description": "男生夏冬制服、運動服與領帶配色參考。",
+        "artist": {
+          "name": "𝕀ℕ𝕌",
+          "url": "https://x.com/INU_Art_"
+        }
       }
     ],
     "links": [
@@ -79,22 +103,86 @@
     "searchPlaceholder": "請輸入名稱、作者或關鍵字",
     "emptyMessage": "找不到符合條件的作品。",
     "items": [
-      { "category": "animation", "layout": "landscape", "keywords": "動畫 no file" },
-      { "category": "comic", "layout": "landscape", "keywords": "漫畫 no file" },
-      { "category": "illustration", "layout": "landscape", "keywords": "插畫 no file" },
-      { "category": "animation", "layout": "portrait", "keywords": "動畫 portrait no file" },
-      { "category": "comic", "layout": "landscape", "keywords": "漫畫 warm no file" },
-      { "category": "illustration", "layout": "landscape", "keywords": "插畫 no file" },
-      { "category": "animation", "layout": "landscape", "keywords": "動畫 no file" },
-      { "category": "comic", "layout": "landscape", "keywords": "漫畫 cream no file" },
-      { "category": "illustration", "layout": "square", "keywords": "插畫 square no file" },
-      { "category": "animation", "layout": "landscape", "keywords": "動畫 pink no file" },
-      { "category": "comic", "layout": "landscape", "keywords": "漫畫 no file" },
-      { "category": "illustration", "layout": "landscape", "keywords": "插畫 no file" },
-      { "category": "animation", "layout": "portrait", "keywords": "動畫 tall no file" },
-      { "category": "comic", "layout": "square", "keywords": "漫畫 square no file" },
-      { "category": "illustration", "layout": "landscape", "keywords": "插畫 no file" },
-      { "category": "comic", "layout": "portrait", "keywords": "漫畫 tall no file" }
+      {
+        "category": "animation",
+        "layout": "landscape",
+        "keywords": "動畫 no file"
+      },
+      {
+        "category": "comic",
+        "layout": "landscape",
+        "keywords": "漫畫 no file"
+      },
+      {
+        "category": "illustration",
+        "layout": "landscape",
+        "keywords": "插畫 no file"
+      },
+      {
+        "category": "animation",
+        "layout": "portrait",
+        "keywords": "動畫 portrait no file"
+      },
+      {
+        "category": "comic",
+        "layout": "landscape",
+        "keywords": "漫畫 warm no file"
+      },
+      {
+        "category": "illustration",
+        "layout": "landscape",
+        "keywords": "插畫 no file"
+      },
+      {
+        "category": "animation",
+        "layout": "landscape",
+        "keywords": "動畫 no file"
+      },
+      {
+        "category": "comic",
+        "layout": "landscape",
+        "keywords": "漫畫 cream no file"
+      },
+      {
+        "category": "illustration",
+        "layout": "square",
+        "keywords": "插畫 square no file"
+      },
+      {
+        "category": "animation",
+        "layout": "landscape",
+        "keywords": "動畫 pink no file"
+      },
+      {
+        "category": "comic",
+        "layout": "landscape",
+        "keywords": "漫畫 no file"
+      },
+      {
+        "category": "illustration",
+        "layout": "landscape",
+        "keywords": "插畫 no file"
+      },
+      {
+        "category": "animation",
+        "layout": "portrait",
+        "keywords": "動畫 tall no file"
+      },
+      {
+        "category": "comic",
+        "layout": "square",
+        "keywords": "漫畫 square no file"
+      },
+      {
+        "category": "illustration",
+        "layout": "landscape",
+        "keywords": "插畫 no file"
+      },
+      {
+        "category": "comic",
+        "layout": "portrait",
+        "keywords": "漫畫 tall no file"
+      }
     ]
   }
 }

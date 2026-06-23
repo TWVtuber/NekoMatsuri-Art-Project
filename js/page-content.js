@@ -81,6 +81,10 @@
     button.dataset.imageViewerTitle = item.title;
     if (item.description) button.dataset.imageViewerDescription = item.description;
     if (item.link) button.dataset.imageViewerLink = item.link;
+    if (item.artist?.name && item.artist?.url) {
+      button.dataset.imageViewerArtistName = item.artist.name;
+      button.dataset.imageViewerArtistUrl = item.artist.url;
+    }
     button.setAttribute("aria-label", `開啟${item.title}完整圖片`);
 
     const image = document.createElement("img");
