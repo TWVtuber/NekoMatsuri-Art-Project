@@ -8,40 +8,68 @@
     },
     "labels": {
       "title": "貓家兄妹相關設定",
-      "galleryTitle": "沈家貓家麻將回"
+      "galleryTitle": "貓家相關照片"
     },
     "portraits": [
       {
         "name": "貓祭",
         "src": "imgs/characters/證件/照片/貓祭-證件.jpg",
-        "accent": "#e28b97"
+        "accent": "#e28b97",
+        "artist": {
+          "name": "亞狸YaRi",
+          "url": "https://x.com/Nk_in_1"
+        }
       },
       {
         "name": "祭煜",
         "src": "imgs/characters/證件/照片/祭煜-證件.jpg",
-        "accent": "#e28b97"
+        "accent": "#e28b97",
+        "artist": {
+          "name": "亞狸YaRi",
+          "url": "https://x.com/Nk_in_1"
+        }
       }
     ],
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/沈家貓家麻將回/沈家漫畫1.webp",
-        "caption": "沈家貓家麻將回 1"
+        "caption": "沈家貓家麻將回 1",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家貓家麻將回/沈家漫畫2.webp",
-        "caption": "沈家貓家麻將回 2"
+        "caption": "沈家貓家麻將回 2",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家貓家麻將回/沈家漫畫3.webp",
-        "caption": "沈家貓家麻將回 3"
+        "caption": "沈家貓家麻將回 3",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家貓家麻將回/沈家漫畫4.webp",
-        "caption": "沈家貓家麻將回 4"
+        "caption": "沈家貓家麻將回 4",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家貓家麻將回/沈家漫畫5.webp",
-        "caption": "沈家貓家麻將回 5"
+        "caption": "沈家貓家麻將回 5",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
       }
     ]
   },
@@ -98,40 +126,76 @@
     "sidebarImage": {
       "src": "imgs/characters/證件/【貓祭】教職證.jpg",
       "alt": "貓祭教職證",
-      "variant": "document"
+      "variant": "document",
+      "artist": {
+        "name": "貓祭 Neko Matsuri",
+        "url": "https://x.com/nekomatsuri_25"
+      }
     },
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】TAG公開.jpg",
-        "caption": "TAG 公開"
+        "caption": "TAG 公開",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】不信任的眼神.jpg",
-        "caption": "不信任的眼神"
+        "caption": "不信任的眼神",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】入職沒跟我說這是24小時制.jpg",
-        "caption": "入職沒跟我說這是 24 小時制"
+        "caption": "入職沒跟我說這是 24 小時制",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】初見3C.jpg",
-        "caption": "初見三年 C 班"
+        "caption": "初見三年 C 班",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】塔努努好香.jpg",
-        "caption": "塔努努好香"
+        "caption": "塔努努好香",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】學院老師全身.webp",
-        "caption": "三年 C 班導師貓祭全身設計"
+        "caption": "三年 C 班導師貓祭全身設計",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】班上美男子太多了.jpg",
-        "caption": "班上美男子太多了"
+        "caption": "班上美男子太多了",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】與哥哥初次見面.webp",
-        "caption": "為了哥哥，特別來同一班，但是是老師"
+        "caption": "為了哥哥，特別來同一班，但是是老師",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       }
     ]
   },
@@ -191,16 +255,28 @@
     "sidebarImage": {
       "src": "imgs/characters/證件/【祭煜】學生證.webp",
       "alt": "祭煜學生證",
-      "variant": "document"
+      "variant": "document",
+      "artist": {
+        "name": "貓祭 Neko Matsuri",
+        "url": "https://x.com/nekomatsuri_25"
+      }
     },
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/3C相關圖文/郭喵/【郭喵】一定是不小心的.jpg",
-        "caption": "一定是不小心的"
+        "caption": "一定是不小心的",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】與哥哥初次見面.webp",
-        "caption": "對妹妹貓祭空降班導非常震驚"
+        "caption": "對妹妹貓祭空降班導非常震驚",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       }
     ]
   },
@@ -256,7 +332,11 @@
     "sidebarImage": {
       "src": "imgs/characters/證件/【沈曦】學生證.jpg",
       "alt": "沈曦學生證",
-      "variant": "document"
+      "variant": "document",
+      "artist": {
+        "name": "貓祭 Neko Matsuri",
+        "url": "https://x.com/nekomatsuri_25"
+      }
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈曦Q.webp",
@@ -266,23 +346,43 @@
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈曦/【沈曦】觀察日記.jpg",
-        "caption": "超級資優生，品學兼優"
+        "caption": "超級資優生，品學兼優",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈曦/【沈曦】漫畫.webp",
-        "caption": "沈曦漫畫"
+        "caption": "沈曦漫畫",
+        "artist": {
+          "name": "柊むらさき",
+          "url": "https://x.com/hiragi_murasaki"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈曦/沈家1.jpg",
-        "caption": "沈家日常 1"
+        "caption": "沈家日常 1",
+        "artist": {
+          "name": "愛君Aijunart",
+          "url": "https://x.com/Aijunart"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈曦/沈家2.jpg",
-        "caption": "沈家日常 2"
+        "caption": "沈家日常 2",
+        "artist": {
+          "name": "愛君Aijunart",
+          "url": "https://x.com/Aijunart"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈曦/曦祭.webp",
-        "caption": "曦祭"
+        "caption": "曦祭",
+        "artist": {
+          "name": "柊むらさき",
+          "url": "https://x.com/hiragi_murasaki"
+        }
       }
     ]
   },
@@ -335,13 +435,17 @@
       }
     ],
     "artist": {
-      "name": "十炎Shiyan",
-      "url": "https://x.com/Shiyan_429"
+      "name": "戸屋",
+      "url": "https://www.threads.com/@toyadolls"
     },
     "sidebarImage": {
       "src": "imgs/characters/證件/【沈澈】學生證.jpg",
       "alt": "沈澈學生證",
-      "variant": "document"
+      "variant": "document",
+      "artist": {
+        "name": "貓祭 Neko Matsuri",
+        "url": "https://x.com/nekomatsuri_25"
+      }
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈澈Q.webp",
@@ -351,11 +455,19 @@
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈澈/【沈澈】無能狂怒.jpg",
-        "caption": "非常照顧妹妹，基本上都待在身邊"
+        "caption": "無能狂怒",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈澈/【沈澈】漫畫.webp",
-        "caption": "沈澈漫畫"
+        "caption": "沈澈漫畫",
+        "artist": {
+          "name": "柊むらさき",
+          "url": "https://x.com/hiragi_murasaki"
+        }
       }
     ]
   },
@@ -413,13 +525,17 @@
       "打呼聲意外的很大聲（是真的很大聲）"
     ],
     "artist": {
-      "name": "十炎Shiyan",
-      "url": "https://x.com/Shiyan_429"
+      "name": "戸屋",
+      "url": "https://www.threads.com/@toyadolls"
     },
     "sidebarImage": {
       "src": "imgs/characters/證件/【沈樂】學生證.jpg",
       "alt": "沈樂學生證",
-      "variant": "document"
+      "variant": "document",
+      "artist": {
+        "name": "貓祭 Neko Matsuri",
+        "url": "https://x.com/nekomatsuri_25"
+      }
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈樂Q.webp",
@@ -429,11 +545,19 @@
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈樂/【沈樂】無能狂怒.jpg",
-        "caption": "常跟二哥鬥嘴吵架，通常居下風"
+        "caption": "無能狂怒",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈樂/【沈樂】漫畫.webp",
-        "caption": "沈樂漫畫"
+        "caption": "沈樂漫畫",
+        "artist": {
+          "name": "柊むらさき",
+          "url": "https://x.com/hiragi_murasaki"
+        }
       }
     ]
   },
@@ -515,7 +639,11 @@
     "sidebarImage": {
       "src": "imgs/characters/證件/【沈月】學生證.jpg",
       "alt": "沈月學生證",
-      "variant": "document"
+      "variant": "document",
+      "artist": {
+        "name": "貓祭 Neko Matsuri",
+        "url": "https://x.com/nekomatsuri_25"
+      }
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈月Q.webp",
@@ -525,49 +653,93 @@
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】一公噸的補水.jpg",
-        "caption": "是條鯊魚，每日需要補充一公噸的水"
+        "caption": "是條鯊魚，每日需要補充一公噸的水",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】好香的魚干.jpg",
-        "caption": "好香的魚乾"
+        "caption": "好香的魚乾",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】月下美人.jpg",
-        "caption": "月下美人"
+        "caption": "月下美人",
+        "artist": {
+          "name": "十炎✧ Shiyan",
+          "url": "https://x.com/Shiyan_429"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】漫畫.webp",
-        "caption": "沈月漫畫"
+        "caption": "沈月漫畫",
+        "artist": {
+          "name": "柊むらさき",
+          "url": "https://x.com/hiragi_murasaki"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】觀察日記.jpg",
-        "caption": "沈月觀察日記"
+        "caption": "沈月觀察日記",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】雙生.jpg",
-        "caption": "雙生"
+        "caption": "雙生",
+        "artist": {
+          "name": "十炎✧ Shiyan",
+          "url": "https://x.com/Shiyan_429"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/【沈月】黑化.jpg",
-        "caption": "沈月黑化設定"
+        "caption": "沈月黑化設定",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/沈月黑化詳細.jpg",
-        "caption": "沈月黑化詳細設定"
+        "caption": "沈月黑化詳細設定",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/擔心三哥的精神狀態.webp",
-        "caption": "擔心三哥的精神狀態"
+        "caption": "擔心三哥的精神狀態",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/image.webp",
-        "caption": "情書？"
+        "caption": "情書？",
+        "artist": {
+          "name": "柊むらさき",
+          "url": "https://x.com/hiragi_murasaki"
+        }
       },
       {
         "type": "video",
         "src": "imgs/characters/3C-Pics/沈家相關/沈月/要黑化了.webm",
         "poster": "imgs/characters/3C-Pics/沈家相關/沈月/要黑化了.webp",
-        "caption": "要黑化了"
+        "caption": "要黑化了",
+        "artist": {
+          "name": "愛君Aijunart",
+          "url": "https://x.com/Aijunart"
+        }
       }
     ]
   },
@@ -581,49 +753,89 @@
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈家/【沈家】Q版行列.webp",
-        "caption": "沈家 Q 版行列"
+        "caption": "沈家 Q 版行列",
+        "artist": {
+          "name": "十炎✧ Shiyan",
+          "url": "https://x.com/Shiyan_429"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈家/【沈家】三年C班的四胞胎.jpg",
-        "caption": "三年 C 班的沈家四胞胎"
+        "caption": "三年 C 班的沈家四胞胎",
+        "artist": {
+          "name": "十炎✧ Shiyan",
+          "url": "https://x.com/Shiyan_429"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈家/【沈家】你為什麼不幫大哥.jpg",
-        "caption": "你為什麼不幫大哥"
+        "caption": "你為什麼不幫大哥畫",
+        "artist": {
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈家/【沈家】全彩日常.jpg",
-        "caption": "沈家全彩日常"
+        "caption": "沈家全彩日常",
+        "artist": {
+          "name": "十炎✧ Shiyan",
+          "url": "https://x.com/Shiyan_429"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈家/沈家塗鴉1.webp",
-        "caption": "沈家塗鴉 1"
+        "caption": "沈家塗鴉 1",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
       },
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈家/沈家塗鴉4-端午節.webp",
-        "caption": "沈家塗鴉 4・端午節"
+        "caption": "沈家塗鴉 4・端午節",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
       }
     ],
     "portraits": [
       {
         "name": "沈曦",
         "src": "imgs/characters/證件/照片/沈曦-證件.jpg",
-        "accent": "#d34b4b"
+        "accent": "#d34b4b",
+        "artist": {
+          "name": "戸屋",
+          "url": "https://www.threads.com/@toyadolls"
+        }
       },
       {
         "name": "沈澈",
         "src": "imgs/characters/證件/照片/沈澈-證件.jpg",
-        "accent": "#5d9dd5"
+        "accent": "#5d9dd5",
+        "artist": {
+          "name": "戸屋",
+          "url": "https://www.threads.com/@toyadolls"
+        }
       },
       {
         "name": "沈樂",
         "src": "imgs/characters/證件/照片/沈樂-證件.jpg",
-        "accent": "#d49a32"
+        "accent": "#d49a32",
+        "artist": {
+          "name": "戸屋",
+          "url": "https://www.threads.com/@toyadolls"
+        }
       },
       {
         "name": "沈月",
         "src": "imgs/characters/證件/照片/沈月-證件.jpg",
-        "accent": "#7584c8"
+        "accent": "#7584c8",
+        "artist": {
+          "name": "湖尼ʜᴜɴɪ",
+          "url": "https://x.com/Hunifox"
+        }
       }
     ],
     "nameTable": {
@@ -647,6 +859,60 @@
         }
       ]
     }
+  },
+  "other": {
+    "kind": "family",
+    "tab": {
+      "title": "【其他】",
+      "color": "#e2d2ff",
+      "order": 9
+    },
+    "labels": {
+      "title": "其他角色相關設定"
+    },
+    "gallery": [],
+    "portraits": [
+      {
+        "name": "阿強",
+        "src": "imgs/characters/證件/照片/阿強-頭貼.webp",
+        "accent": "#7051b7",
+        "url": "https://x.com/Nekolive_Chiang",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
+      },
+      {
+        "name": "阿醜",
+        "src": "imgs/characters/證件/照片/阿醜-頭貼.webp",
+        "accent": "#7051b7",
+        "url": "https://x.com/Nekolive_Ugly",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
+      },
+      {
+        "name": "阿貝",
+        "src": "imgs/characters/證件/照片/利貝-頭貼.webp",
+        "accent": "#7051b7",
+        "url": "https://x.com/Nekolive_Liber",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
+      },
+      {
+        "name": "阿雄",
+        "src": "imgs/characters/證件/照片/阿雄-頭貼.webp",
+        "accent": "#7051b7",
+        "url": "https://x.com/Nekolive_Xiong",
+        "artist": {
+          "name": "湮月",
+          "url": "https://x.com/lilimxxxdeer"
+        }
+      }
+    ]
   },
   "_ui": {
     "profile": {

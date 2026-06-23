@@ -9,6 +9,8 @@
     "image-viewer-description-text",
   );
   const sourceLink = document.getElementById("image-viewer-source-link");
+  const artist = document.getElementById("image-viewer-artist");
+  const artistLink = document.getElementById("image-viewer-artist-link");
   const zoomLabel = document.getElementById("image-viewer-zoom");
 
   if (
@@ -20,6 +22,8 @@
     !description ||
     !descriptionText ||
     !sourceLink ||
+    !artist ||
+    !artistLink ||
     !zoomLabel
   ) {
     return;
@@ -96,10 +100,15 @@
     title.textContent = trigger.dataset.imageViewerTitle || "圖片預覽";
     const body = trigger.dataset.imageViewerDescription || "";
     const link = trigger.dataset.imageViewerLink || "";
+    const artistName = trigger.dataset.imageViewerArtistName || "";
+    const artistUrl = trigger.dataset.imageViewerArtistUrl || "";
     descriptionText.textContent = body;
     sourceLink.href = link || "#";
     sourceLink.hidden = !link;
     description.hidden = !body && !link;
+    artistLink.textContent = artistName;
+    artistLink.href = artistUrl || "#";
+    artist.hidden = !artistName || !artistUrl;
     const videoSource = trigger.dataset.imageViewerVideoSrc || "";
     activeMedia = videoSource ? video : image;
     image.hidden = Boolean(videoSource);

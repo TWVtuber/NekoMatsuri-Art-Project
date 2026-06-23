@@ -10,11 +10,11 @@
       ? `<img src="${escapeHtml(person.portrait)}" alt="" loading="lazy" decoding="async" />`
       : '<span class="classroom-activity__portrait-placeholder" aria-hidden="true">✦</span>';
     const content = `<div class="classroom-activity__photo-frame">${portrait}</div><strong>${escapeHtml(person.name)}${person.role ? `<span class="classroom-activity__seat-role">（${escapeHtml(person.role)}）</span>` : ""}</strong>`;
-    if (person.url) {
-      return `<a class="classroom-activity__seat classroom-activity__seat--${escapeHtml(person.group)} is-clickable" href="${escapeHtml(person.url)}" target="_blank" rel="noopener noreferrer" aria-label="前往${escapeHtml(person.name)}的 X 帳號">${content}</a>`;
-    }
     if (person.characterTab) {
       return `<a class="classroom-activity__seat classroom-activity__seat--${escapeHtml(person.group)} is-clickable" href="#related-data" data-related-character-target="${escapeHtml(person.characterTab)}" aria-label="查看${escapeHtml(person.name)}角色資料">${content}</a>`;
+    }
+    if (person.url) {
+      return `<a class="classroom-activity__seat classroom-activity__seat--${escapeHtml(person.group)} is-clickable" href="${escapeHtml(person.url)}" target="_blank" rel="noopener noreferrer" aria-label="前往${escapeHtml(person.name)}的 X 帳號">${content}</a>`;
     }
     return `<div class="classroom-activity__seat classroom-activity__seat--${escapeHtml(person.group)}">${content}</div>`;
   }

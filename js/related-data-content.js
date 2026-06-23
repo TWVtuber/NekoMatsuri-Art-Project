@@ -62,22 +62,29 @@
     source,
     title,
     description = "",
+    artist = null,
     lazy = true,
   }) {
-    return `<button class="image-viewer-trigger" type="button" data-image-viewer-src="${escapeHtml(source)}" data-image-viewer-title="${escapeHtml(title)}" data-image-viewer-description="${escapeHtml(description)}" aria-label="開啟${escapeHtml(title)}完整圖片"><img src="${escapeHtml(source)}" alt="${escapeHtml(title)}"${lazy ? ' loading="lazy" decoding="async"' : ""} draggable="false" /></button>`;
+    const artistAttributes = artist?.name && artist?.url
+      ? ` data-image-viewer-artist-name="${escapeHtml(artist.name)}" data-image-viewer-artist-url="${escapeHtml(artist.url)}"`
+      : "";
+    return `<button class="image-viewer-trigger" type="button" data-image-viewer-src="${escapeHtml(source)}" data-image-viewer-title="${escapeHtml(title)}" data-image-viewer-description="${escapeHtml(description)}"${artistAttributes} aria-label="開啟${escapeHtml(title)}完整圖片"><img src="${escapeHtml(source)}" alt="${escapeHtml(title)}"${lazy ? ' loading="lazy" decoding="async"' : ""} draggable="false" /></button>`;
   }
 
-  function videoViewerTrigger({ source, title, poster = "" }) {
-    return `<button class="image-viewer-trigger" type="button" data-image-viewer-video-src="${escapeHtml(source)}" data-image-viewer-poster="${escapeHtml(poster)}" data-image-viewer-title="${escapeHtml(title)}" aria-label="開啟${escapeHtml(title)}完整動圖"><video class="related-profile__gallery-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"${poster ? ` poster="${escapeHtml(poster)}"` : ""} aria-label="${escapeHtml(title)}"><source src="${escapeHtml(source)}" type="video/webm" /></video></button>`;
+  function videoViewerTrigger({ source, title, poster = "", artist = null }) {
+    const artistAttributes = artist?.name && artist?.url
+      ? ` data-image-viewer-artist-name="${escapeHtml(artist.name)}" data-image-viewer-artist-url="${escapeHtml(artist.url)}"`
+      : "";
+    return `<button class="image-viewer-trigger" type="button" data-image-viewer-video-src="${escapeHtml(source)}" data-image-viewer-poster="${escapeHtml(poster)}" data-image-viewer-title="${escapeHtml(title)}"${artistAttributes} aria-label="開啟${escapeHtml(title)}完整動圖"><video class="related-profile__gallery-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"${poster ? ` poster="${escapeHtml(poster)}"` : ""} aria-label="${escapeHtml(title)}"><source src="${escapeHtml(source)}" type="video/webm" /></video></button>`;
   }
 
   function renderGallery(gallery = [], currentProfileKey = "") {
     return gallery
       .map(
-        ({ src, caption, description = "", type = "image", poster = "" }) => {
+        ({ src, caption, description = "", type = "image", poster = "", artist = null }) => {
           const media = type === "video"
-            ? videoViewerTrigger({ source: src, title: caption, poster })
-            : imageViewerTrigger({ source: src, title: caption, description });
+            ? videoViewerTrigger({ source: src, title: caption, poster, artist })
+            : imageViewerTrigger({ source: src, title: caption, description, artist });
           return `<figure class="related-photo-card paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${media}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`;
         },
       )
@@ -99,7 +106,7 @@
       ? sidebarImage.variant
       : "document";
     const sidebarImageMarkup = sidebarImage?.src
-      ? `<figure class="${sidebarImageVariant === "document" ? "related-photo-card " : ""}related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "" })}</figure>`
+      ? `<figure class="${sidebarImageVariant === "document" ? "related-photo-card " : ""}related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "", artist: sidebarImage.artist })}</figure>`
       : "";
     const cornerImageMarkup = profile.cornerImage?.animationSrc
       ? `<video class="related-profile__corner-mascot" aria-label="${escapeHtml(profile.cornerImage.alt ?? "")}" role="img" autoplay muted loop playsinline preload="auto"><source src="${escapeHtml(profile.cornerImage.animationSrc)}" type="video/webm" /></video>`
@@ -136,7 +143,7 @@
       <aside class="related-profile__sidebar">
         <div class="related-profile__portrait-wrap">
           <span class="related-data-photo-tape" aria-hidden="true"></span>
-          <div class="related-photo-card polaroid-frame related-profile__portrait">${imageViewerTrigger({ source: profile.portrait, title: `${profile.name}證件照`, description: profile.relationship, lazy: false })}</div>
+          <div class="related-photo-card polaroid-frame related-profile__portrait">${imageViewerTrigger({ source: profile.portrait, title: `${profile.name}證件照`, description: profile.relationship, artist, lazy: false })}</div>
           <div class="related-profile__name-card"><h2>${escapeHtml(profile.name)}｜${escapeHtml(profile.romanized)}</h2></div>
           <p class="related-profile__artist">${escapeHtml(labels.artistPrefix)}${artistName}</p>
         </div>
@@ -163,8 +170,12 @@
       : "";
     const portraits = data.portraits
       .map(
-        ({ name, src, accent }) =>
-          `<div class="related-family__portrait-wrap" style="--profile-accent:${escapeHtml(accent)}"><span class="related-data-photo-tape" aria-hidden="true"></span><figure class="related-photo-card">${imageViewerTrigger({ source: src, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure></div>`,
+        ({ name, src, accent, artist, url = "" }) => {
+          const caption = url
+            ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" aria-label="前往${escapeHtml(name)}的 X 帳號">${escapeHtml(name)}</a>`
+            : linkCharacterMentions(name);
+          return `<div class="related-family__portrait-wrap" style="--profile-accent:${escapeHtml(accent)}"><span class="related-data-photo-tape" aria-hidden="true"></span><figure class="related-photo-card">${imageViewerTrigger({ source: src, title: `${name}證件照`, artist, lazy: false })}<figcaption>${caption}</figcaption></figure></div>`;
+        },
       )
       .join("");
     const namesMarkup = data.nameTable
@@ -181,10 +192,13 @@
           return `<article class="paper-sheet related-family__names"><h3>${escapeHtml(labels.namesTitle)}</h3><div class="related-family__table-wrap"><table><thead><tr>${tableHead}</tr></thead><tbody>${tableBody}</tbody></table></div></article>`;
         })()
       : "";
+    const galleryMarkup = data.gallery?.length
+      ? `<section class="related-profile__gallery related-family__photo-gallery"><h3>${escapeHtml(labels.galleryTitle)}</h3><div>${gallery}</div></section>`
+      : "";
     return `<div class="manila-texture related-overview related-family">
       <section><h2>${escapeHtml(labels.title)}</h2><div class="related-family__portraits${portraitCountClass}">${portraits}</div></section>
       ${namesMarkup}
-      <section class="related-profile__gallery related-family__photo-gallery"><h3>${escapeHtml(labels.galleryTitle)}</h3><div>${gallery}</div></section>
+      ${galleryMarkup}
     </div>`;
   }
 
@@ -208,16 +222,24 @@
       groupTabs
       .map(([key, data]) => {
         const isSelected = key === defaultKey;
-        const colorClass = data.tab.color === "#ffcbd3" ? " folder-tab--pink" : " folder-tab--blue";
+        const colorClass = data.tab.color === "#ffcbd3"
+          ? " folder-tab--pink"
+          : data.tab.color === "#e2d2ff"
+            ? " folder-tab--purple"
+            : " folder-tab--blue";
         return `<button class="folder-tab${colorClass} px-5 py-2 font-label-md text-label-md ${isSelected ? "active-tab text-black" : "inactive-tab text-on-surface-variant"}" type="button" role="tab" aria-selected="${isSelected}" aria-controls="folder-panel-${escapeHtml(key)}" id="folder-tab-${escapeHtml(key)}" data-folder-target="${escapeHtml(key)}">${escapeHtml(data.tab.title)}</button>`;
       })
       .join("");
 
     const primaryTabs = tabs.filter(([, data]) => (data.tab.order ?? 0) < 4);
-    const shenFamilyTabs = tabs.filter(([, data]) => (data.tab.order ?? 0) >= 4);
+    const shenFamilyTabs = tabs.filter(([, data]) => {
+      const order = data.tab.order ?? 0;
+      return order >= 4 && order < 9;
+    });
+    const otherTabs = tabs.filter(([, data]) => (data.tab.order ?? 0) >= 9);
 
     tabList.classList.add("related-data-tabs");
-    tabList.innerHTML = `<div class="related-data-tabs__group">${renderTabGroup(primaryTabs)}</div><div class="related-data-tabs__group related-data-tabs__group--end">${renderTabGroup(shenFamilyTabs)}</div>`;
+    tabList.innerHTML = `<div class="related-data-tabs__group">${renderTabGroup(primaryTabs)}</div><div class="related-data-tabs__group related-data-tabs__group--end">${renderTabGroup(shenFamilyTabs)}</div><div class="related-data-tabs__group related-data-tabs__group--other">${renderTabGroup(otherTabs)}</div>`;
   }
 
   function renderRelatedData(relatedData) {
