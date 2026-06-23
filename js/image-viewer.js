@@ -2,6 +2,7 @@
   const viewer = document.getElementById("image-viewer");
   const viewport = document.getElementById("image-viewer-viewport");
   const image = document.getElementById("image-viewer-image");
+  const video = document.getElementById("image-viewer-video");
   const title = document.getElementById("image-viewer-title");
   const description = document.getElementById("image-viewer-description");
   const descriptionText = document.getElementById(
@@ -14,6 +15,7 @@
     !viewer ||
     !viewport ||
     !image ||
+    !video ||
     !title ||
     !description ||
     !descriptionText ||
@@ -33,6 +35,7 @@
   let returnFocus = null;
   let lastSinglePoint = null;
   let lastPinch = null;
+  let activeMedia = image;
 
   const clamp = (value, minimum, maximum) =>
     Math.min(maximum, Math.max(minimum, value));
@@ -44,8 +47,8 @@
       return;
     }
 
-    const scaledWidth = image.offsetWidth * scale;
-    const scaledHeight = image.offsetHeight * scale;
+    const scaledWidth = activeMedia.offsetWidth * scale;
+    const scaledHeight = activeMedia.offsetHeight * scale;
     const maxX = Math.max(0, (scaledWidth - viewport.clientWidth) / 2 + 32);
     const maxY = Math.max(0, (scaledHeight - viewport.clientHeight) / 2 + 32);
     translateX = clamp(translateX, -maxX, maxX);
@@ -54,7 +57,7 @@
 
   function applyTransform() {
     constrainTranslation();
-    image.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+    activeMedia.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
     zoomLabel.textContent = `${Math.round(scale * 100)}%`;
     viewport.classList.toggle("is-zoomed", scale > minScale);
   }
@@ -97,12 +100,22 @@
     sourceLink.href = link || "#";
     sourceLink.hidden = !link;
     description.hidden = !body && !link;
-    image.alt = title.textContent;
-    image.src = trigger.dataset.imageViewerSrc;
+    const videoSource = trigger.dataset.imageViewerVideoSrc || "";
+    activeMedia = videoSource ? video : image;
+    image.hidden = Boolean(videoSource);
+    video.hidden = !videoSource;
+    if (videoSource) {
+      video.poster = trigger.dataset.imageViewerPoster || "";
+      video.src = videoSource;
+      video.play().catch(() => {});
+    } else {
+      image.alt = title.textContent;
+      image.src = trigger.dataset.imageViewerSrc;
+    }
     viewer.hidden = false;
     document.body.classList.add("image-viewer-open");
     resetTransform();
-    image.addEventListener("load", resetTransform, { once: true });
+    activeMedia.addEventListener(videoSource ? "loadedmetadata" : "load", resetTransform, { once: true });
     requestAnimationFrame(() => viewport.focus({ preventScroll: true }));
   }
 
@@ -113,8 +126,12 @@
     pointers.clear();
     lastPinch = null;
     lastSinglePoint = null;
-    image.removeAttribute("style");
+    activeMedia.removeAttribute("style");
     image.src = "";
+    video.pause();
+    video.removeAttribute("src");
+    video.removeAttribute("poster");
+    video.load();
     returnFocus?.focus({ preventScroll: true });
     returnFocus = null;
   }
@@ -130,7 +147,9 @@
   }
 
   document.addEventListener("click", (event) => {
-    const trigger = event.target.closest("[data-image-viewer-src]");
+    const trigger = event.target.closest(
+      "[data-image-viewer-src], [data-image-viewer-video-src]",
+    );
     if (!trigger) return;
     event.preventDefault();
     openViewer(trigger);

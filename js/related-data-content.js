@@ -67,12 +67,16 @@
     return `<button class="image-viewer-trigger" type="button" data-image-viewer-src="${escapeHtml(source)}" data-image-viewer-title="${escapeHtml(title)}" data-image-viewer-description="${escapeHtml(description)}" aria-label="開啟${escapeHtml(title)}完整圖片"><img src="${escapeHtml(source)}" alt="${escapeHtml(title)}"${lazy ? ' loading="lazy" decoding="async"' : ""} draggable="false" /></button>`;
   }
 
+  function videoViewerTrigger({ source, title, poster = "" }) {
+    return `<button class="image-viewer-trigger" type="button" data-image-viewer-video-src="${escapeHtml(source)}" data-image-viewer-poster="${escapeHtml(poster)}" data-image-viewer-title="${escapeHtml(title)}" aria-label="開啟${escapeHtml(title)}完整動圖"><video class="related-profile__gallery-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"${poster ? ` poster="${escapeHtml(poster)}"` : ""} aria-label="${escapeHtml(title)}"><source src="${escapeHtml(source)}" type="video/webm" /></video></button>`;
+  }
+
   function renderGallery(gallery = [], currentProfileKey = "") {
     return gallery
       .map(
         ({ src, caption, description = "", type = "image", poster = "" }) => {
           const media = type === "video"
-            ? `<video class="related-profile__gallery-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"${poster ? ` poster="${escapeHtml(poster)}"` : ""} aria-label="${escapeHtml(caption)}"><source src="${escapeHtml(src)}" type="video/webm" /></video>`
+            ? videoViewerTrigger({ source: src, title: caption, poster })
             : imageViewerTrigger({ source: src, title: caption, description });
           return `<figure class="related-photo-card paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${media}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`;
         },
@@ -154,24 +158,32 @@
 
   function familyTemplate(data, labels) {
     const gallery = renderGallery(data.gallery);
+    const portraitCountClass = data.portraits.length === 2
+      ? " related-family__portraits--2"
+      : "";
     const portraits = data.portraits
       .map(
         ({ name, src, accent }) =>
           `<div class="related-family__portrait-wrap" style="--profile-accent:${escapeHtml(accent)}"><span class="related-data-photo-tape" aria-hidden="true"></span><figure class="related-photo-card">${imageViewerTrigger({ source: src, title: `${name}證件照`, lazy: false })}<figcaption>${linkCharacterMentions(name)}</figcaption></figure></div>`,
       )
       .join("");
-    const tableHead = data.nameTable.columns
-      .map((column) => `<th>${linkCharacterMentions(column)}</th>`)
-      .join("");
-    const tableBody = data.nameTable.rows
-      .map(
-        ({ name, values }) =>
-          `<tr><th>${linkCharacterMentions(name)}</th>${values.map((value) => `<td>${linkCharacterMentions(value)}</td>`).join("")}</tr>`,
-      )
-      .join("");
+    const namesMarkup = data.nameTable
+      ? (() => {
+          const tableHead = data.nameTable.columns
+            .map((column) => `<th>${linkCharacterMentions(column)}</th>`)
+            .join("");
+          const tableBody = data.nameTable.rows
+            .map(
+              ({ name, values }) =>
+                `<tr><th>${linkCharacterMentions(name)}</th>${values.map((value) => `<td>${linkCharacterMentions(value)}</td>`).join("")}</tr>`,
+            )
+            .join("");
+          return `<article class="paper-sheet related-family__names"><h3>${escapeHtml(labels.namesTitle)}</h3><div class="related-family__table-wrap"><table><thead><tr>${tableHead}</tr></thead><tbody>${tableBody}</tbody></table></div></article>`;
+        })()
+      : "";
     return `<div class="manila-texture related-overview related-family">
-      <section><h2>${escapeHtml(labels.title)}</h2><div class="related-family__portraits">${portraits}</div></section>
-      <article class="paper-sheet related-family__names"><h3>${escapeHtml(labels.namesTitle)}</h3><div class="related-family__table-wrap"><table><thead><tr>${tableHead}</tr></thead><tbody>${tableBody}</tbody></table></div></article>
+      <section><h2>${escapeHtml(labels.title)}</h2><div class="related-family__portraits${portraitCountClass}">${portraits}</div></section>
+      ${namesMarkup}
       <section class="related-profile__gallery related-family__photo-gallery"><h3>${escapeHtml(labels.galleryTitle)}</h3><div>${gallery}</div></section>
     </div>`;
   }
@@ -229,7 +241,10 @@
       .map(([key, data]) => {
         const content =
           data.kind === "family"
-            ? familyTemplate(data, relatedData._ui.family)
+            ? familyTemplate(data, {
+                ...relatedData._ui.family,
+                ...(data.labels ?? {}),
+              })
             : profileTemplate(data, key, relatedData._ui.profile);
         return `<section class="related-data-panel is-rendered" id="folder-panel-${escapeHtml(key)}" role="tabpanel" aria-labelledby="folder-tab-${escapeHtml(key)}" data-folder-panel="${escapeHtml(key)}"${key === defaultKey ? "" : " hidden"}>${content}</section>`;
       })
