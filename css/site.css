@@ -642,11 +642,21 @@ img {
   overflow: hidden;
   contain: paint;
   isolation: isolate;
-  background: var(--home-background-image, url("../imgs/main/main.webp")) center
-    center / cover no-repeat #2f2a2b;
+  background: #2f2a2b;
 }
 .home-background {
-  display: none;
+  position: absolute;
+  z-index: 0;
+  inset: -18px;
+  pointer-events: none;
+  background: var(--home-background-image, url("../imgs/main/main.webp")) center
+    center / cover no-repeat;
+  transform: translate3d(
+    calc(var(--home-parallax-x, 0) * 1px),
+    calc(var(--home-parallax-y, 0) * 1px),
+    0
+  );
+  will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) {
   .home-background {
