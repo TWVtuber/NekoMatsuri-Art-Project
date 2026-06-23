@@ -1,6 +1,6 @@
 {
   "themeAssets": {
-    "homeBackground": "imgs/main/main.jpg"
+    "homeBackground": "imgs/main/main.webp"
   },
   "entrance": {
     "pinkEffect": "imgs/main/pinkVFX.webp",
@@ -19,7 +19,7 @@
     "liveBroadcast": {
       "label": "活動告知直播",
       "url": "https://youtu.be/KMbRmB-PH0E",
-      "image": "imgs/LiveCover.jpg",
+      "image": "imgs/LiveCover.webp",
       "alt": "活動告知直播封面"
     },
     "mainLogo": { "src": "imgs/main/LOGO.webp", "alt": "貓祭不繪讓你俄史計劃" }
@@ -44,7 +44,7 @@
     "items": [
       {
         "variant": "president",
-        "src": "imgs/characters/Objects/素材/校長三視圖.jpg",
+        "src": "imgs/characters/Objects/素材/校長三視圖.webp",
         "title": "校長三視圖",
         "alt": "校長三視圖設定",
         "description": "繪俄史藝術高等學院校長的外觀與設定參考。",
@@ -54,7 +54,7 @@
         }
       },
       {
-        "src": "imgs/characters/Objects/制服&運動服/制服女.jpg",
+        "src": "imgs/characters/Objects/制服&運動服/制服女.webp",
         "title": "女生制服設定",
         "alt": "女生制服與運動服設定",
         "description": "女生夏冬制服、運動服與領結配色參考。",
@@ -64,7 +64,7 @@
         }
       },
       {
-        "src": "imgs/characters/Objects/制服&運動服/制服男.jpg",
+        "src": "imgs/characters/Objects/制服&運動服/制服男.webp",
         "title": "男生制服設定",
         "alt": "男生制服與運動服設定",
         "description": "男生夏冬制服、運動服與領帶配色參考。",
@@ -85,7 +85,7 @@
       }
     ],
     "classPhoto": {
-      "src": "imgs/characters/3C-Pics/貓祭/【貓祭】3C合照單色.jpg",
+      "src": "imgs/characters/3C-Pics/貓祭/【貓祭】3C合照單色.webp",
       "title": "三年 C 班合照",
       "alt": "三年 C 班合照",
       "link": "https://x.com/nekomatsuri_25/status/2066241660762415208"

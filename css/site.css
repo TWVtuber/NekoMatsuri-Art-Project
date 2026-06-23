@@ -642,7 +642,7 @@ img {
   overflow: hidden;
   contain: paint;
   isolation: isolate;
-  background: var(--home-background-image, url("../imgs/main/main.jpg")) center
+  background: var(--home-background-image, url("../imgs/main/main.webp")) center
     center / cover no-repeat #2f2a2b;
 }
 .home-background {
