@@ -110,11 +110,11 @@
         "alt": "祭煜獎獎盃",
         "tone": "yellow",
         "judgeImage": "imgs/judges/大雄&NekoMatsuri.webp",
-        "judgeImageAlt": "貓祭與大雄",
+        "judgeImageAlt": "貓祭與阿雄",
         "judgeImageUrl": "https://lit.link/en/NekoMatsuri",
         "judges": [
           { "name": "貓祭 (60%)", "url": "https://lit.link/en/NekoMatsuri" },
-          { "name": "大雄 (40%)", "url": "https://x.com/Nekolive_Xiong" }
+          { "name": "阿雄 (40%)", "url": "https://x.com/Nekolive_Xiong" }
         ]
       },
       {

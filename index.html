@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="css/awards.css?v=4" />
     <link rel="stylesheet" href="css/pages-responsive.css?v=26" />
     <link rel="stylesheet" href="css/spacing.css?v=10" />
-    <link rel="stylesheet" href="css/related-data.css?v=51" />
+    <link rel="stylesheet" href="css/related-data.css?v=53" />
     <link rel="stylesheet" href="css/classroom-map.css?v=32" />
 
     <!-- Google tag (gtag.js) -->
@@ -245,7 +245,17 @@
           tabindex="0"
           aria-label="圖片預覽，可拖曳並使用滾輪或雙指縮放"
         >
-          <img id="image-viewer-image" src="" alt="" draggable="false" />
+          <img class="image-viewer__media" id="image-viewer-image" src="" alt="" draggable="false" />
+          <video
+            class="image-viewer__media"
+            id="image-viewer-video"
+            muted
+            loop
+            playsinline
+            autoplay
+            disablepictureinpicture
+            hidden
+          ></video>
         </div>
         <div class="image-viewer__toolbar" aria-label="圖片縮放控制">
           <button type="button" data-image-zoom-out aria-label="縮小圖片">
@@ -1700,8 +1710,8 @@
     <script src="js/organizers-content.js?v=5"></script>
     <script src="js/site.js?v=59"></script>
     <script src="js/classroom-map.js?v=13"></script>
-    <script src="js/related-data-content.js?v=20"></script>
+    <script src="js/related-data-content.js?v=21"></script>
     <script src="js/related-data.js?v=12"></script>
-    <script src="js/image-viewer.js?v=2"></script>
+    <script src="js/image-viewer.js?v=3"></script>
   </body>
 </html>
