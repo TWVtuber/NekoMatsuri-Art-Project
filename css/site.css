@@ -649,7 +649,7 @@ img {
   z-index: 0;
   inset: -18px;
   pointer-events: none;
-  background: var(--home-background-image, url("../imgs/main/main.webp")) center
+  background: var(--home-background-image, url("../imgs/main/main.webp")) right
     center / cover no-repeat;
   transform: translate3d(
     calc(var(--home-parallax-x, 0) * 1px),

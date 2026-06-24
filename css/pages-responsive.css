@@ -306,7 +306,7 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .home-background {
     background-size: cover;
-    background-position: center center;
+    background-position: right center;
   }
   .submit-button {
     bottom: 30px;
@@ -730,9 +730,8 @@ body.organizer-open .site-nav [data-organizer-link] {
     width: 100%;
     max-width: 100%;
   }
-  .home-stage.is-playing {
-    background-size: cover;
-    background-position: right top;
+  .home-background {
+    background-position: right center;
   }
   #logo-motion.logo-motion {
     margin-top: 88px;
