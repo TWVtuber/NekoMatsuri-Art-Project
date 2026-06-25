@@ -10,7 +10,6 @@
   );
   const sourceLink = document.getElementById("image-viewer-source-link");
   const artist = document.getElementById("image-viewer-artist");
-  const artistLink = document.getElementById("image-viewer-artist-link");
   const zoomLabel = document.getElementById("image-viewer-zoom");
 
   if (
@@ -23,7 +22,6 @@
     !descriptionText ||
     !sourceLink ||
     !artist ||
-    !artistLink ||
     !zoomLabel
   ) {
     return;
@@ -102,13 +100,46 @@
     const link = trigger.dataset.imageViewerLink || "";
     const artistName = trigger.dataset.imageViewerArtistName || "";
     const artistUrl = trigger.dataset.imageViewerArtistUrl || "";
+    const artistsJson = trigger.dataset.imageViewerArtists || "";
     descriptionText.textContent = body;
     sourceLink.href = link || "#";
     sourceLink.hidden = !link;
     description.hidden = !body && !link;
-    artistLink.textContent = artistName;
-    artistLink.href = artistUrl || "#";
-    artist.hidden = !artistName || !artistUrl;
+
+    artist.replaceChildren();
+    if (artistsJson) {
+      try {
+        const artists = JSON.parse(decodeURIComponent(artistsJson));
+        const fragment = document.createDocumentFragment();
+        artists.forEach((a, i) => {
+          if (i > 0) fragment.append(" | ");
+          if (a.label) fragment.append(`${a.label}：`);
+          const linkNode = document.createElement("a");
+          linkNode.href = a.url || "#";
+          linkNode.target = "_blank";
+          linkNode.rel = "noopener noreferrer";
+          linkNode.textContent = a.name;
+          fragment.append(linkNode);
+        });
+        artist.append(fragment);
+        artist.hidden = false;
+      } catch (e) {
+        artist.hidden = true;
+      }
+    } else if (artistName && artistUrl) {
+      const fragment = document.createDocumentFragment();
+      fragment.append("繪師：");
+      const linkNode = document.createElement("a");
+      linkNode.href = artistUrl;
+      linkNode.target = "_blank";
+      linkNode.rel = "noopener noreferrer";
+      linkNode.textContent = artistName;
+      fragment.append(linkNode);
+      artist.append(fragment);
+      artist.hidden = false;
+    } else {
+      artist.hidden = true;
+    }
     const videoSource = trigger.dataset.imageViewerVideoSrc || "";
     activeMedia = videoSource ? video : image;
     image.hidden = Boolean(videoSource);

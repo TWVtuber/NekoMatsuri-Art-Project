@@ -110,15 +110,25 @@
       : "";
     const renderCornerDisplay = (placement) => {
       const placementClass = `related-profile__corner-mascot--${placement}`;
+      const buildArtistAttributes = (artists) => {
+        if (!artists) return "";
+        if (Array.isArray(artists)) {
+           return ` data-image-viewer-artists="${encodeURIComponent(JSON.stringify(artists))}"`;
+        }
+        if (artists.name && artists.url) {
+           return ` data-image-viewer-artist-name="${escapeHtml(artists.name)}" data-image-viewer-artist-url="${escapeHtml(artists.url)}"`;
+        }
+        return "";
+      };
       const cornerImageMarkup = profile.cornerImage?.animationSrc
-        ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.animationSrc)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整動圖"><img class="related-profile__corner-mascot-animation" src="${escapeHtml(profile.cornerImage.animationSrc)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" draggable="false" /></button>`
+        ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.animationSrc)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整動圖"${buildArtistAttributes(profile.cornerImage.artists)}><img class="related-profile__corner-mascot-animation" src="${escapeHtml(profile.cornerImage.animationSrc)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" draggable="false" /></button>`
         : profile.cornerImage?.src
-          ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.src)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整圖片"><img class="related-profile__corner-mascot-image" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" /></button>`
+          ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.src)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整圖片"${buildArtistAttributes(profile.cornerImage.artists)}><img class="related-profile__corner-mascot-image" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" /></button>`
           : "";
       if (!cornerImageMarkup) return "";
       const logoTitle = profile.logo?.alt ?? `${profile.name} Logo`;
       const logoMarkup = profile.logo?.src
-        ? `<button class="image-viewer-trigger related-profile__corner-logo-button" type="button" data-image-viewer-src="${escapeHtml(profile.logo.src)}" data-image-viewer-title="${escapeHtml(logoTitle)}" aria-label="開啟${escapeHtml(logoTitle)}大圖"><img class="related-profile__corner-logo" src="${escapeHtml(profile.logo.src)}" alt="${escapeHtml(logoTitle)}" loading="lazy" decoding="async" draggable="false" /></button>`
+        ? `<button class="image-viewer-trigger related-profile__corner-logo-button" type="button" data-image-viewer-src="${escapeHtml(profile.logo.src)}" data-image-viewer-title="${escapeHtml(logoTitle)}" aria-label="開啟${escapeHtml(logoTitle)}大圖"${buildArtistAttributes(profile.logo.artists)}><img class="related-profile__corner-logo" src="${escapeHtml(profile.logo.src)}" alt="${escapeHtml(logoTitle)}" loading="lazy" decoding="async" draggable="false" /></button>`
         : "";
       return `<div class="related-profile__corner-display related-profile__corner-display--${placement}">${cornerImageMarkup}${logoMarkup}</div>`;
     };
