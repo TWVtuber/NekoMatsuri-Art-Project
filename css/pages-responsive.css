@@ -317,8 +317,12 @@ body.organizer-open .site-nav [data-organizer-link] {
     margin-bottom: var(--section-gap);
   }
   .site-header__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
     position: relative;
-    width: min(calc(100% - 28px), 1280px);
+    width: min(calc(100% - 16px), 1280px);
     min-height: 62px;
     padding-block: 9px;
   }
@@ -366,12 +370,13 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .nav-toggle {
     display: grid;
-    order: 3;
-    flex: 0 0 auto;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
     place-content: center;
     gap: 5px;
-    width: 44px;
-    height: 44px;
+    width: clamp(38px, 13vw, 44px);
+    height: clamp(38px, 13vw, 44px);
     margin-left: 0;
     padding: 0;
     border: 2px solid var(--ink);
@@ -397,27 +402,34 @@ body.organizer-open .site-nav [data-organizer-link] {
     transform: translateY(-7px) rotate(-45deg);
   }
   .site-brand {
-    order: 2;
-    width: 50px;
-    height: 42px;
+    display: none;
   }
   .header-submit {
-    order: 1;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    max-width: 100%;
+    padding: 10px clamp(12px, 4vw, 16px);
+    font-size: clamp(16px, 5vw, 18px);
+    line-height: 1.15;
   }
   .header-submit,
   .countdown-cta {
-    padding: 10px 16px;
+    min-width: 0;
   }
   .about-text {
     order: 2;
     padding-top: 0;
   }
   .hero-copy .about-text > p {
+    width: min(100%, 42rem);
     margin-right: auto;
     margin-left: auto;
     font-size: clamp(16px, 3.2vw, 20px);
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
   .hero-copy {
     align-items: center;
@@ -748,6 +760,10 @@ body.organizer-open .site-nav [data-organizer-link] {
     padding-inline: 20px;
   }
   .note-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    justify-self: stretch;
     padding: 36px 30px;
   }
   .note-card--rules {
@@ -757,7 +773,7 @@ body.organizer-open .site-nav [data-organizer-link] {
   .character-link {
     top: 26px;
     right: 18px;
-    width: min(290px, calc(100% - 36px));
+    width: min(100%, calc(100% - 36px));
   }
   .section-mascot {
     width: 82px;
@@ -827,11 +843,11 @@ body.organizer-open .site-nav [data-organizer-link] {
     padding: 54px 16px 38px;
   }
   .countdown-card::before {
-    left: -4px;
-    bottom: 24px;
-    font-size: 132px;
+    display: none;
   }
   .countdown {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 7px;
   }
   .time-card {
@@ -843,8 +859,14 @@ body.organizer-open .site-nav [data-organizer-link] {
     font-size: 27px;
   }
   .time-card span {
-    font-size: 18px;
+    font-size: clamp(14px, 4.4vw, 18px);
     letter-spacing: 0;
+  }
+  .countdown-card .countdown-cta {
+    max-width: 100%;
+    padding: 14px 26px;
+    font-size: clamp(22px, 8vw, 30px);
+    white-space: normal;
   }
   .awards-showcase .section-title {
     gap: 12px;
@@ -880,6 +902,15 @@ body.organizer-open .site-nav [data-organizer-link] {
   .reward-prize-list li {
     grid-template-columns: 1fr;
     row-gap: 1px;
+  }
+  .reward-prize-list__heading,
+  .reward-prize-list b,
+  .reward-prize-list span {
+    white-space: normal;
+  }
+  .reward-prize-list .fit-single-line {
+    font-size: inherit !important;
+    letter-spacing: 0 !important;
   }
   .reward-prize-list .reward-prize-list__value {
     grid-column: 1;
@@ -929,7 +960,7 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .award-note-grid {
     grid-template-columns: 1fr;
-    padding: 0 8px;
+    padding: 0;
   }
   .award-note {
     grid-template-rows: 250px auto;
@@ -983,7 +1014,8 @@ body.organizer-open .site-nav [data-organizer-link] {
   .footer-contact p,
   .footer-contact a,
   .footer-identity p {
-    white-space: nowrap;
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
   .footer-contact p {
     font-size: min(14.5px, 4.1cqi);
@@ -993,6 +1025,127 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .footer-identity p {
     font-size: min(12px, 3.1cqi);
+  }
+  .character-link,
+  .character-link svg {
+    max-width: 100%;
+  }
+  .check-list li,
+  .rule-list li,
+  .reward-policy__list > li,
+  .common-awards-sheet,
+  .award-note,
+  .award-note figcaption,
+  .award-note figcaption > strong,
+  .award-note figcaption > span,
+  .award-judge {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .award-note .award-prize__line {
+    white-space: normal;
+  }
+  .award-judge {
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 767.95px) {
+  .reward-policy__paper {
+    min-height: 0;
+    padding: 44px 34px;
+  }
+  .reward-policy__paper::before {
+    display: none;
+  }
+  .reward-policy__columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .reward-policy__prizes,
+  .reward-prize-list {
+    min-width: 0;
+  }
+  .reward-prize-list li {
+    grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  }
+  .reward-prize-list span {
+    white-space: normal;
+  }
+  .reward-prize-list .fit-single-line {
+    font-size: inherit !important;
+    letter-spacing: 0 !important;
+  }
+  .reward-prize-list .reward-prize-list__bonus {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 340px) {
+  .page-content {
+    padding-inline: 14px;
+  }
+  .hero-copy {
+    padding-inline: 8px;
+  }
+  .note-card {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  #rules {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+    gap: calc(var(--section-gap) * 0.75);
+    overflow-x: clip;
+  }
+  #rules > .note-card {
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .note-card--rules,
+  .note-card--guidelines {
+    transform: none;
+  }
+  .note-card--rules {
+    padding-top: 116px;
+  }
+  .check-list li,
+  .rule-list li {
+    padding-left: 32px;
+  }
+  .rule-list li::before {
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+  }
+  .character-link {
+    right: 10px;
+    width: min(100%, calc(100% - 20px));
+  }
+  .countdown-section {
+    padding-inline: 0;
+  }
+  .countdown-card {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .reward-policy__paper {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .common-awards-sheet {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .about-text,
+  .hero-copy .hero-declaration,
+  .collaboration-stamps,
+  .common-awards-sheet {
+    overflow-x: clip;
   }
 }
 

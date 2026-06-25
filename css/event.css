@@ -480,6 +480,29 @@ p {
   .activity-hashtag a { font-size: clamp(11.5px, 2.25vw, 15px); }
 }
 @media (max-width: 599.95px) {
+  .about-text {
+    width: 100%;
+    min-width: 0;
+  }
+  .about-text > p,
+  .hero-copy .hero-lead,
+  .hero-copy .hero-declaration,
+  .hero-copy .hero-closing {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .about-text br {
+    display: none;
+  }
+  .hero-copy .hero-declaration {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+  .hero-copy .hero-declaration__circle {
+    inset: -18px 0 -18px;
+    width: 100%;
+  }
   .activity-hashtags {
     width: calc(100% - 28px);
     margin: 0 auto 20px;
@@ -491,6 +514,14 @@ p {
   .activity-hashtags__copy-all .material-symbols-outlined { font-size: 17px; }
   .activity-hashtags__list { gap: 8px; }
   .activity-hashtag a { padding: 10px 9px; font-size: 14px; }
+  .activity-hashtag.scroll-hashtag-sticker:nth-child(odd) {
+    --hashtag-sticker-start-x: -86px;
+    --hashtag-sticker-mid-x: -34px;
+  }
+  .activity-hashtag.scroll-hashtag-sticker:nth-child(even) {
+    --hashtag-sticker-start-x: 86px;
+    --hashtag-sticker-mid-x: 34px;
+  }
 }
 .collaboration-stamps {
   position: relative;
@@ -506,6 +537,19 @@ p {
     transform: translateX(-12%);
   }
 }
+@media (min-width: 1024px) and (max-width: 1200px) {
+  .collaboration-stamps {
+    width: min(100%, 580px);
+    margin-right: auto;
+    margin-bottom: 58px;
+    margin-left: auto;
+    transform: none;
+  }
+  .principal-stamp {
+    right: clamp(-58px, -3vw, -24px);
+    width: clamp(46px, 8vw, 58px);
+  }
+}
 .collaboration-stamps::before {
   content: "";
   position: absolute;
@@ -515,6 +559,18 @@ p {
   height: 1px;
   background: rgba(29, 28, 21, 0.26);
   transform: translateX(-50%);
+}
+.principal-stamp {
+  position: absolute;
+  top: -52px;
+  right: clamp(-14px, 3.5%, 12px);
+  z-index: 1;
+  width: clamp(44px, 5.8vw, 60px);
+  height: auto;
+  pointer-events: none;
+  transform: rotate(10deg);
+  transform-origin: center;
+  filter: drop-shadow(2px 3px 0 rgba(29, 28, 21, 0.12));
 }
 .stamp {
   position: relative;
@@ -530,6 +586,7 @@ p {
     sans-serif;
   margin: 0 0 20px;
   text-align: center;
+  overflow-wrap: anywhere;
   transform: none;
   left: auto;
   top: auto;
@@ -545,6 +602,7 @@ p {
   text-decoration: none;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
+  overflow-wrap: anywhere;
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 .stamp a:hover {
@@ -636,6 +694,13 @@ p {
     cubic-bezier(0.16, 0.92, 0.24, 1) both;
 }
 
+.scroll-motion-ready
+  .stamp-logos.is-scroll-motion-visible
+  .stamp-logo.scroll-logo-sticker {
+  animation: logo-sticker-attach 0.58s var(--logo-sticker-delay)
+    cubic-bezier(0.16, 0.92, 0.24, 1) both;
+}
+
 @keyframes logo-sticker-attach {
   0% {
     opacity: 0;
@@ -657,6 +722,9 @@ p {
 
 @media (prefers-reduced-motion: reduce) {
   .scroll-motion-ready .stamp-logo.scroll-logo-sticker,
+  .scroll-motion-ready
+    .stamp-logos.is-scroll-motion-visible
+    .stamp-logo.scroll-logo-sticker,
   .scroll-motion-ready
     .stamp-logo.scroll-logo-sticker.is-scroll-motion-visible {
     opacity: 1;
@@ -680,6 +748,10 @@ p {
     left: 50%;
     transform: translateX(-50%);
   }
+  .principal-stamp {
+    right: clamp(-58px, -3vw, -24px);
+    width: clamp(46px, 8vw, 58px);
+  }
   .collaboration-stamps .stamp-logos {
     justify-content: center;
     margin-left: 0;
@@ -694,8 +766,22 @@ p {
   .collaboration-stamps .stamp {
     font-size: 17px;
   }
+  .principal-stamp {
+    top: -38px;
+    right: clamp(-48px, -5vw, -24px);
+    width: clamp(38px, 11.5vw, 48px);
+  }
   .collaboration-stamps .stamp-logo {
-    width: clamp(94px, 26vw, 126px);
+    width: clamp(68px, 26vw, 94px);
+  }
+  .collaboration-stamps .stamp-logos {
+    gap: clamp(12px, 5vw, 22px);
+  }
+  .stamp-logo--academy.scroll-logo-sticker {
+    --logo-sticker-start-x: -40px;
+  }
+  .stamp-logo--neko.scroll-logo-sticker {
+    --logo-sticker-start-x: 40px;
   }
 }
 .hero-photo-stack {
@@ -1676,6 +1762,7 @@ p {
 .reward-policy__list b {
   font-weight: 700;
   padding: 0 2px;
+  overflow-wrap: anywhere;
 }
 
 /* 活動主題 (White paper): Yellow highlighter */
@@ -1716,6 +1803,7 @@ p {
   background-size: 100% 100%;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+  overflow-wrap: anywhere;
 }
 
 .marker-motion-ready .marker-highlight:not(.is-marked) {
@@ -1827,11 +1915,13 @@ p {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 70px;
   align-items: center;
+  min-width: 0;
 }
 .reward-policy__list {
   margin: 0;
   padding: 0 0 0 31px;
   list-style: decimal outside;
+  min-width: 0;
 }
 .reward-policy__list > li {
   margin-bottom: 25px;
@@ -1844,6 +1934,7 @@ p {
   font-weight: 700;
 }
 .reward-policy__prizes {
+  min-width: 0;
   font-size: 18px;
   line-height: 1.65;
 }
@@ -1860,8 +1951,9 @@ p {
 }
 .reward-prize-list li {
   display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
   column-gap: 12px;
+  min-width: 0;
   padding: 8px 4px 9px;
   border: 0;
   background: transparent;
@@ -1870,6 +1962,7 @@ p {
 .reward-prize-list__heading {
   display: flex;
   align-items: baseline;
+  min-width: 0;
   white-space: nowrap;
 }
 .reward-prize-list b {
@@ -1880,7 +1973,7 @@ p {
 }
 .reward-prize-list span {
   font-weight: 700;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 .reward-prize-list .reward-prize-list__value {
   display: block;

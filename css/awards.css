@@ -636,3 +636,21 @@
     transition: none;
   }
 }
+
+@media (max-width: 599.95px) {
+  .award-note-grid .award-note.scroll-stick-note:nth-child(3n + 1) {
+    --sticky-note-start-x: -42px;
+  }
+
+  .award-note-grid .award-note.scroll-stick-note:nth-child(3n) {
+    --sticky-note-start-x: 42px;
+  }
+
+  .award-note-grid .award-note.scroll-stick-note:nth-child(2) {
+    --sticky-note-start-y: -56px;
+  }
+
+  .award-note-grid .award-note.scroll-stick-note:nth-child(5) {
+    --sticky-note-start-y: 56px;
+  }
+}
