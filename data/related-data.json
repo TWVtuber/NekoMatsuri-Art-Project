@@ -136,6 +136,10 @@
       "animationSrc": "imgs/characters/Amins/貓祭老師-alpha.webp",
       "alt": "貓祭老師動圖"
     },
+    "logo": {
+      "src": "imgs/characters/Logo/貓祭/貓祭_粗框.webp",
+      "alt": "貓祭角色 Logo"
+    },
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/貓祭/【貓祭】TAG公開.webp",
@@ -269,6 +273,10 @@
       "animationSrc": "imgs/characters/Amins/祭煜學生-alpha.webp",
       "alt": "祭煜學生動圖"
     },
+    "logo": {
+      "src": "imgs/characters/Logo/祭煜/祭煜_粗框.webp",
+      "alt": "祭煜角色 Logo"
+    },
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/3C相關圖文/郭喵/【郭喵】一定是不小心的.webp",
@@ -350,6 +358,10 @@
       "src": "imgs/characters/Q/沈家_01_沈曦Q.webp",
       "animationSrc": "imgs/characters/Amins/01_沈曦-alpha.webp",
       "alt": "沈曦 Q 版角色圖"
+    },
+    "logo": {
+      "src": "imgs/characters/Logo/沈曦/沈曦_粗框.webp",
+      "alt": "沈曦角色 Logo"
     },
     "gallery": [
       {
@@ -460,6 +472,10 @@
       "animationSrc": "imgs/characters/Amins/02_沈澈-alpha.webp",
       "alt": "沈澈 Q 版角色圖"
     },
+    "logo": {
+      "src": "imgs/characters/Logo/沈澈/沈澈_粗框.webp",
+      "alt": "沈澈角色 Logo"
+    },
     "gallery": [
       {
         "src": "imgs/characters/3C-Pics/沈家相關/沈澈/【沈澈】無能狂怒.webp",
@@ -549,6 +565,10 @@
       "src": "imgs/characters/Q/沈家_01_沈樂Q.webp",
       "animationSrc": "imgs/characters/Amins/03_沈樂-alpha.webp",
       "alt": "沈樂 Q 版角色圖"
+    },
+    "logo": {
+      "src": "imgs/characters/Logo/沈樂/沈樂_粗框.webp",
+      "alt": "沈樂角色 Logo"
     },
     "gallery": [
       {
@@ -657,6 +677,10 @@
       "src": "imgs/characters/Q/沈家_01_沈月Q.webp",
       "animationSrc": "imgs/characters/Amins/04_沈月-alpha.webp",
       "alt": "沈月 Q 版角色圖"
+    },
+    "logo": {
+      "src": "imgs/characters/Logo/沈月/沈月_粗框.webp",
+      "alt": "沈月角色 Logo"
     },
     "gallery": [
       {
