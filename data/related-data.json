@@ -134,11 +134,30 @@
     },
     "cornerImage": {
       "animationSrc": "imgs/characters/Amins/貓祭老師-alpha.webp",
-      "alt": "貓祭老師動圖"
+      "alt": "貓祭老師動圖",
+      "artists": [
+        {
+          "label": "繪師",
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        },
+        {
+          "label": "Live2D 動圖",
+          "name": "筱星朔光",
+          "url": "https://x.com/star_2290"
+        }
+      ]
     },
     "logo": {
       "src": "imgs/characters/Logo/貓祭/貓祭_粗框.webp",
-      "alt": "貓祭角色 Logo"
+      "alt": "貓祭角色 Logo",
+      "artists": [
+        {
+          "label": "設計師",
+          "name": "緋千夜",
+          "url": "https://x.com/hisenya"
+        }
+      ]
     },
     "gallery": [
       {
@@ -271,11 +290,30 @@
     },
     "cornerImage": {
       "animationSrc": "imgs/characters/Amins/祭煜學生-alpha.webp",
-      "alt": "祭煜學生動圖"
+      "alt": "祭煜動圖",
+      "artists": [
+        {
+          "label": "繪師",
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        },
+        {
+          "label": "Live2D 動圖",
+          "name": "筱星朔光",
+          "url": "https://x.com/star_2290"
+        }
+      ]
     },
     "logo": {
       "src": "imgs/characters/Logo/祭煜/祭煜_粗框.webp",
-      "alt": "祭煜角色 Logo"
+      "alt": "祭煜角色 Logo",
+      "artists": [
+        {
+          "label": "設計師",
+          "name": "緋千夜",
+          "url": "https://x.com/hisenya"
+        }
+      ]
     },
     "gallery": [
       {
@@ -357,11 +395,30 @@
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈曦Q.webp",
       "animationSrc": "imgs/characters/Amins/01_沈曦-alpha.webp",
-      "alt": "沈曦 Q 版角色圖"
+      "alt": "沈曦動圖",
+      "artists": [
+        {
+          "label": "繪師",
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        },
+        {
+          "label": "Live2D 動圖",
+          "name": "筱星朔光",
+          "url": "https://x.com/star_2290"
+        }
+      ]
     },
     "logo": {
       "src": "imgs/characters/Logo/沈曦/沈曦_粗框.webp",
-      "alt": "沈曦角色 Logo"
+      "alt": "沈曦角色 Logo",
+      "artists": [
+        {
+          "label": "設計師",
+          "name": "緋千夜",
+          "url": "https://x.com/hisenya"
+        }
+      ]
     },
     "gallery": [
       {
@@ -470,11 +527,30 @@
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈澈Q.webp",
       "animationSrc": "imgs/characters/Amins/02_沈澈-alpha.webp",
-      "alt": "沈澈 Q 版角色圖"
+      "alt": "沈澈動圖",
+      "artists": [
+        {
+          "label": "繪師",
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        },
+        {
+          "label": "Live2D 動圖",
+          "name": "筱星朔光",
+          "url": "https://x.com/star_2290"
+        }
+      ]
     },
     "logo": {
       "src": "imgs/characters/Logo/沈澈/沈澈_粗框.webp",
-      "alt": "沈澈角色 Logo"
+      "alt": "沈澈角色 Logo",
+      "artists": [
+        {
+          "label": "設計師",
+          "name": "緋千夜",
+          "url": "https://x.com/hisenya"
+        }
+      ]
     },
     "gallery": [
       {
@@ -564,11 +640,30 @@
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈樂Q.webp",
       "animationSrc": "imgs/characters/Amins/03_沈樂-alpha.webp",
-      "alt": "沈樂 Q 版角色圖"
+      "alt": "沈樂動圖",
+      "artists": [
+        {
+          "label": "繪師",
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        },
+        {
+          "label": "Live2D 動圖",
+          "name": "筱星朔光",
+          "url": "https://x.com/star_2290"
+        }
+      ]
     },
     "logo": {
       "src": "imgs/characters/Logo/沈樂/沈樂_粗框.webp",
-      "alt": "沈樂角色 Logo"
+      "alt": "沈樂角色 Logo",
+      "artists": [
+        {
+          "label": "設計師",
+          "name": "緋千夜",
+          "url": "https://x.com/hisenya"
+        }
+      ]
     },
     "gallery": [
       {
@@ -676,11 +771,30 @@
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈月Q.webp",
       "animationSrc": "imgs/characters/Amins/04_沈月-alpha.webp",
-      "alt": "沈月 Q 版角色圖"
+      "alt": "沈月動圖",
+      "artists": [
+        {
+          "label": "繪師",
+          "name": "貓祭 Neko Matsuri",
+          "url": "https://x.com/nekomatsuri_25"
+        },
+        {
+          "label": "Live2D 動圖",
+          "name": "筱星朔光",
+          "url": "https://x.com/star_2290"
+        }
+      ]
     },
     "logo": {
       "src": "imgs/characters/Logo/沈月/沈月_粗框.webp",
-      "alt": "沈月角色 Logo"
+      "alt": "沈月角色 Logo",
+      "artists": [
+        {
+          "label": "設計師",
+          "name": "緋千夜",
+          "url": "https://x.com/hisenya"
+        }
+      ]
     },
     "gallery": [
       {
