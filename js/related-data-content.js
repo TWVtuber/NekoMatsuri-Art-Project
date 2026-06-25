@@ -108,10 +108,15 @@
     const sidebarImageMarkup = sidebarImage?.src
       ? `<figure class="${sidebarImageVariant === "document" ? "related-photo-card " : ""}related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "", artist: sidebarImage.artist })}</figure>`
       : "";
-    const cornerImageMarkup = profile.cornerImage?.animationSrc
-      ? `<video class="related-profile__corner-mascot" aria-label="${escapeHtml(profile.cornerImage.alt ?? "")}" role="img" autoplay muted loop playsinline preload="auto"><source src="${escapeHtml(profile.cornerImage.animationSrc)}" type="video/webm" /></video>`
+    const renderCornerImage = (placementClass) => profile.cornerImage?.animationSrc
+      ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-video-src="${escapeHtml(profile.cornerImage.animationSrc)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整動圖"><video class="related-profile__corner-mascot-video" aria-label="${escapeHtml(profile.cornerImage.alt ?? "")}" role="img" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"><source src="${escapeHtml(profile.cornerImage.animationSrc)}" type="video/webm" /></video></button>`
       : profile.cornerImage?.src
-        ? `<img class="related-profile__corner-mascot" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" />`
+        ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.src)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整圖片"><img class="related-profile__corner-mascot-image" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" /></button>`
+      : "";
+    const cornerImageMarkup = renderCornerImage("related-profile__corner-mascot--paper");
+    const sidebarCornerImageMarkup = renderCornerImage("related-profile__corner-mascot--sidebar");
+    const sidebarArtRowMarkup = sidebarImageMarkup || sidebarCornerImageMarkup
+      ? `<div class="related-profile__sidebar-art-row">${sidebarImageMarkup}${sidebarCornerImageMarkup}</div>`
       : "";
     const meta = profile.meta
       .map(
@@ -148,12 +153,11 @@
           <p class="related-profile__artist">${escapeHtml(labels.artistPrefix)}${artistName}</p>
         </div>
         <section class="sticky-note related-profile__facts"><h3>${escapeHtml(labels.personalDataTitle)}</h3><ul>${meta}${socialLink}</ul><div class="related-profile__quick-list"><ul>${facts}</ul></div></section>
-        ${sidebarImageMarkup}
+        ${sidebarArtRowMarkup}
       </aside>
       <div class="related-profile__main">
-        ${cornerImageMarkup}
         <article class="paper-sheet related-profile__paper">
-          <section><h3>${escapeHtml(labels.relationshipTitle)}</h3><p>${linkCharacterMentions(profile.relationship, profileKey)}</p></section>
+          <section>${cornerImageMarkup}<h3>${escapeHtml(labels.relationshipTitle)}</h3><p>${linkCharacterMentions(profile.relationship, profileKey)}</p></section>
           <section><h3>${escapeHtml(labels.personalityTitle)}</h3><p>${linkCharacterMentions(profile.personality, profileKey)}</p></section>
           <section><h3>${escapeHtml(labels.storyTitle)}</h3>${story}</section>
           <section><h3>${escapeHtml(labels.notesTitle)}</h3>${notes}</section>
