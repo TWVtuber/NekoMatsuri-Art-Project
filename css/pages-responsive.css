@@ -1330,6 +1330,13 @@ body.organizer-open .site-nav [data-organizer-link] {
   transform: rotate(-0.5deg);
 }
 
+.organizer-credits__notes > .credit-note:last-child,
+.credit-note--centered {
+  width: calc((100% - 56px) / 3);
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
 .credit-note:hover {
   z-index: 2;
   box-shadow: 7px 9px 0 rgba(29, 28, 21, 0.18);
@@ -1528,6 +1535,12 @@ body.organizer-open .site-nav [data-organizer-link] {
 @media (max-width: 899px) {
   .organizer-credits__notes {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .organizer-credits__notes > .credit-note:last-child,
+  .credit-note--centered {
+    width: auto;
+    grid-column: auto;
   }
 }
 
