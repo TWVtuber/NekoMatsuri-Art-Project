@@ -619,10 +619,10 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
 }
 
 const characterHoverAnimations = new Map([
-  ["沈家_01_沈曦Q.webp", "imgs/characters/Q/Anims/沈家_01_沈曦Q.webm"],
-  ["沈家_01_沈澈Q.webp", "imgs/characters/Q/Anims/沈家_02_沈澈Q.webm"],
-  ["沈家_01_沈樂Q.webp", "imgs/characters/Q/Anims/沈家_03_沈樂Q.webm"],
-  ["沈家_01_沈月Q.webp", "imgs/characters/Q/Anims/沈家_04_沈月Q.webm"],
+  ["沈家_01_沈曦Q.webp", "imgs/characters/Q/Anims/沈家_01_沈曦Q-alpha.webp"],
+  ["沈家_01_沈澈Q.webp", "imgs/characters/Q/Anims/沈家_02_沈澈Q-alpha.webp"],
+  ["沈家_01_沈樂Q.webp", "imgs/characters/Q/Anims/沈家_03_沈樂Q-alpha.webp"],
+  ["沈家_01_沈月Q.webp", "imgs/characters/Q/Anims/沈家_04_沈月Q-alpha.webp"],
 ]);
 
 function enhanceCharacterHover(image) {
@@ -633,7 +633,7 @@ function enhanceCharacterHover(image) {
   if (!staticSource || !animationSource) return;
 
   const wrapper = document.createElement("span");
-  const video = document.createElement("video");
+  const animatedImage = document.createElement("img");
   [...image.attributes].forEach(({ name, value }) => {
     if (!["src", "alt", "loading", "decoding", "draggable"].includes(name)) {
       wrapper.setAttribute(name, value);
@@ -648,24 +648,16 @@ function enhanceCharacterHover(image) {
   image.dataset.characterStatic = "";
   image.classList.add("character-hover__static");
 
-  video.className = "character-hover__animation";
-  video.setAttribute("aria-hidden", "true");
-  video.autoplay = true;
-  video.preload = "auto";
-  video.muted = true;
-  video.defaultMuted = true;
-  video.loop = true;
-  video.playsInline = true;
-
-  const source = document.createElement("source");
-  source.src = animationSource;
-  source.type = "video/webm";
-  video.append(source);
+  animatedImage.className = "character-hover__animation";
+  animatedImage.src = animationSource;
+  animatedImage.alt = "";
+  animatedImage.decoding = "async";
+  animatedImage.draggable = false;
+  animatedImage.setAttribute("aria-hidden", "true");
 
   image.replaceWith(wrapper);
-  wrapper.append(image, video);
+  wrapper.append(image, animatedImage);
   wrapper.classList.add("is-playing");
-  video.play().catch(() => {});
 }
 
 document.querySelectorAll("img").forEach(enhanceCharacterHover);
@@ -682,16 +674,6 @@ const characterImageObserver = new MutationObserver((mutations) => {
 characterImageObserver.observe(document.body, {
   childList: true,
   subtree: true,
-});
-
-document.addEventListener("visibilitychange", () => {
-  document.querySelectorAll(".character-hover__animation").forEach((video) => {
-    if (document.hidden) {
-      video.pause();
-    } else {
-      video.play().catch(() => {});
-    }
-  });
 });
 
 const sectionMascots = [...document.querySelectorAll(".section-mascot")];
