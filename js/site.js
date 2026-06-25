@@ -507,6 +507,9 @@ const stickyNoteTargets = [
 const logoStickerTargets = [
   ...document.querySelectorAll(".collaboration-stamps .stamp-logo"),
 ];
+const logoStickerSection = document.querySelector(
+  ".collaboration-stamps .stamp-logos",
+);
 const hashtagStickerTargets = [
   ...document.querySelectorAll(".activity-hashtags .activity-hashtag"),
 ];
@@ -586,8 +589,19 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     { threshold: 0.01, rootMargin: "64px 0px 240px" },
   );
   const logoStickerObserver = new IntersectionObserver(
-    updateScrollMotionTargets,
-    { threshold: 0.01, rootMargin: "64px 190px" },
+    ([entry]) => {
+      logoStickerSection?.classList.toggle(
+        "is-scroll-motion-visible",
+        entry.isIntersecting,
+      );
+      logoStickerTargets.forEach((target) => {
+        target.classList.toggle(
+          "is-scroll-motion-visible",
+          entry.isIntersecting,
+        );
+      });
+    },
+    { threshold: 0.01, rootMargin: "80px 0px 160px" },
   );
   const hashtagSection = document.querySelector(".activity-hashtags");
   const hashtagStickerObserver = new IntersectionObserver(
@@ -610,9 +624,12 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
         cardMotionObserver.observe(target),
       );
       stickyNoteTargets.forEach((target) => stickyNoteObserver.observe(target));
-      logoStickerTargets.forEach((target) =>
-        logoStickerObserver.observe(target),
-      );
+      if (logoStickerSection) logoStickerObserver.observe(logoStickerSection);
+      else {
+        logoStickerTargets.forEach((target) =>
+          logoStickerObserver.observe(target),
+        );
+      }
       if (hashtagSection) hashtagStickerObserver.observe(hashtagSection);
     });
   });
