@@ -71,19 +71,19 @@
     return `<button class="image-viewer-trigger" type="button" data-image-viewer-src="${escapeHtml(source)}" data-image-viewer-title="${escapeHtml(title)}" data-image-viewer-description="${escapeHtml(description)}"${artistAttributes} aria-label="開啟${escapeHtml(title)}完整圖片"><img src="${escapeHtml(source)}" alt="${escapeHtml(title)}"${lazy ? ' loading="lazy" decoding="async"' : ""} draggable="false" /></button>`;
   }
 
-  function videoViewerTrigger({ source, title, poster = "", artist = null }) {
+  function animationViewerTrigger({ source, title, description = "", artist = null }) {
     const artistAttributes = artist?.name && artist?.url
       ? ` data-image-viewer-artist-name="${escapeHtml(artist.name)}" data-image-viewer-artist-url="${escapeHtml(artist.url)}"`
       : "";
-    return `<button class="image-viewer-trigger" type="button" data-image-viewer-video-src="${escapeHtml(source)}" data-image-viewer-poster="${escapeHtml(poster)}" data-image-viewer-title="${escapeHtml(title)}"${artistAttributes} aria-label="開啟${escapeHtml(title)}完整動圖"><video class="related-profile__gallery-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"${poster ? ` poster="${escapeHtml(poster)}"` : ""} aria-label="${escapeHtml(title)}"><source src="${escapeHtml(source)}" type="video/webm" /></video></button>`;
+    return `<button class="image-viewer-trigger" type="button" data-image-viewer-src="${escapeHtml(source)}" data-image-viewer-title="${escapeHtml(title)}" data-image-viewer-description="${escapeHtml(description)}"${artistAttributes} aria-label="開啟${escapeHtml(title)}完整動圖"><img class="related-profile__gallery-animation" src="${escapeHtml(source)}" alt="${escapeHtml(title)}" loading="lazy" decoding="async" draggable="false" /></button>`;
   }
 
   function renderGallery(gallery = [], currentProfileKey = "") {
     return gallery
       .map(
-        ({ src, caption, description = "", type = "image", poster = "", artist = null }) => {
+        ({ src, caption, description = "", type = "image", artist = null }) => {
           const media = type === "video"
-            ? videoViewerTrigger({ source: src, title: caption, poster, artist })
+            ? animationViewerTrigger({ source: src, title: caption, description, artist })
             : imageViewerTrigger({ source: src, title: caption, description, artist });
           return `<figure class="related-photo-card paper-sheet related-profile__gallery-item"><div class="related-profile__gallery-media">${media}</div><figcaption>${linkCharacterMentions(caption, currentProfileKey)}</figcaption></figure>`;
         },
@@ -109,7 +109,7 @@
       ? `<figure class="${sidebarImageVariant === "document" ? "related-photo-card " : ""}related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "", artist: sidebarImage.artist })}</figure>`
       : "";
     const renderCornerImage = (placementClass) => profile.cornerImage?.animationSrc
-      ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-video-src="${escapeHtml(profile.cornerImage.animationSrc)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整動圖"><video class="related-profile__corner-mascot-video" aria-label="${escapeHtml(profile.cornerImage.alt ?? "")}" role="img" autoplay muted loop playsinline preload="auto" disablepictureinpicture tabindex="-1"><source src="${escapeHtml(profile.cornerImage.animationSrc)}" type="video/webm" /></video></button>`
+      ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.animationSrc)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整動圖"><img class="related-profile__corner-mascot-animation" src="${escapeHtml(profile.cornerImage.animationSrc)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" draggable="false" /></button>`
       : profile.cornerImage?.src
         ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.src)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整圖片"><img class="related-profile__corner-mascot-image" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" /></button>`
       : "";

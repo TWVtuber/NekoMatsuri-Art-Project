@@ -932,7 +932,7 @@
   height: var(--corner-mascot-box, clamp(142px, 13vw, 172px));
 }
 
-.related-profile__corner-mascot-video,
+.related-profile__corner-mascot-animation,
 .related-profile__corner-mascot-image {
   display: block;
   width: 100%;
@@ -1411,7 +1411,7 @@
 }
 
 .related-profile__gallery-item img,
-.related-profile__gallery-video {
+.related-profile__gallery-animation {
   display: block;
   width: 100%;
   height: auto;

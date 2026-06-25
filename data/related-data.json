@@ -133,7 +133,7 @@
       }
     },
     "cornerImage": {
-      "animationSrc": "imgs/characters/Amins/貓祭老師.webm",
+      "animationSrc": "imgs/characters/Amins/貓祭老師-alpha.webp",
       "alt": "貓祭老師動圖"
     },
     "gallery": [
@@ -266,7 +266,7 @@
       }
     },
     "cornerImage": {
-      "animationSrc": "imgs/characters/Amins/祭煜學生.webm",
+      "animationSrc": "imgs/characters/Amins/祭煜學生-alpha.webp",
       "alt": "祭煜學生動圖"
     },
     "gallery": [
@@ -348,7 +348,7 @@
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈曦Q.webp",
-      "animationSrc": "imgs/characters/Amins/01_沈曦.webm",
+      "animationSrc": "imgs/characters/Amins/01_沈曦-alpha.webp",
       "alt": "沈曦 Q 版角色圖"
     },
     "gallery": [
@@ -457,7 +457,7 @@
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈澈Q.webp",
-      "animationSrc": "imgs/characters/Amins/02_沈澈.webm",
+      "animationSrc": "imgs/characters/Amins/02_沈澈-alpha.webp",
       "alt": "沈澈 Q 版角色圖"
     },
     "gallery": [
@@ -547,7 +547,7 @@
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈樂Q.webp",
-      "animationSrc": "imgs/characters/Amins/03_沈樂.webm",
+      "animationSrc": "imgs/characters/Amins/03_沈樂-alpha.webp",
       "alt": "沈樂 Q 版角色圖"
     },
     "gallery": [
@@ -655,7 +655,7 @@
     },
     "cornerImage": {
       "src": "imgs/characters/Q/沈家_01_沈月Q.webp",
-      "animationSrc": "imgs/characters/Amins/04_沈月.webm",
+      "animationSrc": "imgs/characters/Amins/04_沈月-alpha.webp",
       "alt": "沈月 Q 版角色圖"
     },
     "gallery": [
@@ -740,9 +740,8 @@
         }
       },
       {
-        "type": "video",
-        "src": "imgs/characters/3C-Pics/沈家相關/沈月/要黑化了.webm",
-        "poster": "imgs/characters/3C-Pics/沈家相關/沈月/要黑化了.webp",
+        "type": "image",
+        "src": "imgs/characters/3C-Pics/沈家相關/沈月/要黑化了-motion-fps.webp",
         "caption": "要黑化了",
         "artist": {
           "name": "愛君Aijunart",
