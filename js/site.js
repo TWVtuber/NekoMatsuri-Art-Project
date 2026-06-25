@@ -1098,6 +1098,7 @@ const memeModalAnnouncement = document.getElementById(
 const memeModalPrevious = memeModal?.querySelector("[data-meme-previous]");
 const memeModalNext = memeModal?.querySelector("[data-meme-next]");
 const memeModalViewer = memeModal?.querySelector(".meme-modal__viewer");
+const memeModalProgress = memeModal?.querySelector("[data-meme-progress]");
 
 const memeMascots = [
   ...document.querySelectorAll("#activity .section-mascot"),
@@ -1159,6 +1160,50 @@ let memeModalTrigger = null;
 let memeModalIndex = 0;
 let memeModalIsGallery = false;
 let memeSwipeStart = null;
+let memeCarouselTimer = null;
+const memeCarouselDelay = 3000;
+
+function stopMemeCarousel() {
+  if (!memeCarouselTimer) return;
+  window.clearInterval(memeCarouselTimer);
+  memeCarouselTimer = null;
+}
+
+function resetMemeCarouselProgress() {
+  if (!memeModalProgress) return;
+  memeModalProgress.classList.add("is-resetting");
+  void memeModalProgress.offsetWidth;
+  memeModalProgress.classList.remove("is-resetting");
+}
+
+function startMemeCarousel() {
+  stopMemeCarousel();
+  const canCarousel = memeModalIsGallery && memeGalleryItems.length > 1;
+  if (memeModalProgress) memeModalProgress.hidden = !canCarousel;
+  if (!canCarousel) return;
+  resetMemeCarouselProgress();
+  memeCarouselTimer = window.setInterval(() => {
+    showMemeImage(memeModalIndex + 1);
+    resetMemeCarouselProgress();
+  }, memeCarouselDelay);
+}
+
+function resetMemeCarousel() {
+  if (!memeModal || memeModal.hidden) return;
+  startMemeCarousel();
+}
+
+function showMemeImageAndResetCarousel(index) {
+  showMemeImage(index);
+  resetMemeCarousel();
+}
+
+function handleMemeModalTriggerClick(event) {
+  const trigger = event.target.closest("[data-meme-src], [data-meme-gallery]");
+  if (!trigger) return;
+  event.preventDefault();
+  openMemeModal({ currentTarget: trigger });
+}
 
 function renderMemeDots() {
   if (!memeModalStatus) return;
@@ -1168,7 +1213,7 @@ function renderMemeDots() {
     dot.className = "meme-modal__dot";
     dot.type = "button";
     dot.setAttribute("aria-label", `切換到${item.name}`);
-    dot.addEventListener("click", () => showMemeImage(index));
+    dot.addEventListener("click", () => showMemeImageAndResetCarousel(index));
     memeModalStatus.append(dot);
   });
 }
@@ -1213,6 +1258,7 @@ function openMemeModal(event) {
   if (memeModalPrevious) memeModalPrevious.hidden = !memeModalIsGallery;
   if (memeModalNext) memeModalNext.hidden = !memeModalIsGallery;
   if (memeModalStatus) memeModalStatus.hidden = !memeModalIsGallery;
+  if (memeModalProgress) memeModalProgress.hidden = true;
   const requestedIndex = memeModalIsGallery
     ? Math.floor(Math.random() * memeGalleryItems.length)
     : memeGalleryItems.findIndex(
@@ -1227,33 +1273,34 @@ function openMemeModal(event) {
   stage.setAttribute("aria-hidden", "true");
   memeModal.focus({ preventScroll: true });
   memeModal.querySelector(".meme-modal__close")?.focus({ preventScroll: true });
+  startMemeCarousel();
 }
 
 function closeMemeModal() {
   if (!memeModal || memeModal.hidden) return;
+  stopMemeCarousel();
   memeModal.hidden = true;
   document.body.classList.remove("meme-is-open");
   activityRoot.inert = false;
   activityRoot.removeAttribute("aria-hidden");
   stage.inert = false;
   stage.removeAttribute("aria-hidden");
+  if (memeModalProgress) memeModalProgress.hidden = true;
   memeModalImage.removeAttribute("src");
   memeModalImage.alt = "";
   memeModalTrigger?.focus({ preventScroll: true });
   memeModalTrigger = null;
 }
 
-memeModalTriggers.forEach((trigger) =>
-  trigger.addEventListener("click", openMemeModal),
-);
+document.addEventListener("click", handleMemeModalTriggerClick);
 memeModalCloseButtons.forEach((button) =>
   button.addEventListener("click", closeMemeModal),
 );
 memeModalPrevious?.addEventListener("click", () =>
-  showMemeImage(memeModalIndex - 1),
+  showMemeImageAndResetCarousel(memeModalIndex - 1),
 );
 memeModalNext?.addEventListener("click", () =>
-  showMemeImage(memeModalIndex + 1),
+  showMemeImageAndResetCarousel(memeModalIndex + 1),
 );
 
 memeModalViewer?.addEventListener("pointerdown", (event) => {
@@ -1271,11 +1318,20 @@ memeModalViewer?.addEventListener("pointerup", (event) => {
   memeSwipeStart = null;
   if (Math.abs(deltaX) < 48 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.15)
     return;
-  showMemeImage(memeModalIndex + (deltaX < 0 ? 1 : -1));
+  showMemeImageAndResetCarousel(memeModalIndex + (deltaX < 0 ? 1 : -1));
 });
 
 memeModalViewer?.addEventListener("pointercancel", () => {
   memeSwipeStart = null;
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (!memeModal || memeModal.hidden) return;
+  if (document.hidden) {
+    stopMemeCarousel();
+    return;
+  }
+  startMemeCarousel();
 });
 
 const academyModal = document.getElementById("academy-modal");

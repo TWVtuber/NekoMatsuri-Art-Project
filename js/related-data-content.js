@@ -108,13 +108,21 @@
     const sidebarImageMarkup = sidebarImage?.src
       ? `<figure class="${sidebarImageVariant === "document" ? "related-photo-card " : ""}related-profile__sidebar-art related-profile__sidebar-art--${sidebarImageVariant}">${imageViewerTrigger({ source: sidebarImage.src, title: sidebarImage.alt ?? profile.name, description: sidebarImage.description ?? "", artist: sidebarImage.artist })}</figure>`
       : "";
-    const renderCornerImage = (placementClass) => profile.cornerImage?.animationSrc
-      ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.animationSrc)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整動圖"><img class="related-profile__corner-mascot-animation" src="${escapeHtml(profile.cornerImage.animationSrc)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" draggable="false" /></button>`
-      : profile.cornerImage?.src
-        ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.src)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整圖片"><img class="related-profile__corner-mascot-image" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" /></button>`
-      : "";
-    const cornerImageMarkup = renderCornerImage("related-profile__corner-mascot--paper");
-    const sidebarCornerImageMarkup = renderCornerImage("related-profile__corner-mascot--sidebar");
+    const renderCornerDisplay = (placement) => {
+      const placementClass = `related-profile__corner-mascot--${placement}`;
+      const cornerImageMarkup = profile.cornerImage?.animationSrc
+        ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.animationSrc)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整動圖"><img class="related-profile__corner-mascot-animation" src="${escapeHtml(profile.cornerImage.animationSrc)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" draggable="false" /></button>`
+        : profile.cornerImage?.src
+          ? `<button class="image-viewer-trigger related-profile__corner-mascot ${placementClass}" type="button" data-image-viewer-src="${escapeHtml(profile.cornerImage.src)}" data-image-viewer-title="${escapeHtml(profile.cornerImage.alt ?? profile.name)}" aria-label="開啟${escapeHtml(profile.cornerImage.alt ?? profile.name)}完整圖片"><img class="related-profile__corner-mascot-image" src="${escapeHtml(profile.cornerImage.src)}" alt="${escapeHtml(profile.cornerImage.alt ?? "")}" loading="lazy" decoding="async" /></button>`
+          : "";
+      if (!cornerImageMarkup) return "";
+      const logoMarkup = profile.logo?.src
+        ? `<img class="related-profile__corner-logo" src="${escapeHtml(profile.logo.src)}" alt="${escapeHtml(profile.logo.alt ?? `${profile.name} Logo`)}" loading="lazy" decoding="async" draggable="false" />`
+        : "";
+      return `<div class="related-profile__corner-display related-profile__corner-display--${placement}">${cornerImageMarkup}${logoMarkup}</div>`;
+    };
+    const cornerImageMarkup = renderCornerDisplay("paper");
+    const sidebarCornerImageMarkup = renderCornerDisplay("sidebar");
     const sidebarArtRowMarkup = sidebarImageMarkup || sidebarCornerImageMarkup
       ? `<div class="related-profile__sidebar-art-row">${sidebarImageMarkup}${sidebarCornerImageMarkup}</div>`
       : "";
