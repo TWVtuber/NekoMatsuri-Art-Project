@@ -129,6 +129,32 @@
       caption.replaceChildren(name, prize, judge);
     });
 
+    const additionalTitle = document.getElementById("additional-awards-title");
+    if (additionalTitle) additionalTitle.textContent = data.additionalAwards.title;
+
+    document.querySelectorAll(".additional-awards__grid .additional-award-note").forEach((figure, index) => {
+      const item = data.additionalAwards.awards[index];
+      if (!item) return;
+      setAwardTone(figure, item.tone);
+      const caption = figure.querySelector("figcaption");
+      const name = document.createElement("strong");
+      name.textContent = item.name;
+      const prize = createPrize(item.prize);
+      const judge = document.createElement("small");
+      judge.className = "award-judge";
+      const imageLink = externalLink(item.judgeImageUrl);
+      const image = document.createElement("img");
+      image.src = item.judgeImage;
+      image.alt = item.judgeImageAlt;
+      imageLink.append(image);
+      judge.append(imageLink);
+      item.judges.forEach((person, personIndex) => {
+        if (personIndex) judge.append(document.createTextNode(" ＆ "));
+        judge.append(externalLink(person.url, person.name));
+      });
+      caption.replaceChildren(name, prize, judge);
+    });
+
     requestAnimationFrame(watchPrizeLineWidths);
     document.fonts?.ready.then(fitPrizeLines);
   }

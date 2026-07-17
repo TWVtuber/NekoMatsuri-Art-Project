@@ -28,9 +28,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/site.css?v=80" />
-    <link rel="stylesheet" href="css/event.css?v=60" />
-    <link rel="stylesheet" href="css/awards.css?v=5" />
-    <link rel="stylesheet" href="css/pages-responsive.css?v=32" />
+    <link rel="stylesheet" href="css/event.css?v=64" />
+    <link rel="stylesheet" href="css/awards.css?v=7" />
+    <link rel="stylesheet" href="css/pages-responsive.css?v=34" />
     <link rel="stylesheet" href="css/spacing.css?v=10" />
     <link rel="stylesheet" href="css/related-data.css?v=85" />
     <link rel="stylesheet" href="css/classroom-map.css?v=36" />
@@ -734,113 +734,19 @@
           </div>
           <article class="reward-policy__paper paper-card">
             <div class="reward-policy__columns">
-              <ol class="reward-policy__list">
-                <li>
-                  活動獎項請參考<span
-                    class="reward-direction reward-direction--desktop"
-                    >右方</span
-                  ><span class="reward-direction reward-direction--mobile"
-                    >下方</span
-                  >項目。
-                </li>
-                <li>
-                  獎金來源全額由
-                  <strong>貓祭 NekoMatsuri</strong> 出資及後續發放獎金。<span
-                    class="rules-muted-note"
-                    >（※以及各種神秘力量贊助）</span
-                  >
-                </li>
-                <li>
-                  海外得獎者獎金<b>須扣除轉帳等手續費用（僅接受 PayPal）</b>。
-                </li>
-                <li>
-                  投稿期限為即日起至
-                  <strong>2026/07/19 23:59</strong
-                  >，並且將以貼文形式公布獎項獲得者。
-                </li>
-                <li>
-                  投稿即代表遵守以上規定，本活動各項辦法若有未盡事宜，<b>主辦單位有權隨時修正且擁有最終解釋權</b>。
-                </li>
-              </ol>
+              <ol class="reward-policy__list"></ol>
               <div class="reward-policy__prizes">
-                <ul class="reward-prize-list">
-                  <li>
-                    <span class="reward-prize-list__heading"
-                      ><b>金&emsp;賞</b
-                      ><span class="reward-prize-list__count"
-                        >（一名）</span
-                      ></span
-                    ><span class="reward-prize-list__value fit-single-line"
-                      >新台幣 5,000 元</span
-                    ><span class="reward-prize-list__bonus fit-single-line"
-                      >插圖動態化（含拆圖建模）</span
-                    >
-                  </li>
-                  <li>
-                    <span class="reward-prize-list__heading"
-                      ><b>銀&emsp;賞</b
-                      ><span class="reward-prize-list__count"
-                        >（一名）</span
-                      ></span
-                    ><span class="reward-prize-list__value fit-single-line"
-                      >新台幣 3,000 元</span
-                    >
-                  </li>
-                  <li>
-                    <span class="reward-prize-list__heading"
-                      ><b>銅&emsp;賞</b
-                      ><span class="reward-prize-list__count"
-                        >（一名）</span
-                      ></span
-                    ><span class="reward-prize-list__value fit-single-line"
-                      >新台幣 2,000 元</span
-                    >
-                  </li>
-                  <li>
-                    <span class="reward-prize-list__heading"
-                      ><b>互動獎</b
-                      ><span class="reward-prize-list__count"
-                        >（一名）</span
-                      ></span
-                    ><span class="reward-prize-list__value fit-single-line"
-                      >新台幣 1,500 元</span
-                    ><small>即為大於一個的角色進行互動，且十分生動。</small>
-                  </li>
-                  <li>
-                    <span class="reward-prize-list__heading"
-                      ><b>角色獎</b
-                      ><span class="reward-prize-list__count"
-                        >（六名）</span
-                      ></span
-                    ><span class="reward-prize-list__value fit-single-line"
-                      >新台幣 1,500 元</span
-                    ><small
-                      >每位學生與老師將選出自己在內的，最喜歡的作品。</small
-                    >
-                  </li>
-                  <li>
-                    <span class="reward-prize-list__heading"
-                      ><b>卡哇獎</b
-                      ><span class="reward-prize-list__count"
-                        >（三名）</span
-                      ></span
-                    ><span class="reward-prize-list__value fit-single-line"
-                      >新台幣 1,000 元</span
-                    ><small>就是萌到心底暖烘烘的圖，超級卡哇伊。</small>
-                  </li>
-                  <li>
-                    <span class="reward-prize-list__heading"
-                      ><b>搞怪獎</b
-                      ><span class="reward-prize-list__count"
-                        >（三名）</span
-                      ></span
-                    ><span class="reward-prize-list__value fit-single-line"
-                      >新台幣 1,000 元</span
-                    ><small>又鬧又白癡，你能玩出什麼花樣呢？</small>
-                  </li>
-                </ul>
+                <ul class="reward-prize-list"></ul>
               </div>
             </div>
+            <section
+              class="reward-extra-awards"
+              aria-labelledby="reward-extra-awards-title"
+            >
+              <h3 id="reward-extra-awards-title"></h3>
+              <ul class="reward-extra-awards__list"></ul>
+            </section>
+            <p class="reward-policy__sponsor"></p>
           </article>
         </section>
 
@@ -1131,6 +1037,88 @@
               </figcaption>
             </figure>
           </div>
+
+          <section class="additional-awards" aria-labelledby="additional-awards-title">
+            <h3
+              class="award-group-title role-awards-title additional-awards__title"
+              id="additional-awards-title"
+            >
+              追加獎項
+            </h3>
+            <div class="award-note-grid additional-awards__grid">
+              <figure
+                class="award-note role-award-note additional-award-note award-note--blue"
+              >
+                <span class="note-tape" aria-hidden="true"></span>
+                <span class="additional-award-note__trophy" aria-hidden="true"></span>
+                <figcaption>
+                  <strong>迷你像素獎</strong><span>NT$ 1,000</span
+                  ><small class="award-judge"
+                    ><a
+                      href="https://x.com/INU_Art_"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      ><img
+                        src="imgs/judges/President.webp"
+                        alt="繪俄史藝術高等學院校長"
+                    /></a
+                    ><a
+                      href="https://x.com/INU_Art_"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >繪俄史藝術高等學院校長</a
+                    ></small
+                  >
+                </figcaption>
+              </figure>
+              <figure
+                class="award-note role-award-note additional-award-note award-note--pink"
+              >
+                <span class="note-tape" aria-hidden="true"></span>
+                <span class="additional-award-note__trophy" aria-hidden="true"></span>
+                <figcaption>
+                  <strong>最佳手速奨</strong><span>NT$ 1,000</span
+                  ><small class="award-judge"
+                    ><a
+                      href="https://lit.link/en/NekoMatsuri"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      ><img src="imgs/judges/NekoMatsuri.webp" alt="貓祭"
+                    /></a
+                    ><a
+                      href="https://lit.link/en/NekoMatsuri"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >貓祭</a
+                    ></small
+                  >
+                </figcaption>
+              </figure>
+              <figure
+                class="award-note role-award-note additional-award-note award-note--green"
+              >
+                <span class="note-tape" aria-hidden="true"></span>
+                <span class="additional-award-note__trophy" aria-hidden="true"></span>
+                <figcaption>
+                  <strong>最佳死線獎</strong><span>NT$ 500</span
+                  ><small class="award-judge"
+                    ><a
+                      href="https://lit.link/en/NekoMatsuri"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      ><img src="imgs/judges/NekoMatsuri.webp" alt="貓祭"
+                    /></a
+                    ><a
+                      href="https://lit.link/en/NekoMatsuri"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >貓祭</a
+                    ></small
+                  >
+                </figcaption>
+              </figure>
+            </div>
+          </section>
         </section>
       </main>
 
@@ -1684,6 +1672,24 @@
               <span></span>
             </div>
             <dl class="organizer-sponsors">
+              <div class="sponsor-note sponsor-note--company">
+                <span class="sponsor-note__pin" aria-hidden="true"></span>
+                <dt>廠商贊助</dt>
+                <dd>
+                  <a
+                    href="https://zh-tw.bune-tw.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="前往鋁人有限公司官方網站"
+                  >
+                    <img
+                      class="sponsor-note__logo"
+                      src="imgs/organizer/sponsor/BUNE_Logo_Chinese_RGB.webp"
+                      alt="鋁人有限公司"
+                    />
+                  </a>
+                </dd>
+              </div>
               <div class="sponsor-note">
                 <span class="sponsor-note__pin" aria-hidden="true"></span>
                 <dt>個人贊助</dt>
@@ -1756,10 +1762,11 @@
     </div>
 
     <script src="js/page-content.js?v=5"></script>
+    <script src="js/reward-policy-content.js?v=2"></script>
     <script src="js/faq-content.js?v=2"></script>
-    <script src="js/awards-content.js?v=4"></script>
-    <script src="js/organizers-content.js?v=5"></script>
-    <script src="js/site.js?v=63"></script>
+    <script src="js/awards-content.js?v=5"></script>
+    <script src="js/organizers-content.js?v=7"></script>
+    <script src="js/site.js?v=64"></script>
     <script src="js/classroom-map.js?v=15"></script>
     <script src="js/related-data-content.js?v=28"></script>
     <script src="js/related-data.js?v=12"></script>
