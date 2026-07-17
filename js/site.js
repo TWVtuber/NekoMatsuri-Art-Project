@@ -448,7 +448,7 @@ if (heroDeclaration) {
 
 const highlighterMarks = [
   ...document.querySelectorAll(
-    ".hero-lead, .hero-closing, .check-list b, .rule-list b, .reward-policy__list b",
+    ".hero-lead, .hero-closing, .check-list b, .rule-list b, .reward-policy__list b, .reward-policy__sponsor",
   ),
 ];
 

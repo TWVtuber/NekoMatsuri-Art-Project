@@ -151,5 +151,42 @@
         "judges": [{ "name": "沈樂", "url": "https://x.com/Lumineve_3" }]
       }
     ]
+  },
+  "additionalAwards": {
+    "title": "追加獎項",
+    "awards": [
+      {
+        "name": "迷你像素獎",
+        "prize": "NT$ 1,000",
+        "tone": "blue",
+        "judgeImage": "imgs/judges/President.webp",
+        "judgeImageAlt": "繪俄史藝術高等學院校長",
+        "judgeImageUrl": "https://x.com/INU_Art_",
+        "judges": [
+          {
+            "name": "繪俄史藝術高等學院校長",
+            "url": "https://x.com/INU_Art_"
+          }
+        ]
+      },
+      {
+        "name": "最佳手速獎",
+        "prize": "NT$ 1,000",
+        "tone": "pink",
+        "judgeImage": "imgs/judges/NekoMatsuri.webp",
+        "judgeImageAlt": "貓祭",
+        "judgeImageUrl": "https://lit.link/en/NekoMatsuri",
+        "judges": [{ "name": "貓祭", "url": "https://lit.link/en/NekoMatsuri" }]
+      },
+      {
+        "name": "最佳死線獎",
+        "prize": "NT$ 500",
+        "tone": "green",
+        "judgeImage": "imgs/judges/NekoMatsuri.webp",
+        "judgeImageAlt": "貓祭",
+        "judgeImageUrl": "https://lit.link/en/NekoMatsuri",
+        "judges": [{ "name": "貓祭", "url": "https://lit.link/en/NekoMatsuri" }]
+      }
+    ]
   }
 }

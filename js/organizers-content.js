@@ -60,7 +60,26 @@
       const item = credits.sponsors[index];
       if (!item) return;
       note.querySelector("dt").textContent = item.label;
-      note.querySelector("dd").textContent = item.names;
+      const details = note.querySelector("dd");
+      if (item.image) {
+        const logo = details.querySelector("img") || document.createElement("img");
+        logo.className = "sponsor-note__logo";
+        logo.src = item.image.src;
+        logo.alt = item.image.alt;
+        if (item.url) {
+          const link = document.createElement("a");
+          link.href = item.url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.setAttribute("aria-label", `前往${item.image.alt}官方網站`);
+          link.append(logo);
+          details.replaceChildren(link);
+        } else {
+          details.replaceChildren(logo);
+        }
+      } else {
+        details.textContent = item.names;
+      }
     });
   }
 

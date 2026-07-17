@@ -156,8 +156,16 @@
     ],
     "sponsors": [
       {
+        "label": "廠商贊助",
+        "image": {
+          "src": "imgs/organizer/sponsor/BUNE_Logo_Chinese_RGB.webp",
+          "alt": "鋁人有限公司"
+        },
+        "url": "https://zh-tw.bune-tw.com/"
+      },
+      {
         "label": "個人贊助",
-        "names": "喵波、君大、某茶、兔子、Jeff、李翔、刺客戰鬥、薄香貓、初山、阿太"
+        "names": "喵波、君大、某茶、塔努努、兔子、銫希恩、Jeff、李翔、刺客戰鬥、薄香貓、初山、阿太"
       }
     ]
   }

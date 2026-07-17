@@ -395,6 +395,38 @@
   margin-top: 9px;
   padding-top: 9px;
 }
+.additional-awards {
+  margin-top: 0;
+  padding-top: calc(
+    var(--section-gap) + var(--role-awards-mascot-top-overhang)
+  );
+}
+.additional-awards__title {
+  margin-bottom: 64px;
+}
+.additional-awards__grid {
+  margin-bottom: 0;
+}
+.additional-award-note {
+  grid-template-rows: 102px auto;
+}
+.additional-award-note:nth-child(1) {
+  transform: rotate(0.7deg);
+}
+.additional-award-note:nth-child(2) {
+  transform: rotate(-1.15deg);
+}
+.additional-award-note:nth-child(3) {
+  transform: rotate(0.35deg);
+}
+.additional-award-note:hover {
+  transform: translateY(-5px) rotate(0);
+}
+.additional-award-note__trophy {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .detail-sheet {
   position: relative;
   margin: 0 auto 110px;
@@ -638,6 +670,9 @@
 }
 
 @media (max-width: 599.95px) {
+  .additional-award-note {
+    grid-template-rows: 137px auto;
+  }
   .award-note-grid .award-note.scroll-stick-note:nth-child(3n + 1) {
     --sticky-note-start-x: -42px;
   }

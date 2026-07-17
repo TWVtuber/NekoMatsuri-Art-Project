@@ -887,6 +887,23 @@ body.organizer-open .site-nav [data-organizer-link] {
     gap: 18px;
     align-items: start;
   }
+  .reward-extra-awards {
+    margin-top: 18px;
+  }
+  .reward-extra-awards__list {
+    grid-template-columns: 1fr;
+  }
+  .reward-extra-awards__heading {
+    flex-wrap: wrap;
+  }
+  .reward-extra-awards__heading > b {
+    width: auto;
+    margin-left: auto;
+  }
+  .reward-policy__sponsor {
+    margin-top: 22px;
+    font-size: 15px;
+  }
   .reward-policy__list {
     padding-left: 25px;
   }
@@ -1062,6 +1079,13 @@ body.organizer-open .site-nav [data-organizer-link] {
     grid-template-columns: 1fr;
     gap: 24px;
     align-items: start;
+  }
+  .reward-extra-awards__list {
+    grid-template-columns: 1fr;
+  }
+  .reward-extra-awards__heading > b {
+    width: auto;
+    margin-left: auto;
   }
   .reward-policy__prizes,
   .reward-prize-list {
@@ -1612,6 +1636,8 @@ body.organizer-open .site-nav [data-organizer-link] {
 }
 
 .organizer-sponsors {
+  display: grid;
+  gap: 64px;
   width: min(680px, calc(100% - 32px));
   margin: 0 auto;
   font-family: 'jf-openhuninn', cursive;
@@ -1683,6 +1709,14 @@ body.organizer-open .site-nav [data-organizer-link] {
 .organizer-sponsors dd {
   font-size: 1.05rem;
   line-height: 1.6;
+}
+
+.sponsor-note__logo {
+  display: block;
+  width: min(100%, 360px);
+  max-height: 110px;
+  margin: 0 auto;
+  object-fit: contain;
 }
 
 @media (max-width: 899px) {
