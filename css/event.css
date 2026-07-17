@@ -2044,6 +2044,18 @@ p {
   font-size: 15px;
 }
 
+.reward-extra-awards__heading > .reward-extra-awards__unlock {
+  padding: 1px 7px;
+  border: 1px solid rgba(215, 45, 92, 0.55);
+  border-radius: 999px;
+  color: var(--pink-strong);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  white-space: nowrap;
+  background: rgba(255, 232, 238, 0.72);
+}
+
 .reward-extra-awards__heading > b {
   width: 100%;
   margin-left: 0;
