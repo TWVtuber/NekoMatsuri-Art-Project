@@ -97,21 +97,6 @@
     }
   }
 
-  function renderSponsor(data) {
-    const container = document.querySelector(".reward-policy__sponsor");
-    if (!container || !data) return;
-    const link = document.createElement("a");
-    link.href = data.url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = data.name;
-    container.replaceChildren(
-      document.createTextNode(data.prefix || ""),
-      link,
-      document.createTextNode(data.suffix || ""),
-    );
-  }
-
   fetch("data/reward-policy.json", { cache: "no-cache" })
     .then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -123,7 +108,6 @@
       renderPolicies(data.policies);
       renderMainAwards(data.mainAwards);
       renderExtraAwards(data.extraAwards);
-      renderSponsor(data.sponsor);
     })
     .catch((error) => console.error("Unable to load reward policy content.", error));
 })();

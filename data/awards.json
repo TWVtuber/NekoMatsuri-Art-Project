@@ -119,7 +119,7 @@
       },
       {
         "name": "沈月獎",
-        "prize": "NT$ 1,500",
+        "prize": "金：NT$ 1,500\n銀：NT$ 1,000（無獎盃）\n銅：NT$ 500（無獎盃）",
         "image": "imgs/trophies/沈月獎.webp",
         "alt": "沈月獎獎盃",
         "tone": "green",

@@ -24,7 +24,7 @@
     const prize = document.createElement("span");
     prize.className = "award-prize";
 
-    text.split(/\s+\+\s+/).forEach((lineText) => {
+    text.split(/\r?\n|\s+\+\s+/).forEach((lineText) => {
       const line = document.createElement("span");
       line.className = "award-prize__line fit-single-line";
       line.textContent = lineText;

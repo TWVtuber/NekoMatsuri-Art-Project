@@ -1870,7 +1870,7 @@ p {
   --reward-policy-paper-fill: #fffef8;
   --reward-policy-line-fill: rgba(84, 104, 132, 0.11);
   max-width: 1100px;
-  min-height: 960px;
+  min-height: 0;
   margin: 0 auto;
   padding: clamp(48px, 6vw, 72px);
   border-radius: 24px 24px 18px 18px;
@@ -2069,38 +2069,6 @@ p {
   color: #5d5852;
   font-size: 16px;
   line-height: 1.55;
-}
-
-.reward-policy__sponsor {
-  --marker-color: 255 226 123;
-  --marker-start: 48%;
-  --marker-end: 92%;
-  width: fit-content;
-  margin: 26px auto 0;
-  padding: 2px 10px;
-  font-size: 17px;
-  font-weight: 700;
-  text-align: center;
-  background: linear-gradient(
-    180deg,
-    transparent var(--marker-start),
-    rgb(var(--marker-color) / calc(var(--marker-alpha) * 0.72)) var(--marker-start),
-    rgb(var(--marker-color) / calc(var(--marker-alpha) * 0.72)) var(--marker-end),
-    transparent var(--marker-end)
-  );
-}
-
-.reward-policy__sponsor a {
-  color: inherit;
-  font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--pink-strong);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-}
-
-.reward-policy__sponsor a:hover {
-  color: var(--pink-strong);
 }
 
 .scroll-zoom-out-left,
