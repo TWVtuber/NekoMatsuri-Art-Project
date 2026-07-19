@@ -8,6 +8,13 @@
     return link;
   };
 
+  const judgeName = (person) => {
+    if (person.url) return externalLink(person.url, person.name);
+    const name = document.createElement("span");
+    name.textContent = person.name;
+    return name;
+  };
+
   const awardToneClasses = [
     "award-note--yellow",
     "award-note--blue",
@@ -27,6 +34,11 @@
     text.split(/\r?\n|\s+\+\s+/).forEach((lineText) => {
       const line = document.createElement("span");
       line.className = "award-prize__line fit-single-line";
+      const tier = { "金": "gold", "銀": "silver", "銅": "bronze" }[lineText.trim().charAt(0)];
+      if (tier) {
+        prize.classList.add("award-prize--tiered");
+        line.classList.add(`award-prize__line--${tier}`);
+      }
       line.textContent = lineText;
       prize.append(line);
     });
@@ -132,28 +144,56 @@
     const additionalTitle = document.getElementById("additional-awards-title");
     if (additionalTitle) additionalTitle.textContent = data.additionalAwards.title;
 
-    document.querySelectorAll(".additional-awards__grid .additional-award-note").forEach((figure, index) => {
-      const item = data.additionalAwards.awards[index];
-      if (!item) return;
+    const additionalGrid = document.querySelector(".additional-awards__grid");
+    const additionalNotes = data.additionalAwards.awards.map((item) => {
+      const figure = document.createElement("figure");
+      figure.className = "award-note role-award-note additional-award-note";
       setAwardTone(figure, item.tone);
-      const caption = figure.querySelector("figcaption");
+      const tape = document.createElement("span");
+      tape.className = "note-tape";
+      tape.ariaHidden = "true";
+      const trophy = document.createElement("span");
+      trophy.className = "additional-award-note__trophy";
+      trophy.ariaHidden = "true";
+      const caption = document.createElement("figcaption");
       const name = document.createElement("strong");
       name.textContent = item.name;
+      const count = document.createElement("span");
+      count.className = "additional-award-note__count";
+      count.textContent = item.countLabel;
       const prize = createPrize(item.prize);
+      const unlock = document.createElement("span");
+      if (item.unlockLabel) {
+        unlock.className = "additional-award-note__unlock";
+        unlock.textContent = item.unlockLabel;
+      }
       const judge = document.createElement("small");
       judge.className = "award-judge";
-      const imageLink = externalLink(item.judgeImageUrl);
-      const image = document.createElement("img");
-      image.src = item.judgeImage;
-      image.alt = item.judgeImageAlt;
-      imageLink.append(image);
-      judge.append(imageLink);
+      if (item.judgeImage) {
+        const imageLink = externalLink(item.judgeImageUrl);
+        const image = document.createElement("img");
+        image.src = item.judgeImage;
+        image.alt = item.judgeImageAlt;
+        imageLink.append(image);
+        judge.append(imageLink);
+      }
       item.judges.forEach((person, personIndex) => {
         if (personIndex) judge.append(document.createTextNode(" ＆ "));
-        judge.append(externalLink(person.url, person.name));
+        judge.append(judgeName(person));
       });
-      caption.replaceChildren(name, prize, judge);
+      caption.replaceChildren(name, count, prize);
+      caption.append(judge);
+      figure.append(tape);
+      if (item.unlockLabel) figure.append(unlock);
+      figure.append(trophy, caption);
+      return figure;
     });
+    if (additionalGrid) {
+      additionalGrid.replaceChildren(...additionalNotes);
+      document.dispatchEvent(new CustomEvent("awards:additional-rendered", {
+        detail: { notes: additionalNotes },
+      }));
+    }
 
     requestAnimationFrame(watchPrizeLineWidths);
     document.fonts?.ready.then(fitPrizeLines);

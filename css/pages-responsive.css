@@ -519,6 +519,18 @@ body.organizer-open .site-nav [data-organizer-link] {
   .award-note-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .additional-awards__grid,
+  .reward-extra-awards__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .additional-awards__grid > .additional-award-note,
+  .reward-extra-awards__list > li {
+    grid-column: span 2;
+  }
+  .additional-awards__grid > :last-child:nth-child(2n + 1),
+  .reward-extra-awards__list > :last-child:nth-child(2n + 1) {
+    grid-column: 2 / span 2;
+  }
   .award-note {
     grid-template-rows: 220px auto;
   }
@@ -876,7 +888,8 @@ body.organizer-open .site-nav [data-organizer-link] {
     padding: 38px 22px;
     transform: none;
   }
-  .reward-policy__paper::before {
+  .reward-policy__paper::before,
+  .reward-policy__columns::before {
     display: none;
   }
   .reward-policy__paper::after {
@@ -892,6 +905,10 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .reward-extra-awards__list {
     grid-template-columns: 1fr;
+  }
+  .additional-awards__grid > .additional-award-note,
+  .reward-extra-awards__list > li {
+    grid-column: 1 !important;
   }
   .reward-extra-awards__heading {
     flex-wrap: wrap;
@@ -1068,7 +1085,8 @@ body.organizer-open .site-nav [data-organizer-link] {
     min-height: 0;
     padding: 44px 34px;
   }
-  .reward-policy__paper::before {
+  .reward-policy__paper::before,
+  .reward-policy__columns::before {
     display: none;
   }
   .reward-policy__columns {

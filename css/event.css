@@ -1883,11 +1883,11 @@ p {
   box-shadow: 6px 7px 0 rgba(0, 0, 0, 0.15);
   transform: none;
 }
-.reward-policy__paper::before {
+.reward-policy__columns::before {
   content: "";
   position: absolute;
-  top: 34px;
-  bottom: 390px;
+  top: 0;
+  bottom: 0;
   left: 50%;
   width: 1px;
   background: rgba(23, 23, 23, 0.5);
@@ -1911,6 +1911,7 @@ p {
   transform: none;
 }
 .reward-policy__columns {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 70px;
@@ -2021,11 +2022,23 @@ p {
 
 .reward-extra-awards__list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+.reward-extra-awards__list > li {
+  grid-column: span 2;
+}
+.reward-extra-awards__list > :last-child:nth-child(3n + 1) {
+  grid-column: 3 / span 2;
+}
+.reward-extra-awards__list > :nth-last-child(2):nth-child(3n + 1) {
+  grid-column: 2 / span 2;
+}
+.reward-extra-awards__list > :last-child:nth-child(3n + 2) {
+  grid-column: 4 / span 2;
 }
 
 .reward-extra-awards__heading {
