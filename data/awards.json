@@ -79,11 +79,11 @@
   },
   "roleAwards": {
     "title": "角色獎項",
-    "description": "每個獎項下方會標示負責評審，由評審選出前三件自己最喜歡的作品。",
+    "description": "每個獎項下方會標示負責評審，由評審選出自己最喜歡的數件作品。",
     "awards": [
       {
         "name": "沈曦獎",
-        "prize": "金：NT$ 1,500\n銀：NT$ 1,000（無獎盃）\n銅：NT$ 500（無獎盃）",
+        "prize": "金賞（一名）NT$ 1,500 *含獎盃\n優賞（一名）NT$ 1,000\n佳作（三名）NT$ 500",
         "image": "imgs/trophies/沈曦獎.webp",
         "alt": "沈曦獎獎盃",
         "tone": "pink",
@@ -94,7 +94,7 @@
       },
       {
         "name": "貓祭獎",
-        "prize": "金：NT$ 1,500\n銀：NT$ 1,000（無獎盃）\n銅：NT$ 500（無獎盃）",
+        "prize": "金賞（一名）NT$ 1,500 *含獎盃\n優賞（一名）NT$ 1,000\n佳作（三名）NT$ 500",
         "image": "imgs/trophies/貓祭獎.webp",
         "alt": "貓祭獎獎盃",
         "tone": "pink",
@@ -105,7 +105,7 @@
       },
       {
         "name": "祭煜獎",
-        "prize": "金：NT$ 1,500\n銀：NT$ 1,000（無獎盃）\n銅：NT$ 500（無獎盃）",
+        "prize": "金賞（一名）NT$ 1,500 *含獎盃\n優賞（一名）NT$ 1,000\n佳作（三名）NT$ 500",
         "image": "imgs/trophies/祭煜獎.webp",
         "alt": "祭煜獎獎盃",
         "tone": "yellow",
@@ -119,7 +119,7 @@
       },
       {
         "name": "沈月獎",
-        "prize": "金：NT$ 1,500\n銀：NT$ 1,000（無獎盃）\n銅：NT$ 500（無獎盃）",
+        "prize": "金賞（一名）NT$ 1,500 *含獎盃\n優賞（一名）NT$ 1,000\n佳作（三名）NT$ 500",
         "image": "imgs/trophies/沈月獎.webp",
         "alt": "沈月獎獎盃",
         "tone": "green",
@@ -130,7 +130,7 @@
       },
       {
         "name": "沈澈獎",
-        "prize": "金：NT$ 1,500\n銀：NT$ 1,000（無獎盃）\n銅：NT$ 500（無獎盃）",
+        "prize": "金賞（一名）NT$ 1,500 *含獎盃\n優賞（一名）NT$ 1,000\n佳作（三名）NT$ 500",
         "image": "imgs/trophies/沈澈獎.webp",
         "alt": "沈澈獎獎盃",
         "tone": "blue",
@@ -141,7 +141,7 @@
       },
       {
         "name": "沈樂獎",
-        "prize": "金：NT$ 1,500\n銀：NT$ 1,000（無獎盃）\n銅：NT$ 500（無獎盃）",
+        "prize": "金賞（一名）NT$ 1,500 *含獎盃\n優賞（一名）NT$ 1,000\n佳作（三名）NT$ 500",
         "image": "imgs/trophies/沈樂獎.webp",
         "alt": "沈樂獎獎盃",
         "tone": "green",
@@ -211,18 +211,18 @@
       {
         "name": "星星賞",
         "countLabel": "（取一名）",
-        "unlockLabel": "投稿累積超過 100 則解鎖",
+        "unlockLabel": "投稿達 100 件解鎖",
         "prize": "免費建模該圖",
         "tone": "pink",
         "judgeImage": "imgs/judges/star.jpg",
-        "judgeImageAlt": "筱星朔月",
+        "judgeImageAlt": "筱星朔光",
         "judgeImageUrl": "https://x.com/star_2290",
-        "judges": [{ "name": "筱星朔月", "url": "https://x.com/star_2290" }]
+        "judges": [{ "name": "筱星朔光", "url": "https://x.com/star_2290" }]
       },
       {
         "name": "貓祭不繪讓你俄史賞",
         "countLabel": "（取十名）",
-        "unlockLabel": "作畫超過 200 張解鎖（不含差分）",
+        "unlockLabel": "投稿畫作（不含差分）\n超過200張解鎖",
         "prize": "每名 NT$ 500",
         "tone": "green",
         "judgeImage": "imgs/judges/NekoMatsuri.webp",

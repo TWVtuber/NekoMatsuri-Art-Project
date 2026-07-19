@@ -34,7 +34,13 @@
     text.split(/\r?\n|\s+\+\s+/).forEach((lineText) => {
       const line = document.createElement("span");
       line.className = "award-prize__line fit-single-line";
-      const tier = { "金": "gold", "銀": "silver", "銅": "bronze" }[lineText.trim().charAt(0)];
+      const tier = {
+        "金": "gold",
+        "銀": "silver",
+        "優": "silver",
+        "銅": "bronze",
+        "佳": "bronze",
+      }[lineText.trim().charAt(0)];
       if (tier) {
         prize.classList.add("award-prize--tiered");
         line.classList.add(`award-prize__line--${tier}`);
@@ -151,10 +157,12 @@
       setAwardTone(figure, item.tone);
       const tape = document.createElement("span");
       tape.className = "note-tape";
-      tape.ariaHidden = "true";
-      const trophy = document.createElement("span");
-      trophy.className = "additional-award-note__trophy";
-      trophy.ariaHidden = "true";
+      if (item.unlockLabel) {
+        tape.classList.add("note-tape--unlock");
+        tape.textContent = item.unlockLabel;
+      } else {
+        tape.ariaHidden = "true";
+      }
       const caption = document.createElement("figcaption");
       const name = document.createElement("strong");
       name.textContent = item.name;
@@ -162,11 +170,6 @@
       count.className = "additional-award-note__count";
       count.textContent = item.countLabel;
       const prize = createPrize(item.prize);
-      const unlock = document.createElement("span");
-      if (item.unlockLabel) {
-        unlock.className = "additional-award-note__unlock";
-        unlock.textContent = item.unlockLabel;
-      }
       const judge = document.createElement("small");
       judge.className = "award-judge";
       if (item.judgeImage) {
@@ -184,8 +187,7 @@
       caption.replaceChildren(name, count, prize);
       caption.append(judge);
       figure.append(tape);
-      if (item.unlockLabel) figure.append(unlock);
-      figure.append(trophy, caption);
+      figure.append(caption);
       return figure;
     });
     if (additionalGrid) {
