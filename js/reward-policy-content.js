@@ -74,14 +74,13 @@
     count.textContent = `（${item.count}）`;
     const prize = document.createElement("b");
     prize.textContent = item.prize;
-    heading.append(name, count);
+    heading.append(name, count, prize);
     if (item.unlockLabel) {
       const unlockLabel = document.createElement("span");
       unlockLabel.className = "reward-extra-awards__unlock";
       unlockLabel.textContent = item.unlockLabel;
       heading.append(unlockLabel);
     }
-    heading.append(prize);
     const description = document.createElement("p");
     appendSegments(description, item.segments);
     listItem.append(heading, description);

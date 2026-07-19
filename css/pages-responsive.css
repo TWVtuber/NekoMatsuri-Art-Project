@@ -901,7 +901,7 @@ body.organizer-open .site-nav [data-organizer-link] {
     align-items: start;
   }
   .reward-extra-awards {
-    margin-top: 18px;
+    margin-top: 32px;
   }
   .reward-extra-awards__list {
     grid-template-columns: 1fr;
@@ -915,7 +915,7 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .reward-extra-awards__heading > b {
     width: auto;
-    margin-left: auto;
+    margin-left: 12px;
   }
   .reward-policy__list {
     padding-left: 25px;
@@ -1099,7 +1099,7 @@ body.organizer-open .site-nav [data-organizer-link] {
   }
   .reward-extra-awards__heading > b {
     width: auto;
-    margin-left: auto;
+    margin-left: 12px;
   }
   .reward-policy__prizes,
   .reward-prize-list {
