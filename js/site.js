@@ -551,6 +551,16 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
   scrollMotionTargets.forEach((target) =>
     target.classList.add("is-scroll-motion-visible"),
   );
+  document.addEventListener("awards:additional-rendered", ({ detail }) => {
+    detail.notes.forEach((target) => {
+      const originalTransform = getComputedStyle(target).transform;
+      target.style.setProperty(
+        "--scroll-rest-transform",
+        originalTransform === "none" ? "translateZ(0)" : originalTransform,
+      );
+      target.classList.add("scroll-stick-note", "is-scroll-motion-visible");
+    });
+  });
 } else {
   document.body.classList.add("scroll-motion-ready");
 
@@ -588,6 +598,21 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     // observer from ever starting the entrance animation.
     { threshold: 0.01, rootMargin: "64px 0px 240px" },
   );
+  document.addEventListener("awards:additional-rendered", ({ detail }) => {
+    detail.notes.forEach((target) => {
+      const originalTransform = getComputedStyle(target).transform;
+      target.style.setProperty(
+        "--scroll-rest-transform",
+        originalTransform === "none" ? "translateZ(0)" : originalTransform,
+      );
+      target.classList.add("scroll-stick-note");
+    });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        detail.notes.forEach((target) => stickyNoteObserver.observe(target));
+      });
+    });
+  });
   const logoStickerObserver = new IntersectionObserver(
     ([entry]) => {
       logoStickerSection?.classList.toggle(

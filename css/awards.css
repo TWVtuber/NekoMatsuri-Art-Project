@@ -332,10 +332,36 @@
   font-size: 18px;
   font-weight: 700;
 }
+.award-note figcaption > .award-prize--tiered {
+  margin-top: 11px;
+}
 .award-note .award-prize__line {
   display: block;
   width: 100%;
   white-space: nowrap;
+}
+.award-note .award-prize--tiered .award-prize__line {
+  width: min(100%, 280px);
+  margin: 0 auto 5px;
+  padding: 3px 10px;
+  border-left: 4px solid transparent;
+  border-radius: 4px;
+  line-height: 1.35;
+}
+.award-note .award-prize--tiered .award-prize__line:last-child {
+  margin-bottom: 0;
+}
+.award-note .award-prize--tiered .award-prize__line--gold {
+  border-left-color: #d8a51e;
+  background: rgba(244, 200, 72, 0.2);
+}
+.award-note .award-prize--tiered .award-prize__line--silver {
+  border-left-color: #9299a3;
+  background: rgba(174, 181, 190, 0.18);
+}
+.award-note .award-prize--tiered .award-prize__line--bronze {
+  border-left-color: #b87146;
+  background: rgba(196, 124, 80, 0.16);
 }
 .award-note figcaption > small {
   display: block;
@@ -405,10 +431,45 @@
   margin-bottom: 64px;
 }
 .additional-awards__grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   margin-bottom: 0;
+}
+.additional-awards__grid > .additional-award-note {
+  grid-column: span 2;
+}
+.additional-awards__grid > :last-child:nth-child(3n + 1) {
+  grid-column: 3 / span 2;
+}
+.additional-awards__grid > :nth-last-child(2):nth-child(3n + 1) {
+  grid-column: 2 / span 2;
+}
+.additional-awards__grid > :last-child:nth-child(3n + 2) {
+  grid-column: 4 / span 2;
 }
 .additional-award-note {
   grid-template-rows: 102px auto;
+}
+.additional-award-note figcaption > .additional-award-note__count {
+  display: block;
+  margin-top: 1px !important;
+  font-size: 16px;
+  font-weight: 400;
+}
+.additional-award-note > .additional-award-note__unlock {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  right: 13px;
+  max-width: calc(50% - 48px);
+  padding: 2px 9px;
+  border: 1px solid rgba(215, 45, 92, 0.55);
+  border-radius: 999px;
+  color: var(--pink-strong);
+  background: rgba(255, 232, 238, 0.72);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  text-align: center;
 }
 .additional-award-note:nth-child(1) {
   transform: rotate(0.7deg);
