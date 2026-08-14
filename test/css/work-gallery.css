@@ -47,7 +47,14 @@
   transform: rotate(-1deg);
 }
 .work-loading__card strong { font-size: clamp(20px, 4vw, 28px); }
-.work-loading__card > span:last-child { color: #625d4d; font-size: 15px; }
+.work-loading__card > span:last-child { display: none; }
+.work-loading__card strong::after {
+  display: inline-block;
+  width: 1.5em;
+  content: "";
+  text-align: left;
+  animation: work-loading-dots 1.2s steps(1, end) infinite;
+}
 .work-loading__spinner {
   width: 48px;
   height: 48px;
@@ -68,6 +75,12 @@ body.work-open.work-loading-active .work-view > .faq-back {
   opacity: 0;
 }
 @keyframes work-loading-spin { to { transform: rotate(360deg); } }
+@keyframes work-loading-dots {
+  0%, 100% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+}
 
 .work-gallery {
   scroll-margin-top: 96px;
