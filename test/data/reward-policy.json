@@ -1,0 +1,156 @@
+{
+  "sectionTitle": "獎勵辦法",
+  "policies": [
+    {
+      "segments": [
+        { "text": "活動獎項請參考" },
+        {
+          "text": "右方",
+          "className": "reward-direction reward-direction--desktop"
+        },
+        {
+          "text": "下方",
+          "className": "reward-direction reward-direction--mobile"
+        },
+        { "text": "項目。" }
+      ]
+    },
+    {
+      "segments": [
+        { "text": "獎金來源全額由 " },
+        { "text": "貓祭 NekoMatsuri", "tag": "strong" },
+        { "text": " 出資及後續發放獎金。" },
+        { "text": "（※以及各種神秘力量贊助）", "className": "rules-muted-note" }
+      ]
+    },
+    {
+      "segments": [
+        { "text": "海外得獎者獎金" },
+        { "text": "須扣除轉帳等手續費用（僅接受 PayPal）", "tag": "b" },
+        { "text": "。" }
+      ]
+    },
+    {
+      "segments": [
+        { "text": "投稿期限為即日起至 " },
+        { "text": "2026/07/19 23:59", "tag": "strong" },
+        { "text": "，並且將以貼文形式公布獎項獲得者。" }
+      ]
+    },
+    {
+      "segments": [
+        { "text": "投稿即代表遵守以上規定，本活動各項辦法若有未盡事宜，" },
+        { "text": "主辦單位有權隨時修正且擁有最終解釋權", "tag": "b" },
+        { "text": "。" }
+      ]
+    }
+  ],
+  "mainAwards": [
+    {
+      "name": "金　賞",
+      "count": "一名",
+      "prize": "新台幣 5,000 元",
+      "bonus": "插圖動態化（含拆圖建模）"
+    },
+    { "name": "銀　賞", "count": "一名", "prize": "新台幣 3,000 元" },
+    { "name": "銅　賞", "count": "一名", "prize": "新台幣 2,000 元" },
+    {
+      "name": "互動獎",
+      "count": "三名",
+      "prize": "新台幣 1,500 元",
+      "description": "即為大於一個的角色進行互動，且十分生動。"
+    },
+    {
+      "name": "角色獎",
+      "count": "六名",
+      "prize": "新台幣 1,500 元",
+      "description": "每位學生與老師將選出自己在內的，最喜歡的數件作品。"
+    },
+    {
+      "name": "卡哇獎",
+      "count": "三名",
+      "prize": "新台幣 1,000 元",
+      "description": "就是萌到心底暖烘烘的圖，超級卡哇伊。"
+    },
+    {
+      "name": "搞怪獎",
+      "count": "三名",
+      "prize": "新台幣 1,000 元",
+      "description": "又鬧又白癡，你能玩出什麼花樣呢？"
+    }
+  ],
+  "extraAwards": {
+    "title": "主委加碼",
+    "items": [
+      {
+        "name": "迷你像素獎",
+        "count": "一名",
+        "prize": "新台幣 1,000 元",
+        "segments": [
+          { "text": "使用 " },
+          { "text": "30 × 30 px", "tag": "strong" },
+          { "text": " 畫布創作並投稿，由繪俄史藝術高等學院校長全權評選。" }
+        ]
+      },
+      {
+        "name": "最佳手速獎",
+        "count": "一名",
+        "prize": "新台幣 1,000 元",
+        "segments": [
+          {
+            "text": "單人投稿數量最多，且作品整體完整度最佳者獲獎；本獎項可與其他獎項並存。"
+          }
+        ]
+      },
+      {
+        "name": "最佳死線獎",
+        "count": "一名",
+        "prize": "新台幣 500 元",
+        "unlockLabel": "投稿達 50 件解鎖",
+        "segments": [
+          {
+            "text": "倒數三天內（7/17~7/19）投稿，並須提供檔案建立與完成時間；本獎項可與其他獎項並存。"
+          }
+        ]
+      },
+      {
+        "name": "破百賞",
+        "count": "一名",
+        "prize": "新台幣 300 元",
+        "segments": [{ "text": "第一百個投遞表單的參賽選手。" }]
+      },
+      {
+        "name": "團體賞",
+        "count": "一名",
+        "prize": "新台幣 1,500 元",
+        "segments": [
+          {
+            "text": "畫出六人以上，包含賽制規則所有角色，完整度最高者。"
+          }
+        ]
+      },
+      {
+        "name": "星星賞",
+        "count": "一名",
+        "prize": "免費建模該圖",
+        "unlockLabel": "投稿達 100 件解鎖",
+        "segments": [
+          {
+            "text": "將由負責金賞建模老師－筱星朔光，依照個人喜好選出一張，獎勵免費建模該圖。"
+          }
+        ]
+      },
+      {
+        "name": "貓祭不繪讓你俄史賞",
+        "count": "十名",
+        "prize": "每名新台幣 500 元",
+        "unlockLabel": "投稿畫作（不含差分）超過200張解鎖",
+        "segments": [
+          {
+            "text": "由貓祭私心選出喜歡的作品；無法與任何獎項共存。"
+          }
+        ]
+      }
+    ]
+  }
+}
