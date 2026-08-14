@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "description": "作品展示頁的可編輯內容、資產路徑與外部資料設定",
+    "worksBasePath": "imgs/works",
+    "thumbnailsBasePath": "imgs/work-thumbs",
+    "reviewsPath": "data/work-reviews.json"
+  },
+  "ui": {
+    "pageTitle": "作品展示",
+    "sectionLabel": "作品展示內容",
+    "winningTab": "得獎作品",
+    "allTab": "所有作品",
+    "allTabComingSoon": "COMING SOON",
+    "allTabMessage": "總投稿畫作（不含差分）共 287 件，目前仍在整理中。",
+    "loadingTitle": "正在準備作品展覽",
+    "loadingMessage": "請稍候一下，精彩作品馬上登場！",
+    "backLabel": "← 回上一頁",
+    "emptyMessage": "找不到符合條件的作品。",
+    "defaultAward": "得獎作品",
+    "additionalAwards": "加碼獎項",
+    "awardDirectory": "獎項目錄",
+    "openAwardDirectory": "開啟獎項目錄",
+    "closeAwardDirectory": "關閉獎項目錄",
+    "authorPrefix": "作者｜",
+    "previousImage": "上一張",
+    "nextImage": "下一張",
+    "workSequenceSuffix": "得獎作品序列",
+    "previousWorkSuffix": "上一件作品",
+    "nextWorkSuffix": "下一件作品",
+    "commonAwardsLabel": "金賞、銀賞、銅賞"
+  },
+  "groups": [
+    { "title": "共同評選獎項", "directory": "1_金銀銅", "files": ["金賞_繪肝史_凜奈.mp4", "銀賞_貓祭老師與校長的日常_喵喔.jpg", "銅賞_讓我們盡情可愛_麻糬.mov"] },
+    { "title": "互動賞", "directory": "2_互動賞", "files": ["互動賞A_沈家【Chu！對不起我這麼可愛！】_叭哺.mp4", "互動賞B_貓祭班導&3年C班日常_亞狸YaRi.mp4"], "folders": [{ "name": "互動賞C_玫紅色青春、金色回憶、水藍色怪談_松果柏伯", "files": ["玫紅色青春、金色回憶、水藍色怪談1.jpg", "玫紅色青春、金色回憶、水藍色怪談2.jpg", "玫紅色青春、金色回憶、水藍色怪談3.jpg", "玫紅色青春、金色回憶、水藍色怪談4.jpg"] }] },
+    { "title": "可愛賞", "directory": "3_可愛賞", "files": ["可愛賞A_這些人怎麼閃亮亮的_貓貓.png", "可愛賞B_一杯沈月_閉門造居.jpg", "可愛賞C_貓祭老師與校長的日常_喵喔.jpg"] },
+    { "title": "搞怪賞", "directory": "4_搞怪賞", "files": ["搞怪賞A_當選日_鶴目瑞羽.jpg", "搞怪賞B_可能是遊戲劇情吧_飛凡.mp4", "搞怪賞C_衝刺_nozzz.png"] },
+    { "title": "貓祭賞", "directory": "5_貓祭賞", "files": ["貓祭佳作A_請給我 30+紅色貓毛10箱，謝謝_瘋狂的香蕉.png", "貓祭佳作B_來自學生會長候選人沈曦的威壓（身高）_湮月.png", "貓祭佳作C_老師 我想發大財_DZ.png", "貓祭優賞_貓家&沈家日常_李國強(沐沐).png", "貓祭金賞_幻夏予霓_郭喵.png"] },
+    { "title": "祭煜賞", "directory": "6_祭煜賞", "files": ["祭煜佳作A_夕暉間的依靠_伊麗莎白.png", "祭煜佳作B_貓家&沈家日常_李國強(沐沐).png", "祭煜佳作C_祭煜的木馬游戲🐎_閉門居造.mp4", "祭煜優賞_貓祭班導&3年C班日常_亞狸YaRi.jpg", "祭煜金賞_祭煜濕身圖_Aizuo.jpg"] },
+    { "title": "沈曦賞", "directory": "7_沈曦賞", "files": ["沈曦佳作A_沈家的團寵_泠Rin.png", "沈曦佳作B_游泳課_飛凡.jpg", "沈曦佳作C_3年C班學園祭_阿卡.jpg", "沈曦優賞_三頭龍_松果柏柏.png", "沈曦金賞_完美的學生會長_Aizuo.png"] },
+    { "title": "沈澈賞", "directory": "8_沈澈賞", "files": ["沈澈佳作A_性轉！夢中的藍髮少女_湮月.png", "沈澈佳作B_手足_羽毛筆.png", "沈澈佳作C_沈家四胞胎之游泳時間_叭哺.png", "沈澈優賞_if沈澈是乙女遊戲角色_虎芽.jpg", "沈澈金賞_貓家&沈家日常_李國強(沐沐).png"] },
+    { "title": "沈樂賞", "directory": "9_沈樂賞", "files": ["沈樂佳作A_貓家&沈家日常_李國強(沐沐).png", "沈樂佳作B_Bet On Me_安希.mp4", "沈樂佳作C_沈樂咬尾巴_伊宇.png", "沈樂優賞_沈樂大直男！_伊宇.png", "沈樂金賞_繪俄史最速傳說-前傳_拉米OxO.jpg"] },
+    { "title": "沈月賞", "directory": "10_沈月賞", "files": ["沈月佳作A_沈月水中美照_Aizuo.jpg", "沈月佳作B_池中浮月_亞菲.jpg", "沈月佳作C_沈月with專武_郭喵.png", "沈月優賞_夢_nozzz.png", "沈月金賞_掌上明珠_沐玄.png"] },
+    { "title": "追加獎項", "directory": "11_加碼", "files": ["團體賞_三年C班大合照 !!!_瘋狂的香蕉.png", "星星賞_陽光沈樂比耶照_Aizuo.jpg", "最佳死線獎_【2小時32分】沈月水中美照_Aizuo.jpg", "破百賞_夏日沈月好涼涼_御雙夜.png"], "folders": [
+      { "name": "最佳手速獎_貓家&沈家日常_李國強(沐沐)", "sequence": { "count": 101, "extension": ".png", "featured": [10, 11, 54, 93] } },
+      { "name": "迷你像素獎_畫得完嗎？畫得完喔！_沐玄", "files": ["插圖121.png", "2.png", "3.png", "4.png", "5.png", "6.png"] },
+      { "name": "貓祭不會讓你俄史賞", "entries": [
+        { "name": "貓祭不會讓你俄史賞1_關於學院的回憶_十少", "files": ["貓祭不會讓你俄史賞1_關於學院的回憶_十少.png"] },
+        { "name": "貓祭不會讓你俄史賞2_老師和學姊！借我拍個照！_安娜伊恩", "files": ["貓祭不會讓你俄史賞2_老師和學姊！借我拍個照！_安娜伊恩.png"] },
+        { "name": "貓祭不會讓你俄史賞3_獨自一人的天台_阿欣", "files": ["貓祭不會讓你俄史賞3_無標題157_20260719141851.png", "貓祭不會讓你俄史賞3_無標題158_20260719230942.png"], "typeLabel": "插圖" },
+        { "name": "貓祭不會讓你俄史賞4_家政課的簡易小吃_拉米OxO", "files": ["貓祭不會讓你俄史賞4_家政課的簡易小吃_拉米OxO.mp4"] },
+        { "name": "貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart", "files": ["貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart.gif"], "typeLabel": "像素動畫" },
+        { "name": "貓祭不會讓你俄史賞6_可愛四兄妹_灼翼", "files": ["貓祭不會讓你俄史賞6_可愛四兄妹_灼翼.png"] },
+        { "name": "貓祭不會讓你俄史賞7_Alter ego -- 沈家三兄弟跳水版o(°▽°)o_阿太", "files": ["貓祭不會讓你俄史賞7_Alter ego -- 沈家三兄弟跳水版o(°▽°)o_阿太.mp4"] },
+        { "name": "貓祭不會讓你俄史賞8_全員像素中_手滑", "files": ["沈曦.png", "沈月.png", "沈樂.png", "沈澈.png", "祭煜.png", "貓祭.png", "阿強.png", "阿貝.png", "阿醜.png", "阿雄.png"], "pixelArt": true, "typeLabel": "像素插畫" },
+        { "name": "貓祭不會讓你俄史賞9_沈月戲水_海鮮", "files": ["貓祭不會讓你俄史賞9_沈月戲水_海鮮.png"] },
+        { "name": "貓祭不會讓你俄史賞10_繪俄史調查團✨️_艾迪", "files": ["貓祭不會讓你俄史賞10_沈家 調查團.jpg", "貓祭不會讓你俄史賞10_調查團 (1).jpg", "貓祭不會讓你俄史賞10_調查團團長.jpg"], "typeLabel": "插圖" }
+      ] }
+    ] }
+  ],
+  "compactAdditionalAwards": ["團體賞", "星星賞", "最佳死線獎", "破百賞"],
+  "podiumAwards": {
+    "銀賞": { "position": "silver", "place": "銀賞", "order": 0, "trophy": "imgs/trophies/繪俄史銀獎.webp" },
+    "金賞": { "position": "gold", "place": "金賞", "order": 1, "trophy": "imgs/trophies/繪俄史金獎.webp" },
+    "銅賞": { "position": "bronze", "place": "銅賞", "order": 2, "trophy": "imgs/trophies/繪俄史銅獎.webp" }
+  },
+  "awardSectionTrophies": {
+    "互動賞": "imgs/trophies/互動獎.webp", "可愛賞": "imgs/trophies/卡哇獎.webp", "搞怪賞": "imgs/trophies/搞怪獎.webp", "貓祭賞": "imgs/trophies/貓祭獎.webp", "祭煜賞": "imgs/trophies/祭煜獎.webp", "沈曦賞": "imgs/trophies/沈曦獎.webp", "沈澈賞": "imgs/trophies/沈澈獎.webp", "沈樂賞": "imgs/trophies/沈樂獎.webp", "沈月賞": "imgs/trophies/沈月獎.webp"
+  },
+  "judges": {
+    "共同評選獎項": [{ "name": "貓祭", "image": "imgs/judges/NekoMatsuri.webp" }, { "name": "Aoi Hinamori", "image": "imgs/judges/AoiHinamori.webp" }, { "name": "繪俄史藝術高等學院校長", "image": "imgs/judges/President.webp" }],
+    "互動賞": "$共同評選獎項", "可愛賞": "$共同評選獎項", "搞怪賞": "$共同評選獎項",
+    "貓祭賞": [{ "name": "貓祭", "image": "imgs/judges/NekoMatsuri.webp" }], "沈曦賞": [{ "name": "貓祭", "image": "imgs/judges/NekoMatsuri.webp" }], "祭煜賞": [{ "name": "貓祭與阿雄", "image": "imgs/judges/大雄&NekoMatsuri.webp" }], "沈月賞": [{ "name": "沈月", "image": "imgs/judges/Tsuki.webp" }], "沈澈賞": [{ "name": "沈澈", "image": "imgs/judges/David.webp" }], "沈樂賞": [{ "name": "沈樂", "image": "imgs/judges/Ivan.webp" }], "迷你像素獎": [{ "name": "繪俄史藝術高等學院校長", "image": "imgs/judges/President.webp" }], "最佳手速獎": [{ "name": "貓祭", "image": "imgs/judges/NekoMatsuri.webp" }], "最佳死線獎": [{ "name": "貓祭", "image": "imgs/judges/NekoMatsuri.webp" }], "團體賞": [{ "name": "貓祭", "image": "imgs/judges/NekoMatsuri.webp" }], "星星賞": [{ "name": "筱星朔光", "image": "imgs/judges/star.jpg" }], "貓祭不會讓你俄史賞": [{ "name": "貓祭", "image": "imgs/judges/NekoMatsuri.webp" }]
+  },
+  "specialDisplays": {
+    "最佳手速獎": { "subtitle": "《貓家&沈家日常》｜作者：", "artist": "李國強(沐沐)", "countNote": "共 101 張", "viewerTitle": "貓家&沈家日常" },
+    "迷你像素獎": { "subtitle": "《畫得完嗎？畫得完喔！》｜作者：", "artist": "沐玄", "characters": ["沈月", "沈樂", "沈澈", "沈曦", "貓祭", "祭煜"], "workTitle": "畫得完嗎？畫得完喔！", "typeLabel": "像素插畫" }
+  }
+}
