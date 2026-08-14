@@ -20,18 +20,6 @@ if (window.location.hash) {
   );
 }
 
-// Disable the browser context menu and the F12 shortcut on this site.
-document.addEventListener("contextmenu", (event) => {
-  event.preventDefault();
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "F12" || event.keyCode === 123) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-});
-
 function resetInitialScroll() {
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 }
@@ -1515,3 +1503,29 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
+// Block the context menu and common browser developer-tool shortcuts.
+document.addEventListener(
+  "contextmenu",
+  (event) => {
+    event.preventDefault();
+  },
+  { capture: true },
+);
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+    const key = event.key.toLowerCase();
+    const isDeveloperToolsShortcut =
+      event.key === "F12" ||
+      ((event.ctrlKey || event.metaKey) &&
+        event.shiftKey &&
+        ["i", "j", "c"].includes(key));
+
+    if (isDeveloperToolsShortcut) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  },
+  { capture: true },
+);

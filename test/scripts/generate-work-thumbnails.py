@@ -5,7 +5,7 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "imgs" / "works"
 OUTPUT = ROOT / "imgs" / "work-thumbs"
-SUPPORTED = {".jpg", ".jpeg", ".png", ".webp"}
+SUPPORTED = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 MAX_SIZE = (1200, 1200)
 
 
@@ -16,6 +16,8 @@ for source in SOURCE.rglob("*"):
     relative = source.relative_to(SOURCE).with_suffix(".webp")
     target = OUTPUT / relative
     target.parent.mkdir(parents=True, exist_ok=True)
+    if target.exists() and target.stat().st_mtime >= source.stat().st_mtime:
+        continue
 
     with Image.open(source) as image:
         image = ImageOps.exif_transpose(image)

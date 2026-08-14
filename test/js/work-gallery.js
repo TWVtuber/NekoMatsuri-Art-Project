@@ -247,10 +247,10 @@ function getAwardRank(name) {
 function isVideo(path) { return /\.(?:mp4|mov|webm)$/i.test(path); }
 
 function getWorkThumbnail(path) {
-  if (isVideo(path) || /\.gif(?:[?#].*)?$/i.test(path)) return path;
+  if (isVideo(path)) return path;
   return path
     .replace(`${workGalleryMeta.worksBasePath}/`, `${workGalleryMeta.thumbnailsBasePath}/`)
-    .replace(/\.(?:jpe?g|png|webp)(?=$|[?#])/i, ".webp");
+    .replace(/\.(?:jpe?g|png|webp|gif)(?=$|[?#])/i, ".webp");
 }
 
 function getWorkType(work) {
@@ -808,25 +808,36 @@ function initializeWinningWorks() {
 }
 
 function prepareWorkGalleryEntrance(container) {
-  const firstMedia = [...container.querySelectorAll(".winning-work img, .winning-work video")].slice(0, 6);
+  const previewImages = [...container.querySelectorAll(".winning-work img")];
+  const progress = document.querySelector("[data-work-loading-progress]");
   const minimumDisplay = new Promise((resolve) => setTimeout(resolve, 450));
-  const mediaReady = Promise.all(firstMedia.map((media) => new Promise((resolve) => {
-    if (media instanceof HTMLImageElement) {
-      media.loading = "eager";
-      if (media.complete) { resolve(); return; }
-      media.addEventListener("load", resolve, { once: true });
-      media.addEventListener("error", resolve, { once: true });
-      return;
-    }
+  let completed = 0;
+  const updateProgress = () => {
+    if (progress) progress.textContent = `${completed} / ${previewImages.length}`;
+  };
+  updateProgress();
 
-    media.preload = "auto";
-    if (media.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) { resolve(); return; }
-    media.addEventListener("loadeddata", resolve, { once: true });
-    media.addEventListener("error", resolve, { once: true });
+  const mediaReady = Promise.all(previewImages.map((image, index) => new Promise((resolve) => {
+    image.loading = "eager";
+    if (index < 6) image.fetchPriority = "high";
+
+    const finish = () => {
+      const decoded = image.complete && image.naturalWidth && typeof image.decode === "function"
+        ? image.decode().catch(() => {})
+        : Promise.resolve();
+      decoded.finally(() => {
+        completed += 1;
+        updateProgress();
+        resolve();
+      });
+    };
+
+    if (image.complete) { finish(); return; }
+    image.addEventListener("load", finish, { once: true });
+    image.addEventListener("error", finish, { once: true });
   })));
-  const timeout = new Promise((resolve) => setTimeout(resolve, 8000));
 
-  Promise.all([minimumDisplay, Promise.race([mediaReady, timeout])]).then(() => {
+  Promise.all([minimumDisplay, mediaReady]).then(() => {
     document.dispatchEvent(new CustomEvent("work-gallery:ready"));
   });
 }
