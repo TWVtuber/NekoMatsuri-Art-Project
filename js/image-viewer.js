@@ -121,7 +121,7 @@
     if (videoSource) {
       video.src = videoSource;
       video.controls = true;
-      video.controlsList.add("nodownload");
+      video.setAttribute("controlslist", "nodownload");
       video.muted = false;
       video.volume = 1;
     } else {
@@ -396,7 +396,6 @@
 
   viewport.addEventListener("pointerup", releasePointer);
   viewport.addEventListener("pointercancel", releasePointer);
-  video.addEventListener("contextmenu", (event) => event.preventDefault());
   reviewClose?.addEventListener("click", () => {
     if (reviewPanel) reviewPanel.hidden = true;
     const activeJudge = judgeList?.querySelector(".image-viewer__judge.is-active");

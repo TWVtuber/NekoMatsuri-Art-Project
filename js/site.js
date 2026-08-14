@@ -1,36 +1,3 @@
-// Discourage casual image saving and access to browser developer shortcuts.
-// This is a client-side deterrent only: anything delivered to a browser can
-// still be recovered by a determined visitor.
-const blockedDeveloperShortcuts = new Set(["i", "j", "c"]);
-
-document.addEventListener(
-  "contextmenu",
-  (event) => {
-    event.preventDefault();
-  },
-  { capture: true },
-);
-
-// document.addEventListener(
-//   "keydown",
-//   (event) => {
-//     const key = event.key.toLowerCase();
-//     const opensDeveloperTools =
-//       event.key === "F12" ||
-//       ((event.ctrlKey || event.metaKey) &&
-//         event.shiftKey &&
-//         blockedDeveloperShortcuts.has(key));
-//     const opensPageSource =
-//       (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
-
-//     if (opensDeveloperTools || opensPageSource) {
-//       event.preventDefault();
-//       event.stopImmediatePropagation();
-//     }
-//   },
-//   { capture: true },
-// );
-
 document.addEventListener(
   "dragstart",
   (event) => {
