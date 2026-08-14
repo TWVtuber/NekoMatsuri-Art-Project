@@ -11,25 +11,25 @@ document.addEventListener(
   { capture: true },
 );
 
-// document.addEventListener(
-//   "keydown",
-//   (event) => {
-//     const key = event.key.toLowerCase();
-//     const opensDeveloperTools =
-//       event.key === "F12" ||
-//       ((event.ctrlKey || event.metaKey) &&
-//         event.shiftKey &&
-//         blockedDeveloperShortcuts.has(key));
-//     const opensPageSource =
-//       (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
+document.addEventListener(
+  "keydown",
+  (event) => {
+    const key = event.key.toLowerCase();
+    const opensDeveloperTools =
+      event.key === "F12" ||
+      ((event.ctrlKey || event.metaKey) &&
+        event.shiftKey &&
+        blockedDeveloperShortcuts.has(key));
+    const opensPageSource =
+      (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
 
-//     if (opensDeveloperTools || opensPageSource) {
-//       event.preventDefault();
-//       event.stopImmediatePropagation();
-//     }
-//   },
-//   { capture: true },
-// );
+    if (opensDeveloperTools || opensPageSource) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  },
+  { capture: true },
+);
 
 document.addEventListener(
   "dragstart",
