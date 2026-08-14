@@ -377,7 +377,7 @@ function createWinningWork(work) {
       media.muted = true;
       media.playsInline = true;
       media.preload = "metadata";
-      media.controlsList.add("nodownload");
+      media.setAttribute("controlslist", "nodownload");
       media.addEventListener("contextmenu", (event) => event.preventDefault());
       prepareVideoPreview(media);
       media.src = path;
@@ -510,7 +510,9 @@ function initializeAwardSequence(section, track) {
     event.preventDefault();
     move(event.key === "ArrowLeft" ? -1 : 1);
   });
-  new ResizeObserver(updateButtons).observe(track);
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(updateButtons).observe(track);
+  }
   requestAnimationFrame(updateButtons);
 }
 

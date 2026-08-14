@@ -121,7 +121,7 @@
     if (videoSource) {
       video.src = videoSource;
       video.controls = true;
-      video.controlsList.add("nodownload");
+      video.setAttribute("controlslist", "nodownload");
       video.muted = false;
       video.volume = 1;
     } else {
