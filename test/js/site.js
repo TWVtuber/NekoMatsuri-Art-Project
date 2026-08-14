@@ -1,36 +1,3 @@
-// Discourage casual image saving and access to browser developer shortcuts.
-// This is a client-side deterrent only: anything delivered to a browser can
-// still be recovered by a determined visitor.
-const blockedDeveloperShortcuts = new Set(["i", "j", "c"]);
-
-document.addEventListener(
-  "contextmenu",
-  (event) => {
-    event.preventDefault();
-  },
-  { capture: true },
-);
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-    const key = event.key.toLowerCase();
-    const opensDeveloperTools =
-      event.key === "F12" ||
-      ((event.ctrlKey || event.metaKey) &&
-        event.shiftKey &&
-        blockedDeveloperShortcuts.has(key));
-    const opensPageSource =
-      (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
-
-    if (opensDeveloperTools || opensPageSource) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  },
-  { capture: true },
-);
-
 document.addEventListener(
   "dragstart",
   (event) => {
@@ -52,6 +19,18 @@ if (window.location.hash) {
     `${window.location.pathname}${window.location.search}`,
   );
 }
+
+// Disable the browser context menu and the F12 shortcut on this site.
+document.addEventListener("contextmenu", (event) => {
+  event.preventDefault();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "F12" || event.keyCode === 123) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+});
 
 function resetInitialScroll() {
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -1036,6 +1015,8 @@ function showWork(updateHistory = true) {
   organizerView.hidden = true;
   relatedDataView.hidden = true;
   workView.hidden = false;
+  const galleryIsReady = workView.dataset.workReady === "true";
+  document.body.classList.toggle("work-loading-active", !galleryIsReady);
   if (updateHistory && window.location.hash !== "#works") {
     history.pushState({ works: true }, "", "#works");
   }
@@ -1044,7 +1025,7 @@ function showWork(updateHistory = true) {
 }
 
 function hideWork(targetHash = workReturnHash, updateHistory = true) {
-  document.body.classList.remove("work-open");
+  document.body.classList.remove("work-open", "work-loading-active");
   workView.hidden = true;
   if (updateHistory) history.pushState(null, "", targetHash);
   requestAnimationFrame(() => {
@@ -1052,6 +1033,11 @@ function hideWork(targetHash = workReturnHash, updateHistory = true) {
     scheduleActiveNavUpdate();
   });
 }
+
+document.addEventListener("work-gallery:ready", () => {
+  workView.dataset.workReady = "true";
+  document.body.classList.remove("work-loading-active");
+});
 
 faqLinks.forEach((link) =>
   link.addEventListener("click", (event) => {

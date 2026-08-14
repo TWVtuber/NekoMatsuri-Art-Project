@@ -74,7 +74,7 @@ function initializeWorkGallery() {
   updateGallery();
 }
 
-const winningWorkGroups = [
+let winningWorkGroups = [
   { title: "共同評選獎項", directory: "1_金銀銅", files: ["金賞_繪肝史_凜奈.mp4", "銀賞_貓祭老師與校長的日常_喵喔.jpg", "銅賞_讓我們盡情可愛_麻糬.mov"] },
   { title: "互動賞", directory: "2_互動賞", files: ["互動賞A_沈家【Chu！對不起我這麼可愛！】_叭哺.mp4", "互動賞B_貓祭班導&3年C班日常_亞狸YaRi.mp4"], folders: [
     { name: "互動賞C_玫紅色青春、金色回憶、水藍色怪談_松果柏伯", files: [1, 2, 3, 4].map((number) => `玫紅色青春、金色回憶、水藍色怪談${number}.jpg`) },
@@ -106,7 +106,7 @@ const winningWorkGroups = [
       { name: "貓祭不會讓你俄史賞2_老師和學姊！借我拍個照！_安娜伊恩", files: ["貓祭不會讓你俄史賞2_老師和學姊！借我拍個照！_安娜伊恩.png"] },
       { name: "貓祭不會讓你俄史賞3_獨自一人的天台_阿欣", files: ["貓祭不會讓你俄史賞3_無標題157_20260719141851.png", "貓祭不會讓你俄史賞3_無標題158_20260719230942.png"], typeLabel: "插圖" },
       { name: "貓祭不會讓你俄史賞4_家政課的簡易小吃_拉米OxO", files: ["貓祭不會讓你俄史賞4_家政課的簡易小吃_拉米OxO.mp4"] },
-      { name: "貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart", files: ["貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart.gif"] },
+      { name: "貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart", files: ["貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart.gif"], typeLabel: "像素動畫" },
       { name: "貓祭不會讓你俄史賞6_可愛四兄妹_灼翼", files: ["貓祭不會讓你俄史賞6_可愛四兄妹_灼翼.png"] },
       { name: "貓祭不會讓你俄史賞7_Alter ego -- 沈家三兄弟跳水版o(°▽°)o_阿太", files: ["貓祭不會讓你俄史賞7_Alter ego -- 沈家三兄弟跳水版o(°▽°)o_阿太.mp4"] },
       { name: "貓祭不會讓你俄史賞8_全員像素中_手滑", files: ["沈曦.png", "沈月.png", "沈樂.png", "沈澈.png", "祭煜.png", "貓祭.png", "阿強.png", "阿貝.png", "阿醜.png", "阿雄.png"], pixelArt: true, typeLabel: "像素插畫" },
@@ -116,13 +116,13 @@ const winningWorkGroups = [
   ] },
 ];
 
-const compactAdditionalAwards = new Set(["團體賞", "星星賞", "最佳死線獎", "破百賞"]);
-const podiumAwards = {
+let compactAdditionalAwards = new Set(["團體賞", "星星賞", "最佳死線獎", "破百賞"]);
+let podiumAwards = {
   "銀賞": { position: "silver", place: "銀賞", order: 0, trophy: "imgs/trophies/繪俄史銀獎.webp" },
   "金賞": { position: "gold", place: "金賞", order: 1, trophy: "imgs/trophies/繪俄史金獎.webp" },
   "銅賞": { position: "bronze", place: "銅賞", order: 2, trophy: "imgs/trophies/繪俄史銅獎.webp" },
 };
-const awardSectionTrophies = {
+let awardSectionTrophies = {
   "互動賞": "imgs/trophies/互動獎.webp",
   "可愛賞": "imgs/trophies/卡哇獎.webp",
   "搞怪賞": "imgs/trophies/搞怪獎.webp",
@@ -134,14 +134,21 @@ const awardSectionTrophies = {
   "沈月賞": "imgs/trophies/沈月獎.webp",
 };
 
-const commonAwardJudges = [
+let commonAwardJudges = [
   { name: "貓祭", image: "imgs/judges/NekoMatsuri.webp" },
   { name: "Aoi Hinamori", image: "imgs/judges/AoiHinamori.webp" },
   { name: "繪俄史藝術高等學院校長", image: "imgs/judges/President.webp" },
 ];
 let workReviewData = {};
+let workGalleryUi = {};
+let workGalleryMeta = {
+  worksBasePath: "imgs/works",
+  thumbnailsBasePath: "imgs/work-thumbs",
+  reviewsPath: "data/work-reviews.json",
+};
+let specialWorkDisplays = {};
 
-const awardJudges = {
+let awardJudges = {
   "共同評選獎項": commonAwardJudges,
   "互動賞": commonAwardJudges,
   "可愛賞": commonAwardJudges,
@@ -164,10 +171,63 @@ function getWorkJudges(groupTitle, awardTitle) {
   return awardJudges[awardTitle] || awardJudges[groupTitle] || [];
 }
 
+function expandWorkGalleryConfig(config) {
+  workGalleryUi = config.ui || {};
+  workGalleryMeta = { ...workGalleryMeta, ...(config.meta || {}) };
+  specialWorkDisplays = config.specialDisplays || {};
+  winningWorkGroups = (config.groups || []).map((group) => ({
+    ...group,
+    folders: (group.folders || []).map((folder) => {
+      if (!folder.sequence) return folder;
+      const { count, extension, featured = [] } = folder.sequence;
+      const files = Array.from({ length: count }, (_, index) => `${index + 1}${extension}`);
+      const featuredFiles = featured.map((number) => `${number}${extension}`);
+      return { ...folder, files, sequenceFiles: [...featuredFiles, ...files.filter((file) => !featuredFiles.includes(file))] };
+    }),
+  }));
+  compactAdditionalAwards = new Set(config.compactAdditionalAwards || []);
+  podiumAwards = config.podiumAwards || {};
+  awardSectionTrophies = config.awardSectionTrophies || {};
+  const judges = config.judges || {};
+  commonAwardJudges = judges["共同評選獎項"] || [];
+  awardJudges = Object.fromEntries(Object.entries(judges).map(([award, value]) => [
+    award,
+    typeof value === "string" && value.startsWith("$") ? judges[value.slice(1)] || [] : value,
+  ]));
+  applyWorkGalleryUi();
+}
+
+function applyWorkGalleryUi() {
+  const setText = (selector, value) => {
+    if (!value) return;
+    document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
+  };
+  setText("#works-title", workGalleryUi.pageTitle);
+  setText("[data-work-loading] strong", workGalleryUi.loadingTitle);
+  setText("[data-work-loading] strong + span", workGalleryUi.loadingMessage);
+  setText("[data-work-back]", workGalleryUi.backLabel);
+  setText("#winning-works-tab", workGalleryUi.winningTab);
+  setText("#winning-works-panel .work-gallery__panel-title h2", workGalleryUi.winningTab);
+  setText("#all-works-panel .work-gallery__panel-title h2", workGalleryUi.allTab);
+  setText("[data-work-empty]", workGalleryUi.emptyMessage);
+  const allTab = document.getElementById("all-works-tab");
+  if (allTab) {
+    allTab.dataset.comingSoonMessage = workGalleryUi.allTabMessage || "";
+    allTab.setAttribute("aria-label", `${workGalleryUi.allTab || ""}，${workGalleryUi.allTabComingSoon || ""}。${workGalleryUi.allTabMessage || ""}`);
+    allTab.replaceChildren(document.createTextNode(`${workGalleryUi.allTab || ""} `));
+    const status = document.createElement("span");
+    status.className = "work-gallery__coming-soon";
+    status.setAttribute("aria-hidden", "true");
+    status.textContent = workGalleryUi.allTabComingSoon || "";
+    allTab.append(status);
+  }
+  document.querySelector(".work-gallery")?.setAttribute("aria-label", workGalleryUi.sectionLabel || "");
+}
+
 function parseWorkName(name) {
   const cleanName = name.replace(/\.[^.]+$/, "");
   const parts = cleanName.split("_");
-  const rawAward = parts.shift() || "得獎作品";
+  const rawAward = parts.shift() || workGalleryUi.defaultAward || "得獎作品";
   const award = rawAward
     .replace(/(佳作|賞)[A-Z]$/u, "$1")
     .replace(/賞\d+$/u, "賞");
@@ -186,12 +246,23 @@ function getAwardRank(name) {
 
 function isVideo(path) { return /\.(?:mp4|mov|webm)$/i.test(path); }
 
+function getWorkThumbnail(path) {
+  if (isVideo(path) || /\.gif(?:[?#].*)?$/i.test(path)) return path;
+  return path
+    .replace(`${workGalleryMeta.worksBasePath}/`, `${workGalleryMeta.thumbnailsBasePath}/`)
+    .replace(/\.(?:jpe?g|png|webp)(?=$|[?#])/i, ".webp");
+}
+
 function getWorkType(work) {
   if (work.typeLabel) return work.typeLabel;
   if (work.name === "搞怪賞C_衝刺_nozzz.png") return "漫畫";
   if (work.media.length > 1) return "漫畫";
   const [source = ""] = work.media;
-  if (/\.gif(?:[?#].*)?$/i.test(source)) return "動畫GIF";
+  if (/\.gif(?:[?#].*)?$/i.test(source)) return "動畫";
+  if ([
+    "金賞_繪肝史_凜奈.mp4",
+    "互動賞B_貓祭班導&3年C班日常_亞狸YaRi.mp4",
+  ].includes(work.name)) return "動畫";
   if (isVideo(source)) return "有聲動畫";
   return "插圖";
 }
@@ -199,10 +270,11 @@ function getWorkType(work) {
 function getWorkTypeClass(workType) {
   return {
     "插圖": "illustration",
-    "有聲動畫": "video",
-    "動畫GIF": "gif",
+    "動畫": "video",
+    "有聲動畫": "video-audio",
     "漫畫": "comic",
     "像素插畫": "pixel",
+    "像素動畫": "pixel",
   }[workType] || "default";
 }
 
@@ -225,6 +297,31 @@ function fitWorkTitle(title) {
 
 function fitAllWorkTitles() {
   document.querySelectorAll(".winning-work__title").forEach(fitWorkTitle);
+}
+
+const videoPreviewMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const videoPreviewObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (!(video instanceof HTMLVideoElement)) return;
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && !videoPreviewMotion.matches) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: [0, 0.25] })
+  : null;
+
+function startVideoPreview(video) {
+  video.loop = true;
+  video.autoplay = true;
+  if (videoPreviewMotion.matches) return;
+
+  if (videoPreviewObserver) videoPreviewObserver.observe(video);
+  else video.play().catch(() => {});
 }
 
 function prepareVideoPreview(video) {
@@ -264,6 +361,7 @@ function prepareVideoPreview(video) {
       video.dataset.previewBrightness = bestFrame.brightness.toFixed(1);
     }
     video.dataset.previewReady = "";
+    startVideoPreview(video);
   };
 
   const scanByPlayback = () => {
@@ -345,7 +443,7 @@ function createWinningWork(work) {
   openButton.type = "button";
   openButton.dataset.imageViewerGallery = encodeURIComponent(JSON.stringify(work.viewerGallery || work.media));
   openButton.dataset.imageViewerTitle = work.viewerTitle || work.displayTitle || details.title;
-  openButton.dataset.imageViewerDescription = work.viewerDescription || `獎項：${details.award}｜類型：${workType}｜作者：${details.artist}`;
+  openButton.dataset.imageViewerDescription = work.viewerDescription || `獎項：${details.award}｜類型：${workType}`;
   let judges = getWorkJudges(work.groupTitle, details.award).map((judge) => ({
     ...judge,
     comment: reviewEntry?.reviews.find((review) => review.judge === judge.name)?.comment || "",
@@ -373,17 +471,23 @@ function createWinningWork(work) {
   const showMedia = () => {
     const path = work.media[currentIndex];
     const media = isVideo(path) ? document.createElement("video") : document.createElement("img");
+    mediaFrame.classList.remove("is-media-ready");
+    const markMediaReady = () => mediaFrame.classList.add("is-media-ready");
+    media.addEventListener(media instanceof HTMLVideoElement ? "loadeddata" : "load", markMediaReady, { once: true });
+    media.addEventListener("error", markMediaReady, { once: true });
     if (media instanceof HTMLVideoElement) {
       media.muted = true;
       media.playsInline = true;
+      media.loop = true;
       media.preload = "metadata";
       media.setAttribute("controlslist", "nodownload");
-      media.addEventListener("contextmenu", (event) => event.preventDefault());
       prepareVideoPreview(media);
       media.src = path;
     }
-    else { media.src = path; media.alt = `${work.displayTitle || details.title}，作者 ${details.artist}`; media.loading = "lazy"; media.decoding = "async"; }
-    mediaFrame.querySelector("img, video")?.remove();
+    else { media.src = getWorkThumbnail(path); media.alt = `${work.displayTitle || details.title}，作者 ${details.artist}`; media.loading = "lazy"; media.decoding = "async"; }
+    const previousMedia = mediaFrame.querySelector("img, video");
+    if (previousMedia instanceof HTMLVideoElement) videoPreviewObserver?.unobserve(previousMedia);
+    previousMedia?.remove();
     mediaFrame.prepend(media);
     const count = mediaFrame.querySelector(".winning-work__count");
     if (count) count.textContent = `${currentIndex + 1} / ${work.media.length}`;
@@ -394,10 +498,10 @@ function createWinningWork(work) {
     const pager = document.createElement("div");
     pager.className = "winning-work__pager";
     const previous = document.createElement("button");
-    previous.type = "button"; previous.setAttribute("aria-label", "上一張"); previous.textContent = "‹";
+    previous.type = "button"; previous.setAttribute("aria-label", workGalleryUi.previousImage || "上一張"); previous.textContent = "‹";
     const count = document.createElement("span"); count.className = "winning-work__count";
     const next = document.createElement("button");
-    next.type = "button"; next.setAttribute("aria-label", "下一張"); next.textContent = "›";
+    next.type = "button"; next.setAttribute("aria-label", workGalleryUi.nextImage || "下一張"); next.textContent = "›";
     previous.addEventListener("click", () => { currentIndex = (currentIndex - 1 + work.media.length) % work.media.length; showMedia(); });
     next.addEventListener("click", () => { currentIndex = (currentIndex + 1) % work.media.length; showMedia(); });
     pager.append(previous, count, next);
@@ -413,7 +517,7 @@ function createWinningWork(work) {
   const detail = document.createElement("strong"); detail.className = "winning-work__detail"; detail.textContent = work.detailLabel || "";
   const type = document.createElement("span"); type.className = `winning-work__type winning-work__type--${getWorkTypeClass(workType)}`; type.textContent = workType;
   const title = document.createElement("h3"); title.className = "winning-work__title"; title.textContent = work.displayTitle || details.title;
-  const artist = document.createElement("p"); artist.className = "winning-work__artist"; artist.append("作者｜");
+  const artist = document.createElement("p"); artist.className = "winning-work__artist"; artist.append(workGalleryUi.authorPrefix || "作者｜");
   if (reviewEntry?.artistUrl) {
     const artistLink = document.createElement("a");
     artistLink.href = reviewEntry.artistUrl;
@@ -445,7 +549,7 @@ function createWinningWork(work) {
 }
 
 function getGroupWorks(group) {
-  const base = `imgs/works/${group.directory}`;
+  const base = `${workGalleryMeta.worksBasePath}/${group.directory}`;
   const works = group.files.map((file) => ({ name: file, media: [`${base}/${file}`] }));
   (group.folders || []).forEach((folder) => {
     if (folder.sequenceFiles) {
@@ -552,12 +656,13 @@ function getWinningWorkSections() {
 
     return [...additionalSections].map(([title, awardWorks]) => {
       if (title === "最佳手速獎") {
+        const display = specialWorkDisplays[title] || {};
         const viewerGallery = awardWorks.map((work) => work.media[0]);
         return {
           title,
-          subtitle: "《貓家&沈家日常》｜作者：",
-          subtitleArtist: { name: "李國強(沐沐)", url: workReviewData[title]?.artistUrl || "" },
-          countNote: "共 101 張",
+          subtitle: display.subtitle || "",
+          subtitleArtist: { name: display.artist || "", url: workReviewData[title]?.artistUrl || "" },
+          countNote: display.countNote || "",
           additional: true,
           works: awardWorks.map((work, index) => ({
             ...work,
@@ -565,7 +670,7 @@ function getWinningWorkSections() {
             typeOnly: true,
             viewerGallery,
             viewerIndex: index,
-            viewerTitle: "貓家&沈家日常",
+            viewerTitle: display.viewerTitle || "",
           })),
         };
       }
@@ -589,22 +694,23 @@ function getWinningWorkSections() {
       }
 
       const [pixelWork] = awardWorks;
-      const characterNames = ["沈月", "沈樂", "沈澈", "沈曦", "貓祭", "祭煜"];
+      const display = specialWorkDisplays[title] || {};
+      const characterNames = display.characters || [];
       return {
         title,
-        subtitle: "《畫得完嗎？畫得完喔！》｜作者：",
-        subtitleArtist: { name: "沐玄", url: workReviewData[title]?.artistUrl || "" },
+        subtitle: display.subtitle || "",
+        subtitleArtist: { name: display.artist || "", url: workReviewData[title]?.artistUrl || "" },
         additional: true,
         showAll: true,
         works: pixelWork.media.map((media, index) => ({
-          name: `迷你像素獎_${characterNames[index]}_沐玄`,
+          name: `${title}_${characterNames[index]}_${display.artist || ""}`,
           media: [media],
           displayTitle: characterNames[index],
           hideAward: true,
           hideArtist: true,
           pixelArt: true,
-          typeLabel: "像素插畫",
-          viewerDescription: `作品：畫得完嗎？畫得完喔！｜角色：${characterNames[index]}｜類型：像素插畫｜作者：沐玄`,
+          typeLabel: display.typeLabel || "像素插畫",
+          viewerDescription: `作品：${display.workTitle || ""}｜角色：${characterNames[index]}｜類型：${display.typeLabel || ""}｜作者：${display.artist || ""}`,
         })),
       };
     });
@@ -621,13 +727,13 @@ function initializeWinningWorks() {
       const groupTitle = document.createElement("div");
       groupTitle.className = "section-title winning-works__additional-title";
       const heading = document.createElement("h3");
-      heading.textContent = "加碼獎項";
+      heading.textContent = workGalleryUi.additionalAwards || "加碼獎項";
       groupTitle.append(document.createElement("span"), heading, document.createElement("span"));
       container.append(groupTitle);
       additionalHeadingRendered = true;
     }
     const section = document.createElement("section"); section.className = "winning-works__section paper-card";
-    section.dataset.awardTitle = group.podium ? "金賞、銀賞、銅賞" : group.title;
+    section.dataset.awardTitle = group.podium ? (workGalleryUi.commonAwardsLabel || "金賞、銀賞、銅賞") : group.title;
     if (group.additional) section.dataset.awardGroup = "additional";
     if (group.showAll) section.classList.add("winning-works__section--show-all");
     if (group.compact) section.classList.add("winning-works__section--compact");
@@ -698,6 +804,31 @@ function initializeWinningWorks() {
   });
   initializeWorkToc(container);
   requestAnimationFrame(fitAllWorkTitles);
+  prepareWorkGalleryEntrance(container);
+}
+
+function prepareWorkGalleryEntrance(container) {
+  const firstMedia = [...container.querySelectorAll(".winning-work img, .winning-work video")].slice(0, 6);
+  const minimumDisplay = new Promise((resolve) => setTimeout(resolve, 450));
+  const mediaReady = Promise.all(firstMedia.map((media) => new Promise((resolve) => {
+    if (media instanceof HTMLImageElement) {
+      media.loading = "eager";
+      if (media.complete) { resolve(); return; }
+      media.addEventListener("load", resolve, { once: true });
+      media.addEventListener("error", resolve, { once: true });
+      return;
+    }
+
+    media.preload = "auto";
+    if (media.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) { resolve(); return; }
+    media.addEventListener("loadeddata", resolve, { once: true });
+    media.addEventListener("error", resolve, { once: true });
+  })));
+  const timeout = new Promise((resolve) => setTimeout(resolve, 8000));
+
+  Promise.all([minimumDisplay, Promise.race([mediaReady, timeout])]).then(() => {
+    document.dispatchEvent(new CustomEvent("work-gallery:ready"));
+  });
 }
 
 function initializeWorkToc(container) {
@@ -714,12 +845,12 @@ function initializeWorkToc(container) {
   const panel = document.createElement("nav");
   panel.className = "work-toc__panel";
   panel.id = "work-award-directory";
-  panel.setAttribute("aria-label", "獎項目錄");
+  panel.setAttribute("aria-label", workGalleryUi.awardDirectory || "獎項目錄");
   panel.hidden = true;
 
   const heading = document.createElement("strong");
   heading.className = "work-toc__heading";
-  heading.textContent = "獎項目錄";
+  heading.textContent = workGalleryUi.awardDirectory || "獎項目錄";
   panel.append(heading);
 
   let additionalDividerRendered = false;
@@ -731,7 +862,7 @@ function initializeWorkToc(container) {
     if (section.dataset.awardGroup === "additional" && !additionalDividerRendered) {
       const divider = document.createElement("span");
       divider.className = "work-toc__divider";
-      divider.textContent = "加碼獎項";
+      divider.textContent = workGalleryUi.additionalAwards || "加碼獎項";
       panel.append(divider);
       additionalDividerRendered = true;
     }
@@ -752,14 +883,14 @@ function initializeWorkToc(container) {
   toggle.type = "button";
   toggle.setAttribute("aria-controls", panel.id);
   toggle.setAttribute("aria-expanded", "false");
-  toggle.setAttribute("aria-label", "開啟獎項目錄");
-  toggle.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">format_list_bulleted</span><span>獎項目錄</span>';
+  toggle.setAttribute("aria-label", workGalleryUi.openAwardDirectory || "開啟獎項目錄");
+  toggle.innerHTML = `<span class="material-symbols-outlined" aria-hidden="true">format_list_bulleted</span><span>${workGalleryUi.awardDirectory || "獎項目錄"}</span>`;
 
   function setOpen(open) {
     toc.classList.toggle("is-open", open);
     panel.hidden = !open;
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "關閉獎項目錄" : "開啟獎項目錄");
+    toggle.setAttribute("aria-label", open ? (workGalleryUi.closeAwardDirectory || "關閉獎項目錄") : (workGalleryUi.openAwardDirectory || "開啟獎項目錄"));
   }
 
   toggle.addEventListener("click", () => setOpen(panel.hidden));
@@ -794,11 +925,19 @@ document.addEventListener("page-content:ready", initializeWorkGallery);
 document.fonts?.ready.then(fitAllWorkTitles);
 window.addEventListener("resize", fitAllWorkTitles);
 
-fetch("data/work-reviews.json", { cache: "no-cache" })
+fetch("data/work-gallery.json", { cache: "no-cache" })
+  .then((response) => {
+    if (!response.ok) throw new Error(`Unable to load work gallery data (${response.status}).`);
+    return response.json();
+  })
+  .then((config) => {
+    expandWorkGalleryConfig(config);
+    return fetch(workGalleryMeta.reviewsPath, { cache: "no-cache" });
+  })
   .then((response) => {
     if (!response.ok) throw new Error(`Unable to load work reviews (${response.status}).`);
     return response.json();
   })
-  .then((data) => { workReviewData = data; })
+  .then((reviews) => { workReviewData = reviews; })
   .catch((error) => console.error(error))
   .finally(initializeWinningWorks);
