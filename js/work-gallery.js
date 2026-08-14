@@ -203,8 +203,7 @@ function applyWorkGalleryUi() {
     document.querySelectorAll(selector).forEach((element) => { element.textContent = value; });
   };
   setText("#works-title", workGalleryUi.pageTitle);
-  setText("[data-work-loading] strong", workGalleryUi.loadingTitle);
-  setText("[data-work-loading] strong + span", workGalleryUi.loadingMessage);
+  setText("[data-work-loading] strong", "Loading");
   setText("[data-work-back]", workGalleryUi.backLabel);
   setText("#winning-works-tab", workGalleryUi.winningTab);
   setText("#winning-works-panel .work-gallery__panel-title h2", workGalleryUi.winningTab);
