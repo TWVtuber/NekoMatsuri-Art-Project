@@ -32,9 +32,9 @@
     <link rel="stylesheet" href="css/awards.css?v=14" />
     <link rel="stylesheet" href="css/pages-responsive.css?v=36" />
     <link rel="stylesheet" href="css/spacing.css?v=10" />
-    <link rel="stylesheet" href="css/related-data.css?v=85" />
+    <link rel="stylesheet" href="css/related-data.css?v=87" />
     <link rel="stylesheet" href="css/classroom-map.css?v=36" />
-    <link rel="stylesheet" href="css/work-gallery.css?v=49" />
+    <link rel="stylesheet" href="css/work-gallery.css?v=50" />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -271,6 +271,11 @@
             disablepictureinpicture
             hidden
           ></video>
+          <div class="image-viewer__gallery-loading" data-image-viewer-gallery-loading role="status" aria-live="polite" hidden>
+            <span class="image-viewer__gallery-spinner" aria-hidden="true"></span>
+            <strong>正在載入完整作品</strong>
+            <span data-image-viewer-gallery-progress>0 / 0</span>
+          </div>
           <button class="image-viewer__gallery-nav image-viewer__gallery-nav--previous" type="button" data-image-viewer-previous aria-label="上一張作品" hidden>‹</button>
           <button class="image-viewer__gallery-nav image-viewer__gallery-nav--next" type="button" data-image-viewer-next aria-label="下一張作品" hidden>›</button>
           <span class="image-viewer__gallery-count" data-image-viewer-count hidden></span>
@@ -279,12 +284,13 @@
             <span class="image-viewer__judge-list" data-image-viewer-judge-list></span>
           </aside>
           <section class="image-viewer__review" data-image-viewer-review aria-live="polite" hidden>
-            <button class="image-viewer__review-close" type="button" data-image-viewer-review-close aria-label="關閉評審講評">×</button>
-            <header class="image-viewer__review-heading">
-              <img data-image-viewer-review-avatar src="" alt="" />
-              <div><small>評審講評</small><h3 data-image-viewer-review-name></h3></div>
-            </header>
-            <p data-image-viewer-review-text></p>
+            <div class="image-viewer__review-surface">
+              <button class="image-viewer__review-close" type="button" data-image-viewer-review-close aria-label="關閉評審講評">×</button>
+              <header class="image-viewer__review-heading">
+                <div><small>評審講評</small><h3 data-image-viewer-review-name></h3></div>
+              </header>
+              <p data-image-viewer-review-text></p>
+            </div>
           </section>
         </div>
         <div class="image-viewer__toolbar" aria-label="圖片縮放控制">
@@ -369,10 +375,9 @@
           </nav>
           <a
             class="header-submit"
-            href="https://forms.gle/M6ds1JfNyQWvcxud7"
-            target="_blank"
-            rel="noopener noreferrer"
-            >我要投稿！</a
+            href="#works"
+            data-work-link
+            >比賽結果</a
           >
         </div>
       </header>
@@ -606,10 +611,9 @@
               </div>
               <a
                 class="countdown-cta"
-                href="https://forms.gle/M6ds1JfNyQWvcxud7"
-                target="_blank"
-                rel="noopener noreferrer"
-                >我要投稿！</a
+                href="#works"
+                data-work-link
+                >比賽結果</a
               >
             </div>
           </div>
@@ -1151,6 +1155,13 @@
       </aside>
 
       <main class="work-view work-page__content" id="works" aria-labelledby="works-title" hidden>
+        <div class="work-loading" data-work-loading role="status" aria-live="polite" aria-label="作品載入中">
+          <div class="work-loading__card">
+            <span class="work-loading__spinner" aria-hidden="true"></span>
+            <strong>正在準備作品展覽</strong>
+            <span>請稍候一下，精彩作品馬上登場！</span>
+          </div>
+        </div>
         <div class="work-view__heading">
           <button class="faq-back" type="button" data-work-back>← 回上一頁</button>
           <div class="section-title">
@@ -1812,11 +1823,11 @@
     <script src="js/faq-content.js?v=2"></script>
     <script src="js/awards-content.js?v=13"></script>
     <script src="js/organizers-content.js?v=7"></script>
-    <script src="js/site.js?v=66"></script>
+    <script src="js/site.js?v=67"></script>
     <script src="js/classroom-map.js?v=15"></script>
     <script src="js/related-data-content.js?v=28"></script>
     <script src="js/related-data.js?v=12"></script>
-    <script src="js/work-gallery.js?v=43"></script>
-    <script src="js/image-viewer.js?v=5"></script>
+    <script src="js/work-gallery.js?v=46"></script>
+    <script src="js/image-viewer.js?v=7"></script>
   </body>
 </html>

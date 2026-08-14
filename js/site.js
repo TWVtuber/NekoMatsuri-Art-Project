@@ -1003,6 +1003,8 @@ function showWork(updateHistory = true) {
   organizerView.hidden = true;
   relatedDataView.hidden = true;
   workView.hidden = false;
+  const galleryIsReady = workView.dataset.workReady === "true";
+  document.body.classList.toggle("work-loading-active", !galleryIsReady);
   if (updateHistory && window.location.hash !== "#works") {
     history.pushState({ works: true }, "", "#works");
   }
@@ -1011,7 +1013,7 @@ function showWork(updateHistory = true) {
 }
 
 function hideWork(targetHash = workReturnHash, updateHistory = true) {
-  document.body.classList.remove("work-open");
+  document.body.classList.remove("work-open", "work-loading-active");
   workView.hidden = true;
   if (updateHistory) history.pushState(null, "", targetHash);
   requestAnimationFrame(() => {
@@ -1019,6 +1021,11 @@ function hideWork(targetHash = workReturnHash, updateHistory = true) {
     scheduleActiveNavUpdate();
   });
 }
+
+document.addEventListener("work-gallery:ready", () => {
+  workView.dataset.workReady = "true";
+  document.body.classList.remove("work-loading-active");
+});
 
 faqLinks.forEach((link) =>
   link.addEventListener("click", (event) => {

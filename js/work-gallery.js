@@ -106,7 +106,7 @@ const winningWorkGroups = [
       { name: "貓祭不會讓你俄史賞2_老師和學姊！借我拍個照！_安娜伊恩", files: ["貓祭不會讓你俄史賞2_老師和學姊！借我拍個照！_安娜伊恩.png"] },
       { name: "貓祭不會讓你俄史賞3_獨自一人的天台_阿欣", files: ["貓祭不會讓你俄史賞3_無標題157_20260719141851.png", "貓祭不會讓你俄史賞3_無標題158_20260719230942.png"], typeLabel: "插圖" },
       { name: "貓祭不會讓你俄史賞4_家政課的簡易小吃_拉米OxO", files: ["貓祭不會讓你俄史賞4_家政課的簡易小吃_拉米OxO.mp4"] },
-      { name: "貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart", files: ["貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart.gif"] },
+      { name: "貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart", files: ["貓祭不會讓你俄史賞5_上課請不要睡覺_波比pixelart.gif"], typeLabel: "像素動畫" },
       { name: "貓祭不會讓你俄史賞6_可愛四兄妹_灼翼", files: ["貓祭不會讓你俄史賞6_可愛四兄妹_灼翼.png"] },
       { name: "貓祭不會讓你俄史賞7_Alter ego -- 沈家三兄弟跳水版o(°▽°)o_阿太", files: ["貓祭不會讓你俄史賞7_Alter ego -- 沈家三兄弟跳水版o(°▽°)o_阿太.mp4"] },
       { name: "貓祭不會讓你俄史賞8_全員像素中_手滑", files: ["沈曦.png", "沈月.png", "沈樂.png", "沈澈.png", "祭煜.png", "貓祭.png", "阿強.png", "阿貝.png", "阿醜.png", "阿雄.png"], pixelArt: true, typeLabel: "像素插畫" },
@@ -186,12 +186,23 @@ function getAwardRank(name) {
 
 function isVideo(path) { return /\.(?:mp4|mov|webm)$/i.test(path); }
 
+function getWorkThumbnail(path) {
+  if (isVideo(path) || /\.gif(?:[?#].*)?$/i.test(path)) return path;
+  return path
+    .replace(/^imgs\/works\//, "imgs/work-thumbs/")
+    .replace(/\.(?:jpe?g|png|webp)(?=$|[?#])/i, ".webp");
+}
+
 function getWorkType(work) {
   if (work.typeLabel) return work.typeLabel;
   if (work.name === "搞怪賞C_衝刺_nozzz.png") return "漫畫";
   if (work.media.length > 1) return "漫畫";
   const [source = ""] = work.media;
-  if (/\.gif(?:[?#].*)?$/i.test(source)) return "動畫GIF";
+  if (/\.gif(?:[?#].*)?$/i.test(source)) return "動畫";
+  if ([
+    "金賞_繪肝史_凜奈.mp4",
+    "互動賞B_貓祭班導&3年C班日常_亞狸YaRi.mp4",
+  ].includes(work.name)) return "動畫";
   if (isVideo(source)) return "有聲動畫";
   return "插圖";
 }
@@ -199,10 +210,11 @@ function getWorkType(work) {
 function getWorkTypeClass(workType) {
   return {
     "插圖": "illustration",
-    "有聲動畫": "video",
-    "動畫GIF": "gif",
+    "動畫": "video",
+    "有聲動畫": "video-audio",
     "漫畫": "comic",
     "像素插畫": "pixel",
+    "像素動畫": "pixel",
   }[workType] || "default";
 }
 
@@ -225,6 +237,31 @@ function fitWorkTitle(title) {
 
 function fitAllWorkTitles() {
   document.querySelectorAll(".winning-work__title").forEach(fitWorkTitle);
+}
+
+const videoPreviewMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const videoPreviewObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (!(video instanceof HTMLVideoElement)) return;
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && !videoPreviewMotion.matches) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: [0, 0.25] })
+  : null;
+
+function startVideoPreview(video) {
+  video.loop = true;
+  video.autoplay = true;
+  if (videoPreviewMotion.matches) return;
+
+  if (videoPreviewObserver) videoPreviewObserver.observe(video);
+  else video.play().catch(() => {});
 }
 
 function prepareVideoPreview(video) {
@@ -264,6 +301,7 @@ function prepareVideoPreview(video) {
       video.dataset.previewBrightness = bestFrame.brightness.toFixed(1);
     }
     video.dataset.previewReady = "";
+    startVideoPreview(video);
   };
 
   const scanByPlayback = () => {
@@ -345,7 +383,7 @@ function createWinningWork(work) {
   openButton.type = "button";
   openButton.dataset.imageViewerGallery = encodeURIComponent(JSON.stringify(work.viewerGallery || work.media));
   openButton.dataset.imageViewerTitle = work.viewerTitle || work.displayTitle || details.title;
-  openButton.dataset.imageViewerDescription = work.viewerDescription || `獎項：${details.award}｜類型：${workType}｜作者：${details.artist}`;
+  openButton.dataset.imageViewerDescription = work.viewerDescription || `獎項：${details.award}｜類型：${workType}`;
   let judges = getWorkJudges(work.groupTitle, details.award).map((judge) => ({
     ...judge,
     comment: reviewEntry?.reviews.find((review) => review.judge === judge.name)?.comment || "",
@@ -373,16 +411,23 @@ function createWinningWork(work) {
   const showMedia = () => {
     const path = work.media[currentIndex];
     const media = isVideo(path) ? document.createElement("video") : document.createElement("img");
+    mediaFrame.classList.remove("is-media-ready");
+    const markMediaReady = () => mediaFrame.classList.add("is-media-ready");
+    media.addEventListener(media instanceof HTMLVideoElement ? "loadeddata" : "load", markMediaReady, { once: true });
+    media.addEventListener("error", markMediaReady, { once: true });
     if (media instanceof HTMLVideoElement) {
       media.muted = true;
       media.playsInline = true;
+      media.loop = true;
       media.preload = "metadata";
       media.setAttribute("controlslist", "nodownload");
       prepareVideoPreview(media);
       media.src = path;
     }
-    else { media.src = path; media.alt = `${work.displayTitle || details.title}，作者 ${details.artist}`; media.loading = "lazy"; media.decoding = "async"; }
-    mediaFrame.querySelector("img, video")?.remove();
+    else { media.src = getWorkThumbnail(path); media.alt = `${work.displayTitle || details.title}，作者 ${details.artist}`; media.loading = "lazy"; media.decoding = "async"; }
+    const previousMedia = mediaFrame.querySelector("img, video");
+    if (previousMedia instanceof HTMLVideoElement) videoPreviewObserver?.unobserve(previousMedia);
+    previousMedia?.remove();
     mediaFrame.prepend(media);
     const count = mediaFrame.querySelector(".winning-work__count");
     if (count) count.textContent = `${currentIndex + 1} / ${work.media.length}`;
@@ -697,6 +742,31 @@ function initializeWinningWorks() {
   });
   initializeWorkToc(container);
   requestAnimationFrame(fitAllWorkTitles);
+  prepareWorkGalleryEntrance(container);
+}
+
+function prepareWorkGalleryEntrance(container) {
+  const firstMedia = [...container.querySelectorAll(".winning-work img, .winning-work video")].slice(0, 6);
+  const minimumDisplay = new Promise((resolve) => setTimeout(resolve, 450));
+  const mediaReady = Promise.all(firstMedia.map((media) => new Promise((resolve) => {
+    if (media instanceof HTMLImageElement) {
+      media.loading = "eager";
+      if (media.complete) { resolve(); return; }
+      media.addEventListener("load", resolve, { once: true });
+      media.addEventListener("error", resolve, { once: true });
+      return;
+    }
+
+    media.preload = "auto";
+    if (media.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) { resolve(); return; }
+    media.addEventListener("loadeddata", resolve, { once: true });
+    media.addEventListener("error", resolve, { once: true });
+  })));
+  const timeout = new Promise((resolve) => setTimeout(resolve, 8000));
+
+  Promise.all([minimumDisplay, Promise.race([mediaReady, timeout])]).then(() => {
+    document.dispatchEvent(new CustomEvent("work-gallery:ready"));
+  });
 }
 
 function initializeWorkToc(container) {

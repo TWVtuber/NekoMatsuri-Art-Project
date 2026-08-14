@@ -14,11 +14,12 @@
   const previousButton = viewer?.querySelector("[data-image-viewer-previous]");
   const nextButton = viewer?.querySelector("[data-image-viewer-next]");
   const galleryCount = viewer?.querySelector("[data-image-viewer-count]");
+  const galleryLoading = viewer?.querySelector("[data-image-viewer-gallery-loading]");
+  const galleryProgress = viewer?.querySelector("[data-image-viewer-gallery-progress]");
   const judges = viewer?.querySelector("[data-image-viewer-judges]");
   const judgeList = viewer?.querySelector("[data-image-viewer-judge-list]");
   const reviewPanel = viewer?.querySelector("[data-image-viewer-review]");
   const reviewClose = viewer?.querySelector("[data-image-viewer-review-close]");
-  const reviewAvatar = viewer?.querySelector("[data-image-viewer-review-avatar]");
   const reviewName = viewer?.querySelector("[data-image-viewer-review-name]");
   const reviewText = viewer?.querySelector("[data-image-viewer-review-text]");
 
@@ -51,9 +52,63 @@
   let activeMedia = image;
   let galleryItems = [];
   let galleryIndex = 0;
+  let galleryLoadToken = 0;
+  let galleryIsLoading = false;
+  const preloadedImages = new Map();
+
+  function preloadGalleryImages(items, onProgress) {
+    const imageSources = items.filter((source) => !/\.(?:mp4|mov|webm)(?:[?#].*)?$/i.test(source));
+    let completed = 0;
+    onProgress(completed, imageSources.length);
+
+    return Promise.all(imageSources.map((source) => {
+      if (!preloadedImages.has(source)) {
+        preloadedImages.set(source, new Promise((resolve) => {
+          const preload = new Image();
+          const finish = () => {
+            if (typeof preload.decode === "function") {
+              preload.decode().catch(() => {}).finally(resolve);
+            } else {
+              resolve();
+            }
+          };
+          preload.addEventListener("load", finish, { once: true });
+          preload.addEventListener("error", resolve, { once: true });
+          preload.src = source;
+        }));
+      }
+      return preloadedImages.get(source).then(() => {
+        completed += 1;
+        onProgress(completed, imageSources.length);
+      });
+    }));
+  }
 
   const clamp = (value, minimum, maximum) =>
     Math.min(maximum, Math.max(minimum, value));
+
+  function closeReview({ restoreFocus = false } = {}) {
+    if (!reviewPanel || reviewPanel.hidden) return;
+    reviewPanel.hidden = true;
+    const activeJudge = judgeList?.querySelector(".image-viewer__judge.is-active");
+    if (restoreFocus) activeJudge?.focus({ preventScroll: true });
+    judgeList?.querySelectorAll(".image-viewer__judge").forEach((button) => {
+      button.classList.remove("is-active");
+      button.setAttribute("aria-pressed", "false");
+    });
+  }
+
+  function pointReviewAt(portrait) {
+    if (!reviewPanel) return;
+    const portraitRect = portrait.getBoundingClientRect();
+    const panelRect = reviewPanel.getBoundingClientRect();
+    const pointerX = clamp(
+      portraitRect.left + portraitRect.width / 2 - panelRect.left,
+      24,
+      panelRect.width - 24,
+    );
+    reviewPanel.style.setProperty("--review-pointer-x", `${pointerX}px`);
+  }
 
   function constrainTranslation() {
     if (scale <= minScale) {
@@ -139,7 +194,8 @@
     }
   }
 
-  function openViewer(trigger) {
+  async function openViewer(trigger) {
+    const loadToken = ++galleryLoadToken;
     returnFocus = trigger;
     const requestedInitialScale = Number.parseFloat(
       trigger.dataset.imageViewerInitialScale || String(defaultMinScale),
@@ -182,17 +238,17 @@
           portraitImage.src = person.image;
           portraitImage.alt = person.name;
           portrait.append(portraitImage);
-          if (person.comment && reviewPanel && reviewAvatar && reviewName && reviewText) {
+          if (person.comment && reviewPanel && reviewName && reviewText) {
             portrait.addEventListener("click", () => {
               judgeList.querySelectorAll(".image-viewer__judge").forEach((button) => {
                 button.classList.toggle("is-active", button === portrait);
                 button.setAttribute("aria-pressed", String(button === portrait));
               });
-              reviewAvatar.src = person.image;
-              reviewAvatar.alt = person.name;
               reviewName.textContent = person.name;
               reviewText.textContent = person.comment;
               reviewPanel.hidden = false;
+              reviewPanel.scrollTop = 0;
+              pointReviewAt(portrait);
               reviewClose?.focus({ preventScroll: true });
             });
           }
@@ -251,6 +307,22 @@
     galleryIndex = Number.parseInt(trigger.dataset.imageViewerIndex || "0", 10) || 0;
     viewer.hidden = false;
     document.body.classList.add("image-viewer-open");
+    const shouldPreloadGallery = galleryItems.length > 1;
+    if (shouldPreloadGallery && galleryLoading) {
+      galleryIsLoading = true;
+      image.hidden = true;
+      video.hidden = true;
+      galleryLoading.hidden = false;
+      if (previousButton) previousButton.hidden = true;
+      if (nextButton) nextButton.hidden = true;
+      if (galleryCount) galleryCount.hidden = true;
+      await preloadGalleryImages(galleryItems, (loaded, total) => {
+        if (galleryProgress) galleryProgress.textContent = `${loaded} / ${total}`;
+      });
+      if (loadToken !== galleryLoadToken || viewer.hidden) return;
+      galleryIsLoading = false;
+      galleryLoading.hidden = true;
+    }
     showGalleryItem(galleryIndex);
     requestAnimationFrame(() => viewport.focus({ preventScroll: true }));
   }
@@ -258,6 +330,9 @@
   function closeViewer() {
     if (viewer.hidden) return;
     viewer.hidden = true;
+    galleryLoadToken += 1;
+    galleryIsLoading = false;
+    if (galleryLoading) galleryLoading.hidden = true;
     document.body.classList.remove("image-viewer-open");
     pointers.clear();
     lastPinch = null;
@@ -315,6 +390,7 @@
   function handleGalleryNavigation(event, offset) {
     event.preventDefault();
     event.stopPropagation();
+    if (galleryIsLoading) return;
     showGalleryItem(galleryIndex + offset);
   }
 
@@ -331,6 +407,7 @@
   viewport.addEventListener(
     "wheel",
     (event) => {
+      if (event.target.closest("[data-image-viewer-review]")) return;
       event.preventDefault();
       const factor = Math.exp(-event.deltaY * 0.0015);
       zoomTo(scale * factor, event.clientX, event.clientY);
@@ -344,7 +421,10 @@
   });
 
   viewport.addEventListener("pointerdown", (event) => {
-    if (event.target === video || event.target.closest("button")) return;
+    if (
+      event.target === video ||
+      event.target.closest("button, [data-image-viewer-review]")
+    ) return;
     viewport.setPointerCapture(event.pointerId);
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     if (pointers.size === 1) {
@@ -396,15 +476,17 @@
 
   viewport.addEventListener("pointerup", releasePointer);
   viewport.addEventListener("pointercancel", releasePointer);
-  reviewClose?.addEventListener("click", () => {
-    if (reviewPanel) reviewPanel.hidden = true;
-    const activeJudge = judgeList?.querySelector(".image-viewer__judge.is-active");
-    activeJudge?.focus({ preventScroll: true });
-    judgeList?.querySelectorAll(".image-viewer__judge").forEach((button) => {
-      button.classList.remove("is-active");
-      button.setAttribute("aria-pressed", "false");
-    });
-  });
+  reviewClose?.addEventListener("click", () => closeReview({ restoreFocus: true }));
+
+  viewer.addEventListener("click", (event) => {
+    if (!reviewPanel || reviewPanel.hidden) return;
+    if (event.target.closest("[data-image-viewer-review], .image-viewer__judge")) return;
+    closeReview();
+    if (event.target.closest("[data-image-viewer-close]")) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }, true);
 
   document.addEventListener("keydown", (event) => {
     if (viewer.hidden) return;
@@ -420,12 +502,12 @@
         : (currentIndex + 1) % focusable.length;
       event.preventDefault();
       focusable[nextIndex]?.focus();
-    } else if (event.key === "Escape" && reviewPanel && !reviewPanel.hidden) reviewClose?.click();
+    } else if (event.key === "Escape" && reviewPanel && !reviewPanel.hidden) closeReview({ restoreFocus: true });
     else if (event.key === "Escape") closeViewer();
-    else if (event.key === "ArrowLeft" && galleryItems.length > 1) {
+    else if (event.key === "ArrowLeft" && galleryItems.length > 1 && !galleryIsLoading) {
       event.preventDefault();
       showGalleryItem(galleryIndex - 1);
-    } else if (event.key === "ArrowRight" && galleryItems.length > 1) {
+    } else if (event.key === "ArrowRight" && galleryItems.length > 1 && !galleryIsLoading) {
       event.preventDefault();
       showGalleryItem(galleryIndex + 1);
     } else if (event.key === "+" || event.key === "=") {
