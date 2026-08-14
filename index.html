@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="css/spacing.css?v=10" />
     <link rel="stylesheet" href="css/related-data.css?v=85" />
     <link rel="stylesheet" href="css/classroom-map.css?v=36" />
+    <link rel="stylesheet" href="css/work-gallery.css?v=48" />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -270,6 +271,21 @@
             disablepictureinpicture
             hidden
           ></video>
+          <button class="image-viewer__gallery-nav image-viewer__gallery-nav--previous" type="button" data-image-viewer-previous aria-label="上一張作品" hidden>‹</button>
+          <button class="image-viewer__gallery-nav image-viewer__gallery-nav--next" type="button" data-image-viewer-next aria-label="下一張作品" hidden>›</button>
+          <span class="image-viewer__gallery-count" data-image-viewer-count hidden></span>
+          <aside class="image-viewer__judges" data-image-viewer-judges aria-label="評審講評" hidden>
+            <span class="image-viewer__judges-label">評審講評<span class="image-viewer__judges-hint">（點擊頭像查看評語）</span></span>
+            <span class="image-viewer__judge-list" data-image-viewer-judge-list></span>
+          </aside>
+          <section class="image-viewer__review" data-image-viewer-review aria-live="polite" hidden>
+            <button class="image-viewer__review-close" type="button" data-image-viewer-review-close aria-label="關閉評審講評">×</button>
+            <header class="image-viewer__review-heading">
+              <img data-image-viewer-review-avatar src="" alt="" />
+              <div><small>評審講評</small><h3 data-image-viewer-review-name></h3></div>
+            </header>
+            <p data-image-viewer-review-text></p>
+          </section>
         </div>
         <div class="image-viewer__toolbar" aria-label="圖片縮放控制">
           <button type="button" data-image-zoom-out aria-label="縮小圖片">
@@ -347,7 +363,7 @@
             <a href="#related-data" data-related-data-link>相關設定與資料</a>
             <a href="#rewards">獎勵辦法</a>
             <a href="#awards">評審與獎項</a>
-            <a href="work.html">得獎作品</a>
+            <a href="#works" data-work-link>作品展示</a>
             <a href="#organizers" data-organizer-link>主辦與協力</a>
             <a href="#faq" data-faq-link>常見問題</a>
           </nav>
@@ -1134,6 +1150,39 @@
         </a>
       </aside>
 
+      <main class="work-view work-page__content" id="works" aria-labelledby="works-title" hidden>
+        <div class="work-view__heading">
+          <button class="faq-back" type="button" data-work-back>← 回上一頁</button>
+          <div class="section-title">
+            <span></span>
+            <h1 id="works-title">作品展示</h1>
+            <span></span>
+          </div>
+        </div>
+        <section class="work-gallery section" aria-label="作品展示內容">
+          <div class="work-gallery__view-tabs" role="tablist" aria-label="作品展示分類">
+            <button class="work-gallery__view-tab is-active" id="winning-works-tab" type="button" role="tab" aria-selected="true" aria-controls="winning-works-panel" data-work-view="winning">得獎作品</button>
+            <button class="work-gallery__view-tab" id="all-works-tab" type="button" role="tab" aria-selected="false" aria-controls="all-works-panel" data-work-view="all" data-coming-soon-message="總投稿畫作（不含差分）共 287 件，目前仍在整理中。" disabled aria-disabled="true" aria-label="所有作品，Coming Soon。總投稿畫作（不含差分）共 287 件，目前仍在整理中。">
+              所有作品 <span class="work-gallery__coming-soon" aria-hidden="true">COMING SOON</span>
+            </button>
+          </div>
+          <div id="winning-works-panel" role="tabpanel" aria-labelledby="winning-works-tab" data-work-panel="winning">
+            <div class="section-title work-gallery__panel-title"><span></span><h2>得獎作品</h2><span></span></div>
+            <div class="winning-works" data-winning-works></div>
+          </div>
+          <div id="all-works-panel" role="tabpanel" aria-labelledby="all-works-tab" data-work-panel="all" hidden>
+            <div class="section-title work-gallery__panel-title"><span></span><h2>所有作品</h2><span></span></div>
+            <div class="work-gallery__paper paper-card">
+              <span class="tape tape--blue" aria-hidden="true"></span>
+              <div class="work-gallery__toolbar" data-work-toolbar aria-label="作品篩選工具"></div>
+              <div class="work-gallery__grid" data-work-grid></div>
+              <p class="work-gallery__empty" data-work-empty hidden>找不到符合條件的作品。</p>
+            </div>
+          </div>
+        </section>
+        <button class="faq-back faq-back--bottom" type="button" data-work-back>← 回上一頁</button>
+      </main>
+
       <main
         class="related-data-view bulletin-bg"
         id="related-data"
@@ -1750,7 +1799,7 @@
               <a href="#rules">主題與規則</a>
               <a href="#related-data" data-related-data-link>相關設定與資料</a>
               <a href="#awards">評審與獎項</a>
-              <!-- <a href="work.html">作品展示</a> -->
+              <a href="#works" data-work-link>作品展示</a>
               <a href="#organizers" data-organizer-link>主辦與協力</a>
             </nav>
           </div>
@@ -1767,6 +1816,7 @@
     <script src="js/classroom-map.js?v=15"></script>
     <script src="js/related-data-content.js?v=28"></script>
     <script src="js/related-data.js?v=12"></script>
+    <script src="js/work-gallery.js?v=42"></script>
     <script src="js/image-viewer.js?v=4"></script>
   </body>
 </html>
