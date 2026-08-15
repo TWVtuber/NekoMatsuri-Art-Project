@@ -1,133 +1,93 @@
-# 專案資產清冊
+# 專案與素材清冊
 
-更新日期：2026-08-14
+最後更新：2026-08-16
 
 ## 專案概況
 
-- 單頁式靜態網站，主入口為 `index.html`；作品展示整合在 `#works` 頁面狀態中。
-- 無 `package.json`、bundler 或自動化測試；內容以 HTML、CSS、原生 JavaScript 與 JSON 組成。
-- 專案共約 590 個檔案，排除 `.git` 後約 1.44 GiB。
-- `work.html` 已於 2026-08-14 移除，作品頁由 `index.html`、`js/work-gallery.js` 與 `css/work-gallery.css` 負責。
+- 單頁靜態網站，入口為 `index.html`；無 `package.json`、bundler 或框架建置步驟。
+- 內容由 HTML 骨架、CSS、原生 JavaScript 與 `data/*.json` 組成。
+- 網站素材共 580 個檔案、約 1,452.6 MiB；另有 `font/` 1 個字型（4.7 MiB）及 `test/` 22 個來源檔（280.4 MiB）。
+- 根目錄另有 `logo.ico` 與 2 份 PDF 文件。
 
-## 可編輯資料檔
+## 可編輯內容資料
 
-| 檔案 | 用途 |
+| JSON | 用途 |
 | --- | --- |
-| `data/page-content.json` | 首頁、活動說明與部分共用頁面內容 |
-| `data/related-data.json` | 角色與相關設定資料 |
-| `data/reward-policy.json` | 獎勵辦法 |
-| `data/awards.json` | 評審與獎項資料 |
-| `data/organizers.json` | 主辦、協力與工作人員資料 |
-| `data/classroom.json` | 教室／角色地圖資料 |
+| `data/page-content.json` | 網站 metadata、導覽、學院介紹、Hashtag、首頁文案、倒數文字、活動主題與規則、頁尾文字，以及首頁共用圖片／連結 |
+| `data/reward-policy.json` | 獎勵辦法與加碼獎項 |
+| `data/awards.json` | 評審、獎項、獎金與獎盃 |
+| `data/organizers.json` | 主辦／協辦介紹、幕後人員、贊助與彩蛋 |
 | `data/faq.json` | 常見問題 |
-| `data/work-gallery.json` | 作品頁的作品名稱、分類、媒體路徑、獎盃、評審圖、介面文字與特殊展示設定 |
-| `data/work-reviews.json` | 58 組得獎作品的作者連結與評審講評 |
+| `data/related-data.json` | 角色設定與相關資料 |
+| `data/classroom.json` | 教室座位與人物資料 |
+| `data/work-gallery.json` | 得獎作品分組、檔名、顯示設定、評審與 UI 文案 |
+| `data/work-reviews.json` | 作品評語 |
 
-### 作品頁維護方式
-
-- 新增或修改得獎作品：編輯 `data/work-gallery.json` 的 `groups`。
-- 修改作品作者連結或講評：編輯 `data/work-reviews.json`。
-- 修改圖片／影片來源：使用相對於網站根目錄的路徑；原始作品預設位於 `imgs/works/`，縮圖位於 `imgs/work-thumbs/`。
-- `最佳手速獎` 以 `sequence.count`、`sequence.extension` 與 `sequence.featured` 產生序列，不必逐筆列出 101 個檔名。
-- `judges` 內以 `$共同評選獎項` 表示沿用同一評審陣列。
-- JSON 必須維持 UTF-8 與合法語法；修改後建議執行 JSON 解析檢查。
+`index.html` 現在只保留版面骨架、必要的漸進式 fallback／無障礙操作文字與少量元件標籤；主要活動文案不再以 HTML 作為第二份資料來源。JS 中保留的文字為載入錯誤、按鈕狀態、動態 aria-label 與作品類型判斷，屬介面行為而不是內容資料。
 
 ## 程式檔案
 
-### HTML
+| 類型 | 檔案 | 說明 |
+| --- | --- | --- |
+| HTML | `index.html` | 全站結構與各頁面容器 |
+| 內容載入 | `js/page-content.js` | 載入 `page-content.json` 並建立共用內容 |
+| 內容載入 | `js/*-content.js` | FAQ、獎項、獎勵、主辦、角色資料內容渲染 |
+| 互動 | `js/site.js` | 入口、導覽、倒數、modal、彩蛋與頁面切換 |
+| 作品 | `js/work-gallery.js` | 作品資料載入、分類、得獎展示與評審資料 |
+| 檢視器 | `js/image-viewer.js` | 圖片／影片放大、縮放、作品序列與講評 |
+| 樣式 | `css/*.css` | 全站、各內容頁、RWD 與間距樣式 |
+| 工具 | `scripts/generate-work-thumbnails.py` | 產生作品縮圖 |
 
-| 檔案 | 用途 |
-| --- | --- |
-| `index.html` | 全站結構、各頁面容器、Modal 與基礎可及性文字 |
-
-### JavaScript
-
-| 檔案 | 用途 |
-| --- | --- |
-| `js/site.js` | SPA 頁面切換、導覽、PV、倒數、分享與彩蛋 |
-| `js/work-gallery.js` | 載入作品 JSON、建立得獎作品、輪播、目錄、篩選與縮圖 |
-| `js/image-viewer.js` | 作品放大檢視、縮放、切換媒體與評審講評 |
-| `js/page-content.js` | 載入一般頁面內容 |
-| `js/reward-policy-content.js` | 載入獎勵辦法 |
-| `js/awards-content.js` | 載入評審與獎項 |
-| `js/organizers-content.js` | 載入主辦與協力資料 |
-| `js/faq-content.js` | 載入 FAQ |
-| `js/related-data-content.js` | 載入相關設定內容 |
-| `js/related-data.js` | 相關設定互動 |
-| `js/classroom-map.js` | 教室地圖互動 |
-| `js/analytics.js` | Google Analytics |
-| `js/tailwind-config.js` | Tailwind CDN 設定 |
-
-### CSS
-
-| 檔案 | 用途 |
-| --- | --- |
-| `css/site.css` | 全站基礎版面與元件 |
-| `css/event.css` | 活動首頁內容 |
-| `css/awards.css` | 評審與獎項 |
-| `css/work-gallery.css` | 作品展示、輪播、Loading 與作品目錄 |
-| `css/related-data.css` | 相關設定頁 |
-| `css/classroom-map.css` | 教室地圖 |
-| `css/pages-responsive.css` | 各頁 RWD |
-| `css/spacing.css` | 共用間距 |
-
-## 圖像與媒體資產
-
-### `imgs/` 目錄
+## 素材分布
 
 | 目錄 | 檔案數 | 約略大小 | 用途 |
 | --- | ---: | ---: | --- |
-| `characters/` | 179 | 434.5 MiB | 角色立繪、Q 版、動畫與來源檔 |
-| `works/` | 178 | 745.5 MiB | 得獎作品原始圖片、影片與動畫 |
-| `work-thumbs/` | 168 | 11.6 MiB | 作品卡片用 WebP 縮圖 |
-| `trophies/` | 13 | 4.7 MiB | 獎盃圖 |
-| `judges/` | 9 | 184.7 KiB | 評審頭像 |
-| `main/` | 7 | 1.6 MiB | 主視覺與 Logo |
-| `memes/` | 5 | 270.9 KiB | 工作人員彩蛋 |
-| `organizer/` | 3 | 70.5 KiB | 主辦／協力圖像 |
-| `比賽規則圖PSD/` | 12 | 253.0 MiB | 規則圖與大型 PSD 來源檔 |
+| `imgs/characters/` | 179 | 434.5 MiB | 角色、設定圖、動畫與來源素材 |
+| `imgs/works/` | 178 | 745.5 MiB | 得獎作品原檔；由 JSON 的 base path + 目錄／檔名動態組合 |
+| `imgs/work-thumbs/` | 169 | 約 11.6 MiB | 作品縮圖；由原作品路徑動態推導 |
+| `imgs/trophies/` | 13 | 4.7 MiB | 獎盃圖 |
+| `imgs/judges/` | 9 | 約 0.2 MiB | 評審頭像與贊助插圖 |
+| `imgs/main/` | 7 | 1.6 MiB | 首頁背景、Logo 與效果 |
+| `imgs/memes/` | 5 | 約 0.3 MiB | 幕後人員彩蛋 |
+| `imgs/organizer/` | 3 | 約 0.1 MiB | 主辦、協辦與廠商 Logo |
+| `imgs/比賽規則圖PSD/` | 12 | 253.0 MiB | 設計來源 PSD，不供網站執行使用 |
 
-### 副檔名統計
+## 未被網站使用的素材
 
-| 格式 | 數量 | 約略大小 |
+判定方式：掃描 HTML、JS、CSS、JSON 的直接引用；`imgs/works/` 與 `imgs/work-thumbs/` 會由 `work-gallery.json` 動態組合路徑，因此視為使用中，不以完整路徑字串誤判。以下合計 133 個檔案、約 752.8 MiB。這些檔案未刪除。
+
+| 分組 | 數量 | 約略大小 | 說明 |
+| --- | ---: | ---: | --- |
+| `test/imgs/` | 22 | 280.4 MiB | AI／PSD 設計來源備份，全部未在網站引用 |
+| `imgs/比賽規則圖PSD/` | 12 | 253.0 MiB | PSD 設計來源，全部未在網站引用 |
+| `imgs/characters/` 中的個別檔案 | 95 / 179 | 217.7 MiB | 此目錄整體有使用；只有下方列出的 95 個來源檔／替代版本未被目前網站引用 |
+| `imgs/main/main2.webp`, `imgs/main/main3.webp` | 2 | 0.9 MiB | 目前程式與 JSON 沒有引用；網站背景使用 `imgs/main/main.webp` |
+| `imgs/NekoMatsuriA4.webp` | 1 | 0.7 MiB | 目前程式與 JSON 沒有引用 |
+| `imgs/trophies/繪俄史金獎(無貓版).webp` | 1 | 0.2 MiB | 目前程式與 JSON 沒有引用；金賞使用 `imgs/trophies/繪俄史金獎.webp` |
+
+### `imgs/characters/` 中未使用的個別檔案分組
+
+`imgs/characters/` 並非未使用目錄：角色頁目前直接使用其中的證件照、角色 Logo WebP、`*-alpha.webp` 動畫、Q 版圖與大量 3C 圖文。下表只列同一目錄內沒有被引用的其他格式或替代版本。
+
+| 路徑／分組 | 數量 | 約略大小 |
 | --- | ---: | ---: |
-| WebP | 308 | 242.3 MiB |
-| PNG | 201 | 513.4 MiB |
-| JPG | 22 | 89.3 MiB |
-| PSD | 16 | 263.2 MiB |
-| WebM | 11 | 164.4 MiB |
-| MP4 | 8 | 141.8 MiB |
-| AI | 6 | 17.1 MiB |
-| CLIP | 4 | 6.0 MiB |
-| MOV | 1 | 13.5 MiB |
-| GIF | 1 | 1.2 MiB |
+| `imgs/characters/Amins/*.webm` | 6 | 135.7 MiB |
+| `imgs/characters/Logo/`（六位角色的 AI 與各式 PNG 版本） | 60 | 31.2 MiB |
+| `imgs/characters/Q/Anims/*.webm` | 4 | 24.0 MiB |
+| `imgs/characters/Objects/證件/`（PSD／CLIP／範例） | 9 | 16.4 MiB |
+| `imgs/characters/3C-Pics/沈家相關/` | 7 | 7.8 MiB |
+| `imgs/characters/3C-Pics/貓祭/` | 2 | 0.7 MiB |
+| `imgs/characters/證件/`（阿強、阿貝、阿醜、阿雄學生證） | 4 | 1.9 MiB |
+| `imgs/characters/Objects/素材/校長.webp`、`校徽.webp` | 2 | 0.2 MiB |
+| `imgs/characters/3C-Pics/3C相關圖文/木由/【木由】蘑菇人.webp` | 1 | 0.02 MiB |
 
-此外，根目錄有 2 份 PDF、`font/` 內有 1 份 TTF，並有 `logo.ico`。
+其中 `Amins/*.webm` 與 `Q/Anims/*.webm` 有同用途的 WebP 動畫版本被網站使用；未使用的 WebM 很可能是轉檔前來源。Logo、PSD、CLIP、AI 也多屬可編輯來源檔，雖不參與網站執行，仍可能值得移至獨立的 source archive，而不是直接刪除。
 
-## 外部服務與網址
+## Review 結果與注意事項
 
-- Google Analytics
-- YouTube 嵌入與外部觀看連結
-- Google Forms、Docs、Sheets、Drive
-- X（Twitter）、Lit.Link、Twitch、LinkedIn、Portaly
-- Google Material Symbols 與 Tailwind CDN
-
-作者個人連結集中於 `data/work-reviews.json`；作品頁評審圖片與本機資產路徑集中於 `data/work-gallery.json`。
-
-## 專案 Review
-
-### 已改善
-
-- 作品清單、圖片／影片路徑、獎盃路徑、評審資料、特殊作品設定與主要作品頁介面文字已抽到 `data/work-gallery.json`。
-- 評審講評與作者網址維持在獨立的 `data/work-reviews.json`，避免作品清單與長篇文字混在同一檔案。
-- 作品序列支援規則化產生，降低 101 張作品重複維護的風險。
-- 本清冊原有內容已出現編碼損壞且統計停留在 2026-06-22，現已用 UTF-8 重建並更新。
-
-### 後續建議
-
-1. `js/work-gallery.js` 仍保留一份內建 fallback 設定，供 JSON 載入失敗時顯示基本內容；長期可改成明確錯誤畫面，完全移除重複資料。
-2. `index.html` 仍有作品頁容器與圖片檢視器的靜態介面文字；若未來需要多語系，建議再拆成共用 i18n JSON，而非只做作品資料設定。
-3. `imgs/works/` 與來源檔占用空間很大，部署時應排除 PSD、AI、CLIP 等編輯來源檔，並考慮把大型影片轉成 WebM/MP4 串流友善版本。
-4. `imgs/works/` 有 178 個原始媒體，但 `imgs/work-thumbs/` 為 168 個縮圖；影片與 GIF 會直接預覽，因此數量不必完全相等，但新增靜態圖片後應執行 `scripts/generate-work-thumbnails.py`。
-5. 專案目前沒有自動測試與資料 schema。建議加入至少一個檢查腳本，驗證 JSON、作品路徑、作者 URL 與重複作品鍵。
-6. `imgs/organizer/` 的英文目錄名稱目前正確；資料或舊文件若出現 `oraganizer`，應視為拼字錯誤。
+- 主要內容已集中至 9 份 JSON；之後修改文案應先找相應 JSON，不需改 HTML。
+- `work-gallery.json` 是作品與評審展示的權威來源；作品原檔與縮圖路徑由程式動態產生。
+- 網頁採 `fetch()` 讀 JSON，不能直接以 `file://` 開啟；需透過本機 HTTP server 或正式網站測試。
+- JSON 目前沒有 schema 驗證；錯字、缺欄位或路徑錯誤會在瀏覽器執行時才出現。
+- 大型 PSD、AI、CLIP、原始作品與重複動畫版本讓 repo 超過 1 GiB；若要部署或協作，建議把設計來源與網站發布檔分離，或使用 Git LFS／物件儲存。
+- `imgs/organizer/` 的目錄命名正確；資料與程式均已使用此拼法。

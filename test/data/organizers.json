@@ -129,7 +129,7 @@
             "url": "https://www.linkedin.com/in/mingru-lu"
           }
         ],
-        "contribution": "網頁設計"
+        "contribution": "活動網站架設、網頁設計"
       },
       {
         "people": [
@@ -165,6 +165,10 @@
       },
       {
         "label": "個人贊助",
+        "illustration": {
+          "src": "imgs/judges/抖內贊助.webp",
+          "alt": "貓咪們拿著紅包與鈔票歡慶贊助"
+        },
         "names": "校長、喵波、君大、某茶、塔努努、兔子、沈曦、沈澈、沈樂、沈月、銫希恩、Jeff、李翔、刺客戰鬥、薄香貓、初山、阿太"
       }
     ]

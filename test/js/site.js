@@ -475,6 +475,10 @@ const stickyNoteTargets = [
 const logoStickerTargets = [
   ...document.querySelectorAll(".collaboration-stamps .stamp-logo"),
 ];
+const principalStamp = document.querySelector(
+  ".collaboration-stamps .principal-stamp",
+);
+const principalStampSection = document.querySelector(".collaboration-stamps");
 const logoStickerSection = document.querySelector(
   ".collaboration-stamps .stamp-logos",
 );
@@ -486,6 +490,7 @@ const scrollMotionTargets = [
   ...cardPopTargets,
   ...sectionBackgroundTargets,
   ...stickyNoteTargets,
+  ...(principalStamp ? [principalStamp] : []),
   ...logoStickerTargets,
   ...hashtagStickerTargets,
 ];
@@ -508,6 +513,7 @@ heroZoomTargets.forEach((target) =>
 stickyNoteTargets.forEach((target) =>
   target.classList.add("scroll-stick-note"),
 );
+principalStamp?.classList.add("scroll-principal-stamp");
 logoStickerTargets.forEach((target) =>
   target.classList.add("scroll-logo-sticker"),
 );
@@ -596,6 +602,15 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     },
     { threshold: 0.01, rootMargin: "80px 0px 160px" },
   );
+  const principalStampObserver = new IntersectionObserver(
+    ([entry]) => {
+      principalStamp?.classList.toggle(
+        "is-scroll-motion-visible",
+        entry.isIntersecting,
+      );
+    },
+    { threshold: 0.01, rootMargin: "64px 0px" },
+  );
   const hashtagSection = document.querySelector(".activity-hashtags");
   const hashtagStickerObserver = new IntersectionObserver(
     ([entry]) => {
@@ -617,6 +632,9 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
         cardMotionObserver.observe(target),
       );
       stickyNoteTargets.forEach((target) => stickyNoteObserver.observe(target));
+      if (principalStampSection) {
+        principalStampObserver.observe(principalStampSection);
+      }
       if (logoStickerSection) logoStickerObserver.observe(logoStickerSection);
       else {
         logoStickerTargets.forEach((target) =>
@@ -836,8 +854,10 @@ function updateCountdown() {
     2,
     "0",
   );
-  if (difference === 0)
-    document.getElementById("countdown-title").textContent = "本次投稿已截止";
+  if (difference === 0) {
+    const countdownTitle = document.getElementById("countdown-title");
+    countdownTitle.textContent = countdownTitle.dataset.closedTitle || "本次投稿已截止";
+  }
 }
 
 updateCountdown();
@@ -1503,29 +1523,3 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
-// Block the context menu and common browser developer-tool shortcuts.
-document.addEventListener(
-  "contextmenu",
-  (event) => {
-    event.preventDefault();
-  },
-  { capture: true },
-);
-
-document.addEventListener(
-  "keydown",
-  (event) => {
-    const key = event.key.toLowerCase();
-    const isDeveloperToolsShortcut =
-      event.key === "F12" ||
-      ((event.ctrlKey || event.metaKey) &&
-        event.shiftKey &&
-        ["i", "j", "c"].includes(key));
-
-    if (isDeveloperToolsShortcut) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
-  },
-  { capture: true },
-);
