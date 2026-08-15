@@ -316,7 +316,9 @@
       if (previousButton) previousButton.hidden = true;
       if (nextButton) nextButton.hidden = true;
       if (galleryCount) galleryCount.hidden = true;
-      await preloadGalleryImages(galleryItems, (loaded, total) => {
+      const itemsToLoad = [...galleryItems];
+      await preloadGalleryImages(itemsToLoad, (loaded, total) => {
+        if (loadToken !== galleryLoadToken || viewer.hidden) return;
         if (galleryProgress) galleryProgress.textContent = `${loaded} / ${total}`;
       });
       if (loadToken !== galleryLoadToken || viewer.hidden) return;
@@ -333,6 +335,7 @@
     galleryLoadToken += 1;
     galleryIsLoading = false;
     if (galleryLoading) galleryLoading.hidden = true;
+    if (galleryProgress) galleryProgress.textContent = "0 / 0";
     document.body.classList.remove("image-viewer-open");
     pointers.clear();
     lastPinch = null;

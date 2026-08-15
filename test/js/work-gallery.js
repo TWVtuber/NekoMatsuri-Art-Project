@@ -246,7 +246,9 @@ function getAwardRank(name) {
 function isVideo(path) { return /\.(?:mp4|mov|webm)$/i.test(path); }
 
 function getWorkThumbnail(path) {
-  if (isVideo(path)) return path;
+  // Animated GIFs must keep their original source; the generated WebP
+  // thumbnails contain only a single frame.
+  if (isVideo(path) || /\.gif(?:[?#].*)?$/i.test(path)) return path;
   return path
     .replace(`${workGalleryMeta.worksBasePath}/`, `${workGalleryMeta.thumbnailsBasePath}/`)
     .replace(/\.(?:jpe?g|png|webp|gif)(?=$|[?#])/i, ".webp");
