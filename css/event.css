@@ -572,6 +572,57 @@ p {
   transform-origin: center;
   filter: drop-shadow(2px 3px 0 rgba(29, 28, 21, 0.12));
 }
+
+.scroll-motion-ready .principal-stamp.scroll-principal-stamp {
+  opacity: 0;
+  transform: translate3d(0, -24px, 0) rotate(-8deg) scale(4.5);
+  filter: drop-shadow(18px 28px 10px rgba(29, 28, 21, 0.22));
+  will-change: transform, opacity, filter;
+}
+
+.scroll-motion-ready
+  .principal-stamp.scroll-principal-stamp.is-scroll-motion-visible {
+  animation: principal-stamp-drop 0.78s cubic-bezier(0.18, 0.78, 0.24, 1)
+    both;
+}
+
+@keyframes principal-stamp-drop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -24px, 0) rotate(-8deg) scale(4.5);
+    filter: drop-shadow(18px 28px 10px rgba(29, 28, 21, 0.22));
+  }
+  14% {
+    opacity: 0.3;
+  }
+  64% {
+    opacity: 1;
+    transform: var(--scroll-rest-transform) scale(1.08);
+    filter: drop-shadow(5px 8px 3px rgba(29, 28, 21, 0.16));
+  }
+  72% {
+    transform: var(--scroll-rest-transform) scale(1.14, 0.76);
+    filter: drop-shadow(0 1px 0 rgba(29, 28, 21, 0.08));
+  }
+  84% {
+    transform: var(--scroll-rest-transform) scale(0.95, 1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: var(--scroll-rest-transform) scale(1);
+    filter: drop-shadow(2px 3px 0 rgba(29, 28, 21, 0.12));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-motion-ready .principal-stamp.scroll-principal-stamp,
+  .scroll-motion-ready
+    .principal-stamp.scroll-principal-stamp.is-scroll-motion-visible {
+    opacity: 1;
+    transform: var(--scroll-rest-transform);
+    animation: none;
+  }
+}
 .stamp {
   position: relative;
   display: block;

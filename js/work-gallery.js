@@ -154,7 +154,7 @@ let awardJudges = {
   "可愛賞": commonAwardJudges,
   "搞怪賞": commonAwardJudges,
   "貓祭賞": [{ name: "貓祭", image: "imgs/judges/NekoMatsuri.webp" }],
-  "沈曦賞": [{ name: "貓祭", image: "imgs/judges/NekoMatsuri.webp" }],
+  "沈曦賞": [{ name: "沈曦", image: "imgs/judges/Lumin.webp" }],
   "祭煜賞": [{ name: "貓祭與阿雄", image: "imgs/judges/大雄&NekoMatsuri.webp" }],
   "沈月賞": [{ name: "沈月", image: "imgs/judges/Tsuki.webp" }],
   "沈澈賞": [{ name: "沈澈", image: "imgs/judges/David.webp" }],
@@ -277,25 +277,16 @@ function getWorkTypeClass(workType) {
   }[workType] || "default";
 }
 
-function fitWorkTitle(title) {
+function configureWorkTitle(title) {
   title.style.removeProperty("font-size");
-  let fontSize = Number.parseFloat(getComputedStyle(title).fontSize) || 18;
   const card = title.closest(".winning-work");
-  const minimumFontSize = card?.classList.contains("winning-work--podium") ? 8 : 10;
-
-  while (title.scrollWidth > title.clientWidth + 1 && fontSize > minimumFontSize) {
-    fontSize -= 0.5;
-    title.style.fontSize = `${fontSize}px`;
-  }
-
-  const secondaryMinimum = card?.classList.contains("winning-work--podium") ? 6 : 8;
-  card?.style.setProperty("--work-meta-font-size", `${Math.max(secondaryMinimum, fontSize - 3)}px`);
-  card?.style.setProperty("--work-tag-font-size", `${Math.max(secondaryMinimum, fontSize - 4)}px`);
+  card?.style.removeProperty("--work-meta-font-size");
+  card?.style.removeProperty("--work-tag-font-size");
   title.title = title.textContent;
 }
 
-function fitAllWorkTitles() {
-  document.querySelectorAll(".winning-work__title").forEach(fitWorkTitle);
+function configureAllWorkTitles() {
+  document.querySelectorAll(".winning-work__title").forEach(configureWorkTitle);
 }
 
 const videoPreviewMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -435,6 +426,7 @@ function createWinningWork(work) {
     article.classList.add("winning-work--podium", `winning-work--podium-${work.podiumPosition}`);
     article.dataset.podiumPlace = work.podiumPlace;
   }
+  if (work.characterAwardGold) article.classList.add("winning-work--character-gold");
   const mediaFrame = document.createElement("div");
   mediaFrame.className = "winning-work__media";
   const openButton = document.createElement("button");
@@ -643,7 +635,14 @@ function getWinningWorkSections() {
       }];
     }
     if (group.title !== "追加獎項") {
-      return [{ title: group.title, works, trophy: awardSectionTrophies[group.title] || "" }];
+      const trophy = awardSectionTrophies[group.title] || "";
+      const isCharacterAward = /^(5|6|7|8|9|10)_/.test(group.directory);
+      const displayedWorks = isCharacterAward && trophy
+        ? works.map((work) => parseWorkName(work.name).award.includes("金賞")
+          ? { ...work, trophy, characterAwardGold: true }
+          : work)
+        : works;
+      return [{ title: group.title, works: displayedWorks, trophy: isCharacterAward ? "" : trophy, characterAward: isCharacterAward }];
     }
 
     const additionalSections = new Map();
@@ -675,6 +674,7 @@ function getWinningWorkSections() {
       }
       if (title !== "迷你像素獎") {
         const compact = compactAdditionalAwards.has(title);
+        let compactNote = "";
         const displayedWorks = compact
           ? awardWorks.map((work) => {
               const display = { ...work, hideAward: true };
@@ -682,14 +682,14 @@ function getWinningWorkSections() {
                 const details = parseWorkName(work.name);
                 const time = details.title.match(/^(【[^】]+】)\s*/u);
                 if (time) {
-                  display.detailLabel = time[1];
+                  compactNote = time[1].replace(/[【】]/gu, "");
                   display.displayTitle = details.title.replace(time[0], "");
                 }
               }
               return display;
             })
           : awardWorks;
-        return { title, works: displayedWorks, compact, additional: true };
+        return { title, works: displayedWorks, compact, compactNote, additional: true };
       }
 
       const [pixelWork] = awardWorks;
@@ -709,7 +709,7 @@ function getWinningWorkSections() {
           hideArtist: true,
           pixelArt: true,
           typeLabel: display.typeLabel || "像素插畫",
-          viewerDescription: `作品：${display.workTitle || ""}｜角色：${characterNames[index]}｜類型：${display.typeLabel || ""}｜作者：${display.artist || ""}`,
+          viewerDescription: `作品：${display.workTitle || ""}｜角色：${characterNames[index]}｜類型：${display.typeLabel || ""}`,
         })),
       };
     });
@@ -737,6 +737,7 @@ function initializeWinningWorks() {
     if (group.showAll) section.classList.add("winning-works__section--show-all");
     if (group.compact) section.classList.add("winning-works__section--compact");
     if (group.podium) section.classList.add("winning-works__section--podium");
+    if (group.characterAward) section.classList.add("winning-works__section--character");
     if (group.title === "最佳手速獎") section.classList.add("winning-works__section--speed");
     const heading = document.createElement("h2"); heading.className = "winning-works__heading"; heading.textContent = group.title;
     if (group.trophy) {
@@ -782,6 +783,14 @@ function initializeWinningWorks() {
     if (group.subtitle) section.append(subtitle);
     if (group.countNote) section.append(countNote);
     section.append(carousel);
+    if (group.compactNote) {
+      const compactNote = document.createElement("p");
+      compactNote.className = "winning-works__compact-note";
+      compactNote.textContent = group.compactNote;
+      const compactCard = grid.querySelector(".winning-work");
+      compactCard?.classList.add("winning-work--has-compact-note");
+      compactCard?.append(compactNote);
+    }
     if (group.compact) {
       if (!compactRow) {
         compactRow = document.createElement("div");
@@ -802,7 +811,7 @@ function initializeWinningWorks() {
     }
   });
   initializeWorkToc(container);
-  requestAnimationFrame(fitAllWorkTitles);
+  requestAnimationFrame(configureAllWorkTitles);
   prepareWorkGalleryEntrance(container);
 }
 
@@ -932,8 +941,8 @@ function initializeWorkViews() {
 initializeWorkViews();
 initializeWorkGallery();
 document.addEventListener("page-content:ready", initializeWorkGallery);
-document.fonts?.ready.then(fitAllWorkTitles);
-window.addEventListener("resize", fitAllWorkTitles);
+document.fonts?.ready.then(configureAllWorkTitles);
+window.addEventListener("resize", configureAllWorkTitles);
 
 fetch("data/work-gallery.json", { cache: "no-cache" })
   .then((response) => {

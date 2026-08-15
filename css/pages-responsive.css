@@ -1766,6 +1766,19 @@ body.organizer-open .site-nav [data-organizer-link] {
   object-fit: contain;
 }
 
+.sponsor-note__illustration {
+  display: block;
+  width: min(100%, 360px);
+  height: auto;
+  margin: 18px auto 0;
+  object-fit: contain;
+}
+
+.sponsor-note__names {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
 @media (max-width: 899px) {
   .organizer-credits__notes {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1815,6 +1828,10 @@ body.organizer-open .site-nav [data-organizer-link] {
 
   .organizer-sponsors {
     width: calc(100% - 16px);
+  }
+
+  .sponsor-note__illustration {
+    width: min(100%, 290px);
   }
 }
 /* Discourage long-press menus, selection, and dragging on site artwork. */
