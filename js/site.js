@@ -417,7 +417,8 @@ function hideHeaderAtPageTop() {
   const isAlternateViewOpen =
     document.body.classList.contains("faq-open") ||
     document.body.classList.contains("organizer-open") ||
-    document.body.classList.contains("related-data-open");
+    document.body.classList.contains("related-data-open") ||
+    document.body.classList.contains("work-open");
 
   if (window.scrollY <= 1 && !isAlternateViewOpen) {
     document.body.classList.remove("activity-visible");
@@ -507,6 +508,10 @@ const stickyNoteTargets = [
 const logoStickerTargets = [
   ...document.querySelectorAll(".collaboration-stamps .stamp-logo"),
 ];
+const principalStamp = document.querySelector(
+  ".collaboration-stamps .principal-stamp",
+);
+const principalStampSection = document.querySelector(".collaboration-stamps");
 const logoStickerSection = document.querySelector(
   ".collaboration-stamps .stamp-logos",
 );
@@ -518,6 +523,7 @@ const scrollMotionTargets = [
   ...cardPopTargets,
   ...sectionBackgroundTargets,
   ...stickyNoteTargets,
+  ...(principalStamp ? [principalStamp] : []),
   ...logoStickerTargets,
   ...hashtagStickerTargets,
 ];
@@ -540,6 +546,7 @@ heroZoomTargets.forEach((target) =>
 stickyNoteTargets.forEach((target) =>
   target.classList.add("scroll-stick-note"),
 );
+principalStamp?.classList.add("scroll-principal-stamp");
 logoStickerTargets.forEach((target) =>
   target.classList.add("scroll-logo-sticker"),
 );
@@ -628,6 +635,15 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
     },
     { threshold: 0.01, rootMargin: "80px 0px 160px" },
   );
+  const principalStampObserver = new IntersectionObserver(
+    ([entry]) => {
+      principalStamp?.classList.toggle(
+        "is-scroll-motion-visible",
+        entry.isIntersecting,
+      );
+    },
+    { threshold: 0.01, rootMargin: "64px 0px" },
+  );
   const hashtagSection = document.querySelector(".activity-hashtags");
   const hashtagStickerObserver = new IntersectionObserver(
     ([entry]) => {
@@ -649,6 +665,9 @@ if (reduceMotion.matches || !("IntersectionObserver" in window)) {
         cardMotionObserver.observe(target),
       );
       stickyNoteTargets.forEach((target) => stickyNoteObserver.observe(target));
+      if (principalStampSection) {
+        principalStampObserver.observe(principalStampSection);
+      }
       if (logoStickerSection) logoStickerObserver.observe(logoStickerSection);
       else {
         logoStickerTargets.forEach((target) =>
@@ -784,7 +803,7 @@ mobileNavQuery.addEventListener("change", () => setMobileNavOpen(false));
 
 const sectionNavLinks = [
   ...document.querySelectorAll(
-    '.site-nav a[href^="#"]:not([data-faq-link]):not([data-organizer-link]):not([data-related-data-link])',
+    '.site-nav a[href^="#"]:not([data-faq-link]):not([data-organizer-link]):not([data-related-data-link]):not([data-work-link])',
   ),
 ]
   .map((link) => ({
@@ -796,9 +815,15 @@ const faqNavLink = document.querySelector(".site-nav [data-faq-link]");
 const organizerNavLink = document.querySelector(
   ".site-nav [data-organizer-link]",
 );
+const workNavLink = document.querySelector(".site-nav [data-work-link]");
 
 function setActiveNav(activeLink) {
-  [...sectionNavLinks.map(({ link }) => link), organizerNavLink, faqNavLink]
+  [
+    ...sectionNavLinks.map(({ link }) => link),
+    organizerNavLink,
+    faqNavLink,
+    workNavLink,
+  ]
     .filter(Boolean)
     .forEach((link) => {
       const isActive = link === activeLink;
@@ -821,6 +846,10 @@ function updateActiveNav() {
   }
   if (document.body.classList.contains("related-data-open")) {
     setActiveNav(null);
+    return;
+  }
+  if (document.body.classList.contains("work-open")) {
+    setActiveNav(workNavLink);
     return;
   }
 
@@ -863,8 +892,11 @@ function updateCountdown() {
     2,
     "0",
   );
-  if (difference === 0)
-    document.getElementById("countdown-title").textContent = "本次投稿已截止";
+  if (difference === 0) {
+    const countdownTitle = document.getElementById("countdown-title");
+    countdownTitle.textContent =
+      countdownTitle.dataset.closedTitle || "本次投稿已截止";
+  }
 }
 
 updateCountdown();
@@ -874,11 +906,13 @@ document.getElementById("current-year").textContent = new Date().getFullYear();
 const faqView = document.getElementById("faq");
 const organizerView = document.getElementById("organizers");
 const relatedDataView = document.getElementById("related-data");
+const workView = document.getElementById("works");
 const faqLinks = [...document.querySelectorAll("[data-faq-link]")];
 const organizerLinks = [...document.querySelectorAll("[data-organizer-link]")];
 const relatedDataLinks = [
   ...document.querySelectorAll("[data-related-data-link]"),
 ];
+const workLinks = [...document.querySelectorAll("[data-work-link]")];
 const faqBackButtons = [...document.querySelectorAll("[data-faq-back]")];
 const organizerBackButtons = [
   ...document.querySelectorAll("[data-organizer-back]"),
@@ -886,9 +920,11 @@ const organizerBackButtons = [
 const relatedDataBackButtons = [
   ...document.querySelectorAll("[data-related-data-back]"),
 ];
+const workBackButtons = [...document.querySelectorAll("[data-work-back]")];
 let faqReturnHash = "#activity";
 let organizerReturnHash = "#activity";
 let relatedDataReturnHash = "#activity";
+let workReturnHash = "#activity";
 
 function initializeFaqCards() {
   document
@@ -932,9 +968,14 @@ function showFaq(updateHistory = true) {
     faqReturnHash = window.location.hash || "#activity";
   }
   document.body.classList.add("faq-open", "activity-visible");
-  document.body.classList.remove("organizer-open", "related-data-open");
+  document.body.classList.remove(
+    "organizer-open",
+    "related-data-open",
+    "work-open",
+  );
   organizerView.hidden = true;
   relatedDataView.hidden = true;
+  workView.hidden = true;
   faqView.hidden = false;
   if (updateHistory && window.location.hash !== "#faq")
     history.pushState({ faq: true }, "", "#faq");
@@ -949,10 +990,11 @@ function showOrganizer(updateHistory = true) {
   ) {
     organizerReturnHash = window.location.hash || "#activity";
   }
-  document.body.classList.remove("faq-open", "related-data-open");
+  document.body.classList.remove("faq-open", "related-data-open", "work-open");
   document.body.classList.add("organizer-open", "activity-visible");
   faqView.hidden = true;
   relatedDataView.hidden = true;
+  workView.hidden = true;
   organizerView.hidden = false;
   if (updateHistory && window.location.hash !== "#organizers") {
     history.pushState({ organizers: true }, "", "#organizers");
@@ -988,10 +1030,11 @@ function showRelatedData(updateHistory = true) {
   ) {
     relatedDataReturnHash = window.location.hash || "#activity";
   }
-  document.body.classList.remove("faq-open", "organizer-open");
+  document.body.classList.remove("faq-open", "organizer-open", "work-open");
   document.body.classList.add("related-data-open", "activity-visible");
   faqView.hidden = true;
   organizerView.hidden = true;
+  workView.hidden = true;
   relatedDataView.hidden = false;
   if (updateHistory && window.location.hash !== "#related-data") {
     history.pushState({ relatedData: true }, "", "#related-data");
@@ -1012,6 +1055,47 @@ function hideRelatedData(
     scheduleActiveNavUpdate();
   });
 }
+
+function showWork(updateHistory = true) {
+  if (
+    !document.body.classList.contains("work-open") &&
+    window.location.hash !== "#works"
+  ) {
+    workReturnHash = window.location.hash || "#activity";
+  }
+  document.body.classList.remove(
+    "faq-open",
+    "organizer-open",
+    "related-data-open",
+  );
+  document.body.classList.add("work-open", "activity-visible");
+  faqView.hidden = true;
+  organizerView.hidden = true;
+  relatedDataView.hidden = true;
+  workView.hidden = false;
+  const galleryIsReady = workView.dataset.workReady === "true";
+  document.body.classList.toggle("work-loading-active", !galleryIsReady);
+  if (updateHistory && window.location.hash !== "#works") {
+    history.pushState({ works: true }, "", "#works");
+  }
+  setActiveNav(workNavLink);
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+}
+
+function hideWork(targetHash = workReturnHash, updateHistory = true) {
+  document.body.classList.remove("work-open", "work-loading-active");
+  workView.hidden = true;
+  if (updateHistory) history.pushState(null, "", targetHash);
+  requestAnimationFrame(() => {
+    document.querySelector(targetHash)?.scrollIntoView({ behavior: "auto" });
+    scheduleActiveNavUpdate();
+  });
+}
+
+document.addEventListener("work-gallery:ready", () => {
+  workView.dataset.workReady = "true";
+  document.body.classList.remove("work-loading-active");
+});
 
 faqLinks.forEach((link) =>
   link.addEventListener("click", (event) => {
@@ -1041,17 +1125,27 @@ relatedDataLinks.forEach((link) =>
 relatedDataBackButtons.forEach((button) =>
   button.addEventListener("click", () => history.back()),
 );
+workLinks.forEach((link) =>
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    showWork();
+  }),
+);
+workBackButtons.forEach((button) =>
+  button.addEventListener("click", () => history.back()),
+);
 
 document
   .querySelectorAll(
-    '.site-header a[href^="#"]:not([data-faq-link]):not([data-organizer-link]):not([data-related-data-link])',
+    '.site-header a[href^="#"]:not([data-faq-link]):not([data-organizer-link]):not([data-related-data-link]):not([data-work-link])',
   )
   .forEach((link) => {
     link.addEventListener("click", (event) => {
       if (
         !document.body.classList.contains("faq-open") &&
         !document.body.classList.contains("organizer-open") &&
-        !document.body.classList.contains("related-data-open")
+        !document.body.classList.contains("related-data-open") &&
+        !document.body.classList.contains("work-open")
       )
         return;
       event.preventDefault();
@@ -1059,7 +1153,9 @@ document
       if (document.body.classList.contains("faq-open")) hideFaq(targetHash);
       else if (document.body.classList.contains("organizer-open"))
         hideOrganizer(targetHash);
-      else hideRelatedData(targetHash);
+      else if (document.body.classList.contains("related-data-open"))
+        hideRelatedData(targetHash);
+      else hideWork(targetHash);
     });
   });
 
@@ -1067,17 +1163,21 @@ window.addEventListener("popstate", () => {
   if (window.location.hash === "#faq") showFaq(false);
   else if (window.location.hash === "#organizers") showOrganizer(false);
   else if (window.location.hash === "#related-data") showRelatedData(false);
+  else if (window.location.hash === "#works") showWork(false);
   else if (document.body.classList.contains("faq-open"))
     hideFaq(window.location.hash || "#activity", false);
   else if (document.body.classList.contains("organizer-open"))
     hideOrganizer(window.location.hash || "#activity", false);
   else if (document.body.classList.contains("related-data-open"))
     hideRelatedData(window.location.hash || "#activity", false);
+  else if (document.body.classList.contains("work-open"))
+    hideWork(window.location.hash || "#activity", false);
 });
 
 if (window.location.hash === "#faq") showFaq(false);
 else if (window.location.hash === "#organizers") showOrganizer(false);
 else if (window.location.hash === "#related-data") showRelatedData(false);
+else if (window.location.hash === "#works") showWork(false);
 
 // Reopen the themed PV modal from the activity photo.
 const pvOverlay = document.getElementById("pv-overlay");

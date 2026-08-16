@@ -1,3 +1,36 @@
+// Discourage casual image saving and access to browser developer shortcuts.
+// This is a client-side deterrent only: anything delivered to a browser can
+// still be recovered by a determined visitor.
+const blockedDeveloperShortcuts = new Set(["i", "j", "c"]);
+
+document.addEventListener(
+  "contextmenu",
+  (event) => {
+    event.preventDefault();
+  },
+  { capture: true },
+);
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+    const key = event.key.toLowerCase();
+    const opensDeveloperTools =
+      event.key === "F12" ||
+      ((event.ctrlKey || event.metaKey) &&
+        event.shiftKey &&
+        blockedDeveloperShortcuts.has(key));
+    const opensPageSource =
+      (event.ctrlKey || event.metaKey) && (key === "u" || key === "s");
+
+    if (opensDeveloperTools || opensPageSource) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  },
+  { capture: true },
+);
+
 document.addEventListener(
   "dragstart",
   (event) => {
@@ -785,7 +818,12 @@ const organizerNavLink = document.querySelector(
 const workNavLink = document.querySelector(".site-nav [data-work-link]");
 
 function setActiveNav(activeLink) {
-  [...sectionNavLinks.map(({ link }) => link), organizerNavLink, faqNavLink, workNavLink]
+  [
+    ...sectionNavLinks.map(({ link }) => link),
+    organizerNavLink,
+    faqNavLink,
+    workNavLink,
+  ]
     .filter(Boolean)
     .forEach((link) => {
       const isActive = link === activeLink;
@@ -856,7 +894,8 @@ function updateCountdown() {
   );
   if (difference === 0) {
     const countdownTitle = document.getElementById("countdown-title");
-    countdownTitle.textContent = countdownTitle.dataset.closedTitle || "本次投稿已截止";
+    countdownTitle.textContent =
+      countdownTitle.dataset.closedTitle || "本次投稿已截止";
   }
 }
 
@@ -929,7 +968,11 @@ function showFaq(updateHistory = true) {
     faqReturnHash = window.location.hash || "#activity";
   }
   document.body.classList.add("faq-open", "activity-visible");
-  document.body.classList.remove("organizer-open", "related-data-open", "work-open");
+  document.body.classList.remove(
+    "organizer-open",
+    "related-data-open",
+    "work-open",
+  );
   organizerView.hidden = true;
   relatedDataView.hidden = true;
   workView.hidden = true;
@@ -1014,10 +1057,17 @@ function hideRelatedData(
 }
 
 function showWork(updateHistory = true) {
-  if (!document.body.classList.contains("work-open") && window.location.hash !== "#works") {
+  if (
+    !document.body.classList.contains("work-open") &&
+    window.location.hash !== "#works"
+  ) {
     workReturnHash = window.location.hash || "#activity";
   }
-  document.body.classList.remove("faq-open", "organizer-open", "related-data-open");
+  document.body.classList.remove(
+    "faq-open",
+    "organizer-open",
+    "related-data-open",
+  );
   document.body.classList.add("work-open", "activity-visible");
   faqView.hidden = true;
   organizerView.hidden = true;
@@ -1103,7 +1153,8 @@ document
       if (document.body.classList.contains("faq-open")) hideFaq(targetHash);
       else if (document.body.classList.contains("organizer-open"))
         hideOrganizer(targetHash);
-      else if (document.body.classList.contains("related-data-open")) hideRelatedData(targetHash);
+      else if (document.body.classList.contains("related-data-open"))
+        hideRelatedData(targetHash);
       else hideWork(targetHash);
     });
   });

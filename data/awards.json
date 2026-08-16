@@ -87,10 +87,10 @@
         "image": "imgs/trophies/沈曦獎.webp",
         "alt": "沈曦獎獎盃",
         "tone": "pink",
-        "judgeImage": "imgs/judges/NekoMatsuri.webp",
-        "judgeImageAlt": "貓祭",
-        "judgeImageUrl": "https://lit.link/en/NekoMatsuri",
-        "judges": [{ "name": "貓祭", "url": "https://lit.link/en/NekoMatsuri" }]
+        "judgeImage": "imgs/judges/Lumin.webp",
+        "judgeImageAlt": "沈曦",
+        "judgeImageUrl": "https://x.com/Lumineve_",
+        "judges": [{ "name": "沈曦", "url": "https://x.com/Lumineve_" }]
       },
       {
         "name": "貓祭獎",

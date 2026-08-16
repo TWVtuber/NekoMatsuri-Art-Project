@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="校園創作活動資訊──繪俄史，會餓死，畫畫就真的得餓死嗎？"
+      content=""
     />
     <link id="site-favicon" href="logo.ico" rel="icon" type="image/x-icon" />
-    <title>「貓祭不繪讓你俄史計劃」活動網站 | 繪俄史藝術高等學院</title>
+    <title></title>
     <link
       id="preload-home-background"
       rel="preload"
@@ -28,12 +28,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/site.css?v=80" />
-    <link rel="stylesheet" href="css/event.css?v=71" />
+    <link rel="stylesheet" href="css/event.css?v=73" />
     <link rel="stylesheet" href="css/awards.css?v=14" />
-    <link rel="stylesheet" href="css/pages-responsive.css?v=36" />
+    <link rel="stylesheet" href="css/pages-responsive.css?v=38" />
     <link rel="stylesheet" href="css/spacing.css?v=10" />
-    <link rel="stylesheet" href="css/related-data.css?v=85" />
+    <link rel="stylesheet" href="css/related-data.css?v=87" />
     <link rel="stylesheet" href="css/classroom-map.css?v=36" />
+    <link rel="stylesheet" href="css/work-gallery.css?v=71" />
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -129,34 +130,20 @@
           type="button"
           aria-label="關閉學院介紹"
         ></button>
-        <h2 id="academy-modal-title">繪俄史藝術高等學院</h2>
-        <div class="academy-modal__copy">
-          <p>開了一個簡單的學院繪圖企劃，</p>
-          <p>
-            所有人都可以自由創作，你可以讓OC進來當學生也可以讓你喜歡的主播入學
-          </p>
-          <p>創作標籤 <strong>#繪俄史藝術高等學院</strong></p>
-          <p>
-            <a
-              href="https://x.com/INU_Art_/status/2063560036207788289"
-              target="_blank"
-              rel="noopener noreferrer"
-              >from @INU_Art_ on X (Twitter)</a
-            >
-          </p>
-        </div>
+        <h2 id="academy-modal-title"></h2>
+        <div class="academy-modal__copy"></div>
         <a
           class="academy-modal__more"
-          href="https://docs.google.com/spreadsheets/d/1shdC0tnMT_nGfyltAsgkMDdvRAeVlyvSXHu8VXYxjDA/edit?usp=sharing"
+          href="#"
           target="_blank"
           rel="noopener noreferrer"
-          >學院更多資訊（點我了解）</a
+          ></a
         >
         <a
           class="academy-modal__more academy-modal__more--president"
           id="academy-president-link"
           href="#academy-president-message"
-          >校長想說的話 <span aria-hidden="true">→</span></a
+          ><span aria-hidden="true">→</span></a
         >
       </div>
     </div>
@@ -270,6 +257,27 @@
             disablepictureinpicture
             hidden
           ></video>
+          <div class="image-viewer__gallery-loading" data-image-viewer-gallery-loading role="status" aria-live="polite" hidden>
+            <span class="image-viewer__gallery-spinner" aria-hidden="true"></span>
+            <strong>正在載入完整作品</strong>
+            <span data-image-viewer-gallery-progress>0 / 0</span>
+          </div>
+          <button class="image-viewer__gallery-nav image-viewer__gallery-nav--previous" type="button" data-image-viewer-previous aria-label="上一張作品" hidden>‹</button>
+          <button class="image-viewer__gallery-nav image-viewer__gallery-nav--next" type="button" data-image-viewer-next aria-label="下一張作品" hidden>›</button>
+          <span class="image-viewer__gallery-count" data-image-viewer-count hidden></span>
+          <aside class="image-viewer__judges" data-image-viewer-judges aria-label="評審講評" hidden>
+            <span class="image-viewer__judges-label">評審講評<span class="image-viewer__judges-hint">（點擊頭像查看評語）</span></span>
+            <span class="image-viewer__judge-list" data-image-viewer-judge-list></span>
+          </aside>
+          <section class="image-viewer__review" data-image-viewer-review aria-live="polite" hidden>
+            <div class="image-viewer__review-surface">
+              <button class="image-viewer__review-close" type="button" data-image-viewer-review-close aria-label="關閉評審講評">×</button>
+              <header class="image-viewer__review-heading">
+                <div><small>評審講評</small><h3 data-image-viewer-review-name></h3></div>
+              </header>
+              <p data-image-viewer-review-text></p>
+            </div>
+          </section>
         </div>
         <div class="image-viewer__toolbar" aria-label="圖片縮放控制">
           <button type="button" data-image-zoom-out aria-label="縮小圖片">
@@ -342,30 +350,20 @@
             <span class="nav-toggle__line"></span>
           </button>
           <nav class="site-nav" id="site-navigation" aria-label="活動導覽">
-            <a href="#about">活動介紹</a>
-            <a href="#rules">主題與規則</a>
-            <a href="#related-data" data-related-data-link>相關設定與資料</a>
-            <a href="#rewards">獎勵辦法</a>
-            <a href="#awards">評審與獎項</a>
-            <a
-              href="work.html"
-              disable
-              aria-disabled="true"
-              tabindex="-1"
-              title="Coming Soon"
-              style="pointer-events: auto"
-              onclick="event.preventDefault()"
-              >投稿作品</a
-            >
-            <a href="#organizers" data-organizer-link>主辦與協力</a>
-            <a href="#faq" data-faq-link>常見問題</a>
+            <a href="#about"></a>
+            <a href="#rules"></a>
+            <a href="#related-data" data-related-data-link></a>
+            <a href="#rewards"></a>
+            <a href="#awards"></a>
+            <a href="#works" data-work-link></a>
+            <a href="#organizers" data-organizer-link></a>
+            <a href="#faq" data-faq-link></a>
           </nav>
           <a
             class="header-submit"
-            href="https://forms.gle/M6ds1JfNyQWvcxud7"
-            target="_blank"
-            rel="noopener noreferrer"
-            >我要投稿！</a
+            href="#works"
+            data-work-link
+            >比賽結果</a
           >
         </div>
       </header>
@@ -420,46 +418,21 @@
                 aria-labelledby="activity-hashtags-title"
               >
                 <div class="activity-hashtags__heading">
-                  <h2 id="activity-hashtags-title">相關Hashtag</h2>
+                  <h2 id="activity-hashtags-title"></h2>
                   <button
                     class="activity-hashtags__copy-all"
                     type="button"
-                    data-copy-hashtag="#貓祭不繪讓你俄史計劃 #繪俄史藝術高等學院 #繪俄史三年C班"
+                    data-copy-hashtag=""
                     aria-label="複製三個 Hashtag"
                     title="複製活動 Hashtag"
                   >
                     <span class="material-symbols-outlined" aria-hidden="true"
                       >content_copy</span
                     >
-                    <span class="hashtag-copy-label">點我複製Hashtag</span>
+                    <span class="hashtag-copy-label"></span>
                   </button>
                 </div>
-                <div class="activity-hashtags__list">
-                  <div class="activity-hashtag">
-                    <a
-                      href="https://x.com/search?q=%23貓祭不繪讓你俄史計劃&amp;src=hashtag_click"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >#貓祭不繪讓你俄史計劃</a
-                    >
-                  </div>
-                  <div class="activity-hashtag">
-                    <a
-                      href="https://x.com/search?q=%23繪俄史藝術高等學院&amp;src=hashtag_click"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >#繪俄史藝術高等學院</a
-                    >
-                  </div>
-                  <div class="activity-hashtag">
-                    <a
-                      href="https://x.com/search?q=%23繪俄史三年C班&amp;src=hashtag_click"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >#繪俄史三年C班</a
-                    >
-                  </div>
-                </div>
+                <div class="activity-hashtags__list"></div>
                 <span
                   class="visually-hidden"
                   id="hashtag-copy-status"
@@ -471,11 +444,8 @@
               <img src="imgs/main/LOGO.webp" alt="貓祭不繪讓你俄史計劃" />
             </h1>
             <div class="about-text">
-              <p class="hero-lead">繪俄史，會餓死，畫畫就真的得餓死嗎？</p>
-              <p>
-                從小夢想想當漫畫家、插畫家、動畫師...<br />
-                肝過好幾個不眠之夜，卻樂此不疲
-              </p>
+              <p class="hero-lead"></p>
+              <p data-hero-intro></p>
               <p class="hero-declaration">
                 <svg
                   class="hero-declaration__circle"
@@ -488,22 +458,11 @@
                     d="M29 65 C52 22, 128 8, 228 11 C341 14, 405 39, 398 72 C390 110, 292 117, 175 111 C73 106, 12 93, 29 65 Z"
                   />
                 </svg>
-                <span class="hero-declaration__text"
-                  >───我，貓祭，想要支援你們。</span
-                >
+                <span class="hero-declaration__text"></span>
               </p>
-              <p>
-                萌生拿起筆的念頭後，你有後悔過嗎？<br />
-                就算熬成熊貓眼，工作做不完，畫到肌腱炎<br />
-                但你沒有放棄想要創作的念頭，值得紀念。<br />
-                所以我準備了很多，準備讓你不繪俄史。
-              </p>
-              <p>
-                身為 Vtuber 的貓祭，深深理解自由業的痛苦<br />
-                不穩定的收入，不健康的身體，不聽使喚的手感<br />
-                但卻因為成品笑了，替自己的進步雀躍了
-              </p>
-              <p class="hero-closing">同是創作者，我舉辦了這場盛宴───</p>
+              <p data-hero-paragraph></p>
+              <p data-hero-paragraph></p>
+              <p class="hero-closing"></p>
               <div class="collaboration-stamps">
                 <img
                   class="principal-stamp"
@@ -582,27 +541,26 @@
             />
             <span class="countdown-pin" aria-hidden="true"></span>
             <div class="countdown-card">
-              <h2 id="countdown-title">距離投稿截止還有</h2>
+              <h2 id="countdown-title"></h2>
               <div class="countdown" aria-live="polite">
                 <div class="time-card">
-                  <strong id="days">--</strong><span>天</span>
+                  <strong id="days">--</strong><span></span>
                 </div>
                 <div class="time-card">
-                  <strong id="hours">--</strong><span>時</span>
+                  <strong id="hours">--</strong><span></span>
                 </div>
                 <div class="time-card">
-                  <strong id="minutes">--</strong><span>分</span>
+                  <strong id="minutes">--</strong><span></span>
                 </div>
                 <div class="time-card">
-                  <strong id="seconds">--</strong><span>秒</span>
+                  <strong id="seconds">--</strong><span></span>
                 </div>
               </div>
               <a
                 class="countdown-cta"
-                href="https://forms.gle/M6ds1JfNyQWvcxud7"
-                target="_blank"
-                rel="noopener noreferrer"
-                >我要投稿！</a
+                href="#works"
+                data-work-link
+                ></a
               >
             </div>
           </div>
@@ -611,38 +569,16 @@
         <section class="notes-grid" id="rules" aria-label="活動主題與活動規則">
           <article class="paper-card note-card note-card--rules">
             <span class="tape tape--green" aria-hidden="true"></span>
-            <h2>活動主題</h2>
-            <ul class="check-list">
-              <li>
-                須以《繪俄史藝術高等學院－三年 C
-                班》以下六位人物：<b>貓祭、祭煜、沈曦、沈澈、沈樂、沈月，擇一或複數角色創作即可</b>；人物設定請參考提供之素材。
-              </li>
-              <li>
-                創作內容中可以有其他老師、學生等，但<b>不列入評分判定</b>。
-              </li>
-              <li>
-                繪圖主題以「<b>繪俄史藝術高等學院</b>」為主，不相關題材將不會予以參賽資格。
-              </li>
-              <li>本次繪畫<b>可添加服飾、配件、髮型</b>等，形式不拘。</li>
-              <li>
-                內容不得違反善良風俗，<b>禁止血腥、暴力、R18 色情等題材</b>，<b
-                  >不得涉及重製、改作、描圖、抄襲、仿冒、使用 AI 繪製</b
-                >或其他侵害他人權益之情事。
-              </li>
-              <li>
-                <b>禁止使用非本人繪製</b
-                >（若取得雙方同意代發比賽，則不在此限）<b>及未授權之圖片素材</b>於投稿作品中；若發現違規情形，將取消參賽資格。
-              </li>
-            </ul>
+            <h2></h2>
+            <ul class="check-list"></ul>
             <button
               class="academy-info-trigger"
               id="academy-info-trigger"
               data-academy-info-trigger
               type="button"
             >
-              <span class="academy-info-trigger__title"
-                >「繪俄史藝術高等學院」是什麼？</span
-              ><span class="academy-info-trigger__action">前往了解 →</span>
+              <span class="academy-info-trigger__title"></span
+              ><span class="academy-info-trigger__action"></span>
             </button>
             <a
               class="character-link"
@@ -666,9 +602,7 @@
                   class="character-link__fold-lines"
                   d="M286 84 L299 45 L327 56"
                 /></svg
-              ><span class="character-link__label"
-                >查看相關設定與資料 &nbsp; →</span
-              ></a
+              ><span class="character-link__label"></span></a
             >
           </article>
 
@@ -681,37 +615,8 @@
               loading="lazy"
             />
             <span class="tape tape--pink tape--right" aria-hidden="true"></span>
-            <h2>活動規則</h2>
-            <ol class="rule-list">
-              <li>
-                繪圖尺寸<b>不小於 A4、解析度 150 dpi</b
-                >，直橫式皆可；表現手法不限，插畫、漫畫、動畫等皆可，<b>黑白或彩色不拘</b>。
-              </li>
-              <li>作品上傳須使用 <b>PNG、JPG、GIF 或 MP4</b> 格式。</li>
-              <li><b>每張作品僅會獲得一個獎項</b>，不會重複得獎。</li>
-              <li>
-                參賽者包括但不限於學院之老師、學生......等，<b>校外人士也可以參加</b>。
-              </li>
-              <li>
-                所有參賽作品皆可能由主辦方選中、編輯後用於 X（原
-                Twitter）及其他宣傳。參賽者<b>授權主辦單位以「非直接銷售」為目的使用作品</b>，如社群宣傳、新聞稿件、封面圖等；除本活動獎金外，不另支付版稅及其他費用。主辦單位使用作品時，須明確標示創作者，以達互利共榮之效。
-              </li>
-              <li>
-                <b
-                  >未經原著作人同意，主辦方不得將得獎作品用於任何直接營利行為，亦不得製作為禮贈品。</b
-                >
-              </li>
-              <li>
-                活動期間，<b>參賽者可為自己的作品宣傳或直播，也可將作品發布至個人社群平台</b>。
-              </li>
-              <li>
-                為保障所有參加者之權利，主辦方不強制要求繪製縮時錄影；如作品有疑慮，<b>參賽者須提供自行創作證明</b>供主辦方審查。若發生前述情形且無法提交證明，參賽者應自負一切法律責任；主辦單位有權立即取消其參賽或獲獎資格，並追回全數獎金。
-              </li>
-              <li>
-                繪圖作品必須為活動開始前<b>未曾上傳至任何社群平台之作品</b>；活動開始後，須於
-                X（原 Twitter）貼文<b>加上指定 Tag，並將作品上傳至指定雲端</b>。
-              </li>
-            </ol>
+            <h2></h2>
+            <ol class="rule-list"></ol>
           </article>
         </section>
 
@@ -910,15 +815,15 @@
                 <strong>沈曦獎</strong><span>NT$ 1,500</span
                 ><small class="award-judge"
                   ><a
-                    href="https://lit.link/en/NekoMatsuri"
+                    href="https://x.com/Lumineve_"
                     target="_blank"
                     rel="noopener noreferrer"
-                    ><img src="imgs/judges/NekoMatsuri.webp" alt="貓祭" /></a
+                    ><img src="imgs/judges/Lumin.webp" alt="沈曦" /></a
                   ><a
-                    href="https://lit.link/en/NekoMatsuri"
+                    href="https://x.com/Lumineve_"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >貓祭</a
+                    >沈曦</a
                   ></small
                 >
               </figcaption>
@@ -1045,7 +950,10 @@
             </figure>
           </div>
 
-          <section class="additional-awards" aria-labelledby="additional-awards-title">
+          <section
+            class="additional-awards"
+            aria-labelledby="additional-awards-title"
+          >
             <h3
               class="award-group-title role-awards-title additional-awards__title"
               id="additional-awards-title"
@@ -1066,8 +974,7 @@
                       rel="noopener noreferrer"
                       ><img
                         src="imgs/judges/President.webp"
-                        alt="繪俄史藝術高等學院校長"
-                    /></a
+                        alt="繪俄史藝術高等學院校長" /></a
                     ><a
                       href="https://x.com/INU_Art_"
                       target="_blank"
@@ -1088,8 +995,7 @@
                       href="https://lit.link/en/NekoMatsuri"
                       target="_blank"
                       rel="noopener noreferrer"
-                      ><img src="imgs/judges/NekoMatsuri.webp" alt="貓祭"
-                    /></a
+                      ><img src="imgs/judges/NekoMatsuri.webp" alt="貓祭" /></a
                     ><a
                       href="https://lit.link/en/NekoMatsuri"
                       target="_blank"
@@ -1102,7 +1008,9 @@
               <figure
                 class="award-note role-award-note additional-award-note award-note--green"
               >
-                <span class="note-tape note-tape--unlock">投稿達 50 件解鎖</span>
+                <span class="note-tape note-tape--unlock"
+                  >投稿達 50 件解鎖</span
+                >
                 <figcaption>
                   <strong>最佳死線獎</strong><span>NT$ 500</span
                   ><small class="award-judge"
@@ -1110,8 +1018,7 @@
                       href="https://lit.link/en/NekoMatsuri"
                       target="_blank"
                       rel="noopener noreferrer"
-                      ><img src="imgs/judges/NekoMatsuri.webp" alt="貓祭"
-                    /></a
+                      ><img src="imgs/judges/NekoMatsuri.webp" alt="貓祭" /></a
                     ><a
                       href="https://lit.link/en/NekoMatsuri"
                       target="_blank"
@@ -1140,6 +1047,47 @@
           <span aria-hidden="true">→</span>
         </a>
       </aside>
+
+      <main class="work-view work-page__content" id="works" aria-labelledby="works-title" hidden>
+        <div class="work-loading" data-work-loading role="status" aria-live="polite" aria-label="作品載入中">
+          <div class="work-loading__card">
+            <span class="work-loading__spinner" aria-hidden="true"></span>
+            <strong>正在準備作品展覽</strong>
+            <span>正在載入作品預覽 <span data-work-loading-progress>0 / 0</span></span>
+          </div>
+        </div>
+        <div class="work-view__heading">
+          <button class="faq-back" type="button" data-work-back>← 回上一頁</button>
+          <div class="section-title">
+            <span></span>
+            <h1 id="works-title">作品展示</h1>
+            <span></span>
+          </div>
+        </div>
+        <section class="work-gallery section" aria-label="作品展示內容">
+          <div class="work-gallery__view-tabs" role="tablist" aria-label="作品展示分類">
+            <button class="work-gallery__view-tab is-active" id="winning-works-tab" type="button" role="tab" aria-selected="true" aria-controls="winning-works-panel" data-work-view="winning">得獎作品</button>
+            <button class="work-gallery__view-tab" id="all-works-tab" type="button" role="tab" aria-selected="false" aria-controls="all-works-panel" data-work-view="all" data-coming-soon-message="總投稿畫作（不含差分）共 287 件，目前仍在整理中。" disabled aria-disabled="true" aria-label="所有作品，Coming Soon。總投稿畫作（不含差分）共 287 件，目前仍在整理中。">
+              所有作品 <span class="work-gallery__coming-soon" aria-hidden="true">COMING SOON</span>
+            </button>
+          </div>
+          <div id="winning-works-panel" role="tabpanel" aria-labelledby="winning-works-tab" data-work-panel="winning">
+            <div class="section-title work-gallery__panel-title"><span></span><h2>得獎作品</h2><span></span></div>
+            <p class="work-gallery__review-hint">點擊圖片後，點擊彈窗左上角的評審頭貼可查看評語</p>
+            <div class="winning-works" data-winning-works></div>
+          </div>
+          <div id="all-works-panel" role="tabpanel" aria-labelledby="all-works-tab" data-work-panel="all" hidden>
+            <div class="section-title work-gallery__panel-title"><span></span><h2>所有作品</h2><span></span></div>
+            <div class="work-gallery__paper paper-card">
+              <span class="tape tape--blue" aria-hidden="true"></span>
+              <div class="work-gallery__toolbar" data-work-toolbar aria-label="作品篩選工具"></div>
+              <div class="work-gallery__grid" data-work-grid></div>
+              <p class="work-gallery__empty" data-work-empty hidden>找不到符合條件的作品。</p>
+            </div>
+          </div>
+        </section>
+        <button class="faq-back faq-back--bottom" type="button" data-work-back>← 回上一頁</button>
+      </main>
 
       <main
         class="related-data-view bulletin-bg"
@@ -1628,7 +1576,7 @@
                       >Teresa Lu</a
                     >
                   </h3>
-                  <p>網頁設計</p>
+                  <p>活動網站架設、網頁設計</p>
                 </li>
                 <li class="credit-note">
                   <div class="credit-note__tape" aria-hidden="true"></div>
@@ -1698,7 +1646,14 @@
                 <span class="sponsor-note__pin" aria-hidden="true"></span>
                 <dt>個人贊助</dt>
                 <dd>
-                  喵波、君大、某茶、兔子、Jeff、李翔、刺客戰鬥、薄香貓、初山、阿太
+                  <p class="sponsor-note__names">
+                    校長、喵波、君大、某茶、塔努努、兔子、沈曦、沈澈、沈樂、沈月、銫希恩、Jeff、李翔、刺客戰鬥、薄香貓、初山、阿太
+                  </p>
+                  <img
+                    class="sponsor-note__illustration"
+                    src="imgs/judges/抖內贊助.webp"
+                    alt="貓咪們拿著紅包與鈔票歡慶贊助"
+                  />
                 </dd>
               </div>
             </dl>
@@ -1745,35 +1700,29 @@
             </p>
           </div>
           <div class="footer-actions">
-            <div class="footer-contact">
-              <p>若您對本活動以及內容相關有任何疑惑</p>
-              <p>請寄信至以下email：</p>
-              <a href="mailto:windmatsuri25@gmail.com"
-                >windmatsuri25@gmail.com</a
-              >
-              <p>請勿以直接私訊方式聯絡主辦單位以及協辦單位。</p>
-            </div>
+            <div class="footer-contact"></div>
             <nav class="footer-links" aria-label="頁尾導覽">
-              <a href="#rules">主題與規則</a>
-              <a href="#related-data" data-related-data-link>相關設定與資料</a>
-              <a href="#awards">評審與獎項</a>
-              <!-- <a href="work.html">作品展示</a> -->
-              <a href="#organizers" data-organizer-link>主辦與協力</a>
+              <a href="#rules"></a>
+              <a href="#related-data" data-related-data-link></a>
+              <a href="#awards"></a>
+              <a href="#works" data-work-link></a>
+              <a href="#organizers" data-organizer-link></a>
             </nav>
           </div>
         </div>
       </footer>
     </div>
 
-    <script src="js/page-content.js?v=5"></script>
+    <script src="js/page-content.js?v=6"></script>
     <script src="js/reward-policy-content.js?v=4"></script>
     <script src="js/faq-content.js?v=2"></script>
     <script src="js/awards-content.js?v=13"></script>
-    <script src="js/organizers-content.js?v=7"></script>
-    <script src="js/site.js?v=65"></script>
+    <script src="js/organizers-content.js?v=9"></script>
+    <script src="js/site.js?v=69"></script>
     <script src="js/classroom-map.js?v=15"></script>
     <script src="js/related-data-content.js?v=28"></script>
     <script src="js/related-data.js?v=12"></script>
-    <script src="js/image-viewer.js?v=4"></script>
+    <script src="js/work-gallery.js?v=57"></script>
+    <script src="js/image-viewer.js?v=8"></script>
   </body>
 </html>

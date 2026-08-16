@@ -61,6 +61,18 @@
       if (!item) return;
       note.querySelector("dt").textContent = item.label;
       const details = note.querySelector("dd");
+      if (item.illustration) {
+        const illustration = document.createElement("img");
+        illustration.className = "sponsor-note__illustration";
+        illustration.src = item.illustration.src;
+        illustration.alt = item.illustration.alt;
+
+        const names = document.createElement("p");
+        names.className = "sponsor-note__names";
+        names.textContent = item.names;
+        details.replaceChildren(names, illustration);
+        return;
+      }
       if (item.image) {
         const logo = details.querySelector("img") || document.createElement("img");
         logo.className = "sponsor-note__logo";
@@ -83,7 +95,7 @@
     });
   }
 
-  fetch("data/organizers.json", { cache: "no-cache" })
+  fetch("data/organizers.json?v=8", { cache: "no-store" })
     .then((response) => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
     .then((data) => {
       document.getElementById("organizers-title").textContent = data.pageTitle;

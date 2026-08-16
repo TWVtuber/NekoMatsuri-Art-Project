@@ -165,7 +165,7 @@ body.work-open.work-loading-active .work-view > .faq-back {
 
 .work-gallery__panel-title {
   gap: clamp(12px, 2vw, 20px);
-  margin-bottom: clamp(30px, 4vw, 46px);
+  margin-bottom: clamp(14px, 2vw, 20px);
 }
 .section-title.work-gallery__panel-title > span:not([data-character-hover]) {
   width: clamp(36px, 7vw, 78px);
@@ -173,6 +173,14 @@ body.work-open.work-loading-active .work-view > .faq-back {
 }
 .section-title.work-gallery__panel-title h2 {
   font-size: clamp(28px, 4vw, 38px);
+}
+.work-gallery__review-hint {
+  margin: 0 0 clamp(30px, 4vw, 46px);
+  color: rgba(29, 28, 21, 0.62);
+  font-size: clamp(13px, 1.8vw, 14px);
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
 }
 
 .winning-works {

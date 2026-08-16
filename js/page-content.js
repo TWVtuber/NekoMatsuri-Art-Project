@@ -1,4 +1,108 @@
 (() => {
+  const hookAttribute = (hook) => hook ? `data-${hook}-link` : "";
+
+  function renderLinkList(container, items) {
+    if (!container || !Array.isArray(items)) return;
+    const existing = [...container.querySelectorAll(":scope > a")];
+    if (existing.length === items.length) {
+      existing.forEach((link, index) => {
+        const item = items[index];
+        link.href = item.href;
+        link.textContent = item.label;
+      });
+      return;
+    }
+    const fragment = document.createDocumentFragment();
+    items.forEach((item) => {
+      const link = document.createElement("a");
+      link.href = item.href;
+      link.textContent = item.label;
+      const hook = hookAttribute(item.hook);
+      if (hook) link.setAttribute(hook, "");
+      fragment.append(link);
+    });
+    container.replaceChildren(fragment);
+  }
+
+  const renderHtmlItems = (container, items) => {
+    if (!container || !Array.isArray(items)) return;
+    container.replaceChildren(...items.map((html) => {
+      const item = document.createElement("li");
+      item.innerHTML = html;
+      return item;
+    }));
+  };
+
+  function renderSiteContent(data) {
+    if (!data) return;
+    if (data.meta) {
+      document.title = data.meta.title;
+      const description = document.querySelector('meta[name="description"]');
+      if (description) description.content = data.meta.description;
+    }
+    renderLinkList(document.querySelector(".site-nav"), data.navigation);
+
+    if (data.academy) {
+      document.getElementById("academy-modal-title").textContent = data.academy.title;
+      const copy = document.querySelector(".academy-modal__copy");
+      copy.replaceChildren(...data.academy.paragraphs.map((html) => {
+        const paragraph = document.createElement("p"); paragraph.innerHTML = html; return paragraph;
+      }));
+      const more = document.querySelector(".academy-modal__more:not(.academy-modal__more--president)");
+      more.href = data.academy.more.url; more.textContent = data.academy.more.label;
+      document.getElementById("academy-president-link").firstChild.nodeValue = `${data.academy.presidentLabel} `;
+    }
+
+    if (data.hashtags) {
+      document.getElementById("activity-hashtags-title").textContent = data.hashtags.title;
+      const copyButton = document.querySelector("[data-copy-hashtag]");
+      copyButton.dataset.copyHashtag = data.hashtags.items.join(" ");
+      copyButton.querySelector(".hashtag-copy-label").textContent = data.hashtags.copyLabel;
+      const list = document.querySelector(".activity-hashtags__list");
+      list.replaceChildren(...data.hashtags.items.map((label) => {
+        const wrapper = document.createElement("div"); wrapper.className = "activity-hashtag";
+        const link = document.createElement("a"); link.href = `https://x.com/search?q=${encodeURIComponent(label)}&src=hashtag_click`;
+        link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = label; wrapper.append(link); return wrapper;
+      }));
+    }
+
+    if (data.heroCopy) {
+      const root = document.querySelector(".about-text");
+      root.querySelector(".hero-lead").textContent = data.heroCopy.lead;
+      root.querySelector("[data-hero-intro]").innerHTML = data.heroCopy.intro;
+      root.querySelector(".hero-declaration__text").textContent = data.heroCopy.declaration;
+      const paragraphs = root.querySelectorAll("[data-hero-paragraph]");
+      data.heroCopy.paragraphs.forEach((html, index) => { if (paragraphs[index]) paragraphs[index].innerHTML = html; });
+      root.querySelector(".hero-closing").textContent = data.heroCopy.closing;
+    }
+
+    if (data.countdown) {
+      document.getElementById("countdown-title").textContent = data.countdown.title;
+      document.getElementById("countdown-title").dataset.closedTitle = data.countdown.closedTitle;
+      document.querySelectorAll(".time-card span").forEach((node, index) => { node.textContent = data.countdown.units[index] || ""; });
+      document.querySelector(".countdown-cta").textContent = data.countdown.cta;
+    }
+
+    if (data.rules) {
+      const theme = document.querySelector(".note-card--rules");
+      theme.querySelector("h2").textContent = data.rules.themeTitle;
+      renderHtmlItems(theme.querySelector(".check-list"), data.rules.themeItems);
+      theme.querySelector(".academy-info-trigger__title").textContent = data.rules.academyQuestion;
+      theme.querySelector(".academy-info-trigger__action").textContent = data.rules.academyAction;
+      theme.querySelector(".character-link__label").textContent = data.rules.referencesLabel;
+      const guidelines = document.querySelector(".note-card--guidelines");
+      guidelines.querySelector("h2").textContent = data.rules.guidelinesTitle;
+      renderHtmlItems(guidelines.querySelector(".rule-list"), data.rules.guidelineItems);
+    }
+
+    if (data.footer) {
+      const contact = document.querySelector(".footer-contact");
+      const mail = document.createElement("a"); mail.href = `mailto:${data.footer.email}`; mail.textContent = data.footer.email;
+      contact.replaceChildren(document.createElement("p"), document.createElement("p"), mail, document.createElement("p"));
+      contact.querySelectorAll("p").forEach((node, index) => { node.textContent = data.footer.contactLines[index]; });
+      renderLinkList(document.querySelector(".footer-links"), data.footer.links);
+    }
+  }
   const setExternalLinkAttributes = (link) => {
     link.target = "_blank";
     link.rel = "noopener noreferrer";
@@ -219,6 +323,7 @@
       const response = await fetch("data/page-content.json", { cache: "no-cache" });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
+      renderSiteContent(data.siteContent);
       renderThemeAssets(data.themeAssets);
       renderEntrance(data.entrance);
       renderHeroMedia(data.heroMedia);
