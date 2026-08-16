@@ -245,7 +245,14 @@
                 button.setAttribute("aria-pressed", String(button === portrait));
               });
               reviewName.textContent = person.name;
-              reviewText.textContent = person.comment;
+              reviewText.replaceChildren(...person.comment.split("\n").map((line, index) => {
+                const content = line === "「同學你好我想要跟你買插圖版權，我要做周邊！！！」"
+                  ? Object.assign(document.createElement("strong"), { textContent: line })
+                  : line === "（應貓祭需求，本行粗體處理XD by工程師）"
+                    ? Object.assign(document.createElement("small"), { textContent: line })
+                    : document.createTextNode(line);
+                return index ? [document.createElement("br"), content] : content;
+              }).flat());
               reviewPanel.hidden = false;
               reviewPanel.scrollTop = 0;
               pointReviewAt(portrait);

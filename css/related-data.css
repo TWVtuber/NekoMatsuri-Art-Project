@@ -1802,6 +1802,12 @@ body.image-viewer-open {
   line-height: 1.8;
   white-space: pre-wrap;
 }
+.image-viewer__review-surface > p strong { font-weight: 900; }
+.image-viewer__review-surface > p small {
+  color: #8a8376;
+  font-size: 0.72em;
+  opacity: 0.78;
+}
 
 @media (max-width: 640px) {
   .image-viewer__judges { top: 10px; left: 10px; padding: 5px 7px; }
