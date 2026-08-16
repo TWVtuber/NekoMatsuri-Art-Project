@@ -697,6 +697,7 @@ function getWinningWorkSections() {
       const [pixelWork] = awardWorks;
       const display = specialWorkDisplays[title] || {};
       const characterNames = display.characters || [];
+      const viewerGallery = [...pixelWork.media];
       return {
         title,
         subtitle: display.subtitle || "",
@@ -710,6 +711,8 @@ function getWinningWorkSections() {
           hideAward: true,
           hideArtist: true,
           pixelArt: true,
+          viewerGallery,
+          viewerIndex: index,
           typeLabel: display.typeLabel || "像素插畫",
           viewerDescription: `作品：${display.workTitle || ""}｜角色：${characterNames[index]}｜類型：${display.typeLabel || ""}`,
         })),

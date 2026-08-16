@@ -1811,10 +1811,11 @@ body.image-viewer-open {
 
 @media (max-width: 640px) {
   .image-viewer__judges { top: 10px; left: 10px; padding: 5px 7px; }
-  .image-viewer__judges-label { display: none; }
+  .image-viewer__judges-label { display: block; font-size: 11px; letter-spacing: 0.06em; }
+  .image-viewer__judges-hint { font-size: 9px; }
   .image-viewer__judge { width: 38px; height: 38px; }
-  .image-viewer__review { top: 76px; left: 10px; width: calc(100% - 20px); }
-  .image-viewer__review-surface { max-height: calc(100dvh - 135px); padding: 15px 16px 18px; }
+  .image-viewer__review { top: 98px; left: 10px; width: calc(100% - 20px); }
+  .image-viewer__review-surface { max-height: calc(100dvh - 157px); padding: 15px 16px 18px; }
   .image-viewer__review-surface > p { font-size: 14px; line-height: 1.7; }
 }
 
