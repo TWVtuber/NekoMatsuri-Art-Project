@@ -246,6 +246,13 @@ function getWorkMediaUrl(path) {
   // LFS migration briefly served pointer text at these URLs. Use a stable
   // revision so cached pointers are replaced in both cards and the viewer.
   if (!/^imgs\/works\/.*\.(?:gif|mp4|webm)(?:[?#]|$)/i.test(path)) return path;
+  // Branch-based GitHub Pages serves LFS pointers, not the binary objects.
+  // Keep local development local; fetch real LFS media on the Pages host.
+  if (window.location?.hostname === "twvtuber.github.io") {
+    const assetPath = path.split(/[?#]/, 1)[0];
+    return "https://media.githubusercontent.com/media/TWVtuber/NekoMatsuri-Art-Project/master/"
+      + assetPath.split("/").map(encodeURIComponent).join("/");
+  }
   const [source, ...fragment] = path.split("#");
   const separator = source.indexOf("?");
   const pathname = separator < 0 ? source : source.slice(0, separator);

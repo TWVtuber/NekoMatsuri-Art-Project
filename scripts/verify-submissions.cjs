@@ -39,6 +39,16 @@ for (const extension of ['gif', 'mp4', 'webm']) {
   assert.equal(vm.runInContext('getWorkMediaUrl(mediaPath)', context), url);
 }
 assert.equal(vm.runInContext('getWorkMediaUrl("imgs/works/example.png")', context), 'imgs/works/example.png');
+vm.runInContext('window.location = { hostname: "twvtuber.github.io" };', context);
+for (const extension of ['gif', 'mp4', 'webm']) {
+  context.mediaPath = `imgs/works/測試 & 空格/作品.${extension}`;
+  assert.equal(vm.runInContext('getWorkMediaUrl(mediaPath)', context),
+    'https://media.githubusercontent.com/media/TWVtuber/NekoMatsuri-Art-Project/master/'
+      + context.mediaPath.split('/').map(encodeURIComponent).join('/'));
+}
+assert.equal(vm.runInContext('getWorkMediaUrl("imgs/works/example.png")', context), 'imgs/works/example.png');
+assert.equal(vm.runInContext('getWorkMediaUrl("imgs/works/example.mov")', context), 'imgs/works/example.mov');
+vm.runInContext('delete window.location;', context);
 const representedRows = submissions.flatMap((s) => s.sourceRows || [s.sourceRow]).sort((a, b) => a - b);
 assert.deepEqual(representedRows, source.map((_, i) => i + 2), 'every form row remains traceable');
 assert.equal(new Set(submissions.map((s) => s.id)).size, submissions.length);
