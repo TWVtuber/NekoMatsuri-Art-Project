@@ -248,74 +248,7 @@
   function renderWorkGallery(data) {
     const title = document.getElementById("works-title");
     if (title && data?.title) title.textContent = data.title;
-
-    const toolbar = document.querySelector("[data-work-toolbar]");
-    if (toolbar && Array.isArray(data?.filters)) {
-      const filters = document.createElement("div");
-      filters.className = "work-gallery__filters";
-      filters.setAttribute("role", "list");
-      data.filters.forEach((item, index) => {
-        const button = document.createElement("button");
-        button.className = `work-gallery__filter${index === 0 ? " is-active" : ""}`;
-        button.type = "button";
-        button.dataset.workFilter = item.value;
-        button.setAttribute("aria-pressed", String(index === 0));
-        button.textContent = item.label;
-        filters.append(button);
-      });
-
-      const search = document.createElement("label");
-      search.className = "work-gallery__search";
-      const searchLabel = document.createElement("span");
-      searchLabel.className = "visually-hidden";
-      searchLabel.textContent = data.searchLabel || "搜尋作品";
-      const input = document.createElement("input");
-      input.type = "search";
-      input.dataset.workSearch = "";
-      input.placeholder = data.searchPlaceholder || "";
-      input.autocomplete = "off";
-      const icon = document.createElement("span");
-      icon.className = "material-symbols-outlined";
-      icon.setAttribute("aria-hidden", "true");
-      icon.textContent = "search";
-      search.append(searchLabel, input, icon);
-      toolbar.replaceChildren(filters, search);
-    }
-
-    const grid = document.querySelector("[data-work-grid]");
-    if (grid && Array.isArray(data?.items)) {
-      const fragment = document.createDocumentFragment();
-      data.items.forEach((item) => {
-        const article = document.createElement("article");
-        article.className = `work-gallery__item work-gallery__item--${item.layout || "landscape"}`;
-        article.dataset.workCategory = item.category || "";
-        article.dataset.workKeywords = item.keywords || "";
-        if (item.src) {
-          const media = item.type === "video"
-            ? document.createElement("video")
-            : document.createElement("img");
-          media.src = item.src;
-          if (media instanceof HTMLImageElement) media.alt = item.alt || "";
-          if (media instanceof HTMLVideoElement) {
-            media.muted = true;
-            media.loop = true;
-            media.playsInline = true;
-          }
-          article.append(media);
-        } else {
-          const placeholder = document.createElement("span");
-          placeholder.className = "material-symbols-outlined work-gallery__placeholder-icon";
-          placeholder.setAttribute("aria-hidden", "true");
-          placeholder.textContent = "image";
-          article.append(placeholder);
-        }
-        fragment.append(article);
-      });
-      grid.replaceChildren(fragment);
-    }
-
-    const empty = document.querySelector("[data-work-empty]");
-    if (empty && data?.emptyMessage) empty.textContent = data.emptyMessage;
+    // Submission cards and controls are owned by all-works.js.
   }
 
   async function loadPageContent() {

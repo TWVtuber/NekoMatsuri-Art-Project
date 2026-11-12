@@ -1,0 +1,10 @@
+{
+  "groups": [
+    { "rows": [62, 77], "keepEarlierMedia": true, "reason": "同作品不同裁切，保留兩個版本" },
+    { "rows": [68, 69], "keepEarlierMedia": false, "reason": "重複像素校長，以後投稿為主" },
+    { "rows": [84, 87], "keepEarlierMedia": false, "reason": "重複動畫，以後投稿為主" },
+    { "rows": [103, 104], "keepEarlierMedia": false, "reason": "相同六張像素作品，以後投稿為主" },
+    { "rows": [133, 143], "keepEarlierMedia": false, "reason": "相同作品，以後投稿為主" },
+    { "rows": [120, 121, 123, 125, 126, 130, 131, 134, 138, 140, 141], "keepEarlierMedia": true, "reason": "同系列分批投稿，保留全部101張作品" }
+  ]
+}

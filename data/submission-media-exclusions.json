@@ -1,0 +1,9 @@
+{
+  "exclusions": [
+    { "sourceRow": 19, "sourceId": "1jPuOBId22dxp_voIs79AyntOkzDfyFPK", "reason": "檔案管理與繪圖軟體操作錄影，非作品展示" },
+    { "sourceRow": 59, "sourceId": "1r4uAE-GTJ5jSAGNV_Mm9qAQFiG2SMYWk", "reason": "畫布資訊／統計截圖，非畫作" },
+    { "sourceRow": 59, "sourceId": "1b0qVHvxYtROpQ3Ss7EicowcDDCA5GUT0", "reason": "畫布資訊／規格截圖，非畫作" },
+    { "sourceRow": 93, "sourceId": "1E1ci6bBjqjl0My2vTSQgQNZpQAHqLd54", "reason": "壓縮檔內容目錄截圖，非畫作" }
+  ],
+  "tagOverrides": { "19": ["插圖"] }
+}

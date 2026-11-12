@@ -211,14 +211,11 @@ function applyWorkGalleryUi() {
   setText("[data-work-empty]", workGalleryUi.emptyMessage);
   const allTab = document.getElementById("all-works-tab");
   if (allTab) {
-    allTab.dataset.comingSoonMessage = workGalleryUi.allTabMessage || "";
-    allTab.setAttribute("aria-label", `${workGalleryUi.allTab || ""}，${workGalleryUi.allTabComingSoon || ""}。${workGalleryUi.allTabMessage || ""}`);
-    allTab.replaceChildren(document.createTextNode(`${workGalleryUi.allTab || ""} `));
-    const status = document.createElement("span");
-    status.className = "work-gallery__coming-soon";
-    status.setAttribute("aria-hidden", "true");
-    status.textContent = workGalleryUi.allTabComingSoon || "";
-    allTab.append(status);
+    allTab.removeAttribute("data-coming-soon-message");
+    allTab.removeAttribute("aria-label");
+    allTab.removeAttribute("aria-disabled");
+    allTab.disabled = false;
+    allTab.textContent = workGalleryUi.allTab || "所有作品";
   }
   document.querySelector(".work-gallery")?.setAttribute("aria-label", workGalleryUi.sectionLabel || "");
 }
@@ -248,7 +245,7 @@ function isVideo(path) { return /\.(?:mp4|mov|webm)$/i.test(path); }
 function getWorkThumbnail(path) {
   // Animated GIFs must keep their original source; the generated WebP
   // thumbnails contain only a single frame.
-  if (isVideo(path) || /\.gif(?:[?#].*)?$/i.test(path)) return path;
+  if (isVideo(path) || /\.(?:gif|webp)(?:[?#].*)?$/i.test(path)) return path;
   return path
     .replace(`${workGalleryMeta.worksBasePath}/`, `${workGalleryMeta.thumbnailsBasePath}/`)
     .replace(/\.(?:jpe?g|png|webp|gif)(?=$|[?#])/i, ".webp");
@@ -418,7 +415,8 @@ function prepareVideoPreview(video) {
 }
 
 function createWinningWork(work) {
-  const details = parseWorkName(work.name);
+  const details = { ...parseWorkName(work.name), ...(work.details || {}) };
+  const submission = work.submission || findWorkSubmission(work);
   const reviewEntry = workReviewData[details.rawAward] || workReviewData[details.award] || null;
   const workType = getWorkType(work);
   const article = document.createElement("article");
@@ -434,9 +432,22 @@ function createWinningWork(work) {
   const openButton = document.createElement("button");
   openButton.className = "winning-work__open";
   openButton.type = "button";
+  openButton.dataset.awardKey = work.name;
   openButton.dataset.imageViewerGallery = encodeURIComponent(JSON.stringify(work.viewerGallery || work.media));
   openButton.dataset.imageViewerTitle = work.viewerTitle || work.displayTitle || details.title;
   openButton.dataset.imageViewerDescription = work.viewerDescription || `獎項：${details.award}｜類型：${workType}`;
+  openButton.dataset.imageViewerArtistName = details.artist;
+  openButton.dataset.imageViewerArtistLabel = "作者";
+  if (submission?.meaning) openButton.dataset.imageViewerMeaning = submission.meaning;
+  const viewerAwards = submission ? submission.awards : [work];
+  openButton.dataset.imageViewerAwards = JSON.stringify(viewerAwards.map((entry) => {
+    const award = parseWorkName(entry.name).award;
+    return {
+      name: award,
+      media: getAwardMedia(entry, submission),
+      trophy: podiumAwards[award]?.trophy || awardSectionTrophies[entry.groupTitle] || "imgs/trophies/繪俄史金獎(無貓版).webp",
+    };
+  }));
   let judges = getWorkJudges(work.groupTitle, details.award).map((judge) => ({
     ...judge,
     comment: reviewEntry?.reviews.find((review) => review.judge === judge.name)?.comment || "",
@@ -477,7 +488,14 @@ function createWinningWork(work) {
       prepareVideoPreview(media);
       media.src = path;
     }
-    else { media.src = getWorkThumbnail(path); media.alt = `${work.displayTitle || details.title}，作者 ${details.artist}`; media.loading = "lazy"; media.decoding = "async"; }
+    else {
+      const thumbnail = getWorkThumbnail(path);
+      media.src = thumbnail;
+      media.alt = `${work.displayTitle || details.title}，作者 ${details.artist}`;
+      media.loading = "lazy";
+      media.decoding = "async";
+      if (thumbnail !== path) media.addEventListener("error", () => { media.src = path; }, { once: true });
+    }
     const previousMedia = mediaFrame.querySelector("img, video");
     if (previousMedia instanceof HTMLVideoElement) videoPreviewObserver?.unobserve(previousMedia);
     previousMedia?.remove();
@@ -485,6 +503,7 @@ function createWinningWork(work) {
     const count = mediaFrame.querySelector(".winning-work__count");
     if (count) count.textContent = `${currentIndex + 1} / ${work.media.length}`;
     openButton.dataset.imageViewerIndex = String(work.viewerIndex ?? currentIndex);
+    article.dispatchEvent(new CustomEvent("workmediachange", { detail: { path } }));
   };
 
   if (work.media.length > 1) {
@@ -963,5 +982,6 @@ fetch("data/work-gallery.json", { cache: "no-cache" })
     return response.json();
   })
   .then((reviews) => { workReviewData = reviews; })
+  .then(loadAllSubmissions)
   .catch((error) => console.error(error))
-  .finally(initializeWinningWorks);
+  .finally(() => { initializeWinningWorks(); initializeAllWorks(); });

@@ -1,4 +1,29 @@
 (() => {
+  function appendLinkedText(container, text) {
+    const pattern = /\b(?:https?:\/\/|www\.)[^\s<>"'，。！？；、（）「」『』【】]+/giu;
+    let cursor = 0;
+    for (const match of text.matchAll(pattern)) {
+      let urlText = match[0].replace(/[.,!?;:]+$/u, "");
+      while (urlText.endsWith(")") && (urlText.match(/\)/g) || []).length > (urlText.match(/\(/g) || []).length) {
+        urlText = urlText.slice(0, -1);
+      }
+      container.append(document.createTextNode(text.slice(cursor, match.index)));
+      try {
+        const url = new URL(/^www\./i.test(urlText) ? `https://${urlText}` : urlText);
+        const anchor = document.createElement("a");
+        anchor.href = url.href;
+        anchor.textContent = urlText;
+        anchor.target = "_blank";
+        anchor.rel = "noopener noreferrer";
+        container.append(anchor);
+      } catch {
+        container.append(document.createTextNode(urlText));
+      }
+      cursor = match.index + urlText.length;
+    }
+    container.append(document.createTextNode(text.slice(cursor)));
+  }
+
   const viewer = document.getElementById("image-viewer");
   const viewport = document.getElementById("image-viewer-viewport");
   const image = document.getElementById("image-viewer-image");
@@ -10,6 +35,9 @@
   );
   const sourceLink = document.getElementById("image-viewer-source-link");
   const artist = document.getElementById("image-viewer-artist");
+  const meaning = document.getElementById("image-viewer-meaning");
+  const awards = document.getElementById("image-viewer-awards");
+  let galleryAwards = [];
   const zoomLabel = document.getElementById("image-viewer-zoom");
   const previousButton = viewer?.querySelector("[data-image-viewer-previous]");
   const nextButton = viewer?.querySelector("[data-image-viewer-next]");
@@ -165,6 +193,19 @@
     if (!galleryItems.length) return;
     galleryIndex = (index + galleryItems.length) % galleryItems.length;
     const source = galleryItems[galleryIndex];
+    if (awards) {
+      awards.replaceChildren();
+      galleryAwards.filter((entry) => !entry.media || entry.media.includes(source)).forEach((entry) => {
+        const note = document.createElement("span");
+        note.className = "all-works__award";
+        const trophy = document.createElement("img");
+        trophy.src = entry.trophy;
+        trophy.alt = `${entry.name}獎盃`;
+        note.append(trophy, document.createTextNode(entry.name));
+        awards.append(note);
+      });
+      awards.hidden = !awards.childElementCount;
+    }
     const videoSource = /\.(?:mp4|mov|webm)(?:[?#].*)?$/i.test(source) ? source : "";
     activeMedia.removeAttribute("style");
     image.src = "";
@@ -210,13 +251,32 @@
       trigger.dataset.imageViewerPixelArt !== undefined,
     );
     title.textContent = trigger.dataset.imageViewerTitle || "圖片預覽";
+    galleryAwards = [];
+    try {
+      const entries = JSON.parse(trigger.dataset.imageViewerAwards || "[]");
+      if (Array.isArray(entries)) galleryAwards = entries;
+    } catch { /* No award metadata. */ }
+    if (awards) { awards.replaceChildren(); awards.hidden = true; }
     const body = trigger.dataset.imageViewerDescription || "";
     const link = trigger.dataset.imageViewerLink || "";
     const artistName = trigger.dataset.imageViewerArtistName || "";
     const artistUrl = trigger.dataset.imageViewerArtistUrl || "";
     const artistLabel = trigger.dataset.imageViewerArtistLabel || "繪師";
     const artistsJson = trigger.dataset.imageViewerArtists || "";
-    descriptionText.textContent = body;
+    if (meaning) {
+      const meaningText = trigger.dataset.imageViewerMeaning || "";
+      meaning.replaceChildren();
+      meaning.hidden = !meaningText.trim();
+      if (!meaning.hidden) {
+        const label = document.createElement("strong");
+        label.className = "image-viewer__meaning-label";
+        label.textContent = "作品涵義";
+        meaning.append(label);
+        appendLinkedText(meaning, meaningText);
+      }
+    }
+    descriptionText.replaceChildren();
+    appendLinkedText(descriptionText, body);
     sourceLink.href = link || "#";
     sourceLink.hidden = !link;
     description.hidden = !body && !link;
@@ -297,6 +357,9 @@
       linkNode.textContent = artistName;
       fragment.append(linkNode);
       artist.append(fragment);
+      artist.hidden = false;
+    } else if (artistName) {
+      artist.textContent = `${artistLabel}：${artistName}`;
       artist.hidden = false;
     } else {
       artist.hidden = true;
