@@ -13,11 +13,32 @@ const document = {
 };
 const context = vm.createContext({ document, window: {
   matchMedia: () => ({ matches: false }), addEventListener() {},
-}, fetch: () => new Promise(() => {}), console, config, submissions });
+}, fetch: () => new Promise(() => {}), console, config, submissions, URLSearchParams });
 vm.runInContext(read('js/all-works.js'), context);
 vm.runInContext(read('js/work-gallery.js'), context);
 vm.runInContext('expandWorkGalleryConfig(config); allSubmissions = submissions;', context);
 const winners = vm.runInContext('winningWorkGroups.flatMap(getGroupWorks)', context);
+// A pointer exists on disk but cannot be displayed as an image or video.
+const displayedMedia = new Set([
+  ...submissions.flatMap((submission) => submission.media),
+  ...winners.flatMap((winner) => winner.media),
+]);
+for (const asset of displayedMedia) {
+  const fd = fs.openSync(path.join(root, asset), 'r');
+  const header = Buffer.alloc(128);
+  try { fs.readSync(fd, header, 0, header.length, 0); }
+  finally { fs.closeSync(fd); }
+  assert.ok(!header.toString().startsWith('version https://git-lfs.github.com/spec/v1'),
+    `LFS pointer served as media; run git lfs pull: ${asset}`);
+}
+for (const extension of ['gif', 'mp4', 'webm']) {
+  context.mediaPath = `imgs/works/example.${extension}?size=1#preview`;
+  const url = vm.runInContext('getWorkMediaUrl(mediaPath)', context);
+  assert.equal(url, `imgs/works/example.${extension}?size=1&media-version=lfs-5204170#preview`);
+  context.mediaPath = url;
+  assert.equal(vm.runInContext('getWorkMediaUrl(mediaPath)', context), url);
+}
+assert.equal(vm.runInContext('getWorkMediaUrl("imgs/works/example.png")', context), 'imgs/works/example.png');
 const representedRows = submissions.flatMap((s) => s.sourceRows || [s.sourceRow]).sort((a, b) => a - b);
 assert.deepEqual(representedRows, source.map((_, i) => i + 2), 'every form row remains traceable');
 assert.equal(new Set(submissions.map((s) => s.id)).size, submissions.length);

@@ -102,7 +102,7 @@
           };
           preload.addEventListener("load", finish, { once: true });
           preload.addEventListener("error", resolve, { once: true });
-          preload.src = source;
+          preload.src = getWorkMediaUrl(source);
         }));
       }
       return preloadedImages.get(source).then(() => {
@@ -215,14 +215,14 @@
     image.hidden = Boolean(videoSource);
     video.hidden = !videoSource;
     if (videoSource) {
-      video.src = videoSource;
+      video.src = getWorkMediaUrl(videoSource);
       video.controls = true;
       video.setAttribute("controlslist", "nodownload");
       video.muted = false;
       video.volume = 1;
     } else {
       image.alt = title.textContent;
-      image.src = source;
+      image.src = getWorkMediaUrl(source);
     }
     resetTransform();
     activeMedia.addEventListener(videoSource ? "loadedmetadata" : "load", resetTransform, { once: true });

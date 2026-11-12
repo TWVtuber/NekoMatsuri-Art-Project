@@ -242,6 +242,18 @@ function getAwardRank(name) {
 
 function isVideo(path) { return /\.(?:mp4|mov|webm)$/i.test(path); }
 
+function getWorkMediaUrl(path) {
+  // LFS migration briefly served pointer text at these URLs. Use a stable
+  // revision so cached pointers are replaced in both cards and the viewer.
+  if (!/^imgs\/works\/.*\.(?:gif|mp4|webm)(?:[?#]|$)/i.test(path)) return path;
+  const [source, ...fragment] = path.split("#");
+  const separator = source.indexOf("?");
+  const pathname = separator < 0 ? source : source.slice(0, separator);
+  const query = new URLSearchParams(separator < 0 ? "" : source.slice(separator + 1));
+  query.set("media-version", "lfs-5204170");
+  return `${pathname}?${query}${fragment.length ? `#${fragment.join("#")}` : ""}`;
+}
+
 function getWorkThumbnail(path) {
   // Animated GIFs must keep their original source; the generated WebP
   // thumbnails contain only a single frame.
@@ -486,15 +498,15 @@ function createWinningWork(work) {
       media.preload = "metadata";
       media.setAttribute("controlslist", "nodownload");
       prepareVideoPreview(media);
-      media.src = path;
+      media.src = getWorkMediaUrl(path);
     }
     else {
       const thumbnail = getWorkThumbnail(path);
-      media.src = thumbnail;
+      media.src = getWorkMediaUrl(thumbnail);
       media.alt = `${work.displayTitle || details.title}，作者 ${details.artist}`;
       media.loading = "lazy";
       media.decoding = "async";
-      if (thumbnail !== path) media.addEventListener("error", () => { media.src = path; }, { once: true });
+      if (thumbnail !== path) media.addEventListener("error", () => { media.src = getWorkMediaUrl(path); }, { once: true });
     }
     const previousMedia = mediaFrame.querySelector("img, video");
     if (previousMedia instanceof HTMLVideoElement) videoPreviewObserver?.unobserve(previousMedia);
